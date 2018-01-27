@@ -27,7 +27,7 @@ class Converter extends React.Component {
 	var bottom2 = (cos(lat1)*cos(lat2)*cos(absLong))
 	var finalBottom = bottom1 + bottom2
 
-	var final = atan(finalTop / finalBottom)
+	var final = atan(finalTop / finalBottom) //final answer (theoretically	)
 	
     //Leave the prevent default or else clicking the equal button will break things
     this.setState({output:[this.lat1,this.long1,this.lat2,this.long2]});
