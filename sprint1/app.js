@@ -16,6 +16,19 @@ class Converter extends React.Component {
   //calvin I think the formula will go here
   converter(event) {
     //Output can be in any form you want, I assume it will be one floating point number representing difference
+	
+	var absLong = abs(long1 - long2)
+	
+	var top1 = pow(cos(lat2) + sin(absLong), 2)
+	var top2 = pow(cos(lat1)*sin(lat2) - sin(lat1)*cos(lat2)*cos(absLong), 2)
+	var finalTop = sqrt(top1 + top2)
+
+	var bottom1 = sin(lat1)*sin(lat2)
+	var bottom2 = (cos(lat1)*cos(lat2)*cos(absLong))
+	var finalBottom = bottom1 + bottom2
+
+	var final = atan(finalTop / finalBottom)
+	
     //Leave the prevent default or else clicking the equal button will break things
     this.setState({output:[this.lat1,this.long1,this.lat2,this.long2]});
     event.preventDefault();
