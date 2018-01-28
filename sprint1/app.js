@@ -21,13 +21,13 @@ class Converter extends React.Component {
 	
 	var top1 = pow(cos(lat2) + sin(absLong), 2)
 	var top2 = pow(cos(lat1)*sin(lat2) - sin(lat1)*cos(lat2)*cos(absLong), 2)
-	var finalTop = sqrt(top1 + top2)
+	var numerator = sqrt(top1 + top2)
 
 	var bottom1 = sin(lat1)*sin(lat2)
 	var bottom2 = (cos(lat1)*cos(lat2)*cos(absLong))
-	var finalBottom = bottom1 + bottom2
+	var denominator = bottom1 + bottom2
 
-	var final = atan(finalTop / finalBottom) //final answer (theoretically	)
+	var distance = atan(numerator / denominator) * 3958.7613 
 	
     //Leave the prevent default or else clicking the equal button will break things
     this.setState({output:[this.lat1,this.long1,this.lat2,this.long2]});
