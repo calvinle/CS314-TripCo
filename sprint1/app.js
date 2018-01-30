@@ -17,14 +17,14 @@ class Converter extends React.Component {
   converter(event) {
     //Output can be in any form you want, I assume it will be one floating point number representing difference
 	
-	var absLong = abs(long1 - long2)
+	var absLong = abs(this.long1 - this.long2)
 	
-	var top1 = pow(cos(lat2) + sin(absLong), 2)
-	var top2 = pow(cos(lat1)*sin(lat2) - sin(lat1)*cos(lat2)*cos(absLong), 2)
+	var top1 = pow(cos(this.lat2) + sin(absLong), 2)
+	var top2 = pow(cos(this.lat1)*sin(this.lat2) - sin(this.lat1)*cos(this.lat2)*cos(absLong), 2)
 	var numerator = sqrt(top1 + top2)
 
-	var bottom1 = sin(lat1)*sin(lat2)
-	var bottom2 = (cos(lat1)*cos(lat2)*cos(absLong))
+	var bottom1 = sin(this.lat1)*sin(this.lat2)
+	var bottom2 = (cos(this.lat1)*cos(this.lat2)*cos(absLong))
 	var denominator = bottom1 + bottom2
 
 	var distance = atan(numerator / denominator) * 3958.7613 
