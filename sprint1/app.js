@@ -112,7 +112,7 @@ class Converter extends React.Component {
           onChange={this.updateInput1}
         />
         <button
-          className="btn btn-primary mr-sm-2"
+          className="btn btn-default mr-sm-2"
           type="submit"
           value="submit"
           disabled
@@ -142,13 +142,35 @@ class Converter extends React.Component {
   }
 }
 
+class FileCalculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: ""
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="file" id="myFile" value={this.state.file}/>
+        <button className="btn btn-primary mr-sm-2">Ok</button>
+      </div>
+    );
+  }
+}
+
 class App extends React.Component {
   render() {
     return (
-      <div className="jumbotron">
-        <h1>Distance Calculator</h1>
-        <hr/>
-        <Converter />
+      <div className="container">
+        <div className="jumbotron">
+          <h1>Distance Calculator</h1>
+          <hr/>
+          <Converter />
+        </div>
+        <h3>Select a JSON file to process</h3>
+        <FileCalculator />
       </div>
     );
   }
