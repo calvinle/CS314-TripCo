@@ -169,8 +169,21 @@ class FileCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: ""
+      file: null,
+      output: ""
     };
+    this.getFileContents = this.getFileContents.bind(this);
+  }
+
+  getFileContents(event) {
+    let input = event.target.value;
+    this.setState({ input: file });
+    var data = require(this.state.file);
+    
+    for (var i = 0; i < data.length; i++) {
+      var obj = data[i];
+      console.log(obj);
+    }
   }
 
   render() {
