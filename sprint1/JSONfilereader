@@ -1,55 +1,73 @@
-<style>
-  #byte_content {
-    margin: 5px 0;
-    max-height: 100px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  #byte_range { margin-top: 5px; }
-</style>
-
-<input type="file" id="files" name="file" /> Read .JSON: 
-<span class="readButton">
-
-  <button>OK</button>
-</span>
-<div id="byte_range"></div>
-<div id="byte_content"></div>
-
-<script>
-  function readBlob() {
-
-    var files = document.getElementById('files').files;
-    if (!files.length) {
-      alert('Please select a file!');
-      return;
-    }
-
-    var file = files[0];
-    var start = 0;
-    var stop = file.size - 1;
-
-    var reader = new FileReader();
-
-    // If we use onloadend, we need to check the readyState.
-    reader.onloadend = function(evt) {
-      if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-        document.getElementById('byte_content').textContent = evt.target.result;
-        document.getElementById('byte_range').textContent = 
-            ['Read bytes: ', start + 1, ' - ', stop + 1,
-             ' of ', file.size, ' byte file'].join('');
-      }
+class FileCalculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: ""
     };
-
-    var blob = file.slice(start, stop + 1);
-    reader.readAsBinaryString(blob);
   }
   
-  document.querySelector('.readButton').addEventListener('click', function(evt) {
-    if (evt.target.tagName.toLowerCase() == 'button') {
-      var startByte = evt.target.getAttribute('data-startbyte');
-      var endByte = evt.target.getAttribute('data-endbyte');
-      readBlob(startByte, endByte);
+  loadFile(event){
+    
+//    this.setState({output:this.parseFile()});
+    alert("it works!");
+    var input, file, fr;
+
+    input = document.getElementById('fileinput');
+    
+    if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
     }
-  }, false);
-</script>
+    else {
+      alert("in else!")
+      file = input.files[0];
+      // alert(file);
+      // var jFile = JSON.parse(file);
+      // alert(jFile);
+      fr = new FileReader();
+      fr.onload = function(event)
+      {
+        alert(event.target.result);
+      };
+      fr.readAsText(file);
+      
+    }
+  }
+
+  parseFile(){
+    return 1;
+    var input, file, fr;
+
+    input = document.getElementById('fileinput');
+    
+    if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+      fr.onload = receivedText;
+      fr.readAsText(file);
+    }
+  }
+  
+  receivedText(e) {
+      lines = e.target.result;
+      //alert(lines);
+      //var newArr = JSON.stringify(lines); 
+      var newArr = JSON.parse(lines); 
+      //var theKey = "id";
+      alert(lines);
+    
+  
+  }
+
+  render() {
+    return (
+      <div>
+        <input type="file" id="fileinput" />
+        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.loadFile}>Ok</button>
+        
+      </div>
+    );
+  }
+}
