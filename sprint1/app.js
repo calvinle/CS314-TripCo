@@ -13,19 +13,16 @@ class Converter extends React.Component {
     this.converter = this.converter.bind(this);
   }
   
-  //calvin I think the formula will go here
   converter(event) {
-    //Output can be in any form you want, I assume it will be one floating point number representing difference
     //Leave the prevent default or else clicking the equal button will break things
     //40° 26′ 46″ N 79° 58′ 56″ W
     //42° 32′ 21″ N 76° 37′ 30″ W
+    //Sample coordinates for testing
     this.setState({output:this.distanceCalculate()});
     event.preventDefault();
   }
   
   distanceCalculate(){
-    //return 2;
-    //console.log("HERE");
     let wla1 = this.lat1*(Math.PI / 180); //x1
     let wlo1 = this.long1*(Math.PI / 180); //y1
     let wla2 = this.lat2*(Math.PI / 180);  //x2
@@ -43,22 +40,8 @@ class Converter extends React.Component {
 
     let final = Math.atan2(finalTop, finalBottom);
     let dd = Number(final * 6371).toFixed(2);
-    /*let difx = (Math.cos(wla2)*Math.cos(wlo2)-Math.cos(wla1)*Math.cos(wlo1));
-    let dify = (Math.cos(wla2)*Math.sin(wlo2)-Math.cos(wla1)*Math.sin(wlo1));
-    let bigc = Math.sqrt(Math.pow(difx,2)+(Math.pow(dify,2)));
-    let trio = 2*(Math.asin(bigc/2));
-    console.log(trio);
-    let dd = trio * 6378;
-    */
-    
-    //console.log(dd);
+
     return dd;
-    /*console.log([wla1,wla2,wlo1,wlo2]);
-    let dify = Math.abs(wla1-wla2);
-    console.log(dify);
-    let difx = Math.abs(wlo1-wlo2);
-    console.log(difx);*/
-    //return 0;
   }
 
   updateInput1(event) {
