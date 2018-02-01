@@ -165,51 +165,6 @@ class Converter extends React.Component {
   }
 }
 
-class FileCalculator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      file: null,
-      output: ""
-    };
-    this.getFileContents = this.getFileContents.bind(this);
-  }
-  
-  getFileContents(event){
-    let input = event.target.value;
-    this.setState({ input:file });
-    var data = require(this.state.file); 
-    var input1, file, fr;
-
-    input1 = document.getElementById('fileinput');
-    
-    if (!input1.files[0]) {
-      alert("Please select a file first.");
-    }
-    else {
-      file = input1.files[0];
-      fr = new FileReader();
-      fr.onload = function(event)
-      {
-        var lines = event.target.result
-        console.log(lines);
-        //var fileObj = JSON.parse(lines);
-      };
-      fr.readAsText(file);
-    }
-  }
-  
-  render() {
-    return (
-      <div>
-        <input type="file" id="fileinput" value ={this.state.file}/>
-        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.getFileContents}>Ok</button>
-        
-      </div>
-    );
-  }
-}
-
 class App extends React.Component {
   render() {
     return (
@@ -219,8 +174,6 @@ class App extends React.Component {
           <hr/>
           <Converter />
         </div>
-        <h3>Select a JSON file to process</h3>
-        <FileCalculator />
       </div>
     );
   }
