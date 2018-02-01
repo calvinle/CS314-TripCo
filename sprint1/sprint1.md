@@ -1,60 +1,74 @@
-# Sprint 1 - Epic 2 - Distance Calculator
-## Updated 1/25.  See Optional section below.
-## Updated 1/26.  Only 2 text input fields for geographic coordinates.
+# Sprint 1 - t12 - Team Goslings
 
-Trip planning requires accurate distances in the selected units, either miles or kilometers.
-All distances in this course are rounded to the nearest whole number.
-Use of conversion factors is not acceptable and will lead to errors.
+## Goal
 
-### Technology
-You will use CodePen, Bootstrap 4, ReactJS, and JavaScript to create your responsive, mobile Distance Calculator with a good user experience.
+## A team effort to build a simple web application!
 
-The [Great Circle Distance](https://en.wikipedia.org/wiki/Great-circle_distance) formulas determine the shortest distant between two points on a sphere as measured along the surface of the sphere.
-There are several ways to compute this distance.
-This semester we will use chord length to determine the central angle which is then multiplied by the radius to determine the distance.
+## Definition of Done
 
-The [Geographic Coordinate System](https://en.wikipedia.org/wiki/Geographic_coordinate_system) allows us to identify the points on the earth.
-We will use Latitude and Longitude to identify the points for trip planning, _copying and pasting 2 strings like the examples below exactly as they are shown._
-_You should only have 2 text input fields, one for the start coordinate and one for the end coordinate._
-The coordinates must be converted to decimal values for the Great Circle Distance computation.
-They may be specified in various formats which may need to be converted to a postive or negative floating point value from the various [formats](https://en.wikipedia.org/wiki/Decimal_degrees):
-* degrees minutes seconds: __40° 26′ 46″ N 79° 58′ 56″ W__
-* degrees decimal minutes: __40° 26.767′ N 79° 58.933′ W__
-* decimal degrees: __40.446° N 79.982° W__
-* floating point __40.445 -79.982__
+* Ready for demo / customer release.
+* Sprint Review and Restrospectives completed.
+* Product Increment release `v1.0` created on GitHub with appropriate version number and name, a description based on the template, and a zip of the repo.
+* ~~Version in pom.xml should be `<version>1.0.0</version>`.~~
+* ~~Unit tests for all new features and public methods at a minimum.~~
+* ~~Coverage at least 50% overall and for each class.~~
+* ~~Clean continuous integration build/test on master branch.~~
 
-The earth is not a perfect sphere.
-The [radius of the earth](https://en.wikipedia.org/wiki/Earth_radius) has been studied for centuries.
-Aristotle published the first reference around 350 BC.
-Eratosthenes performed the first known scientific measurement and calculation around 240 BC.
-For the purpose of this course we will use the mean radius of 6371.0088 km or 3958.7613 miles.
+## Policies
 
-### Process
-This will be your first single page web application.
-Use the minimal HTML page template to load the style sheet and javascript files.
-The Bootstrap 4 user experience should be implemented in JavaScript as done in the second stage of the previous assignment.
-The application logic should be implemented in a separate JavaScript classes for the conversions and distance computations.
+* ~~Tests and Javadoc are written before/with code. ~~
+* ~~All pull requests include tests for the added or modified code.~~
+* Master is never broken.  If broken, it is fixed immediately.
+* Always check for new changes in master to resolve merge conflicts locally before committing them.
+* All changes are built and tested before they are committed.
+* ~~Continuous integration always builds and tests successfully.~~
+* All commits with more than 1 line of change include a task/issue number.
+* ~~All Java dependencies in pom.xml.~~
 
-All work should be done on github.
-Each team will demo their solution in class for a portion of the grade.
 
-### Optional (added 1/25)
-Remember those changing requirements?
-This assignment may be easier than I intended and some of you might like more of a challege so I thought I'd add something optional.
-Think of this as another Epic/User Story for this sprint - it's something like what you will do in the next sprint.
-You don't have to do it in this sprint.
-* Add a second button that let's the user choose a file in the local file system to process.
-* The file will be in the same format as brews.json so that would be good test data.
-* Treat the file as a round trip between consecutive locations that returns to the starting location.
-* Compute the leg distance and cummulative distance for each consecutive pair to form an itinerary.
-* Display the itinerary aa table with the from information, to information, leg distance, and cumulative distance.
+## Metrics 
 
-### Submission
-To complete this assignment, each team complete the following before the assignment is due.
-* Create a **sprint1** directory at the top level of your repo.
-* Copy the **sprint.md** file from the **sprint1/sprint.md** file in the tripco repo to your **sprint1** directory, updating the team number and name.
-* Create and modify your HTML and JavaScript files in this directory during development.
-* Choose a team member to demonstrate your distance calculator during class.
-* Complete the **Review** and **Retrospective** portions of the **sprint.md** file as a team.
+## Plan
 
-Check Canvas for due dates.
+Epics planned for this release.
+
+* #1 README.md
+* #2 team/eName.md
+* #3 Resume
+* #4 Distance Calculator
+
+## Daily Scrums
+
+## Review
+
+#### Completed user stories (epics) in Sprint Backlog 
+* ReadMe.md:  *comments*
+* team/eName.md
+* Resume
+* Distance Calculator Core: Got main requirements completed.
+
+#### Incomplete user stories / epics in Sprint Backlog 
+* Distance Calculator (optional) : Ran into issues learning state with React in conjunction with local files, and time management due to classes, work, and unforeseen issues (computers being used as makeshift campfires).
+
+#### What went well
+* Coming together as a team to plan out our goals and break down the issues
+* Picked up Codepen and JavaScript fairly quickly.
+* Good progress towards proper use of GitHub and ZenHub for this sort of project.
+* Following GitHub Etiquette well.
+* Great team communication.
+
+#### Problems encountered and resolutions
+* Difficulty with time mangement for some teammates. Actively resolving moving forward given a better understanding of class and work loads.
+* Ran into issues combining code that was written seperately by different team members. Resolved by opening up more communication and working with one another and how each others code works and what is expected.
+* Difficulty with react and states. Resolved by doing more research, and sharing findings with teammates.
+* Difficulty with codepen during development. Resolved by focing ourselves to use it more and openly asking questions.
+* Learning javascript. Resolved by investing more time in studying the language.
+
+## Retrospective
+
+Topic | Teamwork | Process | Tools
+:--- | :--- | :--- | :---
+What we will change this time | N/A | N/A | N/A
+What we did well | Open Communication | GitHub Etiquette | Learned Codepen quickly, planning in process, ZenHub
+What we need to work on | Time management | Usage of fibonacci cards | better use of codepen
+What we will change next time | Better time managment | Plan specific deadlines for individual tasks | Use codepen more effectively
