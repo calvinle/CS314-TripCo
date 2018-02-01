@@ -180,6 +180,12 @@ class FileCalculator extends React.Component {
     this.setState({ input:file });
     var data = require(this.state.file);
     
+    for (var i = 0; i < data.length; i++)
+    {
+      var obj = data[i];
+      console.log(obj);
+    }
+    
     var input, file, fr;
 
     input = document.getElementById('fileinput');
@@ -203,7 +209,7 @@ class FileCalculator extends React.Component {
   render() {
     return (
       <div>
-        <input type="file" id="fileinput" />
+        <input type="file" id="fileinput" value ={this.state.file}/>
         <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.getFileContents}>Ok</button>
         
       </div>
