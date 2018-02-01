@@ -169,28 +169,85 @@ class FileCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null,
-      output: ""
+      file: ""
     };
-    this.getFileContents = this.getFileContents.bind(this);
   }
-
-  getFileContents(event) {
-    let input = event.target.value;
-    this.setState({ input: file });
-    var data = require(this.state.file);
+  
+  loadFile(event){
     
-    for (var i = 0; i < data.length; i++) {
-      var obj = data[i];
-      console.log(obj);
+//    this.setState({output:this.parseFile()});
+    //alert("it works!");
+    var input, file, fr;
+
+    input = document.getElementById('fileinput');
+    
+    if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
     }
+    else {
+      //alert("in else!")
+      file = input.files[0];
+      // alert(file);
+      // var jFile = JSON.parse(file);
+      // alert(jFile);
+      fr = new FileReader();
+      fr.onload = function(event)
+      {
+        alert(event.target.result);
+        lines = event.target.result
+        var newArr = JSON.parse(lines);
+        //alert(newArr.id);
+      };
+      fr.readAsText(file);
+      
+    }
+  }
+  
+  render() {
+    return (
+      <div>
+        <input type="file" id="fileinput" />
+        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.loadFile}>Ok</button>
+        
+      </div>
+    );
+  }
+}
+
+  parseFile(){
+    return 1;
+    var input, file, fr;
+
+    input = document.getElementById('fileinput');
+    
+    if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+      fr.onload = receivedText;
+      fr.readAsText(file);
+    }
+  }
+  
+  receivedText(e) {
+      lines = e.target.result;
+      alert(lines);
+      //var newArr = JSON.stringify(lines); 
+      //var newArr = JSON.parse(lines); 
+      //var theKey = "id";
+      alert(lines);
+    
+  
   }
 
   render() {
     return (
       <div>
-        <input type="file" id="myFile" value={this.state.file}/>
-        <button className="btn btn-primary mr-sm-2">Ok</button>
+        <input type="file" id="fileinput" />
+        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.loadFile}>Ok</button>
+        
       </div>
     );
   }
