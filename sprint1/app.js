@@ -39,7 +39,7 @@ class Converter extends React.Component {
     let finalBottom = bottom1 + bottom2;
 
     let final = Math.atan2(finalTop, finalBottom);
-    let dd = Number(final * 6371).toFixed(2);
+    let dd = Number(final * 6371.0088).toFixed(2);
 
     return dd;
   }
