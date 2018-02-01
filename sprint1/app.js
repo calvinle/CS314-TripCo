@@ -13,12 +13,35 @@ class Converter extends React.Component {
     this.converter = this.converter.bind(this);
   }
   
-  //calvin I think the formula will go here
   converter(event) {
-    //Output can be in any form you want, I assume it will be one floating point number representing difference
     //Leave the prevent default or else clicking the equal button will break things
-    this.setState({output:[this.lat1,this.long1,this.lat2,this.long2]});
+    //40° 26′ 46″ N 79° 58′ 56″ W
+    //42° 32′ 21″ N 76° 37′ 30″ W
+    //Sample coordinates for testing
+    this.setState({output:this.distanceCalculate()});
     event.preventDefault();
+  }
+  
+  distanceCalculate(){
+    let wla1 = this.lat1*(Math.PI / 180); //x1
+    let wlo1 = this.long1*(Math.PI / 180); //y1
+    let wla2 = this.lat2*(Math.PI / 180);  //x2
+    let wlo2 = this.long2*(Math.PI / 180);  //y2
+    
+    let difY = Math.abs(wlo1 - wlo2);
+    
+    let top1 = Math.pow(Math.cos(wla2) * Math.sin(difY), 2);
+    let top2 = Math.pow( (Math.cos(wla1)*Math.sin(wla2) - Math.sin(wla1)*Math.cos(wla2)*Math.cos(difY)), 2);
+    let finalTop = Math.sqrt(top1 + top2);
+
+    let bottom1 = Math.sin(wla1)*Math.sin(wla2);
+    let bottom2 = Math.cos(wla1)*Math.cos(wla2)*Math.cos(difY);
+    let finalBottom = bottom1 + bottom2;
+
+    let final = Math.atan2(finalTop, finalBottom);
+    let dd = Number(final * 6371.0088).toFixed(2);
+
+    return dd;
   }
 
   updateInput1(event) {
@@ -98,7 +121,7 @@ class Converter extends React.Component {
       outarr[1]=Number(inputarr[1]);
     }
     else
-      return "Invalid";
+      return "Invalid Input Form";
     return(outarr);
   }
 
