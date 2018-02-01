@@ -174,23 +174,37 @@ class FileCalculator extends React.Component {
     };
     this.getFileContents = this.getFileContents.bind(this);
   }
-
-  getFileContents(event) {
+  
+  getFileContents(event){
     let input = event.target.value;
-    this.setState({ input: file });
-    var data = require(this.state.file);
+    this.setState({ input:file });
+    var data = require(this.state.file); 
+    var input1, file, fr;
+
+    input1 = document.getElementById('fileinput');
     
-    for (var i = 0; i < data.length; i++) {
-      var obj = data[i];
-      console.log(obj);
+    if (!input1.files[0]) {
+      alert("Please select a file first.");
+    }
+    else {
+      file = input1.files[0];
+      fr = new FileReader();
+      fr.onload = function(event)
+      {
+        var lines = event.target.result
+        console.log(lines);
+        //var fileObj = JSON.parse(lines);
+      };
+      fr.readAsText(file);
     }
   }
-
+  
   render() {
     return (
       <div>
-        <input type="file" id="myFile" value={this.state.file}/>
-        <button className="btn btn-primary mr-sm-2">Ok</button>
+        <input type="file" id="fileinput" value ={this.state.file}/>
+        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.getFileContents}>Ok</button>
+        
       </div>
     );
   }
