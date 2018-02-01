@@ -178,29 +178,22 @@ class FileCalculator extends React.Component {
   getFileContents(event){
     let input = event.target.value;
     this.setState({ input:file });
-    var data = require(this.state.file);
-    
-    for (var i = 0; i < data.length; i++)
-    {
-      var obj = data[i];
-      console.log(obj);
-    }
-    
-    var input, file, fr;
+    var data = require(this.state.file); 
+    var input1, file, fr;
 
-    input = document.getElementById('fileinput');
+    input1 = document.getElementById('fileinput');
     
-    if (!input.files[0]) {
+    if (!input1.files[0]) {
       alert("Please select a file first.");
     }
     else {
-      file = input.files[0];
+      file = input1.files[0];
       fr = new FileReader();
       fr.onload = function(event)
       {
         var lines = event.target.result
         console.log(lines);
-        //var newArr = JSON.parse(lines);
+        //var fileObj = JSON.parse(lines);
       };
       fr.readAsText(file);
     }
