@@ -169,11 +169,17 @@ class FileCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: ""
+      file: null,
+      output: ""
     };
+    this.getFileContents = this.getFileContents.bind(this);
   }
   
-  loadFile(event){
+  getFileContents(event){
+    let input = event.target.value;
+    this.setState({ input:file });
+    var data = require(this.state.file);
+    
     var input, file, fr;
 
     input = document.getElementById('fileinput');
@@ -198,7 +204,7 @@ class FileCalculator extends React.Component {
     return (
       <div>
         <input type="file" id="fileinput" />
-        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.loadFile}>Ok</button>
+        <button className="btn btn-primary mr-sm-2" id='btnLoad' value='Load' onClick={this.getFileContents}>Ok</button>
         
       </div>
     );
