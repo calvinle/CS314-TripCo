@@ -3,7 +3,7 @@
 ## Goal
 
 ### A mobile, responsive map and itinerary!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: Joshua Henry
 
 ## Definition of Done
 
@@ -30,8 +30,13 @@
 
 Epics planned for this release.
 
-* *## title*
-*
+* 65 Show map of round trip
+* 66 Give the user the option to choose if data is displayed in km or mi
+* 68 Let the user save their trip
+* 80 Show an itinerary of the round trip
+* 83 Let the user load a file with destinations
+* 84 Plan the trip in the order the user provided
+* 91 Build a responsive, mobile first web application
 
 *Include a discussion of planning decisions made based on your velocity from previous sprints.*
 
@@ -39,8 +44,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *value*   | *value* 
-Story Points |  *value*  | *value* 
+Tasks |  19   | *value* 
+Story Points |  39  | *value* 
 
 ## Daily Scrums
 
