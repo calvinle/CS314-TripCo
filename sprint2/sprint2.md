@@ -2,6 +2,8 @@
 
 ## Goal
 
+To complete epics 33-39 and 42(in tripco directory) and to distingiush our web app through design
+
 ### A mobile, responsive map and itinerary!
 ### Sprint Leader: Joshua Henry
 
@@ -12,6 +14,7 @@
 * Product Increment release `v2.0` created on GitHub with appropriate version number and name, a description based on the Release Notes template, and the arhived files.
 * Version in pom.xml should be `<version>2.0.0</version>`.
 * Javadoc and unit tests for public methods.
+* Complete all current issues in directory
 * ~~Coverage at least 50% overall and for each class.~~
 
 ## Policies
@@ -38,7 +41,7 @@ Epics planned for this release.
 * 84 Plan the trip in the order the user provided
 * 91 Build a responsive, mobile first web application
 
-*Include a discussion of planning decisions made based on your velocity from previous sprints.*
+*Only 1 previous sprint, our possibly low estimates are because that sprint went well. The current plan may be a bit optimistic, however we have learned a lot about how to do these projects and how to work in the tools and languages we have been given, which accounts for the optimism
 
 ## Metrics
 
