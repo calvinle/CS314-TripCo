@@ -10,19 +10,30 @@ class Converter extends React.Component {
     };
     this.updateInput1 = this.updateInput1.bind(this);
     this.updateInput2 = this.updateInput2.bind(this);
-    this.converter = this.converter.bind(this);
+    this.converterKM = this.converterKM.bind(this);
+    this.converterMI = this.converterMI.bind(this);
   }
   
-  converter(event) {
+  converterKM(event) {
     //Leave the prevent default or else clicking the equal button will break things
-    //40° 26′ 46″ N 79° 58′ 56″ W
-    //42° 32′ 21″ N 76° 37′ 30″ W
+    //40° 26' 46" N 79° 58' 56" W
+    //42° 32' 21" N 76° 37' 30" W
     //Sample coordinates for testing
-    this.setState({output:this.distanceCalculate()});
+    this.setState({output:this.distanceCalculateKM()});
     event.preventDefault();
   }
   
-  distanceCalculate(){
+    converterMI(event) {
+    //Leave the prevent default or else clicking the equal button will break things
+    //40° 26' 46" N 79° 58' 56" W
+    //42° 32' 21" N 76° 37' 30" W
+    //Sample coordinates for testing
+    this.setState({output:this.distanceCalculateMI()});
+    event.preventDefault();
+  }
+  
+  
+  distanceCalculateKM(){
     let wla1 = this.lat1*(Math.PI / 180); //x1
     let wlo1 = this.long1*(Math.PI / 180); //y1
     let wla2 = this.lat2*(Math.PI / 180);  //x2
@@ -39,17 +50,40 @@ class Converter extends React.Component {
     let finalBottom = bottom1 + bottom2;
 
     let final = Math.atan2(finalTop, finalBottom);
-    let dd = Number(final * 6371.0088).toFixed(2);
+    let dd = Number(final * 6371.0088).toFixed(0);
 
     return dd;
   }
 
+  distanceCalculateMI(){
+    let wla1 = this.lat1*(Math.PI / 180); //x1
+    let wlo1 = this.long1*(Math.PI / 180); //y1
+    let wla2 = this.lat2*(Math.PI / 180);  //x2
+    let wlo2 = this.long2*(Math.PI / 180);  //y2
+    
+    let difY = Math.abs(wlo1 - wlo2);
+    
+    let top1 = Math.pow(Math.cos(wla2) * Math.sin(difY), 2);
+    let top2 = Math.pow( (Math.cos(wla1)*Math.sin(wla2) - Math.sin(wla1)*Math.cos(wla2)*Math.cos(difY)), 2);
+    let finalTop = Math.sqrt(top1 + top2);
+
+    let bottom1 = Math.sin(wla1)*Math.sin(wla2);
+    let bottom2 = Math.cos(wla1)*Math.cos(wla2)*Math.cos(difY);
+    let finalBottom = bottom1 + bottom2;
+
+    let final = Math.atan2(finalTop, finalBottom);
+    let dd = Number(final * 3958.7613).toFixed(0);
+
+    return dd;
+  }
+  
   updateInput1(event) {
     let place1 = event.target.value;
     this.setState({ input1: place1 });
     let placeOut= this.splitter(place1);
     this.lat1 = placeOut[0];
     this.long1 = placeOut[1];
+
   }
   updateInput2(event) {
     let place2 = event.target.value;
@@ -57,11 +91,13 @@ class Converter extends React.Component {
     let placeOut= this.splitter(place2);
     this.lat2=placeOut[0];
     this.long2=placeOut[1];
+    
   }
   
   splitter(input){
-    let inputarr = input.split(/[ °″′]+/g);
+    let inputarr = input.split(/[ °'"]+/g);
     let outarr = [0,0];
+    
     if(inputarr.length ==8){
       if(inputarr[3] == 'N'&&inputarr[7] == 'W'){
         outarr[0] = Number(inputarr[0]) + Number(inputarr[1]/60) + Number(inputarr[2]/3600);
@@ -127,7 +163,7 @@ class Converter extends React.Component {
 
   render() {
     return (
-      <form className="form-inline" onSubmit={this.converter}>
+      <form className="form-inline">
         <input
           type="text"
           className="text-right form-control mr-sm-2"
@@ -149,11 +185,20 @@ class Converter extends React.Component {
           onChange={this.updateInput2}
         />
         <button
+          className="btn btn-danger mr-sm-2"
+          type="submit"
+          value="submit"
+          onClick={this.converterMI}
+        >
+          mi
+        </button>
+        <button
           className="btn btn-primary mr-sm-2"
           type="submit"
           value="submit"
+          onClick={this.converterKM}
         >
-          =
+          km
         </button>
         <input
           type="text"
@@ -169,6 +214,7 @@ class Converter extends React.Component {
 
 class FileCalculator extends React.Component {
 constructor(props) {
+  
  super(props);
  this.state = {
    file: "",
@@ -176,12 +222,12 @@ constructor(props) {
    
  };
 this.converter1 = this.converter1.bind(this);
-
+ 
 }
 
  converter1(event) {
    this.setState({output:this.loadFile()});
-   event.preventDefault();
+   //event.preventDefault();
  }
 
 loadFile(event){
@@ -199,11 +245,11 @@ loadFile(event){
  else {
    file = input.files[0];
    fr = new FileReader();
-   fr.onload = function(event){
-     var lines = event.target.result
+   fr.onload = function test(e){
+     //var lines = e.target.result
 
      //parse JSON file.
-     var newArr = JSON.parse(event.target.result);
+     var newArr = JSON.parse(e.target.result);
 
      //For each object in JSON file
      newArr.forEach((o)=>{ 
@@ -284,7 +330,7 @@ loadFile(event){
         outarr[1]=Number(inputarr[1]);
       }
 
-      if(count == 1){
+     if(count == 1){
         outarr2[0] = outarr[0];
         outarr2[1] = outarr[1];
       }
@@ -323,10 +369,18 @@ loadFile(event){
        
      }); //end forEach
     console.log("totalDistance:", totalDistance);
+    loadFile1(totalDistance);
    };
+   
+   
    fr.readAsText(file);
+//function loadFile1(){console.log("at the end:", totalDistance);}
 //console.log("outside readFile:", totalDistance);
+   
  } //end else to input file check
+function loadFile1(total){console.log("total", total);}
+  
+//console.log("???", totalDistance);
 return totalDistance;
 } //end loadFile
 
@@ -350,8 +404,6 @@ return totalDistance;
  }
 }
 
-
-
 class App extends React.Component {
   render() {
     return (
@@ -361,6 +413,8 @@ class App extends React.Component {
           <hr/>
           <Converter />
         </div>
+        <h3>Select a JSON file to process</h3>
+        <FileCalculator />
       </div>
     );
   }
