@@ -52,7 +52,7 @@ class Converter extends React.Component {
     let final = Math.atan2(finalTop, finalBottom);
     let dd = Number(final * 6371.0088).toFixed(0);
 
-    return dd;
+    return (dd + " kilometers");
   }
 
   distanceCalculateMI(){
@@ -74,7 +74,7 @@ class Converter extends React.Component {
     let final = Math.atan2(finalTop, finalBottom);
     let dd = Number(final * 3958.7613).toFixed(0);
 
-    return dd;
+    return (dd + " miles");
   }
   
   updateInput1(event) {
