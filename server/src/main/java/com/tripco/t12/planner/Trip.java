@@ -49,6 +49,7 @@ public class Trip {
   private ArrayList<Integer> legDistances() {
 
     ArrayList<Integer> dist = new ArrayList<Integer>();
+    ArrayList<Place> data = this.places;
 
     // hardcoded example
     dist.add(12);
@@ -59,6 +60,36 @@ public class Trip {
     dist.add(19);
 
     return dist;
+  }
+
+  public double decCoord(String s){
+    String in[] = s.split("['\" °″′]+");
+    double calculated = 0;
+    if(in.length == 4){
+      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60+Double.parseDouble(in[2])/3600;
+      if (in[3].equalsIgnoreCase("s")|| in[3].equalsIgnoreCase("w"))
+        calculated*=-1;
+      //return calculated;
+    }
+    else if(in.length == 3){
+      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
+      if (in[2].equalsIgnoreCase("s")|| in[2].equalsIgnoreCase("w"))
+        calculated*=-1;
+      //return calculated;
+    }
+    else if(in.length == 2){
+      calculated = Double.parseDouble(in[0]);
+      if (in[1].equalsIgnoreCase("s")|| in[1].equalsIgnoreCase("w"))
+        calculated*=-1;
+      //return calculated;
+    }
+    else if(in.length == 1){
+      calculated = Double.parseDouble(in[0]);
+    }
+
+    if(Math.abs(calculated) <= 90)
+      return calculated;
+    else return 0;
   }
 
 }
