@@ -50,16 +50,19 @@ public class Trip {
 
     ArrayList<Integer> dist = new ArrayList<Integer>();
     ArrayList<Place> data = this.places;
-
-    // hardcoded example
-    dist.add(12);
-    dist.add(23);
-    dist.add(34);
-    dist.add(45);
-    dist.add(65);
-    dist.add(19);
-
+    dist.add(1);
     return dist;
+    //TODO finish so that it populates the distances field correctly in tffi
+    /*Place temp0;
+    Place temp1;
+    for(int i = 0; i < data.size()-2; i++){
+      temp0 = data.get(i);
+      temp1 = data.get(i+1);
+      dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
+    }
+    temp0 = data.get(0);
+    temp1 = data.get(data.size()-1);
+    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));*/
   }
 
   public double decCoord(String s){
@@ -69,27 +72,67 @@ public class Trip {
       calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60+Double.parseDouble(in[2])/3600;
       if (in[3].equalsIgnoreCase("s")|| in[3].equalsIgnoreCase("w"))
         calculated*=-1;
-      //return calculated;
     }
     else if(in.length == 3){
       calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
       if (in[2].equalsIgnoreCase("s")|| in[2].equalsIgnoreCase("w"))
         calculated*=-1;
-      //return calculated;
     }
     else if(in.length == 2){
       calculated = Double.parseDouble(in[0]);
       if (in[1].equalsIgnoreCase("s")|| in[1].equalsIgnoreCase("w"))
         calculated*=-1;
-      //return calculated;
     }
     else if(in.length == 1){
       calculated = Double.parseDouble(in[0]);
+      return calculated;
     }
 
-    if(Math.abs(calculated) <= 90)
+    if(in[in.length-1].equalsIgnoreCase("n")&&(calculated >= 37 && calculated <= 41 ))
+      return calculated;
+    else if(in[in.length-1].equalsIgnoreCase("w")&&(calculated <=-102 && calculated >= -109 ))
       return calculated;
     else return 0;
+  }
+
+  public int calcDist(double lat1, double long1, double lat2, double long2){
+    double work;
+    Option o = this.options;
+
+    double wla1 = lat1*(Math.PI / 180);
+    double wlo1 = long1*(Math.PI / 180);
+    double wla2 = lat2*(Math.PI / 180);
+    double wlo2 = long2*(Math.PI / 180);
+
+    double dify = Math.abs(wlo1-wlo2);
+
+    double top1 = Math.pow(Math.cos(wla2) * Math.sin(dify), 2);
+    double top2 = Math.pow( (Math.cos(wla1)*Math.sin(wla2) - Math.sin(wla1)*Math.cos(wla2)*Math.cos(dify)), 2);
+    double finalTop = Math.sqrt(top1 + top2);
+
+    double bottom1 = Math.sin(wla1)*Math.sin(wla2);
+    double bottom2 = Math.cos(wla1)*Math.cos(wla2)*Math.cos(dify);
+    double finalBottom = bottom1 + bottom2;
+
+    work = Math.atan2(finalTop, finalBottom);
+    return (int)kilo(work);
+    //TODO finish with option integration
+    /*if(o.distance.equalsIgnoreCase("m")){
+      return (int)mile(work);
+    }
+    else if(o.distance.equalsIgnoreCase("k")){
+      return (int)kilo(work);
+    }
+    else
+      return 0;*/
+  }
+
+  public double mile(double d){
+    return d*3958.7613;
+  }
+
+  public double kilo(double d){
+    return d*6371.0088;
   }
 
 }
