@@ -11,18 +11,35 @@ class Destinations extends Component {
   constructor(props) {
     super(props);
     this.loadTFFI = this.loadTFFI.bind(this);
+    this.state = {count: 0, contents: null};
   }
 
   loadTFFI(event) {
     console.log(event.target.files[0].name);
     // now you need to read the file and create a JSON.
+    //Found via StackOverflow and modified:
+    //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
+    let file = event.target.files[0];
+    if(!file) {
+      return;
+    }
+    let reader = new FileReader();
+    reader.onload = function(event) {
+      this.setState({
+        contents: JSON.parse(event.target.result),
+      });
+      this.setState({
+        count: this.state.contents.places.length
+      });
+      console.log(this.state.contents);
+    }.bind(this);
+    reader.readAsText(file);
     // then you need to set the trip property
     // this.props.updateTrip(??);
   }
 
   render() {
     // need to clean up the button
-    const count = 99; // need to count the number in the trip
     return (
         <div id="destinations" className="card">
           <div className="card-header bg-info text-white">
@@ -33,7 +50,7 @@ class Destinations extends Component {
             <div className="form-group" role="group">
                 <input type="file" className="form-control-file" onChange={this.loadTFFI} id="tffifile" />
             </div>
-            <h5>There are {count} destinations. </h5>
+            <h5>There are {this.state.count} destinations. </h5>
           </div>
         </div>
     )
