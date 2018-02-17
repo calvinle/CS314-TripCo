@@ -65,6 +65,7 @@ public class Trip {
   private ArrayList<Integer> legDistances() {
 
     ArrayList<Integer> dist = new ArrayList<Integer>();
+    ArrayList<Place> data = this.places;
 
     // hardcoded example
     dist.add(12);
@@ -107,5 +108,4 @@ public class Trip {
   }
 
 }
-
-}
+//extra bracket??
