@@ -11,7 +11,7 @@ class Destinations extends Component {
   constructor(props) {
     super(props);
     this.loadTFFI = this.loadTFFI.bind(this);
-    this.state = {count: 0, contents: null};
+    this.state = {count: 0};
   }
 
   loadTFFI(event) {
@@ -25,18 +25,17 @@ class Destinations extends Component {
     }
     let reader = new FileReader();
     reader.onload = function(event) {
-      this.setState({
-        contents: JSON.parse(event.target.result),
-      });
-      if(this.state.contents.hasOwnProperty('places') &&
-          this.state.contents.hasOwnProperty('type') &&
-          this.state.contents.hasOwnProperty('title') &&
-          this.state.contents.hasOwnProperty('options') &&
-          this.state.contents.hasOwnProperty('distances') &&
-          this.state.contents.hasOwnProperty('map')){
+      let fileContents = JSON.parse(event.target.result);
+      if(fileContents.hasOwnProperty('places') &&
+          fileContents.hasOwnProperty('type') &&
+          fileContents.hasOwnProperty('title') &&
+          fileContents.hasOwnProperty('options') &&
+          fileContents.hasOwnProperty('distances') &&
+          fileContents.hasOwnProperty('map')){
         this.setState({
-          count: this.state.contents.places.length
+          count: fileContents.places.length
         });
+        this.props.updateTrip(fileContents);
       }
       else{
         alert("File data is corrupt. Please review file format,"
@@ -45,7 +44,6 @@ class Destinations extends Component {
           count: 0
         });
       }
-      console.log(this.state.contents);
     }.bind(this);
     reader.readAsText(file);
     // then you need to set the trip property
