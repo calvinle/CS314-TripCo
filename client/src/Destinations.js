@@ -28,9 +28,23 @@ class Destinations extends Component {
       this.setState({
         contents: JSON.parse(event.target.result),
       });
-      this.setState({
-        count: this.state.contents.places.length
-      });
+      if(this.state.contents.hasOwnProperty('places') &&
+          this.state.contents.hasOwnProperty('type') &&
+          this.state.contents.hasOwnProperty('title') &&
+          this.state.contents.hasOwnProperty('options') &&
+          this.state.contents.hasOwnProperty('distances') &&
+          this.state.contents.hasOwnProperty('map')){
+        this.setState({
+          count: this.state.contents.places.length
+        });
+      }
+      else{
+        alert("File data is corrupt. Please review file format,"
+            + " or create new file below.");
+        this.setState({
+          count: 0
+        });
+      }
       console.log(this.state.contents);
     }.bind(this);
     reader.readAsText(file);
