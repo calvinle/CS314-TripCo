@@ -75,6 +75,22 @@ public class Trip {
     return finalLat;
   }
 
+  public String path(){
+    String path = "<path d=\"";
+    String end = "Z\" stroke=\"red\" stroke-width=\"2\" fill=\"none\" />";
+    //For loop to go thru each set of long/lat
+    //If first point, then add M
+    //else, add L
+    //Convert long
+    //Convert lat
+    //Add long to string with space
+    //Add lat to string with space
+    //Repeat till end
+
+
+    return "";
+  }
+
     /**
    * Returns the distances between consecutive places,
    * including the return to the starting point to make a round trip.
