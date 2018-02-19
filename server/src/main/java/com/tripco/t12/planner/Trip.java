@@ -86,7 +86,7 @@ public class Trip {
     //Add long to string with space
     //Add lat to string with space
     //Repeat till end
-
+    //TODO: FIND WHERE TO ADD THIS STRING IN THE SVG
 
     return "";
   }
