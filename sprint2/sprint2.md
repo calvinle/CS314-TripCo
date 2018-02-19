@@ -55,7 +55,10 @@ Story Points |  39  | *value*
 Date | Tasks done  | Tasks in progress | Impediments 
 :--- | :--- | :--- | :--- 
 *date* | *@task only* | *@task only* | none
- | | | 
+ 2/13  |#85,86,87,88 | #81 | understanding project structure, replanning
+ 2/16 | #81 | #71,75,77,82,108,114,118| loading tffi in, testing server functions
+ 2/18 |  #71,75,77,82,108,114,118 | #78,79,66,83,67,69,70,72,74,76,89,90| none
+ 2/19 | #78,79,66,83 | #67,69,70,72,74,76,89,90| none yet lol
  
 
 ## Review
