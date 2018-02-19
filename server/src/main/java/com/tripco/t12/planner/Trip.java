@@ -57,6 +57,24 @@ public class Trip {
     return map;
   }
 
+  public int longConv(double longitude){
+    double svgWidthPix = 992.0;                       //Width of SVG in Pixels
+    int maxLong = 7;                                  //CO is 7 Longitudes wide
+    double longOrigin = -109.050;                     //Origin (Top Left) coordinate.
+    double netLong = Math.abs(longOrigin - longitude);//Real Life Longitude distance from origin
+    int finalLong = (int)((netLong * svgWidthPix) / maxLong); //convert to pixels
+    return finalLong;
+  }
+
+  public int latConv(double latitude){
+    double svgHeightPix = 707.0;                            //Height of SVG in Pixels
+    int maxLat = 4;                                         //CO is 4 Latitudes tall
+    double latOrigin = 41.0;                                //
+    double netLong = Math.abs(latOrigin - latitude);
+    int finalLat = (int)((netLong * svgHeightPix) / maxLat);
+    return finalLat;
+  }
+
     /**
    * Returns the distances between consecutive places,
    * including the return to the starting point to make a round trip.
