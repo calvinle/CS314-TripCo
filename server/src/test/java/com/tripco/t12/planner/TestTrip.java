@@ -33,7 +33,7 @@ public class TestTrip {
   public void testDistances() {
     trip.plan();
     ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-    Collections.addAll(expectedDistances, 1);
+    Collections.addAll(expectedDistances, 0);
     // Call the equals() method of the first object on the second object.
     assertEquals(expectedDistances, trip.distances);
   }
@@ -60,8 +60,8 @@ public class TestTrip {
   @Test
   public void testFormula(){
     assertEquals(trip.calcDist(0,0,0,0),0);
-    assertEquals(698,trip.calcDist(40.455, -79.982,39.559, -88.102));
-    assertEquals(968, trip.calcDist(50.066, -5.715, 58.644, -3.07));
+    assertEquals(434,trip.calcDist(40.455, -79.982,39.559, -88.102));
+    assertEquals(602, trip.calcDist(50.066, -5.715, 58.644, -3.07));
   }
 
   @Test
