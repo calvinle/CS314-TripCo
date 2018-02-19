@@ -35,10 +35,10 @@ class Options extends Component{
               {/*<div onChange={this.changeButton.bind(this)}>*/}
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
                 <div onChange={this.changeButton.bind(this)}>
-              <label className="btn btn-primary active">
+              <label className="btn btn-outline-dark">
                 <input type="radio" id="miles" name="distance" autoComplete="off" defaultChecked/> Miles
               </label>
-              <label className="btn btn-danger">
+              <label className="btn btn-outline-dark">
                 <input type="radio" id="kilometers" name="distance" autoComplete="off"/> Kilometers
               </label>
                 </div>
