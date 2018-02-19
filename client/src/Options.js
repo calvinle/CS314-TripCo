@@ -36,7 +36,7 @@ class Options extends Component{
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
                 <div onChange={this.changeButton.bind(this)}>
               <label className="btn btn-outline-dark">
-                <input type="radio" id="miles" name="distance" autoComplete="off" defaultChecked/> Miles
+                <input type="radio" id="miles" name="distance" autoComplete="off"/> Miles
               </label>
               <label className="btn btn-outline-dark">
                 <input type="radio" id="kilometers" name="distance" autoComplete="off"/> Kilometers
