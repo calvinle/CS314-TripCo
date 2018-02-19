@@ -18,7 +18,7 @@ class Application extends Component {
         distances: [],
         map: "<svg width=\"1920\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\"><g></g></svg>"
       }
-    };
+    }
     this.updateTrip = this.updateTrip.bind(this);
     this.updateOptions = this.updateOptions.bind(this);
   }
@@ -30,11 +30,19 @@ class Application extends Component {
   }
 
   updateOptions(options){
-    console.log(options);
-    let tripEdit = this.state.trip;
+    console.log("in Application:", options);
+    var testTrip = Object.assign({}, this.state.trip, {
+            type: this.state.trip.type,
+            title: this.state.trip.title,
+            options: {distance: options},
+            places: this.state.trip.places,
+            distances: this.state.trip.distances,
+            map: this.state.trip.map,
+        }
+    )
+    this.setState({trip:testTrip});
+    //console.log("testTrip:", testTrip);
     // update the options in the trip.
-    tripEdit.options = options;
-    this.setState({trip: tripEdit});
   }
 
   render() {
