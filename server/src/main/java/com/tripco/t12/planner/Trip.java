@@ -54,6 +54,8 @@ public class Trip {
     } catch (IOException e) {
       e.printStackTrace();
     }
+    int insert = map.indexOf("</svg>");
+    map = map.substring(0, insert) + path() + map.substring(insert, map.length());
     return map;
   }
 
@@ -69,26 +71,33 @@ public class Trip {
   public int latConv(double latitude){
     double svgHeightPix = 707.0;                            //Height of SVG in Pixels
     int maxLat = 4;                                         //CO is 4 Latitudes tall
-    double latOrigin = 41.0;                                //
-    double netLong = Math.abs(latOrigin - latitude);
-    int finalLat = (int)((netLong * svgHeightPix) / maxLat);
+    double latOrigin = 41.0;                                //Origin (Top Left) coordinate
+    double netLong = Math.abs(latOrigin - latitude);        //Real Life Lat. distance from origin
+    int finalLat = (int)((netLong * svgHeightPix) / maxLat);//convert to pixels
     return finalLat;
   }
 
   public String path(){
-    String path = "<path d=\"";
-    String end = "Z\" stroke=\"red\" stroke-width=\"2\" fill=\"none\" />";
+    String path = "<svg height=\"707\" width=\"992\"> <path d=\"";
+    String end = "Z\" stroke=\"red\" stroke-width=\"2\" fill=\"none\" /> </svg>";
+
     //For loop to go thru each set of long/lat
-    //If first point, then add M
-    //else, add L
-    //Convert long
-    //Convert lat
-    //Add long to string with space
-    //Add lat to string with space
-    //Repeat till end
+    for (int i=0; i < this.places.size(); i++){
+      if (i == 0) { path.concat("M"); } //If first point, then add M
+      else { path.concat("L"); };       //else, add L
+
+      double newLat = decCoord(this.places.get(i).latitude);//Convert lat
+      double newLong = decCoord(this.places.get(i).longitude);//Convert long
+      int latPx = latConv(newLat);
+      int longPx = longConv(newLong);
+
+      path.concat(Integer.toString(longPx) + " ");//Add long to string with space
+      path.concat(Integer.toString(latPx) + " ");//Add lat to string with space
+    }
+    path.concat(end); //indicate with Z to roundtrip, define visual props
     //TODO: FIND WHERE TO ADD THIS STRING IN THE SVG
 
-    return "";
+    return path;
   }
 
     /**

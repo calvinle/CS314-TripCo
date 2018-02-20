@@ -34,6 +34,8 @@ public class TestTrip {
     trip.plan();
     ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
     Collections.addAll(expectedDistances, 1);
+    System.out.println(trip.latConv(38.846127));
+    System.out.println(trip.longConv(-104.800644));
     // Call the equals() method of the first object on the second object.
     assertEquals(expectedDistances, trip.distances);
   }
@@ -56,6 +58,7 @@ public class TestTrip {
     //Numbers outside range
     assertEquals(trip.decCoord("100° 32' 45\" N"), 0,0.001);
   }
+
 
   @Test
   public void testFormula(){
