@@ -10,8 +10,12 @@ import Itinerary from './Itinerary';
 class Trip extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      tripTitle: ''
+    };
     this.plan = this.plan.bind(this);
+    this.fieldChange = this.fieldChange.bind(this);
+    this.destroyClickedElement = this.destroyClickedElement.bind(this);
     this.saveTFFI = this.saveTFFI.bind(this);
   }
 
@@ -43,9 +47,37 @@ class Trip extends Component {
     }
   }
 
+  fieldChange(event){
+    this.setState({tripTitle: event.target.value});
+  }
+
+  destroyClickedElement(event){
+    document.body.removeChild(event.target);
+  }
+
   /* Saves the map and itinerary to the local file system.
    */
+
+  //Download function help found here:
+  //https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
   saveTFFI(){
+    let contents = this.props.trip;
+    contents.title = this.state.tripTitle;
+
+    let textToSave = JSON.stringify(contents);
+    let textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    let textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    let fileNameToSaveAs = this.state.tripTitle;
+
+    let downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = this.destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
   }
 
   /* Renders the buttons, map, and itinerary.
@@ -61,11 +93,11 @@ class Trip extends Component {
             <p>Give your trip a title before planning or saving.</p>
             <div className="input-group" role="group">
               <span className="input-group-btn">
-              <button className="btn btn-primary " onClick={this.plan} type="button">Plan</button>
+              <button className="btn btn-primary " disabled={!this.state.tripTitle} onClick={this.plan} type="button">Plan</button>
             </span>
-              <input type="text" className="form-control" placeholder="Trip title..."/>
+              <input type="text" className="form-control" value={this.state.tripTitle} onChange={this.fieldChange} placeholder="Trip title..."/>
               <span className="input-group-btn">
-              <button className="btn btn-primary " onClick={this.saveTFFI} type="button">Save</button>
+              <button className="btn btn-primary " disabled={!this.state.tripTitle} onClick={this.saveTFFI} type="button">Save</button>
             </span>
             </div>
             <Map trip={this.props.trip} />
