@@ -7,11 +7,22 @@ class Itinerary extends Component {
     this.createTable = this.createTable.bind(this);
   }
 
+  sumDists(){
+      let sumD = this.props.trip.distances;
+      var sum = 0;
+      sumD.forEach(function(obj){
+          sum += obj;
+      });
+      //console.log("here:", sum);
+      return sum;
+  }
+
   createTable () {
-    let distance = 0;  // need to sum this from real the trip
+    let distance = this.sumDists();  // need to sum this from real the trip
     let units = this.props.trip.options.distance;
     let dests = this.props.trip.places.map((item) => <td>{item.name}</td>);
     let dists = this.props.trip.distances.map((item) => <td>{item}</td>);
+    //let tableCells = numbers.map((number, index) => <td key={index}>{number}</td>);
 
     console.log(this.props.trip);
 
@@ -20,6 +31,7 @@ class Itinerary extends Component {
 
   render() {
     let table = this.createTable();
+
 
     return(
         <div id="itinerary">
