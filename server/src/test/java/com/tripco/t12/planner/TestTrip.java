@@ -63,8 +63,8 @@ public class TestTrip {
   @Test
   public void testFormula(){
     assertEquals(trip.calcDist(0,0,0,0),0);
-    assertEquals(698,trip.calcDist(40.455, -79.982,39.559, -88.102));
-    assertEquals(968, trip.calcDist(50.066, -5.715, 58.644, -3.07));
+    assertEquals(434,trip.calcDist(40.455, -79.982,39.559, -88.102));
+    assertEquals(602, trip.calcDist(50.066, -5.715, 58.644, -3.07));
   }
 
   @Test

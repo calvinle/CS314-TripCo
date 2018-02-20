@@ -7,19 +7,37 @@ class Itinerary extends Component {
     this.createTable = this.createTable.bind(this);
   }
 
+  sumDists(){
+      let sumD = this.props.trip.distances;
+      let count = 0;
+      var sum = 0;
+      var tot = [];
+      sumD.forEach(function(obj){
+          sum += obj;
+          tot[count] = sum;
+          console.log(tot[count]);
+          count+=1;
+      });
+      //console.log("here:", sum);
+      return {sum, tot};
+  }
+
   createTable () {
-    let distance = 0;  // need to sum this from real the trip
+    let distance = this.sumDists().sum;// need to sum this from real the trip
+      let roundTrip = this.sumDists().tot.map((item) => <td>{item}</td>);
     let units = this.props.trip.options.distance;
     let dests = this.props.trip.places.map((item) => <td>{item.name}</td>);
     let dists = this.props.trip.distances.map((item) => <td>{item}</td>);
+    //let tableCells = numbers.map((number, index) => <td key={index}>{number}</td>);
 
     console.log(this.props.trip);
 
-    return {distance, units, dests, dists};
+    return {distance, units, dests, dists, roundTrip};
   }
 
   render() {
     let table = this.createTable();
+
 
     return(
         <div id="itinerary">
@@ -35,6 +53,10 @@ class Itinerary extends Component {
             <tr>
               <th className="table-info align-middle">{table.units}</th>
               {table.dists}
+            </tr>
+            <tr>
+                <th className="table-info align-middle">cumulative distance</th>
+                {table.roundTrip}
             </tr>
             </tbody>
           </table>

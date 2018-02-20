@@ -109,19 +109,23 @@ public class Trip {
 
     ArrayList<Integer> dist = new ArrayList<Integer>();
     ArrayList<Place> data = this.places;
-    dist.add(1);
-    return dist;
     //TODO finish so that it populates the distances field correctly in tffi
-    /*Place temp0;
+    Place temp0;
     Place temp1;
-    for(int i = 0; i < data.size()-2; i++){
+    if(data == null) {
+      System.out.println("NULL");
+      dist.add(0);
+      return dist;
+    }
+    for(int i = 0; i <= data.size()-2; i++){
       temp0 = data.get(i);
       temp1 = data.get(i+1);
       dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
     }
     temp0 = data.get(0);
     temp1 = data.get(data.size()-1);
-    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));*/
+    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
+    return dist;
   }
   public double decCoord(String s){
     String in[] = s.split("['\" °″′]+");
@@ -173,23 +177,30 @@ public class Trip {
     double finalBottom = bottom1 + bottom2;
 
     work = Math.atan2(finalTop, finalBottom);
-    return (int)kilo(work);
+    //System.out.println(work);
     //TODO finish with option integration
-    /*if(o.distance.equalsIgnoreCase("m")){
+    if(work == 0)
+      return (int)work;
+    else if(o==null){
       return (int)mile(work);
     }
-    else if(o.distance.equalsIgnoreCase("k")){
+    else if(o.distance.equalsIgnoreCase("miles")){
+      return (int)mile(work);
+    }
+    else if(o.distance.equalsIgnoreCase("kilometers")){
       return (int)kilo(work);
     }
     else
-      return 0;*/
+      return 0;
   }
 
   public double mile(double d){
+    System.out.println(d*3958.7613);
     return d*3958.7613;
   }
 
   public double kilo(double d){
+    System.out.println(d*6371.0088);
     return d*6371.0088;
   }
 
