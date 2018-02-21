@@ -33,16 +33,29 @@ public class TestTrip {
   public void testDistances() {
     trip.plan();
     ArrayList<Integer> expectedDistances = new ArrayList<Integer>();
-    Collections.addAll(expectedDistances, 1);
-    System.out.println(trip.latConv(38.846127));
-    System.out.println(trip.longConv(-104.800644));
+    Collections.addAll(expectedDistances, 0);
     // Call the equals() method of the first object on the second object.
     assertEquals(expectedDistances, trip.distances);
   }
 
   @Test
-  public void testSVG(){
+  public void testLatConv(){
+    //Denver Lat
+    assertEquals(trip.latConv(39.742043), 257.6938998, 0.02);
+    //FoCo Lat
+    assertEquals(trip.latConv(40.585258), 108.6556485, 0.02);
+    //Loveland lat
+    assertEquals(trip.latConv(40.398857), 141.6020253, 0.02);
+  }
 
+  @Test
+  public void testLongConv(){
+    //Denver Long
+    assertEquals(trip.longConv(-104.991531), 609.5796069, 0.02);
+    //FoCo Long
+    assertEquals(trip.longConv(-105.084419), 596.4160503, 0.02);
+    //Loveland long
+    assertEquals(trip.longConv(-105.052643), 600.9191634, 0.02);
   }
 
   @Test
