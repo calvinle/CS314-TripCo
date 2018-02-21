@@ -39,8 +39,23 @@ public class TestTrip {
   }
 
   @Test
-  public void testSVG(){
+  public void testLatConv(){
+    //Denver Lat
+    assertEquals(trip.latConv(39.742043), 257.6938998, 0.02);
+    //FoCo Lat
+    assertEquals(trip.latConv(40.585258), 108.6556485, 0.02);
+    //Loveland lat
+    assertEquals(trip.latConv(40.398857), 141.6020253, 0.02);
+  }
 
+  @Test
+  public void testLongConv(){
+    //Denver Long
+    assertEquals(trip.longConv(-104.991531), 609.5796069, 0.02);
+    //FoCo Long
+    assertEquals(trip.longConv(-105.084419), 596.4160503, 0.02);
+    //Loveland long
+    assertEquals(trip.longConv(-105.052643), 600.9191634, 0.02);
   }
 
   @Test
@@ -61,6 +76,7 @@ public class TestTrip {
     //Numbers outside range
     assertEquals(trip.decCoord("100° 32' 45\" N"), 0,0.001);
   }
+
 
   @Test
   public void testFormula(){
