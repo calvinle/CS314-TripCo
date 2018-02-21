@@ -55,7 +55,14 @@ public class Trip {
       e.printStackTrace();
     }
     int insert = map.indexOf("</svg>");
-    map = map.substring(0, insert) + path() + map.substring(insert, map.length());
+    map = map.substring(0, map.length()-6);
+
+    ArrayList<Place> yeah = this.places;
+    if (yeah == null){
+      System.out.println("Null");
+      return map;
+    }
+    map += path();
     return map;
   }
 
@@ -77,25 +84,26 @@ public class Trip {
     return finalLat;
   }
 
-  public String path(){
+  private String path(){
     String path = "<svg height=\"707\" width=\"992\"> <path d=\"";
-    String end = "Z\" stroke=\"red\" stroke-width=\"2\" fill=\"none\" /> </svg>";
+    String end = "Z\" stroke=\"blue\" stroke-width=\"2\" fill=\"none\" /> </svg></svg>";
 
     //For loop to go thru each set of long/lat
-    for (int i=0; i < this.places.size(); i++){
-      if (i == 0) { path.concat("M"); } //If first point, then add M
-      else { path.concat("L"); };       //else, add L
+    ArrayList<Place> data = this.places;
+    System.out.println(data.isEmpty());
+    for (int i=0; i < data.size(); i++){
+      if (i == 0) { path+="M"; } //If first point, then add M
+      else { path+="L"; };       //else, add L
 
-      double newLat = decCoord(this.places.get(i).latitude);//Convert lat
-      double newLong = decCoord(this.places.get(i).longitude);//Convert long
+      double newLat = decCoord(data.get(i).latitude);//Convert lat
+      double newLong = decCoord(data.get(i).longitude);//Convert long
       int latPx = latConv(newLat);
       int longPx = longConv(newLong);
 
-      path.concat(Integer.toString(longPx) + " ");//Add long to string with space
-      path.concat(Integer.toString(latPx) + " ");//Add lat to string with space
+      path += Integer.toString(longPx) + " ";//Add long to string with space
+      path += Integer.toString(latPx) + " ";//Add lat to string with space
     }
-    path.concat(end); //indicate with Z to roundtrip, define visual props
-    //TODO: FIND WHERE TO ADD THIS STRING IN THE SVG
+    path += end; //indicate with Z to roundtrip, define visual props
 
     return path;
   }
@@ -109,7 +117,7 @@ public class Trip {
 
     ArrayList<Integer> dist = new ArrayList<Integer>();
     ArrayList<Place> data = this.places;
-    //TODO finish so that it populates the distances field correctly in tffi
+
     Place temp0;
     Place temp1;
     if(data == null) {
