@@ -15,6 +15,17 @@ import spark.Request;
 import java.util.ArrayList;
 
 /**
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * The Trip class supports TFFI so it can easily be converted to/from Json by Gson.
  *
  */
@@ -190,13 +201,13 @@ public class Trip {
     if(work == 0)
       return (int)work;
     else if(o==null){
-      return (int)mile(work);
+      return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("miles")){
-      return (int)mile(work);
+      return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
-      return (int)kilo(work);
+      return (int)Math.round(kilo(work));
     }
     else
       return 0;
