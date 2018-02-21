@@ -66,21 +66,21 @@ public class Trip {
     return map;
   }
 
-  public int longConv(double longitude){
-    double svgWidthPix = 992.0;                       //Width of SVG in Pixels
-    int maxLong = 7;                                  //CO is 7 Longitudes wide
-    double longOrigin = -109.050;                     //Origin (Top Left) coordinate.
+  public double longConv(double longitude){
+    double svgWidthPix = 992;                       //Width of SVG in Pixels
+    double maxLong = 7.0;                                  //CO is 7 Longitudes wide
+    double longOrigin = -109.293;                     //Origin (Top Left) coordinate.
     double netLong = Math.abs(longOrigin - longitude);//Real Life Longitude distance from origin
-    int finalLong = (int)((netLong * svgWidthPix) / maxLong); //convert to pixels
+    double finalLong = (netLong * svgWidthPix) / maxLong; //convert to pixels
     return finalLong;
   }
 
-  public int latConv(double latitude){
+  public double latConv(double latitude){
     double svgHeightPix = 707.0;                            //Height of SVG in Pixels
-    int maxLat = 4;                                         //CO is 4 Latitudes tall
-    double latOrigin = 41.0;                                //Origin (Top Left) coordinate
+    double maxLat = 4;                                         //CO is 4 Latitudes tall
+    double latOrigin = 41.2;                                //Origin (Top Left) coordinate
     double netLong = Math.abs(latOrigin - latitude);        //Real Life Lat. distance from origin
-    int finalLat = (int)((netLong * svgHeightPix) / maxLat);//convert to pixels
+    double finalLat = ((netLong * svgHeightPix) / maxLat);//convert to pixels
     return finalLat;
   }
 
@@ -97,14 +97,14 @@ public class Trip {
 
       double newLat = decCoord(data.get(i).latitude);//Convert lat
       double newLong = decCoord(data.get(i).longitude);//Convert long
-      int latPx = latConv(newLat);
-      int longPx = longConv(newLong);
+      double latPx = latConv(newLat);
+      double longPx = longConv(newLong);
 
-      path += Integer.toString(longPx) + " ";//Add long to string with space
-      path += Integer.toString(latPx) + " ";//Add lat to string with space
+      path += Double.toString(longPx) + " ";//Add long to string with space
+      path += Double.toString(latPx) + " ";//Add lat to string with space
     }
     path += end; //indicate with Z to roundtrip, define visual props
-
+    System.out.println(path);
     return path;
   }
 
