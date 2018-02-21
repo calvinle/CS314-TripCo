@@ -39,6 +39,11 @@ public class TestTrip {
   }
 
   @Test
+  public void testSVG(){
+
+  }
+
+  @Test
   public void testFormat() {
     //method returns
     assertEquals(trip.decCoord("0"),00.000,0);
