@@ -32,8 +32,13 @@ class Destinations extends Component {
           fileContents.hasOwnProperty('options') &&
           fileContents.hasOwnProperty('distances') &&
           fileContents.hasOwnProperty('map')){
+        if(fileContents.distances[0] != 0){
+          fileContents.places.push(fileContents.places[0]);
+          fileContents.distances.push(fileContents.distances[0]);
+          fileContents.distances[0] = 0;
+        }
         this.setState({
-          count: fileContents.places.length
+          count: fileContents.places.length - 1
         });
         this.props.updateTrip(fileContents);
       }
