@@ -44,18 +44,18 @@ class Itinerary extends Component {
           <h4>Round trip distance of {table.distance} {table.units}. </h4>
           <table className="table table-responsive table-bordered">
             <thead>
-            <tr className="table-info">
+            <tr className="table-primary">
               <th className="align-middle">Destination</th>
               {table.dests}
             </tr>
             </thead>
             <tbody>
             <tr>
-              <th className="table-info align-middle">{table.units}</th>
+              <th className="table-danger align-middle">{table.units}</th>
               {table.dists}
             </tr>
             <tr>
-                <th className="table-info align-middle">cumulative distance</th>
+                <th className="table-success align-middle">cumulative distance</th>
                 {table.roundTrip}
             </tr>
             </tbody>

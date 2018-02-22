@@ -59,8 +59,8 @@ class Destinations extends Component {
   render() {
     // need to clean up the button
     return (
-        <div id="destinations" className="card">
-          <div className="card-header bg-info text-white">
+        <div id="destinations" className="card border-0 border-dark">
+          <div className="card-header bg-primary text-light">
             Destinations
           </div>
           <div className="card-body">
