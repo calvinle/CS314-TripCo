@@ -96,7 +96,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Communication(live) | Getting started sooner | Stop using codepen
+What we did well | Communication | getting tasks done and assigning | Integrating client and server 
+What we need to work on | More live meetings, plan live | Making sure all issues are in github BEFORE we work on them | Cleaner code
+What we will change next time | Live meetings | Starting much sooner | Sharing info from client and server side
