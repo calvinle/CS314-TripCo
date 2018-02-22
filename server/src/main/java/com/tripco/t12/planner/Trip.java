@@ -136,14 +136,15 @@ public class Trip {
       dist.add(0);
       return dist;
     }
+    dist.add(0);
     for(int i = 0; i <= data.size()-2; i++){
       temp0 = data.get(i);
       temp1 = data.get(i+1);
       dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
     }
-    temp0 = data.get(0);
+   /* temp0 = data.get(0);
     temp1 = data.get(data.size()-1);
-    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
+    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));*/
     return dist;
   }
   public double decCoord(String s){
