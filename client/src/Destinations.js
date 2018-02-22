@@ -36,6 +36,7 @@ class Destinations extends Component {
           fileContents.places.push(fileContents.places[0]);
           fileContents.distances.push(fileContents.distances[0]);
           fileContents.distances[0] = 0;
+
         }
         this.setState({
           count: fileContents.places.length - 1
