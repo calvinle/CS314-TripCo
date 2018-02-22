@@ -85,8 +85,8 @@ class Trip extends Component {
    */
   render(){
     return(
-        <div id="trip" className="card">
-          <div className="card-header bg-info text-white">
+        <div id="trip" className="card border-0 border-dark">
+          <div className="card-header bg-primary text-white">
             Trip
           </div>
           <div className="card-body">
@@ -97,7 +97,7 @@ class Trip extends Component {
             </span>
               <input type="text" className="form-control" value={this.state.tripTitle} onChange={this.fieldChange} placeholder="Trip title..."/>
               <span className="input-group-btn">
-              <button className="btn btn-primary " disabled={!this.state.tripTitle} onClick={this.saveTFFI} type="button">Save</button>
+              <button className="btn btn-success " disabled={!this.state.tripTitle} onClick={this.saveTFFI} type="button">Save</button>
             </span>
             </div>
             <Map trip={this.props.trip} />
