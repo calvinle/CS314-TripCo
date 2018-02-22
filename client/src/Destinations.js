@@ -34,8 +34,7 @@ class Destinations extends Component {
           fileContents.hasOwnProperty('map')){
         if(fileContents.distances[0] != 0){
           fileContents.places.push(fileContents.places[0]);
-          fileContents.distances.push(fileContents.distances[0]);
-          fileContents.distances[0] = 0;
+          fileContents.distances.unshift(0);
 
         }
         this.setState({
