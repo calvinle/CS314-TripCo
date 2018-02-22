@@ -14,15 +14,24 @@ class Header extends Component{
           <p className="lead">"Want to travel far and wide?"</p>
             <ol >
               <li>
-                Choose options for trip planning, information to display about locations,
-                and how the trip map and itinerary should be saved.</li>
+                First seclect if you prefer miles or kilometers for your trip. If you have
+                a saved trip or recieved a trip file in tffi format from a friend, please keep in mind that
+                the distance unit you in the file will be the units that the trip is displayed in</li>
               <li>
-                Choose your destinations by loading existing sets of destinations or
-                find more in an extensive database of locations worldwide.</li>
+                To plan your trip and see it plotted on a map of Colorado, you must upload either a 
+                saved trip file from your last visit, or a trip file in tffi format from elsewhere.</li>
               <li>
-                Plan the trip with the options you selected.
-                Review and revise the trip origin and order.
-                Save the trip map and itinerary for future reference.</li>
+                By clicking plan you will be able to see your trip mapped out in straight lines,
+                overlayed on the state map of Colorado. Distances from each location of the trip
+                will be displayed in the itinerary section, along with a cumulative distance of
+                the round trip.
+                
+                If you wish to save the trip for future use, you can use the save button. This
+                will download a file to your computer in the appropriate format.
+                
+                Don't forget- You must specify a name before you can plan or save your trip! 
+
+                Thanks, and safe travels!</li>
             </ol>
         </div>
     )
