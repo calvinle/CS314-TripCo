@@ -26,8 +26,8 @@ class Options extends Component{
     // @todo need to update the options when a button is pressed
     return(
 
-        <div id="options" className="card">
-          <div className="card-header bg-info text-white">
+        <div id="options" className="card border-0 border-dark">
+          <div className="card-header bg-primary text-light">
             Options
           </div>
           <div className="card-body">
