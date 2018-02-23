@@ -47,8 +47,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  19   | *value* 
-Story Points |  39  | *value* 
+Tasks |  19   | 25
+Story Points |  39  | 45
 
 ## Daily Scrums
 
@@ -58,32 +58,45 @@ Date | Tasks done  | Tasks in progress | Impediments
  2/13  |#85,86,87,88 | #81 | understanding project structure, replanning
  2/16 | #81 | #71,75,77,82,108,114,118| loading tffi in, testing server functions
  2/18 |  #71,75,77,82,108,114,118 | #78,79,66,83,67,69,70,72,74,76,89,90| none
- 2/19 | #78,79,66,83 | #67,69,70,72,74,76,89,90| none yet lol
+ 2/19 | #66,72,74,78,79,66,83 | #67,69,70,72,74,76,89,90| none yet lol
+ 2/21 | #69,70,76,89,90,128 | DONE | Some minor bug solving late at night
  
 
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* #65 Show Map of Roundtrip
+* #66 Give the user the option to choose if the data is displayed in Km or Mi
+* #68 Let the User Save their Trip
+* #73 Show an Itinierary of the Round Trip
+* #83 Let the user load a file with destinations
+* #84 Plan the Trip in the Order the User Provided
+* #91 Build a Responsive, Mobile First Web Application
+* #99 Server Side Distance Calculations
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* None, all planned were completed
 
 #### What went well
-* *something*
-*
+* Communication
+* Owning all our tasks
+* Helping and supporting
+* Identifying new issues and accounting for the added work
+* All tasks completed
+* Testing and debugging
 
 #### Problems encountered and resolutions
-* *something*
-*
+* Bugs on the last night: people jumped in to help late at night
+* Late start: we got our acts together
+* Planning: assigning tasks clearer
+* Planning: Gaining a further understanding of the structure
+* Black Box Testing: writing tests sooner
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Communication(live) | Getting started sooner | Stop using codepen
+What we did well | Communication | getting tasks done and assigning | Integrating client and server 
+What we need to work on | More live meetings, plan live | Making sure all issues are in github BEFORE we work on them | Cleaner code
+What we will change next time | Live meetings | Starting much sooner | Sharing info from client and server side
