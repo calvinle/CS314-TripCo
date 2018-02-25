@@ -1,4 +1,4 @@
-# Sprint 3 - T12 - Goslings
+# Sprint 3 - T12 - Dave Matthews' Beard @deprecated
 
 ## Goal
 

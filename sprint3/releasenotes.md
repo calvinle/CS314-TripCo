@@ -1,5 +1,5 @@
 ## TripCo 3.0 
-### T12 - Goslings
+### T12 - Dave Matthews' Beard @deprecated
 
 ### Overview
 [a brief overview of the product]
