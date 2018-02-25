@@ -1,4 +1,4 @@
-# t12 - Goslings
+# t12 - Dave Matthews' Beard @deprecated
 ![Team Goslings](images/teamGoslings.jpeg)
 * Charlie Schoonover, wschoon, wcschoonover
 * Calvin Le, calvinle, calvinle
