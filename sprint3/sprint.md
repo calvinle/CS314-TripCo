@@ -30,8 +30,11 @@
 
 Epics planned for this release.
 
-* *## title*
-*
+* ## UX/UI changes
+* ## Code Coverage
+* ## Give the User the Option to View a Shorter Trip
+* ## Build a Trip from Existing Information
+* ## Clean Code
 
 *Include a discussion of planning decisions made based on your velocity from previous sprints.*
 
@@ -39,8 +42,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *value*   | *value* 
-Story Points |  *value*  | *value* 
+Tasks |  19  | *value* 
+Story Points |  40 | *value* 
 
 ## Daily Scrums
 
