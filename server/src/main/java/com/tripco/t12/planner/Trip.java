@@ -152,33 +152,27 @@ public class Trip {
     double calculated = 0;
     if(in.length == 4){
       calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60+Double.parseDouble(in[2])/3600;
-      if (in[3].equalsIgnoreCase("s")|| in[3].equalsIgnoreCase("w"))
-        calculated*=-1;
     }
     else if(in.length == 3){
       calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
-      if (in[2].equalsIgnoreCase("s")|| in[2].equalsIgnoreCase("w"))
-        calculated*=-1;
     }
     else if(in.length == 2){
       calculated = Double.parseDouble(in[0]);
-      if (in[1].equalsIgnoreCase("s")|| in[1].equalsIgnoreCase("w"))
-        calculated*=-1;
     }
     else if(in.length == 1){
       calculated = Double.parseDouble(in[0]);
       return calculated;
     }
 
-    if(in[in.length-1].equalsIgnoreCase("n")&&(calculated >= 37 && calculated <= 41 ))
-      return calculated;
-    else if(in[in.length-1].equalsIgnoreCase("w")&&(calculated <=-102 && calculated >= -109 ))
+    if (in[in.length-1].equalsIgnoreCase("s")||in[in.length-1].equalsIgnoreCase("w"))
+      calculated*=-1;
+
+    if((in[in.length-1].equalsIgnoreCase("n")&&(calculated >= 37 && calculated <= 41 )) || (in[in.length-1].equalsIgnoreCase("w")&&(calculated <=-102 && calculated >= -109 )))
       return calculated;
     else return 0;
   }
 
   public int calcDist(double lat1, double long1, double lat2, double long2){
-    double work;
     Option o = this.options;
 
     double wla1 = lat1*(Math.PI / 180);
@@ -186,7 +180,14 @@ public class Trip {
     double wla2 = lat2*(Math.PI / 180);
     double wlo2 = long2*(Math.PI / 180);
 
-    double dify = Math.abs(wlo1-wlo2);
+    double difx = Math.cos(wla2)*Math.cos(wlo2) - Math.cos(wla1)*Math.cos(wlo1);
+    double dify = Math.cos(wla2)*Math.sin(wlo2) - Math.cos(wla1)*Math.sin(wlo1);
+    double difz = Math.sin(wla2) - Math.sin(wla1);
+
+    double c = Math.sqrt(Math.pow(difx,2)+ Math.pow(dify,2)+Math.pow(difz,2));
+    double work = 2*Math.asin(c/2);
+
+    /*double dify = Math.abs(wlo1-wlo2);
 
     double top1 = Math.pow(Math.cos(wla2) * Math.sin(dify), 2);
     double top2 = Math.pow( (Math.cos(wla1)*Math.sin(wla2) - Math.sin(wla1)*Math.cos(wla2)*Math.cos(dify)), 2);
@@ -196,15 +197,9 @@ public class Trip {
     double bottom2 = Math.cos(wla1)*Math.cos(wla2)*Math.cos(dify);
     double finalBottom = bottom1 + bottom2;
 
-    work = Math.atan2(finalTop, finalBottom);
-    //System.out.println(work);
-    //TODO finish with option integration
-    if(work == 0)
-      return (int)work;
-    else if(o==null){
-      return (int)Math.round(mile(work));
-    }
-    else if(o.distance.equalsIgnoreCase("miles")){
+    work = Math.atan2(finalTop, finalBottom);*/
+
+    if(o==null || o.distance.equalsIgnoreCase("miles")){
       return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
@@ -215,12 +210,12 @@ public class Trip {
   }
 
   public double mile(double d){
-    System.out.println(d*3958.7613);
+    //System.out.println(d*3958.7613);
     return d*3958.7613;
   }
 
   public double kilo(double d){
-    System.out.println(d*6371.0088);
+    //System.out.println(d*6371.0088);
     return d*6371.0088;
   }
 
