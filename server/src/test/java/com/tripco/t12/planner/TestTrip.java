@@ -72,7 +72,7 @@ public class TestTrip {
     assertEquals(trip.decCoord("40° 41' 41\" N"), 40.695,0.001);
     assertEquals(trip.decCoord("38° 01.383' N"), 38.023,0.001);
     assertEquals(trip.decCoord("106.988° W"), -106.988,0.001);
-    assertEquals(trip.decCoord("-40.001"), -40.001,.001);
+    assertEquals(-40.001, trip.decCoord("-40.001"),.001);
     //Numbers outside range
     assertEquals(trip.decCoord("100° 32' 45\" N"), 0,0.001);
   }
