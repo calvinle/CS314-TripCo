@@ -142,11 +142,9 @@ public class Trip {
       temp1 = data.get(i+1);
       dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
     }
-   /* temp0 = data.get(0);
-    temp1 = data.get(data.size()-1);
-    dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));*/
     return dist;
   }
+
   public double decCoord(String s){
     String in[] = s.split("['\" °″′]+");
     double calculated = 0;
@@ -156,19 +154,22 @@ public class Trip {
     else if(in.length == 3){
       calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
     }
-    else if(in.length == 2){
+    else if(in.length <= 2){
       calculated = Double.parseDouble(in[0]);
-    }
-    else if(in.length == 1){
-      calculated = Double.parseDouble(in[0]);
-      return calculated;
+      if(in.length==1) return calculated;
     }
 
-    if (in[in.length-1].equalsIgnoreCase("s")||in[in.length-1].equalsIgnoreCase("w"))
-      calculated*=-1;
+    return validL(in,calculated);
+  }
 
-    if((in[in.length-1].equalsIgnoreCase("n")&&(calculated >= 37 && calculated <= 41 )) || (in[in.length-1].equalsIgnoreCase("w")&&(calculated <=-102 && calculated >= -109 )))
-      return calculated;
+  private double validL(String[] s, double d){
+    if (s[s.length-1].equalsIgnoreCase("s")||s[s.length-1].equalsIgnoreCase("w"))
+      d*=-1;
+
+    if(s[s.length-1].equalsIgnoreCase("n") && (d>=37 && d<=41))
+      return d;
+    else if(s[s.length-1].equalsIgnoreCase("w") &&(d>=-109 && d<=-102))
+      return d;
     else return 0;
   }
 
@@ -186,18 +187,6 @@ public class Trip {
 
     double c = Math.sqrt(Math.pow(difx,2)+ Math.pow(dify,2)+Math.pow(difz,2));
     double work = 2*Math.asin(c/2);
-
-    /*double dify = Math.abs(wlo1-wlo2);
-
-    double top1 = Math.pow(Math.cos(wla2) * Math.sin(dify), 2);
-    double top2 = Math.pow( (Math.cos(wla1)*Math.sin(wla2) - Math.sin(wla1)*Math.cos(wla2)*Math.cos(dify)), 2);
-    double finalTop = Math.sqrt(top1 + top2);
-
-    double bottom1 = Math.sin(wla1)*Math.sin(wla2);
-    double bottom2 = Math.cos(wla1)*Math.cos(wla2)*Math.cos(dify);
-    double finalBottom = bottom1 + bottom2;
-
-    work = Math.atan2(finalTop, finalBottom);*/
 
     if(o==null || o.distance.equalsIgnoreCase("miles")){
       return (int)Math.round(mile(work));
