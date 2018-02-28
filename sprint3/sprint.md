@@ -50,7 +50,7 @@ Story Points |  40 | *value*
 Date | Tasks done  | Tasks in progress | Impediments 
 :--- | :--- | :--- | :--- 
 *date* | *@task only* | *@task only* | none
- | | | 
+ Feb. 27, 2018| N/A|Clean Code| change distance calc to chord formula
  
 
 ## Review
