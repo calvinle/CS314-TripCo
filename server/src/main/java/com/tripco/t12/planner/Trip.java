@@ -163,13 +163,18 @@ public class Trip {
   }
 
   private double validL(String[] s, double d){
-    if (s[s.length-1].equalsIgnoreCase("s")||s[s.length-1].equalsIgnoreCase("w"))
+    String sCheck;
+    sCheck = s[s.length-1].toLowerCase();
+
+    if (sCheck.equals("s")|| sCheck.equals("w"))
       d*=-1;
 
-    if(s[s.length-1].equalsIgnoreCase("n") && (d>=37 && d<=41))
+    if(sCheck.equals("n") && (d>=37 && d<=41))
       return d;
-    else if(s[s.length-1].equalsIgnoreCase("w") &&(d>=-109 && d<=-102))
+
+    else if(sCheck.equals("w") &&(d>=-109 && d<=-102))
       return d;
+
     else return 0;
   }
 
