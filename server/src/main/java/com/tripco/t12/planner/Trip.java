@@ -163,14 +163,22 @@ public class Trip {
   }
 
   private double validL(String[] s, double d){
-    if (s[s.length-1].equalsIgnoreCase("s")||s[s.length-1].equalsIgnoreCase("w"))
-      d*=-1;
+    String scheck;
+    scheck = s[s.length-1].toLowerCase();
 
-    if(s[s.length-1].equalsIgnoreCase("n") && (d>=37 && d<=41))
-      return d;
-    else if(s[s.length-1].equalsIgnoreCase("w") &&(d>=-109 && d<=-102))
-      return d;
-    else return 0;
+    if (scheck.equals("s")|| scheck.equals("w")) {
+        d *= -1;
+    }
+
+    if(scheck.equals("n") && (d>=37 && d<=41)) {
+        return d;
+    }
+    else if(scheck.equals("w") &&(d>=-109 && d<=-102)) {
+        return d;
+    }
+    else {
+      return 0;
+    }
   }
 
   public int calcDist(double lat1, double long1, double lat2, double long2){
