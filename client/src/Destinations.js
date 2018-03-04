@@ -18,9 +18,8 @@ class Destinations extends Component {
   {
       let myArray = ["places", "type", "title", "options", "distances", "map"];
       let flag = true;
-      let s;
 
-      for(s in myArray)
+      for(var s in myArray)
       {
           //console.log("myArray:", myArray[s]);
           if(!fileContents.hasOwnProperty(myArray[s])){ flag = false; }
