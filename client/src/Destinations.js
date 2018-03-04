@@ -26,15 +26,16 @@ class Destinations extends Component {
           //console.log("flag: ", flag);
       }
 
-      if(flag){
-          if(fileContents.distances[0] !== 0) {
+      if(!flag){
+          return false;
+      }
+
+      if(fileContents.distances[0] !== 0) {
               fileContents.places.push(fileContents.places[0]);
               fileContents.distances.unshift(0);
-              return true
+              return true;
           }
-      }
-      else
-          return false
+
   }
 
     alertMsg()
