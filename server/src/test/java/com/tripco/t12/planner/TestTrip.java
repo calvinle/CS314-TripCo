@@ -36,6 +36,14 @@ public class TestTrip {
     Collections.addAll(expectedDistances, 0);
     // Call the equals() method of the first object on the second object.
     assertEquals(expectedDistances, trip.distances);
+    Place p = new Place();
+    p.id = "01";
+    p.name = "here";
+    p.latitude = "40";
+    p.longitude = "-107";
+    trip.places.add(p);
+    trip.rePlan();
+    assertEquals(expectedDistances, trip.distances);
   }
 
   @Test
@@ -83,6 +91,11 @@ public class TestTrip {
     assertEquals(trip.calcDist(0,0,0,0),0);
     assertEquals(434,trip.calcDist(40.455, -79.982,39.559, -88.102));
     assertEquals(602, trip.calcDist(50.066, -5.715, 58.644, -3.07));
+    trip.plan();
+    trip.options.distance = "kilometers";
+    assertEquals(140,trip.calcDist(40,-107,41,-106));
+    trip.options.distance = "heckifiknow";
+    assertEquals(0,trip.calcDist(40,-107,41,-106));
   }
 
   @Test
