@@ -43,10 +43,14 @@ public class Trip {
    * It might need to reorder the places in the future.
    */
   public void plan() {
-
     this.map = svg();
     this.distances = legDistances();
+    this.options = new Option();
+    this.places = new ArrayList<Place>();
+  }
 
+  public void rePlan(){
+    this.distances = legDistances();
   }
 
   /**
@@ -142,6 +146,7 @@ public class Trip {
       temp1 = data.get(i+1);
       dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
     }
+    System.out.println("places is not null");
     return dist;
   }
 
@@ -189,12 +194,15 @@ public class Trip {
     double work = 2*Math.asin(c/2);
 
     if(o==null || o.distance.equalsIgnoreCase("miles")){
+      System.out.println("M or N");
       return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
+      System.out.println("kilo");
       return (int)Math.round(kilo(work));
     }
     else
+      System.out.println("invalid Unit");
       return 0;
   }
 
