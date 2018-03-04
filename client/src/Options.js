@@ -44,6 +44,7 @@ class Options extends Component{
                 </div>
             </div>
           </div>
+            <input type="range">
         </div>
     )
   }
