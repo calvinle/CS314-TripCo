@@ -166,16 +166,19 @@ public class Trip {
     String sCheck;
     sCheck = s[s.length-1].toLowerCase();
 
-    if (sCheck.equals("s")|| sCheck.equals("w"))
-      d*=-1;
+    if (sCheck.equals("s")|| sCheck.equals("w")) {
+        d *= -1;
+    }
 
-    if(sCheck.equals("n") && (d>=37 && d<=41))
-      return d;
-
-    else if(sCheck.equals("w") &&(d>=-109 && d<=-102))
-      return d;
-
-    else return 0;
+    if(sCheck.equals("n") && (d>=37 && d<=41)) {
+        return d;
+    }
+    else if(sCheck.equals("w") &&(d>=-109 && d<=-102)) {
+        return d;
+    }
+    else {
+      return 0;
+    }
   }
 
   public int calcDist(double lat1, double long1, double lat2, double long2){
