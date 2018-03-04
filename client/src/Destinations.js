@@ -16,12 +16,18 @@ class Destinations extends Component {
 
   validTFFI(fileContents)
   {
-      if(fileContents.hasOwnProperty('places') &&
-          fileContents.hasOwnProperty('type') &&
-          fileContents.hasOwnProperty('title') &&
-          fileContents.hasOwnProperty('options') &&
-          fileContents.hasOwnProperty('distances') &&
-          fileContents.hasOwnProperty('map')){
+      let myArray = ["places", "type", "title", "options", "distances", "map"];
+      let flag = true;
+      let s;
+
+      for(s in myArray)
+      {
+          //console.log("myArray:", myArray[s]);
+          if(!fileContents.hasOwnProperty(myArray[s])){ flag = false; }
+          //console.log("flag: ", flag);
+      }
+
+      if(flag){
           if(fileContents.distances[0] !== 0) {
               fileContents.places.push(fileContents.places[0]);
               fileContents.distances.unshift(0);
