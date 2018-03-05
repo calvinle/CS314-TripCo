@@ -14,9 +14,38 @@ class Destinations extends Component {
     this.state = {count: 0};
   }
 
+  validTFFI(fileContents)
+  {
+      let myArray = ["places", "type", "title", "options", "distances", "map"];
+      let flag = true;
+
+      for(var s in myArray)
+      {
+          //console.log("myArray:", myArray[s]);
+          if(!fileContents.hasOwnProperty(myArray[s])){ flag = false; }
+          //console.log("flag: ", flag);
+      }
+
+      if(!flag){
+          return false;
+      }
+
+      if(fileContents.distances[0] !== 0) {
+              fileContents.places.push(fileContents.places[0]);
+              fileContents.distances.unshift(0);
+              return true;
+          }
+
+  }
+
+    alertMsg()
+    {
+        alert("File data is corrupt. Please review file format, or create new file below.");
+        this.setState({ count: 0 });
+    }
+
   loadTFFI(event) {
     console.log(event.target.files[0].name);
-    // now you need to read the file and create a JSON.
     //Found via StackOverflow and modified:
     //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
     let file = event.target.files[0];
@@ -26,28 +55,12 @@ class Destinations extends Component {
     let reader = new FileReader();
     reader.onload = function(event) {
       let fileContents = JSON.parse(event.target.result);
-      if(fileContents.hasOwnProperty('places') &&
-          fileContents.hasOwnProperty('type') &&
-          fileContents.hasOwnProperty('title') &&
-          fileContents.hasOwnProperty('options') &&
-          fileContents.hasOwnProperty('distances') &&
-          fileContents.hasOwnProperty('map')){
-        if(fileContents.distances[0] != 0){
-          fileContents.places.push(fileContents.places[0]);
-          fileContents.distances.unshift(0);
-
-        }
-        this.setState({
-          count: fileContents.places.length - 1
-        });
+      if(this.validTFFI(fileContents)){
+        this.setState({count: fileContents.places.length - 1});
         this.props.updateTrip(fileContents);
       }
       else{
-        alert("File data is corrupt. Please review file format,"
-            + " or create new file below.");
-        this.setState({
-          count: 0
-        });
+        this.alertMsg();
       }
     }.bind(this);
     reader.readAsText(file);
