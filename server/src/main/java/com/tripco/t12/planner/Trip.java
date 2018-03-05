@@ -167,18 +167,38 @@ public class Trip {
     return validL(in,calculated);
   }
 
+  private boolean outOfRangeN (double d)
+  {
+      if(d>=37 && d<=41)
+      {
+          return true;
+      }
+      return false;
+  }
+  private boolean outOfRangeW (double d)
+  {
+      if(d>=-109 && d<=-102)
+      {
+          return true; 
+      }
+      return false;
+    }
   private double validL(String[] s, double d){
-    String scheck;
-    scheck = s[s.length-1].toLowerCase();
+    String scheck = s[s.length-1].toLowerCase();
 
-    if (scheck.equals("s")|| scheck.equals("w")) {
+    if (scheck.equals("s")) {
         d *= -1;
     }
 
-    if(scheck.equals("n") && (d>=37 && d<=41)) {
+    if (scheck.equals("w")) {
+        d *= -1;
+    }
+
+    if(scheck.equals("n") && outOfRangeN(d)) {
         return d;
     }
-    else if(scheck.equals("w") &&(d>=-109 && d<=-102)) {
+
+    else if(scheck.equals("w") && outOfRangeW(d)) {
         return d;
     }
     else {
