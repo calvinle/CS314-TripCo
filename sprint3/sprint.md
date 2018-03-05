@@ -51,6 +51,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 :--- | :--- | :--- | :--- 
 *date* | *@task only* | *@task only* | none
  Feb. 27, 2018| N/A|Clean Code| change distance calc to chord formula
+ Mar. 3, 2018 | Clean Code, Chord Formula | Code Coverage, Slider bar | None
  
 
 ## Review
