@@ -167,18 +167,18 @@ public class Trip {
     return validL(in,calculated);
   }
 
-  private boolean outofrangen(double d)
+  private boolean outofrangen(double dist)
   {
-      if(d>=37 && d<=41)
+      if(dist>=37 && dist<=41)
       {
           return true;
       }
       return false;
   }
   
-  private boolean outofrangew(double d)
+  private boolean outofrangew(double dist)
   {
-      if(d>=-109 && d<=-102)
+      if(dist>=-109 && dist<=-102)
       {
           return true; 
       }
