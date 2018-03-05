@@ -188,21 +188,22 @@ public class Trip {
   private double validL(String[] s, double d){
     String scheck = s[s.length-1].toLowerCase();
 
-    if (scheck.equals("s")) {
+    if (scheck.equals("s")){
         d *= -1;
     }
 
-    if (scheck.equals("w")) {
+    if (scheck.equals("w")){
         d *= -1;
     }
 
-    if(scheck.equals("n") && outofrangen(d)) {
+    if(scheck.equals("n") && outofrangen(d)){
         return d;
     }
 
-    else if(scheck.equals("w") && outofrangew(d)) {
+    if(scheck.equals("w") && outofrangew(d)){
         return d;
     }
+    
     else {
       return 0;
     }
