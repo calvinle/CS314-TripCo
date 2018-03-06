@@ -49,6 +49,9 @@ public class Trip {
     //this.places = new ArrayList<Place>();
   }
 
+  /**
+   * Plan method for testing without breaking things
+   */
   public void rePlan(){
     this.map = svg();
     this.distances = legDistances();
