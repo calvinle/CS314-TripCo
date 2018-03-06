@@ -41,8 +41,8 @@ public class TestTrip {
     p.name = "here";
     p.latitude = "40";
     p.longitude = "-107";
-    trip.places.add(p);
     trip.rePlan();
+    trip.places.add(p);
     assertEquals(expectedDistances, trip.distances);
   }
 
@@ -91,7 +91,7 @@ public class TestTrip {
     assertEquals(trip.calcDist(0,0,0,0),0);
     assertEquals(434,trip.calcDist(40.455, -79.982,39.559, -88.102));
     assertEquals(602, trip.calcDist(50.066, -5.715, 58.644, -3.07));
-    trip.plan();
+    trip.rePlan();
     trip.options.distance = "kilometers";
     assertEquals(140,trip.calcDist(40,-107,41,-106));
     trip.options.distance = "heckifiknow";

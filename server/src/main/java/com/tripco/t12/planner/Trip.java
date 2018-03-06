@@ -45,12 +45,18 @@ public class Trip {
   public void plan() {
     this.map = svg();
     this.distances = legDistances();
-    this.options = new Option();
-    this.places = new ArrayList<Place>();
+    //this.options = new Option();
+    //this.places = new ArrayList<Place>();
   }
 
+  /**
+   * Plan method for testing without breaking things.
+   */
   public void rePlan(){
+    this.map = svg();
     this.distances = legDistances();
+    this.options = new Option();
+    this.places = new ArrayList<Place>();
   }
 
   /**
