@@ -50,7 +50,7 @@ public class Trip {
   }
 
   /**
-   * Plan method for testing without breaking things
+   * Plan method for testing without breaking things.
    */
   public void rePlan(){
     this.map = svg();
