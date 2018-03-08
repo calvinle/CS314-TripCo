@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 /* Options allows the user to change the parameters for planning
  * and rendering the trip map and itinerary.
  * The options reside in the parent object so they may be shared with the Trip object.
@@ -43,8 +42,11 @@ class Options extends Component{
               </label>
                 </div>
             </div>
+            <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+            </div>
+            </div>
           </div>
-        </div>
     )
   }
 }
