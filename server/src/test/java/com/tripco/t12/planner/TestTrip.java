@@ -43,6 +43,7 @@ public class TestTrip {
     p.longitude = "-107";
     trip.rePlan();
     trip.places.add(p);
+    trip.plan();
     assertEquals(expectedDistances, trip.distances);
   }
 
