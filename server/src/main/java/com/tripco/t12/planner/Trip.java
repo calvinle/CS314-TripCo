@@ -75,11 +75,10 @@ public class Trip {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    int insert = map.indexOf("</svg>");
+
     map = map.substring(0, map.length()-6);
 
-    ArrayList<Place> yeah = this.places;
-    if (yeah == null){
+    if (this.places == null){
       System.out.println("Null");
       return map;
     }
@@ -109,7 +108,6 @@ public class Trip {
 
     //For loop to go thru each set of long/lat
     ArrayList<Place> data = this.places;
-    System.out.println(data.isEmpty());
     for (int i=0; i < data.size(); i++){
       if (i == 0) { path+="M"; } //If first point, then add M
       else { path+="L"; };       //else, add L
@@ -118,10 +116,10 @@ public class Trip {
       double newLong = decCoord(data.get(i).longitude);//Convert long
 
       path += Double.toString(longConv(newLong)) + " ";//Add long to string with space
-      path += Double.toString(latConv(newLat)) + " ";//Add lat to string with space
+      path += Double.toString(latConv(newLat)) + " ";  //Add lat to string with space
     }
-    path += end; //indicate with Z to roundtrip, define visual props
-    System.out.println(path);
+
+    path += end;
     return path;
   }
 
