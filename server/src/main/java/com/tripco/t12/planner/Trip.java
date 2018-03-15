@@ -148,6 +148,7 @@ public class Trip {
     }
     System.out.println("places is not null");
     return dist;
+
   }
 
   public double decCoord(String s){
