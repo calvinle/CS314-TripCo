@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import spark.Request;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -143,23 +144,48 @@ public class Trip {
 
   }
 
-  public double decCoord(String s){
-    String in[] = s.split("['\" °″′]+");
+  public double decCoord(String s)
+  {
     double calculated = 0;
-    if(in.length == 4){
-      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60+Double.parseDouble(in[2])/3600;
-    }
-    else if(in.length == 3){
-      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
-    }
-    else if(in.length <= 2){
-      calculated = Double.parseDouble(in[0]);
-      if(in.length==1) return calculated;
+    ArrayList<String> list = new ArrayList<String>();
+    String in[] = s.split("['\" °″′]+");
+
+    for(String key:in)
+    {
+      if(!(key.matches("[0-9.-]+")))
+      {
+        //Pulled regex from google (find link please)
+        String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+        list.addAll(Arrays.asList(temp));
+      }
+
+      else
+        list.add(key);
     }
 
-    return validL(in,calculated);
+    String newIn[] = new String[list.size()];
+
+    for(int i = 0; i < list.size(); i++)
+    {
+      newIn[i] = list.get(i);
+    }
+
+    if(newIn.length == 4){
+      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60+Double.parseDouble(newIn[2])/3600;
+    }
+    else if(newIn.length == 3){
+      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60;
+    }
+    else if(newIn.length <= 2) {
+      calculated = Double.parseDouble(newIn[0]);
+    }
+    if(newIn.length == 1){
+      return calculated;
+    }
+
+    return validL(newIn,calculated);
   }
-
+  
   private boolean outofrangen(double dist)
   {
       if(dist>=37 && dist<=41)
