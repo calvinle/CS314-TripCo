@@ -48,7 +48,7 @@ class Options extends Component{
                 </div>
             </div>
               <div className="slidecontainer">
-                  <input type="range" min="1" max="100" className="slider" id="myRange"></input>{/*OnChange*/}
+                  <input type="range" min="0" max="3" defaultValue={"0"} className="slider" id="myRange"></input>{/*OnChange*/}
                   <div onChange={this.changeOptimization.bind(this)}>
                   </div>
             </div>
