@@ -110,9 +110,9 @@ public class Trip {
     ArrayList<Place> data = this.places;
     for (int i=0; i < data.size(); i++){
       if (i == 0) { path+="M"; } //If first point, then add M
-      else { path+="L"; };       //else, add L
+      else { path+="L"; }        //else, add L
 
-      double newLat = decCoord(data.get(i).latitude);//Convert lat
+      double newLat = decCoord(data.get(i).latitude);  //Convert lat
       double newLong = decCoord(data.get(i).longitude);//Convert long
 
       path += Double.toString(longConv(newLong)) + " ";//Add long to string with space
