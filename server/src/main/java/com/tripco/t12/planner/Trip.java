@@ -116,11 +116,9 @@ public class Trip {
 
       double newLat = decCoord(data.get(i).latitude);//Convert lat
       double newLong = decCoord(data.get(i).longitude);//Convert long
-      double latPx = latConv(newLat);
-      double longPx = longConv(newLong);
 
-      path += Double.toString(longPx) + " ";//Add long to string with space
-      path += Double.toString(latPx) + " ";//Add lat to string with space
+      path += Double.toString(longConv(newLong)) + " ";//Add long to string with space
+      path += Double.toString(latConv(newLat)) + " ";//Add lat to string with space
     }
     path += end; //indicate with Z to roundtrip, define visual props
     System.out.println(path);
