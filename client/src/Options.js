@@ -21,8 +21,13 @@ class Options extends Component{
       this.changeOption(event.target.id);
   }
 
+    changeOptimization(event) {
+        console.log(event.target.id);
+        this.changeOptimization(event.target.id);
+    }
+
   render() {
-    // @todo need to update the options when a button is pressed
+      //todo need to update the options when a button is pressed
     return(
 
         <div id="options" className="card border-0 border-dark">
@@ -42,8 +47,10 @@ class Options extends Component{
               </label>
                 </div>
             </div>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="100" value="50" class="slider" id="myRange"></input>
+              <div className="slidecontainer">
+                  <input type="range" min="0" max="3" defaultValue={"0"} className="slider" id="myRange"></input>{/*OnChange*/}
+                  <div onChange={this.changeOptimization.bind(this)}>
+                  </div>
             </div>
             </div>
           </div>

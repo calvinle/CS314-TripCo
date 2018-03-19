@@ -75,11 +75,10 @@ public class Trip {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    int insert = map.indexOf("</svg>");
+
     map = map.substring(0, map.length()-6);
 
-    ArrayList<Place> yeah = this.places;
-    if (yeah == null){
+    if (this.places == null){
       System.out.println("Null");
       return map;
     }
@@ -88,21 +87,19 @@ public class Trip {
   }
 
   public double longConv(double longitude){
-    double svgWidthPix = 992;                       //Width of SVG in Pixels
-    double maxLong = 7.0;                                  //CO is 7 Longitudes wide
-    double longOrigin = -109.293;                     //Origin (Top Left) coordinate.
-    double netLong = Math.abs(longOrigin - longitude);//Real Life Longitude distance from origin
-    double finalLong = (netLong * svgWidthPix) / maxLong; //convert to pixels
-    return finalLong;
+    //svgWidthPix = 992;                            //Width of SVG in Pixels
+    //maxLong = 7.0;                                //CO is 7 Longitudes wide
+    //longOrigin = -109.293;                        //Origin (Top Left) coordinate.
+    //double netLong = Math.abs(-109.293 - longitude);//Real Life Longitude distance from origin
+    return (Math.abs(-109.293 - longitude) * 992) / 7.0;
   }
 
-  public double latConv(double latitude){
-    double svgHeightPix = 707.0;                            //Height of SVG in Pixels
-    double maxLat = 4;                                         //CO is 4 Latitudes tall
-    double latOrigin = 41.2;                                //Origin (Top Left) coordinate
-    double netLong = Math.abs(latOrigin - latitude);        //Real Life Lat. distance from origin
-    double finalLat = ((netLong * svgHeightPix) / maxLat);//convert to pixels
-    return finalLat;
+  public double latConv(double latitude) {
+    //svgHeightPix = 707.0;                  //Height of SVG in Pixels
+    //maxLat = 4.0;                            //CO is 4 Latitudes tall
+    //latOrigin = 41.2;                      //Origin (Top Left) coordinate
+    //double netLat = Math.abs(41.2 - latitude);     //Real Life Lat. distance from origin
+    return (Math.abs(41.2 - latitude) * 707.0) / 4.0;
   }
 
   private String path(){
@@ -111,21 +108,18 @@ public class Trip {
 
     //For loop to go thru each set of long/lat
     ArrayList<Place> data = this.places;
-    System.out.println(data.isEmpty());
     for (int i=0; i < data.size(); i++){
       if (i == 0) { path+="M"; } //If first point, then add M
-      else { path+="L"; };       //else, add L
+      else { path+="L"; }        //else, add L
 
-      double newLat = decCoord(data.get(i).latitude);//Convert lat
+      double newLat = decCoord(data.get(i).latitude);  //Convert lat
       double newLong = decCoord(data.get(i).longitude);//Convert long
-      double latPx = latConv(newLat);
-      double longPx = longConv(newLong);
 
-      path += Double.toString(longPx) + " ";//Add long to string with space
-      path += Double.toString(latPx) + " ";//Add lat to string with space
+      path += Double.toString(longConv(newLong)) + " ";//Add long to string with space
+      path += Double.toString(latConv(newLat)) + " ";  //Add lat to string with space
     }
-    path += end; //indicate with Z to roundtrip, define visual props
-    System.out.println(path);
+
+    path += end;
     return path;
   }
 
@@ -154,6 +148,7 @@ public class Trip {
     }
     System.out.println("places is not null");
     return dist;
+
   }
 
   public double decCoord(String s){
