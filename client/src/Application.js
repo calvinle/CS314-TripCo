@@ -90,7 +90,6 @@ class Application extends Component {
         )
         this.setState({trip: testTrip});
         //console.log("testTrip:", testTrip);
-        // update the options in the trip.
     }
 
 
