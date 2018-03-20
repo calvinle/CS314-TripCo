@@ -16,16 +16,6 @@ import java.util.ArrayList;
 
 /**
  *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
  * The Trip class supports TFFI so it can easily be converted to/from Json by Gson.
  *
  */
@@ -44,7 +34,7 @@ public class Trip {
    */
   public void plan() {
     this.map = svg();
-    this.distances = legDistances();
+    checkOpt();
     //this.options = new Option();
     //this.places = new ArrayList<Place>();
   }
@@ -246,6 +236,18 @@ public class Trip {
   public double kilo(double d){
     //System.out.println(d*6371.0088);
     return d*6371.0088;
+  }
+
+  public void checkOpt(){
+    if(Integer.parseInt(this.options.optimization) > 0){
+      Optimizer opt = new Optimizer();
+      opt.trip = this;
+      opt.nearNeighbor();
+      this.distances = opt.trip.distances;
+      this.places = opt.trip.places;
+    }
+    else
+      this.distances = legDistances();
   }
 
 }
