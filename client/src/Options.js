@@ -8,22 +8,26 @@ class Options extends Component{
   constructor(props) {
     super(props);
     this.changeOption = this.changeOption.bind(this);
-    this.changeOptimization = this.changeOptimization.bind(this);
+    this.changeOptimizationArg = this.changeOptimizationArg.bind(this);
   }
 
   changeOption(arg) {
-    //console.log(arg);
+    console.log(arg);
     this.props.updateOptions(arg);
   }
 
   changeButton(event){
-      //console.log(event.target.id);
       this.changeOption(event.target.id);
   }
 
-  changeOptimization(arg){
-      console.log(arg);
+
+  changeOptimizationArg(arg){
+      //console.log(arg);
       this.props.updateOptimization(arg);
+  }
+
+  changeOptimization(event){
+      this.changeOptimizationArg(event.target.value);
   }
 
   render() {
@@ -47,10 +51,11 @@ class Options extends Component{
               </label>
                 </div>
             </div>
+
               <div className="slidecontainer">
-                  <input type="range" min="0" max="99" defaultValue={"0"} className="slider" id="myRange"></input>{/*OnChange*/}
-                  <div onChange={this.changeOptimization.bind(this)}>
-                  </div>
+                <div onChange={this.changeOptimization.bind(this)}>
+                  <input type="range" min="0" max="1" defaultValue={"0"} className="slider" id={"slider"}></input>
+                </div>
             </div>
             </div>
           </div>
