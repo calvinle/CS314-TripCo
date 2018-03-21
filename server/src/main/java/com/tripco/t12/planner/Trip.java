@@ -143,7 +143,8 @@ public class Trip {
 
   }
 
-    public double decCoord(String s){
+  public double decCoord(String s)
+  {
     double calculated = 0;
     ArrayList<String> list = new ArrayList<String>();
     String in[] = s.split("['\" °″′]+");
@@ -156,6 +157,7 @@ public class Trip {
         String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
         list.addAll(Arrays.asList(temp));
       }
+
       else
         list.add(key);
     }
@@ -166,7 +168,7 @@ public class Trip {
     {
       newIn[i] = list.get(i);
     }
-    
+
     if(newIn.length == 4){
       calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60+Double.parseDouble(newIn[2])/3600;
     }
@@ -176,7 +178,7 @@ public class Trip {
     else if(newIn.length <= 2) {
       calculated = Double.parseDouble(newIn[0]);
     }
-    else {
+    if(newIn.length == 1){
       return calculated;
     }
 
