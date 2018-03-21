@@ -19,7 +19,6 @@ class Destinations extends Component {
 
       let myArray1 = ["type", "title", "options", "places", "distances", "map"];
       let myArray2 = ["type", "title", "options", "places", "distances", "map", "version", "query"];
-      let flag = true;
       let key = [];
       let i;
 
@@ -27,36 +26,40 @@ class Destinations extends Component {
       {
           key.push(s);
       }
+
       console.log("key: ", key.length);
 
-      for(i = 0; i< key.length; i++)
+      if (key.length === 8)
       {
-          if (key.length === 8) {
-              if (!fileContents.hasOwnProperty(myArray2[i])) {
-                  flag = false;
+          for (i = 0; i < 8; i++)
+          {
+              if (!fileContents.hasOwnProperty(myArray2[i]))
+              {
+                  return false;
               }
           }
-
-          else if (key.length === 6) {
-              if (!fileContents.hasOwnProperty(myArray1[i])) {
-                  flag = false;
-              }
-          }
-
-          else
-              return false;
-
       }
 
-      if(!flag){
+      else if (key.length === 6)
+      {
+          for (i = 0; i < 6; i++)
+          {
+              if (!fileContents.hasOwnProperty(myArray1[i]))
+              {
+                  return false;
+              }
+          }
+      }
+
+      else
           return false;
-      }
 
-      if(fileContents.distances[0] !== 0) {
+      if(fileContents.distances[0] !== 0)
+      {
               fileContents.places.push(fileContents.places[0]);
               fileContents.distances.unshift(0);
               return true;
-          }
+      }
 
   }
 
