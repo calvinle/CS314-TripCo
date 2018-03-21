@@ -34,10 +34,11 @@ public class Trip {
    * It might need to reorder the places in the future.
    */
   public void plan() {
-    this.map = svg();
+    //this.map = svg();
     //System.out.println(this.options);
     //this.options.optimization = "0";
     checkOpt();
+    this.map = svg();
     //this.options = new Option();
     //this.places = new ArrayList<Place>();
   }
@@ -272,11 +273,11 @@ public class Trip {
       this.distances = legDistances();
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
-      Optimizer opt = new Optimizer();
-      opt.trip = this;
+      System.out.println("OPTIMIZED:NN");
+      Optimizer opt = new Optimizer(this);
       opt.nearNeighbor();
-      this.distances = opt.trip.distances;
-      this.places = opt.trip.places;
+      this.distances = opt.finDist;
+      this.places = opt.finArray;
     }
     else
       this.distances = legDistances();
