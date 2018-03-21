@@ -109,6 +109,9 @@ class Application extends Component {
                         <Destinations trip={this.state.trip} updateTrip={this.updateTrip}/>
                     </div>
                     <div className="col-12">
+                      <Database/>
+                    </div>
+                    <div className="col-12">
                         <Trip trip={this.state.trip} updateTrip={this.updateTrip}/>
                     </div>
                 </div>
