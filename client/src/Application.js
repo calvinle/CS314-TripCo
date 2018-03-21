@@ -3,6 +3,7 @@ import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
 import Dropdown from './Dropdown';
+import Database from "./Database";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
