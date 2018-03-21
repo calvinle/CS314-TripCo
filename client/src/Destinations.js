@@ -16,15 +16,43 @@ class Destinations extends Component {
 
   validTFFI(fileContents)
   {
-      let myArray = ["places", "type", "title", "options", "distances", "map"];
-      let flag = true;
 
-      for(var s in myArray)
+      let myArray1 = ["type", "title", "options", "places", "distances", "map"];
+      let myArray2 = ["type", "title", "options", "places", "distances", "map", "version", "query"];
+      let flag = true;
+      let key = [];
+      let i;
+
+      for(let s in fileContents)
       {
-          //console.log("myArray:", myArray[s]);
-          if(!fileContents.hasOwnProperty(myArray[s])){ flag = false; }
-          //console.log("flag: ", flag);
+          key.push(s);
       }
+      console.log("key: ", key.length);
+
+      for(i = 0; i< key.length; i++)
+      {
+          if (key.length === 8) {
+              console.log("HERE length 8: ");
+              console.log("test: ", (myArray2[i]));
+              if (!fileContents.hasOwnProperty(myArray2[i])) {
+                  console.log("HERE length 81111: ");
+                  flag = false;
+              }
+          }
+
+          else if (key.length === 6) {
+              console.log("HERE length 6: ");
+              if (!fileContents.hasOwnProperty(myArray1[i])) {
+                  console.log("HERE length 61111: ");
+                  flag = false;
+              }
+          }
+
+          else
+              return false;
+
+      }
+
 
       if(!flag){
           return false;
@@ -44,7 +72,7 @@ class Destinations extends Component {
         this.setState({ count: 0 });
     }
 
-  loadTFFI(event) {
+   loadTFFI(event) {
     console.log(event.target.files[0].name);
     //Found via StackOverflow and modified:
     //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
