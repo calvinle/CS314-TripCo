@@ -25,14 +25,12 @@ class Database extends Component {
             places: this.state.query.places
         })
         this.setState({query: testQuery});
-        console.log("testQuery: ", testQuery);
 
-        //@TODO: send the value somewhere
     }
 
     updateQuery(event) {
-        console.log(event.target.value);
-        this.newQuery(event.target.value);
+        console.log(document.getElementById("query").value);
+        this.newQuery(document.getElementById("query").value);
     }
 
     render() {
@@ -42,15 +40,13 @@ class Database extends Component {
                 <div className="card-header bg-primary text-light">
                     Search
                 </div>
+
                 <div className="card-body">
-                    <div className="input-group mb-3">
-                        <span className="input-group-btn">
-
-              <button className="btn btn-success " id="query" onClick={this.updateQuery.bind(this)} type="button">Search</button>
-            </span>
-                        <input type="text" id="query" className="form-control" placeholder="Search for..."
-                               onChange={this.updateQuery.bind(this)}></input>
-
+                    <div className="input-group-prepend">
+                        <div onClick={this.updateQuery.bind(this)}>
+                            <button className="btn btn-success " id="queryButton"  type="button">Search</button>
+                        </div>
+                        <input type="text" id="query" className="form-control" placeholder="Location"></input>
                     </div>
                 </div>
             </div>
