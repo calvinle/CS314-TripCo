@@ -3,6 +3,7 @@ import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
 import Dropdown from './Dropdown';
+import Database from "./Database";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -107,6 +108,9 @@ class Application extends Component {
 
                     <div className="col-12">
                         <Destinations trip={this.state.trip} updateTrip={this.updateTrip}/>
+                    </div>
+                    <div className="col-12">
+                        <Database/>
                     </div>
                     <div className="col-12">
                         <Trip trip={this.state.trip} updateTrip={this.updateTrip}/>
