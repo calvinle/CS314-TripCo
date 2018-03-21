@@ -29,7 +29,11 @@ public class TestOptimizer {
     }
 
     @Test
-    public void testNNHelper(){
-
+    public void testN(){
+        Place place = new Place();
+        Place place0 = new Place();
+        optimizer.workingArray.add(place);
+        optimizer.workingArray.add(place0);
+        optimizer.nearNeighbor();
     }
 }

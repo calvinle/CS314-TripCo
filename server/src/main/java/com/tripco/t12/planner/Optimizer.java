@@ -20,7 +20,7 @@ public class Optimizer {
     private Trip trip;
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
-    private ArrayList<Place> workingArray;
+    public ArrayList<Place> workingArray;
     private Place working;
     private Place firstPlace;
 
@@ -64,6 +64,9 @@ public class Optimizer {
     }
 
     private int NNhelper(Place place0, Place place1){
+        if(place0.latitude == null || place1.latitude == null){
+            return 0;
+        }
         double p0lat = trip.decCoord(place0.latitude);
         double p0long = trip.decCoord(place0.longitude);
         double p1lat = trip.decCoord(place1.latitude);
