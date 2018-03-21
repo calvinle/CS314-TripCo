@@ -40,12 +40,13 @@ class Database extends Component {
                 <div className="card-header bg-primary text-light">
                     Search
                 </div>
+
                 <div className="card-body">
-                    <div className="input-group mb-3">
+                    <div className="input-group-prepend">
                         <div onClick={this.updateQuery.bind(this)}>
                             <button className="btn btn-success " id="queryButton"  type="button">Search</button>
-                        <input type="text" id="query" className="form-control" placeholder="Search for..."></input>
                         </div>
+                        <input type="text" id="query" className="form-control" placeholder="Location"></input>
                     </div>
                 </div>
             </div>
