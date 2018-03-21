@@ -32,18 +32,13 @@ class Destinations extends Component {
       for(i = 0; i< key.length; i++)
       {
           if (key.length === 8) {
-              console.log("HERE length 8: ");
-              console.log("test: ", (myArray2[i]));
               if (!fileContents.hasOwnProperty(myArray2[i])) {
-                  console.log("HERE length 81111: ");
                   flag = false;
               }
           }
 
           else if (key.length === 6) {
-              console.log("HERE length 6: ");
               if (!fileContents.hasOwnProperty(myArray1[i])) {
-                  console.log("HERE length 61111: ");
                   flag = false;
               }
           }
@@ -52,7 +47,6 @@ class Destinations extends Component {
               return false;
 
       }
-
 
       if(!flag){
           return false;
