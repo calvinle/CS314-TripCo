@@ -18,7 +18,7 @@ class Destinations extends Component {
   {
 
       let myArray1 = ["type", "title", "options", "places", "distances", "map"];
-      let myArray2 = ["type", "title", "options", "places", "distances", "map", "version", "query"];
+      let myArray2 = ["type", "title", "options", "places", "distances", "map", "version"];
       let key = [];
       let i;
 
@@ -29,9 +29,9 @@ class Destinations extends Component {
 
       console.log("key: ", key.length);
 
-      if (key.length === 8)
+      if (key.length === 7)
       {
-          for (i = 0; i < 8; i++)
+          for (i = 0; i < 7; i++)
           {
               if (!fileContents.hasOwnProperty(myArray2[i]))
               {
