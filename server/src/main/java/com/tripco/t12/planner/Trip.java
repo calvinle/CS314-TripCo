@@ -143,7 +143,9 @@ public class Trip {
 
   }
 
-  public double decCoord(String s){
+  public double decCoord(String s)
+  {
+    double calculated = 0;
     ArrayList<String> list = new ArrayList<String>();
     String in[] = s.split("['\" °″′]+");
 
@@ -153,18 +155,11 @@ public class Trip {
       {
         //Pulled regex from google (find link please)
         String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
-        //System.out.println(Arrays.toString(temp));
-
         list.addAll(Arrays.asList(temp));
-//        for(String t:temp)
-//        {
-//          list.add(t);
-//        }
       }
 
       else
         list.add(key);
-
     }
 
     String newIn[] = new String[list.size()];
@@ -174,25 +169,22 @@ public class Trip {
       newIn[i] = list.get(i);
     }
 
-    System.out.println("Size of list: " + list.size());
-    System.out.println("HERE: " + Arrays.toString(newIn));
-
-
-    double calculated = 0;
     if(newIn.length == 4){
       calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60+Double.parseDouble(newIn[2])/3600;
     }
     else if(newIn.length == 3){
       calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60;
     }
-    else if(newIn.length <= 2){
+    else if(newIn.length <= 2) {
       calculated = Double.parseDouble(newIn[0]);
-      if(newIn.length==1) return calculated;
+    }
+    if(newIn.length == 1){
+      return calculated;
     }
 
     return validL(newIn,calculated);
   }
-
+  
   private boolean outofrangen(double dist)
   {
       if(dist>=37 && dist<=41)
