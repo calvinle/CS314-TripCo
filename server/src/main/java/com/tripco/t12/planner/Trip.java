@@ -34,6 +34,8 @@ public class Trip {
    */
   public void plan() {
     this.map = svg();
+    //System.out.println(this.options);
+    //this.options.optimization = "0";
     checkOpt();
     //this.options = new Option();
     //this.places = new ArrayList<Place>();
@@ -238,8 +240,12 @@ public class Trip {
     return d*6371.0088;
   }
 
-  public void checkOpt(){
-    if(Integer.parseInt(this.options.optimization) > 0){
+  private void checkOpt(){
+
+    if(this.options == null || this.options.optimization == null){
+      this.distances = legDistances();
+    }
+    else if(Integer.parseInt(this.options.optimization) > 0){
       Optimizer opt = new Optimizer();
       opt.trip = this;
       opt.nearNeighbor();
