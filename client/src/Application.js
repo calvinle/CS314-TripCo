@@ -90,7 +90,6 @@ class Application extends Component {
         )
         this.setState({trip: testTrip});
         //console.log("testTrip:", testTrip);
-        // update the options in the trip.
     }
 
 
@@ -99,7 +98,7 @@ class Application extends Component {
             <div id="application" className="container">
                 <div className="row">
                     <div className="col-12">
-                        <Options options={this.state.trip.options} updateOptions={this.updateOptions}/>
+                        <Options options={this.state.trip.options} updateOptions={this.updateOptions} updateOptimization={this.updateOptimization}/>
                     </div>
 
                     <div className="col-12">
