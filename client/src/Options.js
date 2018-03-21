@@ -49,6 +49,9 @@ class Options extends Component{
               <label className="btn btn-outline-dark">
                 <input type="radio" id="kilometers" name="distance" autoComplete="off"/> Kilometers
               </label>
+              <label className="btn btn-outline-dark">
+                <input type="radio" id="nautical miles" name="distance" autoComplete="off"/> Nautical Miles
+              </label>
                 </div>
             </div>
 

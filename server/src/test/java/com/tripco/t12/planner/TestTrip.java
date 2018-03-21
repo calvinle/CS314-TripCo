@@ -95,6 +95,8 @@ public class TestTrip {
     trip.rePlan();
     trip.options.distance = "kilometers";
     assertEquals(140,trip.calcDist(40,-107,41,-106));
+    trip.options.distance = "nautical miles";
+    assertEquals(76,trip.calcDist(40,-107,41,-106), 1);
     trip.options.distance = "heckifiknow";
     assertEquals(0,trip.calcDist(40,-107,41,-106));
   }
