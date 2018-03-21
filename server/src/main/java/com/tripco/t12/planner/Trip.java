@@ -34,13 +34,8 @@ public class Trip {
    * It might need to reorder the places in the future.
    */
   public void plan() {
-    //this.map = svg();
-    //System.out.println(this.options);
-    //this.options.optimization = "0";
     checkOpt();
     this.map = svg();
-    //this.options = new Option();
-    //this.places = new ArrayList<Place>();
   }
 
   /**
