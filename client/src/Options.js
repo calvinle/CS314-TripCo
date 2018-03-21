@@ -12,7 +12,7 @@ class Options extends Component{
   }
 
   changeOption(arg) {
-    console.log(arg);
+    //console.log(arg);
     this.props.updateOptions(arg);
   }
 
