@@ -25,7 +25,7 @@ class Database extends Component {
             places: this.state.query.places
         })
         this.setState({query: testQuery});
-
+      //@TODO: Send file elsewhere
     }
 
     updateQuery(event) {
