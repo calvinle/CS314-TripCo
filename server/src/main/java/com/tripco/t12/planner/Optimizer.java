@@ -17,12 +17,12 @@ import java.sql.Array;
 import java.util.ArrayList;
 
 public class Optimizer {
-    public Trip trip;
+    private Trip trip;
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
     public ArrayList<Place> workingArray;
-    public Place working;
-    public Place firstPlace;
+    private Place working;
+    private Place firstPlace;
 
     public Optimizer(Trip t){
         finArray = new ArrayList<Place>();
@@ -63,7 +63,10 @@ public class Optimizer {
         nearNeighbor();
     }
 
-    public int NNhelper(Place place0, Place place1){
+    private int NNhelper(Place place0, Place place1){
+        if(place0.latitude == null || place1.latitude == null){
+            return 0;
+        }
         double p0lat = trip.decCoord(place0.latitude);
         double p0long = trip.decCoord(place0.longitude);
         double p1lat = trip.decCoord(place1.latitude);
