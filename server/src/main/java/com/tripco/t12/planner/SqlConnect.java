@@ -115,6 +115,6 @@ public class SqlConnect {
 
     public static void main(String[] args)
     {
-        getQ("test");
+        getQ("SELECT * FROM airports");
     }
 }
