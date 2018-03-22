@@ -1,24 +1,25 @@
 package com.tripco.t12.planner;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SqlConnect {
   // db configuration information
-  private String myDriver  = "com.mysql.jdbc.Driver";
-  private String myUrl                  = "";
-  private String search                 = "";
+  private String myDriver = "com.mysql.jdbc.Driver";
+  private String myUrl = "";
+  private String search = "";
   // SQL queries to count the number of records and to retrieve the data
-  private String count     = "";
+  private String count = "";
   private String username = "";
   private String password = "";
 
   SqlConnect(String incomingSearch) {
-    if(System.getenv("TRAVIS") != null) {
+    if (System.getenv("TRAVIS") != null) {
       //set db url to travis for testing
       username = "TRAVIS";
       myUrl = "localhost";
-    }
-    else {
+    } else {
       myUrl = "jbdc:mysql://faure.cs.colostate.edu/cs314";
       username = "cs314-db";
       password = "eiK5liet1uej";
@@ -30,10 +31,10 @@ public class SqlConnect {
       Class.forName(this.myDriver);
       // connect to the database and query
       try (Connection conn = DriverManager.getConnection(this.myUrl, this.username, this.password);
-          Statement stCount = conn.createStatement();
-          Statement stQuery = conn.createStatement();
-          ResultSet rsCount = stCount.executeQuery(this.count);
-          ResultSet rsQuery = stQuery.executeQuery(this.search)
+           Statement stCount = conn.createStatement();
+           Statement stQuery = conn.createStatement();
+           ResultSet rsCount = stCount.executeQuery(this.count);
+           ResultSet rsQuery = stQuery.executeQuery(this.search)
       ) {
         printJSON(rsCount, rsQuery);
       }
@@ -42,7 +43,7 @@ public class SqlConnect {
     }
   }
 
-  public void setSearch(String input){
+  public void setSearch(String input) {
     this.search = input;
   }
 
@@ -57,7 +58,7 @@ public class SqlConnect {
 
     while (query.next()) {
       System.out.printf(" \"%s\"", query.getString("code"));
-      if(--results == 0)
+      if (--results == 0)
         System.out.printf("\n");
       else
         System.out.printf(",\n");
@@ -65,11 +66,55 @@ public class SqlConnect {
     System.out.printf(" ]\n}\n");
   }
 
+
   // Arguments contain the username and password for the database
-  public static void main(String[] args){
-    SqlConnect sqlConn = new SqlConnect("");
+  public static ArrayList <Place> getQ(String q) {
+
+    //SqlConnect sqlConn = new SqlConnect("select * from airports");
+    String query = q;
+    ArrayList<String> rQ= new ArrayList<String>();
+    ArrayList<Place> placeList = new ArrayList<Place>();
+    String myDriver = "com.mysql.jdbc.Driver"; // add dependencies in pom.xml
+    String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+    try { // connect to the database
+      Class.forName(myDriver);
+      Connection conn = DriverManager.getConnection(myUrl, "cs314-db", "eiK5liet1uej");
+      try { // create a statement
+        Statement st = conn.createStatement();
+        try { // submit a query
+          ResultSet rs = st.executeQuery(query);
+          try { // iterate through the query results and print selected columns
+            while (rs.next()) {
+              String id = rs.getString("id");
+              String name = rs.getString("name");
+              System.out.printf("%s,%s\n", id, name);
+              Place place = new Place();
+              place.id = rs.getString("id");;
+              place.name = rs.getString("name");
+              place.latitude = rs.getString("latitude");
+              place.longitude = rs.getString("longitude");
+
+              placeList.add(place);
+
+            }
+          } finally {
+            rs.close();
+          }
+        } finally {
+          st.close();
+        }
+      } finally {
+        conn.close();
+      }
+    } catch (Exception e) { // catches all exceptions in the nested try's
+      System.err.printf("Exception: " + e.getMessage());
+
+    }
+    return placeList;
   }
+
+    public static void main(String[] args)
+    {
+        getQ("test");
+    }
 }
-
-
-
