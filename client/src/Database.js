@@ -31,7 +31,12 @@ class Database extends Component {
     updateQuery(event) {
         console.log(document.getElementById("query").value);
         this.newQuery(document.getElementById("query").value);
+
     }
+
+    /*updateSlider(){
+      document.getElementByID("slider").max = optimizationlevels;
+    }*/
 
     render() {
 
