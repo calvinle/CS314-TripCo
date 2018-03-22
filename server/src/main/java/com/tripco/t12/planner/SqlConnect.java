@@ -4,29 +4,46 @@ import java.sql.*;
 
 public class SqlConnect {
   // db configuration information
-  private final static String myDriver  = "com.mysql.jdbc.Driver";
+  private String myDriver  = "com.mysql.jdbc.Driver";
   private String myUrl                  = "";
+  private String search                 = "";
   // SQL queries to count the number of records and to retrieve the data
-  private final static String count     = "";
-  private final static String search    = "";
+  private String count     = "";
 
-  SqlConnect() {
+  SqlConnect(String incomingSearch) {
     if(System.getenv("TRAVIS") != null) {
       //set db url to travis for testing
     }
     else {
       myUrl = "jbdc:mysql://faure.cs.colostate.edu/cs314";
     }
+
+    setSearch(incomingSearch);
+
+    try {
+      Class.forName(this.myDriver);
+      // connect to the database and query
+      try (Connection conn = DriverManager.getConnection(this.myUrl, "cs314-db", "eiK5liet1uej");
+          Statement stCount = conn.createStatement();
+          Statement stQuery = conn.createStatement();
+          ResultSet rsCount = stCount.executeQuery(this.count);
+          ResultSet rsQuery = stQuery.executeQuery(this.search)
+      ) {
+        printJSON(rsCount, rsQuery);
+      }
+    } catch (Exception e) {
+      System.err.println("Exception: " + e.getMessage());
+    }
   }
 
-  public String getMyUrl() {
-    return myUrl;
+  public void setSearch(String input){
+    this.search = input;
   }
 
-  private static void printJSON(ResultSet count, ResultSet query) throws SQLException {
+  private void printJSON(ResultSet count, ResultSet query) throws SQLException {
     System.out.printf("\n{\n");
     System.out.printf("\"type\": \"find\",\n");
-    System.out.printf("\"title\": \"%s\",\n",search);
+    System.out.printf("\"title\": \"%s\",\n", this.search);
     System.out.printf("\"places\": [\n");
 
     count.next();
@@ -44,21 +61,7 @@ public class SqlConnect {
 
   // Arguments contain the username and password for the database
   public static void main(String[] args){
-    SqlConnect sqlConn = new SqlConnect();
-    try {
-      Class.forName(myDriver);
-      // connect to the database and query
-      try (Connection conn = DriverManager.getConnection(sqlConn.myUrl, args[0], args[1]);
-          Statement stCount = conn.createStatement();
-          Statement stQuery = conn.createStatement();
-          ResultSet rsCount = stCount.executeQuery(count);
-          ResultSet rsQuery = stQuery.executeQuery(search)
-      ) {
-        printJSON(rsCount, rsQuery);
-      }
-    } catch (Exception e) {
-      System.err.println("Exception: " + e.getMessage());
-    }
+    SqlConnect sqlConn = new SqlConnect("");
   }
 }
 
