@@ -9,13 +9,19 @@ public class SqlConnect {
   private String search                 = "";
   // SQL queries to count the number of records and to retrieve the data
   private String count     = "";
+  private String username = "";
+  private String password = "";
 
-  SqlConnect(String incomingSearch, String user, String pass) {
+  SqlConnect(String incomingSearch) {
     if(System.getenv("TRAVIS") != null) {
       //set db url to travis for testing
+      username = "TRAVIS";
+      myUrl = "localhost";
     }
     else {
       myUrl = "jbdc:mysql://faure.cs.colostate.edu/cs314";
+      username = "cs314-db";
+      password = "eiK5liet1uej";
     }
 
     setSearch(incomingSearch);
@@ -23,7 +29,7 @@ public class SqlConnect {
     try {
       Class.forName(this.myDriver);
       // connect to the database and query
-      try (Connection conn = DriverManager.getConnection(this.myUrl, user, pass);
+      try (Connection conn = DriverManager.getConnection(this.myUrl, this.username, this.password);
           Statement stCount = conn.createStatement();
           Statement stQuery = conn.createStatement();
           ResultSet rsCount = stCount.executeQuery(this.count);
