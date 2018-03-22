@@ -10,7 +10,7 @@ public class SqlConnect {
   // SQL queries to count the number of records and to retrieve the data
   private String count     = "";
 
-  SqlConnect(String incomingSearch) {
+  SqlConnect(String incomingSearch, String user, String pass) {
     if(System.getenv("TRAVIS") != null) {
       //set db url to travis for testing
     }
@@ -23,7 +23,7 @@ public class SqlConnect {
     try {
       Class.forName(this.myDriver);
       // connect to the database and query
-      try (Connection conn = DriverManager.getConnection(this.myUrl, "cs314-db", "eiK5liet1uej");
+      try (Connection conn = DriverManager.getConnection(this.myUrl, user, pass);
           Statement stCount = conn.createStatement();
           Statement stQuery = conn.createStatement();
           ResultSet rsCount = stCount.executeQuery(this.count);
