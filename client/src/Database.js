@@ -14,19 +14,22 @@ class Database extends Component {
         };
 
         this.updateQ = this.updateQ.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
+        this.fetchResponse = this.fetchResponse.bind(this);
+        this.plan = this.plan.bind(this);
     }
 
     updateQuery(tffi) {
-        console.log("updateTrip");
+        console.log("updateQuery");
         console.log(tffi);
         this.setState({query: tffi});
     }
 
-    fetchResponse(){
+    fetchResponse(tQuery){
         // need to get the request body from the trip in state object.
-        let requestBody = this.props.query;
-
-        console.log(requestBody);
+        //let requestBody = this.state.query;
+        let requestBody = tQuery;
+        console.log("request body", requestBody);
 
         return fetch('http://' + location.host +'/query', {
             method:"POST",
@@ -34,12 +37,13 @@ class Database extends Component {
         });
     }
 
-    async plan(){
+    async plan(tQuery){
         try {
-            let serverResponse = await this.fetchResponse();
+            console.log(this.state.query);
+            let serverResponse = await this.fetchResponse(tQuery);
             let tffi = await serverResponse.json();
-            console.log(tffi);
-            this.props.updateQuery(tffi);
+            console.log("in asyncPlan: ", tffi);
+            this.updateQuery(tffi);
         } catch(err) {
             console.error(err);
         }
@@ -56,7 +60,8 @@ class Database extends Component {
             places: this.state.query.places
         });
         console.log("testQuery: ", testQuery);
-        this.setState({query: testQuery});
+        //this.setState({query: testQuery});
+        this.plan(testQuery);
     }
 
     updateQ(event) {
@@ -75,11 +80,11 @@ class Database extends Component {
                 <div className="card-body">
                     <div className="input-group-prepend">
                         <div onClick={this.updateQ.bind(this)}>
-                            <button className="btn btn-success " id="queryButton"  type="button">Search</button>
+                            <button className="btn btn-success " id="queryButton" type="button">Search</button>
                         </div>
                         <input type="text" id="query" className="form-control" placeholder="Location"></input>
                     </div>
-                    <SearchTable query={this.props.query} />
+                    <SearchTable query={this.state.query} />
                 </div>
             </div>
         )
