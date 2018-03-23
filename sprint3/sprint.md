@@ -23,7 +23,7 @@
 * Always check for new changes in master to resolve merge conflicts locally before committing them.
 * All changes are built and tested before they are committed.
 * Continuous integration successfully builds and tests pull requests for master branch always.
-* All commits with more than 1 line of change include a task/issue number.
+* All commits with more than 1 line of change include a task/issue number.Understanding IntelliJ and stability
 * All Java dependencies in pom.xml.
 
 ## Plan
@@ -59,11 +59,12 @@ Date | Tasks done  | Tasks in progress | Impediments
 #### Completed epics in Sprint Backlog 
 * *Code Coverage*:  *Tests Passing as needed*
 * *Shorter Trip*: *User is able to create shorter trip from TFFI*
+* *TFFI Reader*: *update for TFFI V2*
 
 #### Incomplete epics in Sprint Backlog 
 * *Obtain the list from a database of places*: *Creating query statements*
 * *Subset of database*: *Above must be completed first*
-* *TFFI Reader*: *update for TFFI V2*
+
 
 #### What went well
 * Access to the database, 
@@ -81,5 +82,5 @@ Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
 What we will change this time | Communication(live) | Getting started sooner | Understanding IntelliJ and stability
 What we did well | Helping each other when possible | Workflow is good when all are onboard | Codeclimate and Travis are useful
-What we need to work on | Being specific as to what would be worked on | Assigning tasks and being punctual with due dates | Understanding IntelliJ and stability
+What we need to work on | Being specific as to what would be worked on | Assigning tasks and being punctual with due dates. Overview each merge carefully. | Understanding IntelliJ and stability
 What we will change next time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically | Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment
