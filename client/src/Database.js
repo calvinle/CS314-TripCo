@@ -18,6 +18,7 @@ class Database extends Component {
         this.fetchResponse = this.fetchResponse.bind(this);
         this.plan = this.plan.bind(this);
         this.conditionalSearch = this.conditionalSearch.bind(this);
+        this.addEntryDB = this.addEntryDB.bind(this);
     }
 
     updateQuery(tffi) {
@@ -68,12 +69,16 @@ class Database extends Component {
     updateQ(event) {
         console.log(document.getElementById("query").value);
         this.newQuery(document.getElementById("query").value);
-
     }
+
+    addEntryDB(place){
+        this.props.addPlace(place);
+    }
+
 
     conditionalSearch(){
        if(this.state.query.query !== ""){
-           return <SearchTable query={this.state.query}/>
+           return <SearchTable query={this.state.query} addEntryDB = {this.addEntryDB}/>
        }
     }
 
