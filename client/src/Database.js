@@ -17,6 +17,7 @@ class Database extends Component {
         this.updateQuery = this.updateQuery.bind(this);
         this.fetchResponse = this.fetchResponse.bind(this);
         this.plan = this.plan.bind(this);
+        this.conditionalSearch = this.conditionalSearch.bind(this);
     }
 
     updateQuery(tffi) {
@@ -69,6 +70,12 @@ class Database extends Component {
         this.newQuery(document.getElementById("query").value);
     }
 
+    conditionalSearch(){
+       if(this.state.query.query !== ""){
+           return <SearchTable query={this.state.query}/>
+       }
+    }
+
     render() {
 
         return (
@@ -84,7 +91,7 @@ class Database extends Component {
                         </div>
                         <input type="text" id="query" className="form-control" placeholder="Location"></input>
                     </div>
-                    <SearchTable query={this.state.query} />
+                    {this.conditionalSearch()}
                 </div>
             </div>
         )

@@ -5,12 +5,14 @@ class SearchTable extends Component {
     constructor(props) {
         super(props);
         this.createTable = this.createTable.bind(this);
+        //let tableVar;
     }
 
     createTable () {
-       //let dests = this.props.trip.places.map((item) => <td>{item}</td>);
 
-        let dests = this.props.trip;
+        let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
+        console.log("ANYTHING AT ALL");
+        //let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
         console.log(this.props.query);
 
         return {dests};
