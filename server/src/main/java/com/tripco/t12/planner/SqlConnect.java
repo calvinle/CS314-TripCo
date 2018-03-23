@@ -74,11 +74,14 @@ public class SqlConnect {
     String query = q;
     System.out.println("query string: " + query);
 
-//    String modQuery = "SELECT * FROM airports WHERE (id LIKE \"" + query + "\" or type like \"" + query + "\" or name like \"" + query + "\")";
-      //String modQuery = "SELECT * FROM airports WHERE NAME LIKE \"" + query + "\"";
-    //System.out.println("query string: " + modQuery);
 
-    //query = modQuery;
+    //String modQuery = "SELECT * FROM airports WHERE (id LIKE \"" + query + "\" or type like \"" + query +
+    //        "\" or name like \"" + query + "\" or municipality like \"" + query + "\")";
+
+    String modQuery = "select * from airports where id like \"" + query + "\" or type like \"" + query + "\" or name like \"" + query + "\" or latitude like \"" + query +"\" or longitude like \"" + query + "\" or elevation like \"" + query + "\" or continent like \"" + query + "\" or iso_country like \"" + query + "\" or iso_region like \"" + query + "\" or municipality like \""  + query + "\" or scheduled_service like \""  + query + "\" or gps_code like \""  + query + "\" or iata_code like \""  + query + "\" or local_code like \""  + query + "\" or home_link like \""  + query + "\" or wikipedia_link like \""  + query + "\" or keywords like \""  + query +  "\"";
+    System.out.println("query string: " + modQuery);
+
+    query = modQuery;
 
     ArrayList<String> rQ= new ArrayList<String>();
     ArrayList<Place> placeList = new ArrayList<Place>();
