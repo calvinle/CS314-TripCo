@@ -20,8 +20,11 @@ class SearchTable extends Component {
     }
 
 
-    addButton(event){
-        this.addEntry(event.target.id);
+    addButton(){
+        for(let i =0; i<this.props.query.places.length;){
+            this.addEntry(this.props.query.places.pop());
+        }
+        //this.addEntry(event.target.id);
     }
 
     addEntry(arg){
