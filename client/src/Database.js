@@ -68,6 +68,7 @@ class Database extends Component {
     updateQ(event) {
         console.log(document.getElementById("query").value);
         this.newQuery(document.getElementById("query").value);
+
     }
 
     conditionalSearch(){
