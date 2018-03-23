@@ -68,13 +68,12 @@ Date | Tasks done  | Tasks in progress | Impediments
 #### What went well
 * Access to the database, 
 * filesystem expanded and integrated
-* 
 
 #### Problems encountered and resolutions
 * Being vague about what would be worked on
 * Assigning tasks and issues
 * Punctual on deadlines
-* 
+
 
 ## Retrospective
 
