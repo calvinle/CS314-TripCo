@@ -42,8 +42,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  19  | *value* 
-Story Points |  40 | *value* 
+Tasks |  23  | 18 
+Story Points |  50 | 35 
 
 ## Daily Scrums
 
@@ -65,18 +65,21 @@ Date | Tasks done  | Tasks in progress | Impediments
 *
 
 #### What went well
-* *something*
-*
+* Access to the database, 
+* filesystem expanded and integrated
+* 
 
 #### Problems encountered and resolutions
-* *something*
-*
+* Being vague about what would be worked on
+* Assigning tasks and issues
+* Punctual on deadlines
+* 
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
 What we will change this time |  |  | 
-What we did well |  |  | 
+What we did well | Helping each other when possible | Workflow is good when all are onboard | Codeclimate and Travis are useful, as well as IntelliJ
 What we need to work on |  |  |
 What we will change next time |  |  | 
