@@ -72,6 +72,14 @@ public class SqlConnect {
 
     //SqlConnect sqlConn = new SqlConnect("select * from airports");
     String query = q;
+    System.out.println("query string: " + query);
+
+//    String modQuery = "SELECT * FROM airports WHERE (id LIKE \"" + query + "\" or type like \"" + query + "\" or name like \"" + query + "\")";
+      //String modQuery = "SELECT * FROM airports WHERE NAME LIKE \"" + query + "\"";
+    //System.out.println("query string: " + modQuery);
+
+    //query = modQuery;
+
     ArrayList<String> rQ= new ArrayList<String>();
     ArrayList<Place> placeList = new ArrayList<Place>();
     String myDriver = "com.mysql.jdbc.Driver"; // add dependencies in pom.xml
