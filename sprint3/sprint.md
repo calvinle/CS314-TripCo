@@ -57,12 +57,13 @@ Date | Tasks done  | Tasks in progress | Impediments
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *Code Coverage*:  *Tests Passing as needed*
+* *Shorter Trip*: *User is able to create shorter trip from TFFI*
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* *Obtain the list from a database of places*: *Creating query statements*
+* *Subset of database*: *Above must be completed first*
+* *TFFI Reader*: *update for TFFI V2*
 
 #### What went well
 * Access to the database, 
