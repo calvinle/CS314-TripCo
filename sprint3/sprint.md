@@ -79,7 +79,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time | Communication(live) | Getting started sooner | Having an environment ready at given times
+What we will change this time | Communication(live) | Getting started sooner | work on intelliJ understanding and stability”
 What we did well | Helping each other when possible | Workflow is good when all are onboard | Codeclimate and Travis are useful, as well as IntelliJ
 What we need to work on | Being specific as to what would be worked on | Assigning tasks and being punctual with due dates | Being prepared for IntelliJ being moody
 What we will change next time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically | Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment
