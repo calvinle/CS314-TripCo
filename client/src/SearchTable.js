@@ -5,6 +5,7 @@ class SearchTable extends Component {
     constructor(props) {
         super(props);
         this.createTable = this.createTable.bind(this);
+        this.addEntry = this.addEntry.bind(this);
         //let tableVar;
     }
 
@@ -18,6 +19,16 @@ class SearchTable extends Component {
         return {dests};
     }
 
+
+    addButton(event){
+        this.addEntry(event.target.id);
+    }
+
+    addEntry(arg){
+        this.props.addEntryDB(arg);
+    }
+
+
     render() {
         let table = this.createTable();
 
@@ -26,11 +37,19 @@ class SearchTable extends Component {
             <table className="table table-responsive table-bordered">
                 <thead>
                 <tr className="table-primary">
-                    <th className="align-middle">Search Results</th>
+                    <th className="align-middle">Name:</th>
                     {table.dests}
                 </tr>
                 </thead>
             </table>
+            <div className="card-body">
+                <div className="input-group-prepend">
+                    <div onClick={this.addButton.bind(this)}>
+                        <button className="btn btn-success " id="add" type="button">Add</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     }
 }
