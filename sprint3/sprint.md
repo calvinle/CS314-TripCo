@@ -23,7 +23,7 @@
 * Always check for new changes in master to resolve merge conflicts locally before committing them.
 * All changes are built and tested before they are committed.
 * Continuous integration successfully builds and tests pull requests for master branch always.
-* All commits with more than 1 line of change include a task/issue number.Understanding IntelliJ and stability
+* All commits with more than 1 line of change include a task/issue number.
 * All Java dependencies in pom.xml.
 
 ## Plan
