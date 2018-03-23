@@ -34,12 +34,8 @@ public class Trip {
    * It might need to reorder the places in the future.
    */
   public void plan() {
-    this.map = svg();
-    //System.out.println(this.options);
-    //this.options.optimization = "0";
     checkOpt();
-    //this.options = new Option();
-    //this.places = new ArrayList<Place>();
+    this.map = svg();
   }
 
   /**
@@ -251,6 +247,11 @@ public class Trip {
       System.out.println("kilo");
       return (int)Math.round(kilo(work));
     }
+
+    else if (o.distance.equalsIgnoreCase("nautical miles")){
+      System.out.println("naut");
+      return (int)Math.round(mile(work) * 0.868976);
+    }
     else
       System.out.println("invalid Unit");
       return 0;
@@ -272,11 +273,11 @@ public class Trip {
       this.distances = legDistances();
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
-      Optimizer opt = new Optimizer();
-      opt.trip = this;
+      System.out.println("OPTIMIZED:NN");
+      Optimizer opt = new Optimizer(this);
       opt.nearNeighbor();
-      this.distances = opt.trip.distances;
-      this.places = opt.trip.places;
+      this.distances = opt.finDist;
+      this.places = opt.finArray;
     }
     else
       this.distances = legDistances();

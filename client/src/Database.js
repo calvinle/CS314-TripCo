@@ -13,7 +13,6 @@ class Database extends Component {
         };
 
         this.updateQuery = this.updateQuery.bind(this);
-        //this.createTable = this.createTable.bind(this);
     }
 
     newQuery(arg) {
@@ -32,17 +31,14 @@ class Database extends Component {
     updateQuery(event) {
         console.log(document.getElementById("query").value);
         this.newQuery(document.getElementById("query").value);
+
     }
 
-    /*createTable(){
-        let dests = this.places.map((item) => <td>{item.name}</td>);
-        console.log(dests);
-        return dests;
+    /*updateSlider(){
+      document.getElementByID("slider").max = optimizationlevels;
     }*/
 
     render() {
-        //let table = this.createTable();
-
 
         return (
             <div id="database" className="card border-0 border-dark">
@@ -58,14 +54,6 @@ class Database extends Component {
                         <input type="text" id="query" className="form-control" placeholder="Location"></input>
                     </div>
                 </div>
-                <table className="table table-responsive table-bordered">
-                    <thead>
-                    <tr className="table-primary">
-                        <th className="align-middle">Destination</th>
-                        {this.table}
-                    </tr>
-                    </thead>
-                </table>
             </div>
         )
     }
