@@ -12,18 +12,34 @@ class SearchTable extends Component {
     createTable () {
 
         let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
+        let buttons = [];
+        for(let i = 0; i < dests.length; i++){
+            buttons.push(<td><div className="input-group-prepend">
+                <div onClick={this.addButton.bind(this)}>
+                    <button className="btn btn-danger " id={i} type="button">Add</button>
+                </div>
+            </div></td>)
+        }
         console.log("ANYTHING AT ALL");
         //let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
         console.log(this.props.query);
 
-        return {dests};
+        return {dests,buttons};
     }
 
 
-    addButton(){
+    addButtonAll(){
         for(let i =0; i<this.props.query.places.length;){
             this.addEntry(this.props.query.places.pop());
         }
+        //this.addEntry(event.target.id);
+    }
+
+    addButton(event){
+        //for(let i =0; i<this.props.query.places.length;){
+            this.addEntry(this.props.query.places[event.target.id]);
+            this.props.query.places.splice(event.target.id, 1);
+        //}
         //this.addEntry(event.target.id);
     }
 
@@ -44,11 +60,19 @@ class SearchTable extends Component {
                     {table.dests}
                 </tr>
                 </thead>
+
+                <tbody>
+                <tr>
+                    <th className="table-danger align-middle">Click to add</th>
+                    {table.buttons}
+                </tr>
+                </tbody>
+
             </table>
             <div className="card-body">
                 <div className="input-group-prepend">
-                    <div onClick={this.addButton.bind(this)}>
-                        <button className="btn btn-success " id="add" type="button">Add</button>
+                    <div onClick={this.addButtonAll.bind(this)}>
+                        <button className="btn btn-success " id="add" type="button">Add All</button>
                     </div>
                 </div>
             </div>
