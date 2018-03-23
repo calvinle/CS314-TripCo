@@ -6,8 +6,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - mysql -u root -e 'CREATE DATABASE testingDB;'
-  - mysql -u root -e 'CREATE TABLE testingDB.airports (index int(11), id varchar(1000), type varchar(1000), name varchar(1000), latitude varchar(1000), longitude varchar(1000), elevation varchar(1000), continent varchar(1000), iso_country varchar(1000), iso_region varchar(1000), municipality varchar(1000), scheduled_service varchar(1000), gps_code varchar(1000), iata_code varchar(1000), local_code varchar(1000), home_link varchar(1000), wikipedia_link varchar(1000), keywords varchar(1000));'
+  
 script:
   - mvn prepare-package
 cache:
