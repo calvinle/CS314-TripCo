@@ -46,38 +46,24 @@ class Dropdown extends Component {
     return (
         <div id="dropdown" className="card border-0 border-dark">
             <div className="card-header bg-primary text-light">
-                Trip Modifier
-            </div>
+                Trip Modifier </div>
             <div className="card-body">
                 <form>
-                    <label><p>If you would like to pick a different starting
-                        point then specified, please select one from the
-                        dropdown menu.</p>
-                        <select onChange={this.handleChange}>
-                          {drop};
-                        </select>
+                    <label><p> Change Starting Point</p>
+                        <select onChange={this.handleChange}>{drop};</select>
                     </label>
                 </form>
 
                 <div>
                     <form>
-                        <label><p> Alternatively, if you would like to remove a
-                            destination from your trip, select it from the
-                            following dropdown menu and it will be removed. </p>
-                            <select id={"deleteForm"}>
-                              {drop};
-                            </select> &emsp;
-                            <button type="button" className="btn btn-danger"
-                                    onClick={this.removePlace}>Delete
-                            </button>
+                        <label><p> Delete Destination </p>
+                            <select id={"deleteForm"}>{drop};</select> &emsp;
+                            <button type="button" className="btn btn-danger" onClick={this.removePlace}>Delete </button>
                         </label>
                     </form>
                 </div>
-
             </div>
         </div>
-
-
     );
   }
 }
