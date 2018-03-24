@@ -42,8 +42,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  19  | *value* 
-Story Points |  40 | *value* 
+Tasks |  23  | 18 
+Story Points |  50 | 35 
 
 ## Daily Scrums
 
@@ -57,26 +57,30 @@ Date | Tasks done  | Tasks in progress | Impediments
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *Code Coverage*:  *Tests Passing as needed*
+* *Shorter Trip*: *User is able to create shorter trip from TFFI*
+* *TFFI Reader*: *update for TFFI V2*
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* *Obtain the list from a database of places*: *Creating query statements*
+* *Subset of database*: *Above must be completed first*
+
 
 #### What went well
-* *something*
-*
+* Access to the database, 
+* filesystem expanded and integrated
 
 #### Problems encountered and resolutions
-* *something*
-*
+* Being vague about what would be worked on
+* Assigning tasks and issues
+* Punctual on deadlines
+
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Live meetings | Starting much sooner | Sharing info from client and server side
+What we did well | Helping each other when possible | Workflow is good when all are onboard | Codeclimate and Travis are useful
+What we need to work on | Being specific as to what would be worked on | Assigning tasks and being punctual with due dates. Overview each merge carefully. | Understanding IntelliJ and stability
+What we will change next time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically | Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment

@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import spark.Request;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -33,12 +34,8 @@ public class Trip {
    * It might need to reorder the places in the future.
    */
   public void plan() {
-    this.map = svg();
-    //System.out.println(this.options);
-    //this.options.optimization = "0";
     checkOpt();
-    //this.options = new Option();
-    //this.places = new ArrayList<Place>();
+    this.map = svg();
   }
 
   /**
@@ -143,23 +140,48 @@ public class Trip {
 
   }
 
-  public double decCoord(String s){
-    String in[] = s.split("['\" °″′]+");
+  public double decCoord(String s)
+  {
     double calculated = 0;
-    if(in.length == 4){
-      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60+Double.parseDouble(in[2])/3600;
-    }
-    else if(in.length == 3){
-      calculated = Double.parseDouble(in[0])+Double.parseDouble(in[1])/60;
-    }
-    else if(in.length <= 2){
-      calculated = Double.parseDouble(in[0]);
-      if(in.length==1) return calculated;
+    ArrayList<String> list = new ArrayList<String>();
+    String in[] = s.split("['\" °″′]+");
+
+    for(String key:in)
+    {
+      if(!(key.matches("[0-9.-]+")))
+      {
+        //Pulled regex from google (find link please)
+        String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+        list.addAll(Arrays.asList(temp));
+      }
+
+      else
+        list.add(key);
     }
 
-    return validL(in,calculated);
+    String newIn[] = new String[list.size()];
+
+    for(int i = 0; i < list.size(); i++)
+    {
+      newIn[i] = list.get(i);
+    }
+
+    if(newIn.length == 4){
+      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60+Double.parseDouble(newIn[2])/3600;
+    }
+    else if(newIn.length == 3){
+      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60;
+    }
+    else if(newIn.length <= 2) {
+      calculated = Double.parseDouble(newIn[0]);
+    }
+    if(newIn.length == 1){
+      return calculated;
+    }
+
+    return validL(newIn,calculated);
   }
-
+  
   private boolean outofrangen(double dist)
   {
       if(dist>=37 && dist<=41)
@@ -225,6 +247,11 @@ public class Trip {
       System.out.println("kilo");
       return (int)Math.round(kilo(work));
     }
+
+    else if (o.distance.equalsIgnoreCase("nautical miles")){
+      System.out.println("naut");
+      return (int)Math.round(mile(work) * 0.868976);
+    }
     else
       System.out.println("invalid Unit");
       return 0;
@@ -246,11 +273,11 @@ public class Trip {
       this.distances = legDistances();
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
-      Optimizer opt = new Optimizer();
-      opt.trip = this;
+      System.out.println("OPTIMIZED:NN");
+      Optimizer opt = new Optimizer(this);
       opt.nearNeighbor();
-      this.distances = opt.trip.distances;
-      this.places = opt.trip.places;
+      this.distances = opt.finDist;
+      this.places = opt.finArray;
     }
     else
       this.distances = legDistances();

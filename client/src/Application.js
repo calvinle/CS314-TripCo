@@ -15,7 +15,7 @@ class Application extends Component {
             trip: { // default TFFI
                 type: "trip",
                 title: "",
-                options: {distance: "miles", start: "", optimization: ""},
+                options: {distance: "miles", start: "", optimization: "0"},
                 places: [],
                 distances: [],
                 map: "<svg width=\"1920\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\"><g></g></svg>"
@@ -25,6 +25,7 @@ class Application extends Component {
         this.updateOptions = this.updateOptions.bind(this);
         this.updateStart = this.updateStart.bind(this);
         this.updateOptimization = this.updateOptimization.bind(this);
+        this.addPlace = this.addPlace.bind(this);
     }
 
     updateTrip(tffi) {
@@ -74,6 +75,14 @@ class Application extends Component {
         // update the options in the trip.
     }
 
+    addPlace(place){
+        console.log("add place,", place);
+        let testTrip = Object.assign({}, this.state.trip);
+        testTrip.places.push(place);
+        console.log(testTrip);
+        this.setState({trip: testTrip});
+    }
+
     updateOptimization(options) {
         console.log("in Application:", options);
         var testTrip = Object.assign({}, this.state.trip, {
@@ -110,7 +119,7 @@ class Application extends Component {
                         <Destinations trip={this.state.trip} updateTrip={this.updateTrip}/>
                     </div>
                     <div className="col-12">
-                        <Database/>
+                      <Database trip={this.state.trip} addPlace = {this.addPlace}/>
                     </div>
                     <div className="col-12">
                         <Trip trip={this.state.trip} updateTrip={this.updateTrip}/>
