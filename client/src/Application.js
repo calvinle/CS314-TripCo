@@ -26,6 +26,7 @@ class Application extends Component {
         this.updateStart = this.updateStart.bind(this);
         this.updateOptimization = this.updateOptimization.bind(this);
         this.addPlace = this.addPlace.bind(this);
+        this.reduceList = this.reduceList.bind(this);
     }
 
     updateTrip(tffi) {
@@ -34,26 +35,65 @@ class Application extends Component {
         this.setState({trip: tffi});
     }
 
-    updateStart(options) {
-        console.log("in Application:", options);
-        var testTrip = Object.assign({}, this.state.trip, {
-                type: this.state.trip.type,
-                title: this.state.trip.title,
-                options: {
-                    start: options,
-                    distance: this.state.trip.options.distance,
-                    optimization: this.state.trip.options.optimization
-                },
-                places: this.state.trip.places,
-                distances: this.state.trip.distances,
-                map: this.state.trip.map,
-            }
-        )
-        this.setState({trip: testTrip});
-        //console.log("new option",testTrip);
-        //console.log("testTrip:", testTrip);
-        // update the options in the trip.
+    reduceList(place){
+      console.log("place is: "+ place);
+      var newPlaces = this.state.trip.places;
+
+      if (place.length <= 7) {
+        console.log("Splicing List");
+        var newStart = newPlaces.find(x => x.id == place);
+        var index = newPlaces.indexOf(newStart);
+        if (index == 0){
+          newPlaces.splice(index, 1);
+          newPlaces.splice(newPlaces.length-1, 1);
+          newPlaces.push(newPlaces[0]);
+        }
+        else{
+          newPlaces.splice(index, 1);
+        }
+
+      }
+      else{
+        console.log("Default selected, nothing")
+      }
+      var testTrip = Object.assign({}, this.state.trip, {
+            type: this.state.trip.type,
+            title: this.state.trip.title,
+            options: {start: this.state.trip.options.start, distance: this.state.trip.options.distance, optimization: this.state.trip.options.optimization},
+            places: newPlaces,
+            distances: this.state.trip.distances,
+            map: this.state.trip.map,
+          }
+      )
+      this.setState({trip: testTrip});
     }
+
+  updateStart(options) {
+    var newPlaces = this.state.trip.places;
+    if (options != "Select...") {
+      var newStart = newPlaces.find(x => x.id == options);
+      var index = newPlaces.indexOf(newStart);
+      newPlaces.splice(index, 1);
+      newPlaces.unshift(newStart);
+      newPlaces.splice(newPlaces.length - 1, 1);
+      newPlaces.push(newStart);}
+    else {}
+    console.log(newPlaces);
+    console.log("in Application:", options);
+    var testTrip = Object.assign({}, this.state.trip, {
+          type: this.state.trip.type,
+          title: this.state.trip.title,
+          options: {start: options, distance: this.state.trip.options.distance, optimization: this.state.trip.options.optimization},
+          places: newPlaces,
+          distances: this.state.trip.distances,
+          map: this.state.trip.map,
+        }
+    )
+    this.setState({trip: testTrip});
+    //console.log("new option",testTrip);
+    //console.log("testTrip:", testTrip);
+    // update the options in the trip.
+  }
 
     updateOptions(options) {
         console.log("in Application:", options);
@@ -112,7 +152,7 @@ class Application extends Component {
                     </div>
 
                     <div className="col-12">
-                        <Dropdown trip={this.state.trip} updateStart={this.updateStart}/>
+                        <Dropdown trip={this.state.trip} updateStart={this.updateStart} reduceList={this.reduceList}/>
                     </div>
 
                     <div className="col-12">
