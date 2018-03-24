@@ -36,11 +36,8 @@ class Application extends Component {
     }
 
     reduceList(place){
-      console.log("place is: "+ place);
       var newPlaces = this.state.trip.places;
-
       if (place.length <= 7) {
-        console.log("Splicing List");
         var newStart = newPlaces.find(x => x.id == place);
         var index = newPlaces.indexOf(newStart);
         if (index == 0){
@@ -51,11 +48,8 @@ class Application extends Component {
         else{
           newPlaces.splice(index, 1);
         }
-
       }
-      else{
-        console.log("Default selected, nothing")
-      }
+      else{}
       var testTrip = Object.assign({}, this.state.trip, {
             type: this.state.trip.type,
             title: this.state.trip.title,
