@@ -66,8 +66,7 @@ class Database extends Component {
         this.plan(testQuery);
     }
 
-    updateQ(event) {
-        console.log(document.getElementById("query").value);
+    updateQ() {
         this.newQuery(document.getElementById("query").value);
     }
 
