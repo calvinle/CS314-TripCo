@@ -49,13 +49,16 @@ class Options extends Component{
               <label className="btn btn-outline-dark">
                 <input type="radio" id="kilometers" name="distance" autoComplete="off"/> Kilometers
               </label>
+              <label className="btn btn-outline-dark">
+                <input type="radio" id="nautical miles" name="distance" autoComplete="off"/> Nautical Miles
+              </label>
                 </div>
             </div>
 
               <div className="slidecontainer">
                   <p>Choose an Optimization level</p>
                 <div onChange={this.changeOptimization.bind(this)}>
-                  <input type="range" min="0" max="1" defaultValue={"0"} className="slider" id={"slider"}></input>
+                  None &emsp;<input type="range" min="0" max="1" defaultValue={"0"} className="slider" id={"slider"}></input>&emsp; Nearest Neighbor
                 </div>
             </div>
             </div>
