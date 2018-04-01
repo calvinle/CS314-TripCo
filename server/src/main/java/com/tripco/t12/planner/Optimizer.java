@@ -23,21 +23,34 @@ public class Optimizer {
     public ArrayList<Place> workingArray;
     private Place working;
     private Place firstPlace;
+    private int[][] nnTable;
 
     public Optimizer(Trip t){
         finArray = new ArrayList<Place>();
         finDist = new ArrayList<Integer>();
         trip = t;
         workingArray = t.places;
+
+        nnTable = new int[workingArray.size()][workingArray.size()];
+        for (int i=0; i < workingArray.size(); i++){
+            for (int j=0; j < workingArray.size(); j++){
+                int dist = NNhelper(workingArray.get(i), workingArray.get(j));
+                nnTable[i][j] = dist;
+                System.out.println(workingArray.get(i).id + " " + workingArray.get(j).id + " " + dist);
+            }
+        }
+
         working = workingArray.get(0);
-        //System.out.println(working.name);
         workingArray.remove(0);
-        //System.out.println("HEREIAM");
         //finArray.add(working);
         //finDist.add(0);
         firstPlace = working;
     }
 
+    public void nearNeightborNew(){
+        for (int i=0; i < workingArray.size(); i++){
+        }
+    }
 
 
     public void nearNeighbor(){

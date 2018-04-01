@@ -240,20 +240,20 @@ public class Trip {
     double work = 2*Math.asin(c/2);
 
     if(o==null || o.distance.equalsIgnoreCase("miles")){
-      System.out.println("M or N");
+      //System.out.println("M or N");
       return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
-      System.out.println("kilo");
+      //System.out.println("kilo");
       return (int)Math.round(kilo(work));
     }
 
     else if (o.distance.equalsIgnoreCase("nautical miles")){
-      System.out.println("naut");
+      //System.out.println("naut");
       return (int)Math.round(mile(work) * 0.868976);
     }
     else
-      System.out.println("invalid Unit");
+      //System.out.println("invalid Unit");
       return 0;
   }
 
