@@ -15,15 +15,22 @@ import spark.Request;
 
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Optimizer {
     private Trip trip;
+    private int[][] nnTable;
+    private int[][] tableCopy;
+    private int workingDest;    //The column of the table we are working on
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
+
     public ArrayList<Place> workingArray;
+
     private Place working;
     private Place firstPlace;
-    private int[][] nnTable;
+
+
 
     public Optimizer(Trip t){
         finArray = new ArrayList<Place>();
@@ -31,26 +38,54 @@ public class Optimizer {
         trip = t;
         workingArray = t.places;
 
-        nnTable = new int[workingArray.size()][workingArray.size()];
-        for (int i=0; i < workingArray.size(); i++){
-            for (int j=0; j < workingArray.size(); j++){
+        nnTable = new int[workingArray.size()-1][workingArray.size()-1];    //original table, untouched
+        tableCopy = new int[workingArray.size()-1][workingArray.size()-1];  //copy of table to be worked on
+
+        //Populate Table of distances
+        for (int i=0; i < workingArray.size()-1; i++){
+            for (int j=0; j < workingArray.size()-1; j++){
                 int dist = NNhelper(workingArray.get(i), workingArray.get(j));
                 nnTable[i][j] = dist;
+                tableCopy[i][j] = dist;
                 System.out.println(workingArray.get(i).id + " " + workingArray.get(j).id + " " + dist);
             }
         }
 
         working = workingArray.get(0);
         workingArray.remove(0);
-        //finArray.add(working);
-        //finDist.add(0);
+
         firstPlace = working;
     }
 
     public void nearNeightborNew(){
-        for (int i=0; i < workingArray.size(); i++){
+        for (int i=0; i < workingArray.size(); i++) {    //use each dest. as a start
+            workingDest=i;          //Use each destiation as a starter
+            NNSearch();
+            tableCopy = nnTable;    //@TODO: Resets tableCopy for next run?
+            //@TODO: Reset stuff for next NN run with new starting dest.
+            //@TODO: Add starting dest to end of finArray and distance from end to start
         }
     }
+
+    public void NNSearch(){
+            int indexofNN = 0;
+            double distofNN = Double.POSITIVE_INFINITY;
+
+            for (int j=0; j < workingArray.size(); j++){    //column search
+                if (j==workingDest){continue;}              //same location
+                if (tableCopy[workingDest][j] < distofNN &&
+                        tableCopy[workingDest][j] != Double.POSITIVE_INFINITY){ //Infinity mark means we already visited
+                    distofNN = tableCopy[workingDest][j];
+                    indexofNN = j;
+                    tableCopy[workingDest][j] = (int)Double.POSITIVE_INFINITY;  //marked as visited
+                    tableCopy[j][workingDest] = (int)Double.POSITIVE_INFINITY;  //marked as visited
+                }
+            }
+            finDist.add((int)distofNN);
+            finArray.add((workingArray.get(indexofNN)));
+            workingDest = indexofNN;
+            NNSearch();
+        }
 
 
     public void nearNeighbor(){
