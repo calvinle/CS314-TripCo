@@ -16,6 +16,7 @@ class App extends Component {
     return(
         <div id="tripco">
             <Header number={this.state.number} name={this.state.name}/>
+            <h4 align="middle">Welcome to Team Gosling's Trip Planner  © TripCo t{this.props.number} {this.props.name} 2018</h4><br/>
             <Application />
             <Footer number={this.state.number} name={this.state.name}/>
         </div>

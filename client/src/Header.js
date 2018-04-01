@@ -9,17 +9,12 @@ class Header extends Component{
 
   render() {
     return(
-        <div id="header" className="jumbotron" style={{"background-color": "#1E4D2B", "color":"white"}}>
-          <img src={"http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png"} width={"40%"}/>
-          {this.title()}
-          <p className="lead">Welcome to Team Gosling's Trip Planner</p>
+        <div id="header" className="jumbotron" style={{"background-color": "#1E4D2B", "color":"white", "vertical-align":"middle"}}>
+            <img src={"http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png"} width={"30%"}/>
         </div>
     )
   }
 
-  title() {
-    return( <h3>TripCo <small>t{this.props.number} {this.props.name}</small></h3> )
-  }
 }
 
 export default Header;
