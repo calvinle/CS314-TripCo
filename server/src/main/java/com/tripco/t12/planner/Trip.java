@@ -182,18 +182,18 @@ public class Trip {
     return validL(newIn,calculated);
   }
   
-  private boolean outofrangen(double dist)
+  private boolean outofrangelat(double dist)
   {
-      if(dist>=37 && dist<=41)
+      if(dist>=-85 && dist<=85)
       {
           return true;
       }
       return false;
   }
   
-  private boolean outofrangew(double dist)
+  private boolean outofrangelong(double dist)
   {
-      if(dist>=-109 && dist<=-102)
+      if(dist>=-180 && dist<=180)
       {
           return true; 
       }
@@ -211,11 +211,11 @@ public class Trip {
         d *= -1;
     }
 
-    if(scheck.equals("n") && outofrangen(d)){
+    if((scheck.equals("n")||scheck.equals("s")) && outofrangelat(d)){
         return d;
     }
 
-    if(scheck.equals("w") && outofrangew(d)){
+    if((scheck.equals("w")||scheck.equals("e")) && outofrangelong(d)){
         return d;
     }
     
