@@ -22,8 +22,15 @@ public class Optimizer {
     private int[][] nnTable;
     private int[][] tableCopy;
     private int workingDest;    //The column of the table we are working on
+
+    //Arrays to be tested if they contain shortest distance. Will become finArray/finDist if they do
+    public ArrayList<Place> tempArray;
+    public ArrayList<Integer> tempDist;
+
+    //Arrays to be returned
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
+    public int minDist = (int)Double.POSITIVE_INFINITY;
 
     public ArrayList<Place> workingArray;
 
@@ -33,8 +40,8 @@ public class Optimizer {
 
 
     public Optimizer(Trip t){
-        finArray = new ArrayList<Place>();
-        finDist = new ArrayList<Integer>();
+        tempArray = new ArrayList<Place>();
+        tempDist = new ArrayList<Integer>();
         trip = t;
         workingArray = t.places;
 
@@ -51,23 +58,32 @@ public class Optimizer {
             }
         }
 
-        working = workingArray.get(0);
-        workingArray.remove(0);
-
-        firstPlace = working;
     }
 
     public void nearNeighborNew(){
         for (int i=0; i < workingArray.size(); i++) {    //use each dest. as a start
             workingDest=i;          //Use each destiation as a starter
             NNSearch();
+
             tableCopy = nnTable;    //@TODO: Resets tableCopy for next run?
             //@TODO: Reset stuff for next NN run with new starting dest.
-            //@TODO: Add starting dest to end of finArray and distance from end to start
         }
+        return;
     }
 
     public void NNSearch(){
+        if (tempArray.size() == workingArray.size()){    //All locations visited
+            tempArray.add(finArray.get(0));  //Add startingDest to end of array
+            tempDist.add(NNhelper(finArray.get(finArray.size()-1), finArray.get(finArray.size()-2)));
+
+            int distanceTotal = distSum(finDist);
+            if (distanceTotal < minDist){
+                minDist = distanceTotal;
+                finArray = tempArray;
+                finDist = tempDist;
+            }
+            return;
+        }
             int indexofNN = 0;
             double distofNN = Double.POSITIVE_INFINITY;
 
@@ -81,8 +97,8 @@ public class Optimizer {
                     tableCopy[j][workingDest] = (int)Double.POSITIVE_INFINITY;  //marked as visited
                 }
             }
-            finDist.add((int)distofNN);
-            finArray.add((workingArray.get(indexofNN)));
+            tempDist.add((int)distofNN);
+            tempArray.add((workingArray.get(indexofNN)));
             workingDest = indexofNN;
             NNSearch();
         }
@@ -109,6 +125,14 @@ public class Optimizer {
         finArray.add(working);
         finDist.add(distofNN);
         nearNeighbor();
+    }
+
+    public int distSum(ArrayList<Integer> distances){
+        int sum = 0;
+        for (int i=0; i < distances.size(); i++){
+            sum+=distances.get(i);
+        }
+        return sum;
     }
 
     private int NNhelper(Place place0, Place place1){
