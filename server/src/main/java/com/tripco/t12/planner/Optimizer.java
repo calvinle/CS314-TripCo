@@ -57,7 +57,7 @@ public class Optimizer {
         firstPlace = working;
     }
 
-    public void nearNeightborNew(){
+    public void nearNeighborNew(){
         for (int i=0; i < workingArray.size(); i++) {    //use each dest. as a start
             workingDest=i;          //Use each destiation as a starter
             NNSearch();
