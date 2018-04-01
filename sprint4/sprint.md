@@ -1,9 +1,9 @@
-# Sprint 4 - *your team number* - *your team name*
+# Sprint 4 - *12* - *Dave Matthew's Beard @deprecated*
 
 ## Goal
 
 ### Worldwide!
-### Sprint Leader: *firstname lastname*
+### Sprint Leader: *Calvin Le*
 
 ## Definition of Done
 
@@ -40,8 +40,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *value*   | *value* 
-Story Points |  *value*  | *value* 
+Tasks |  22   | *value* 
+Story Points |  34 | *value* 
 
 ## Daily Scrums
 
