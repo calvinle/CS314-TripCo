@@ -10,8 +10,9 @@ class Footer extends Component {
 
   render() {
     return (
-        <div id="footer" className="jumbotron">
-          <h4>© TripCo t{this.props.number} {this.props.name} 2018</h4>
+        <div id="footer" className="jumbotron" style={{"background-color": "#1E4D2B", "color":"white"}}>
+          {<img src={"http://www.cs.colostate.edu/~cs314/images/CSU-Official-wrdmrk-357-617_Rev.png"}/>}
+          <h4 align={"right"}>© TripCo t{this.props.number} {this.props.name} 2018</h4>
         </div>
     )
   }
