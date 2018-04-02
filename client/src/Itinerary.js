@@ -25,7 +25,10 @@ class Itinerary extends Component {
   createTable () {
     let distance = this.sumDists().sum;// need to sum this from real the trip
     let roundTrip = this.sumDists().tot.map((item) => <td>{item}</td>);
-    let units = this.props.trip.options.distance;
+    let units = "";
+    if(this.props.trip.options.distance === "user defined")
+        units = this.props.trip.options.userUnit;
+    else units = this.props.trip.options.distance;
     let dests = this.props.trip.places.map((item) => <td>{item.name}</td>);
     let dists = this.props.trip.distances.map((item) => <td>{item}</td>);
     //let tableCells = numbers.map((number, index) => <td key={index}>{number}</td>);

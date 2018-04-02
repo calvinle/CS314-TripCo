@@ -8,5 +8,7 @@ public class Option {
 
   public String distance;
   public String optimization;
-  public String start;
+  public String userUnit;
+  public String userRadius;
+  //public String start;
 }

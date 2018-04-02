@@ -7,17 +7,56 @@ import React, {Component} from 'react';
 class Options extends Component{
   constructor(props) {
     super(props);
+    this.state = {
+        userRadius: "",
+        userUnit: ""
+      };
     this.changeOption = this.changeOption.bind(this);
     this.changeOptimizationArg = this.changeOptimizationArg.bind(this);
+    this.userConditional = this.userConditional.bind(this);
+    this.handleRadius = this.handleRadius.bind(this);
+    this.handleUnit = this.handleUnit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   changeOption(arg) {
     //console.log(arg);
     this.props.updateOptions(arg);
+    console.log("this.state.",this.props.options);
   }
 
   changeButton(event){
       this.changeOption(event.target.id);
+      event.preventDefault();
+  }
+
+  handleUnit(event){
+      this.setState({userUnit: event.target.value});
+  }
+
+  handleRadius(event){
+      this.setState({userRadius: event.target.value});
+      event.preventDefault();
+  }
+
+  handleSubmit(event){
+      this.props.updateUserDef(this.state.userUnit, this.state.userRadius);
+      alert("Success, radius set to: " + this.state.userRadius);
+      event.preventDefault();
+  }
+
+  userConditional(){
+    if(this.props.options.distance ==="user defined")
+        return <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Name:
+                        <input type="text" className="form-control" value={this.state.userUnit} onChange={this.handleUnit} />
+                        Radius:
+                        <input type = "text" className="form-control" value = {this.state.userRadius} onChange={this.handleRadius}/>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+            ;
   }
 
 
@@ -52,8 +91,12 @@ class Options extends Component{
               <label className="btn btn-outline-dark">
                 <input type="radio" id="nautical miles" name="distance" autoComplete="off"/> Nautical Miles
               </label>
+              <label className="btn btn-outline-dark">
+                  <input type = "radio" id="user defined" name="distance" autoComplete="off"/>User Units
+              </label>
                 </div>
             </div>
+              {this.userConditional()}
 
               <div className="slidecontainer">
                   <p>Choose an Optimization level</p>
