@@ -55,12 +55,8 @@ class Database extends Component {
     newQuery(arg) {
         //this.props.updateOptions(arg);
         console.log("in Database.js: ", arg);
-        var testQuery = Object.assign({}, this.state.query, {
-            version: this.state.query.version,
-            type: this.state.query.type,
-            query: arg,
-            places: this.state.query.places
-        });
+        var testQuery = Object.assign({}, this.state.query);
+        testQuery.query = arg;
         console.log("testQuery: ", testQuery);
         //this.setState({query: testQuery});
         this.plan(testQuery);

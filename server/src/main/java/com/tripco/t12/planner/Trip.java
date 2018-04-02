@@ -252,6 +252,11 @@ public class Trip {
       System.out.println("naut");
       return (int)Math.round(mile(work) * 0.868976);
     }
+
+    else if(o.distance.equalsIgnoreCase("user defined")){
+      System.out.println("user");
+      return (int)Math.round(user(work));
+    }
     else
       System.out.println("invalid Unit");
       return 0;
@@ -265,6 +270,10 @@ public class Trip {
   public double kilo(double d){
     //System.out.println(d*6371.0088);
     return d*6371.0088;
+  }
+
+  public double user(double d){
+    return d*Double.parseDouble(this.options.userRadius);
   }
 
   private void checkOpt(){
