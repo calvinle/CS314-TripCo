@@ -40,7 +40,7 @@ public class Optimizer {
 
 
     public Optimizer(Trip t){
-        System.out.println("optimizer constructor");
+        //System.out.println("constructor");
         tempArray = new ArrayList<Place>();
         tempDist = new ArrayList<Integer>();
         finArray = new ArrayList<Place>();
@@ -59,79 +59,9 @@ public class Optimizer {
             }
         }
         tableCopy = nnTable;
-        printTableCopy();
     }
 
-    public void printTableCopy(){
-        System.out.println("HELLO" + Arrays.deepToString(nnTable));
-        System.out.println("Anything");
-    }
 
-    public void nearNeighborNew(){
-        for (int i=0; i < workingArray.size(); i++) {    //use each dest. as a start
-            workingDest=i;          //Use each destiation as a starter
-            NNSearch();
-            tableCopy = nnTable;    //@TODO: Resets tableCopy for next run?
-            //@TODO: Reset stuff for next NN run with new starting dest.
-        }
-        return;
-    }
-
-    public void NNSearch(){
-        if (tempArray.size() == workingArray.size()){    //All locations visited
-            tempArray.add(finArray.get(0));  //Add startingDest to end of array
-            tempDist.add(NNhelper(finArray.get(finArray.size()-1), finArray.get(finArray.size()-2)));
-
-            int distanceTotal = distSum(finDist);
-            if (distanceTotal < minDist){
-                minDist = distanceTotal;
-                finArray = tempArray;
-                finDist = tempDist;
-            }
-            return;
-        }
-            int indexofNN = 0;
-            double distofNN = Double.POSITIVE_INFINITY;
-
-            for (int j=0; j < workingArray.size(); j++){    //column search
-                if (j==workingDest){continue;}              //same location
-                if (tableCopy[workingDest][j] < distofNN &&
-                        tableCopy[workingDest][j] != Double.POSITIVE_INFINITY){ //Infinity mark means we already visited
-                    distofNN = tableCopy[workingDest][j];
-                    indexofNN = j;
-                    tableCopy[workingDest][j] = (int)Double.POSITIVE_INFINITY;  //marked as visited
-                    tableCopy[j][workingDest] = (int)Double.POSITIVE_INFINITY;  //marked as visited
-                }
-            }
-            tempDist.add((int)distofNN);
-            tempArray.add((workingArray.get(indexofNN)));
-            workingDest = indexofNN;
-            NNSearch();
-        }
-
-
-    public void nearNeighbor(){
-        if(workingArray.isEmpty()){
-            finDist.add(NNhelper(firstPlace, finArray.get(finArray.size()-1)));
-            finArray.add(firstPlace);
-            return;
-        }
-        int indexofNN = 0;
-        int workingdist = 0;
-        int distofNN = NNhelper(working, workingArray.get(0));
-        for(int i=0;i<trip.places.size();i++){
-            workingdist = NNhelper(working,workingArray.get(i));
-            if(workingdist<distofNN){
-                distofNN = workingdist;
-                indexofNN = i;
-            }
-        }
-        working = workingArray.get(indexofNN);
-        workingArray.remove(indexofNN);
-        finArray.add(working);
-        finDist.add(distofNN);
-        nearNeighbor();
-    }
 
     private int distSum(ArrayList<Integer> distances){
         int sum = 0;

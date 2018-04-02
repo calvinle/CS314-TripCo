@@ -34,6 +34,6 @@ public class TestOptimizer {
         Place place0 = new Place();
         optimizer.workingArray.add(place);
         optimizer.workingArray.add(place0);
-        optimizer.nearNeighbor();
+        //optimizer.nearNeighbor();
     }
 }

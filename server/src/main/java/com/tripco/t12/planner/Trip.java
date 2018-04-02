@@ -240,7 +240,6 @@ public class Trip {
     double work = 2*Math.asin(c/2);
 
     if(o==null || o.distance.equalsIgnoreCase("miles")){
-      //System.out.println("M or N");
       return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
@@ -268,14 +267,13 @@ public class Trip {
   }
 
   private void checkOpt(){
-
+    Trip testTrip = this;
     if(this.options == null || this.options.optimization == null){
       this.distances = legDistances();
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
       System.out.println("OPTIMIZED:NN");
-      Optimizer opt = new Optimizer(this);
-      opt.printTableCopy();
+      Optimizer opt = new Optimizer(testTrip);
       //opt.nearNeighborNew();
       //this.distances = opt.finDist;
       //this.places = opt.finArray;
