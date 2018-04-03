@@ -240,16 +240,15 @@ public class Trip {
     double work = 2*Math.asin(c/2);
 
     if(o==null || o.distance.equalsIgnoreCase("miles")){
-      System.out.println("M or N");
       return (int)Math.round(mile(work));
     }
     else if(o.distance.equalsIgnoreCase("kilometers")){
-      System.out.println("kilo");
+      //System.out.println("kilo");
       return (int)Math.round(kilo(work));
     }
 
     else if (o.distance.equalsIgnoreCase("nautical miles")){
-      System.out.println("naut");
+      //System.out.println("naut");
       return (int)Math.round(mile(work) * 0.868976);
     }
 
@@ -258,7 +257,7 @@ public class Trip {
       return (int)Math.round(user(work));
     }
     else
-      System.out.println("invalid Unit");
+      //System.out.println("invalid Unit");
       return 0;
   }
 
@@ -277,13 +276,13 @@ public class Trip {
   }
 
   private void checkOpt(){
-
+    Trip testTrip = this;
     if(this.options == null || this.options.optimization == null){
       this.distances = legDistances();
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
       System.out.println("OPTIMIZED:NN");
-      Optimizer opt = new Optimizer(this);
+      Optimizer opt = new Optimizer(testTrip);
       opt.nearNeighbor();
       this.distances = opt.finDist;
       this.places = opt.finArray;
