@@ -274,9 +274,9 @@ public class Trip {
     else if(Integer.parseInt(this.options.optimization) > 0){
       System.out.println("OPTIMIZED:NN");
       Optimizer opt = new Optimizer(testTrip);
-      //opt.nearNeighborNew();
-      //this.distances = opt.finDist;
-      //this.places = opt.finArray;
+      opt.nearNeighbor();
+      this.distances = opt.finDist;
+      this.places = opt.finArray;
     }
     else
       this.distances = legDistances();
