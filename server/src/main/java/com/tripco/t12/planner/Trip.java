@@ -282,10 +282,17 @@ public class Trip {
     }
     else if(Integer.parseInt(this.options.optimization) > 0){
       System.out.println("OPTIMIZED:NN");
-      Optimizer opt = new Optimizer(testTrip);
-      opt.nearNeighbor();
-      this.distances = opt.finDist;
-      this.places = opt.finArray;
+      Optimizer nn = new Optimizer(testTrip);
+      nn.nearNeighbor();
+      this.distances = nn.finDist;
+      this.places = nn.finArray;
+    }
+    else if (Integer.parseInt(this.options.optimization) > 1){
+      System.out.println("OPTIMIZED:2OPT");
+      Optimizer twoOpt = new Optimizer(testTrip);
+      twoOpt.opt2Start();
+      this.distances = twoOpt.twoOptfinDist;
+      this.places = twoOpt.twoOptFinArray;
     }
     else
       this.distances = legDistances();

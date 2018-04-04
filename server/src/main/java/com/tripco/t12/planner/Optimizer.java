@@ -31,6 +31,11 @@ public class Optimizer {
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
 
+    public ArrayList<Place> twoOptFinArray;
+    public ArrayList<Integer> twoOptfinDist;
+    private boolean improve;
+
+
     public Optimizer(Trip t){
         tempArray = new ArrayList<Place>();
         tempDist = new ArrayList<Integer>();
@@ -115,24 +120,30 @@ public class Optimizer {
 
     public void opt2Start(){
         tripDist = (int)Double.POSITIVE_INFINITY;
-        nearNeighbor(); //start again
+        improve = true;
+        opt2R(); //start again
     }
 
     private void opt2R(){
+        if (improve == false){
+            return;
+        }
         for (int i=1; i < finArray.size(); i++){
             for (int k=i+1; k < finArray.size(); k++){
                 ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);   //new placeArray w/ swaps
-                //distance of workingRoute
                 ArrayList<Integer> workingDist = opt2DistSum(workingRoute);//create distArray from placeArray
                 int workingSum = distSum(workingDist);                      //find sum of distArray
                 if (workingSum < tripDist){                                 //compare to total
                     tripDist = workingSum;
-                    //finArray = workingRoute
-                    //finDist = workingDist;
+                    twoOptFinArray = workingRoute;
+                    twoOptfinDist = workingDist;
+                    improve = true;
                 }
-                //finArray.clear();
-                //finArray = workingRoute
-                //tripDist = workingDist
+                else{
+                    improve = false;
+                }
+                workingRoute.clear();
+                workingDist.clear();
                 opt2R(); //go to start
             }
         }
