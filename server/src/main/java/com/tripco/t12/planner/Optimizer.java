@@ -126,6 +126,8 @@ public class Optimizer {
         oneTripNN(current, counter, visCities);
     }
 
+
+
     private int distSum(ArrayList<Integer> distances){
         int sum = 0;
         for (int i=0; i < distances.size(); i++){
