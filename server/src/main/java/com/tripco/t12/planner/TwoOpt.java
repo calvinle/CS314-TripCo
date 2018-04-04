@@ -19,7 +19,9 @@ public class TwoOpt {
     for (int i=1; i < oldRoute.size(); i++){
       for (int k=i+1; k < oldRoute.size(); k++){
         ArrayList<Place> workingRoute = opt2Swap(oldRoute, i, k);
-
+        //distance of workingRoute
+        //if workingRoute dist < minDist
+        //finalRoute = workingRoute
       }
     }
   }
