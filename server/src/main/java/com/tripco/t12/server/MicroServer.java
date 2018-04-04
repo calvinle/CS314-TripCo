@@ -125,7 +125,7 @@ public class MicroServer {
 
       response.type("application/json");
 
-      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\" }";
+      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\": 1 }";
   }
 
     /** A REST API to query the database.
