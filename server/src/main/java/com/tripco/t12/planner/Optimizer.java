@@ -118,18 +118,32 @@ public class Optimizer {
         nearNeighbor(); //start again
     }
 
-    public void opt2R(){
+    private void opt2R(){
         for (int i=1; i < finArray.size(); i++){
             for (int k=i+1; k < finArray.size(); k++){
-                ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);
+                ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);   //new placeArray w/ swaps
                 //distance of workingRoute
-                //if workingRoute dist < tripDist
+                ArrayList<Integer> workingDist = opt2DistSum(workingRoute);//create distArray from placeArray
+                int workingSum = distSum(workingDist);                      //find sum of distArray
+                if (workingSum < tripDist){                                 //compare to total
+                    tripDist = workingSum;
+                    //finArray = workingRoute
+                    //finDist = workingDist;
+                }
                 //finArray.clear();
                 //finArray = workingRoute
                 //tripDist = workingDist
                 opt2R(); //go to start
             }
         }
+    }
+
+    private ArrayList<Integer> opt2DistSum(ArrayList<Place> workingRoute){
+        ArrayList<Integer> opt2dists = new ArrayList<Integer>();
+        for (int i=0; i < workingRoute.size()-1; i++){
+            opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
+        }
+        return opt2dists;
     }
 
     private int distSum(ArrayList<Integer> distances){
