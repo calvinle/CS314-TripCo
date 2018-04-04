@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Grid, Row, Col} from 'react-bootstrap';
 import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
@@ -114,25 +115,34 @@ class Application extends Component {
     render() {
         return (
             <div id="application" className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <Options options={this.state.trip.options} updateOptions={this.updateOptions} updateUserDef={this.updateUserDef} updateOptimization={this.updateOptimization}/>
-                    </div>
+            <Grid>
+                <Row className="show-grid">
+                    <Col id="sidenav" sm={3}>
+                       
+                    </Col>
+                    <Col sm={9}>
+                        <Row className="show-grid">
+                            <Col sm={12}>
+                                <Options options={this.state.trip.options} updateOptions={this.updateOptions} updateUserDef={this.updateUserDef} updateOptimization={this.updateOptimization} />
+                            </Col>
 
-                    <div className="col-12">
-                        <Dropdown trip={this.state.trip} updateStart={this.updateStart} reduceList={this.reduceList}/>
-                    </div>
+                            <Col sm={12}>
+                                <Dropdown trip={this.state.trip} updateStart={this.updateStart} reduceList={this.reduceList} />
+                            </Col>
 
-                    <div className="col-12">
-                        <Destinations trip={this.state.trip} updateTrip={this.updateTrip}/>
-                    </div>
-                    <div className="col-12">
-                      <Database trip={this.state.trip} addPlace = {this.addPlace}/>
-                    </div>
-                    <div className="col-12">
-                        <Trip trip={this.state.trip} updateTrip={this.updateTrip}/>
-                    </div>
-                </div>
+                            <Col sm={12}>
+                                <Destinations trip={this.state.trip} updateTrip={this.updateTrip} />
+                            </Col>
+                            <Col sm={12}>
+                                <Database trip={this.state.trip} addPlace={this.addPlace} />
+                            </Col>
+                            <Col sm={12}>
+                                <Trip trip={this.state.trip} updateTrip={this.updateTrip} />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Grid>
             </div>
         )
     }
