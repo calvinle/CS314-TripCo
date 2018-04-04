@@ -113,14 +113,21 @@ public class Optimizer {
         oneTripNN(current, counter, visCities);
     }
 
-    public void opt2(){
-        nearNeighbor();
+    public void opt2Start(){
+        tripDist = (int)Double.POSITIVE_INFINITY;
+        nearNeighbor(); //start again
+    }
+
+    public void opt2R(){
         for (int i=1; i < finArray.size(); i++){
             for (int k=i+1; k < finArray.size(); k++){
                 ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);
                 //distance of workingRoute
-                //if workingRoute dist < minDist
-                //finalRoute = workingRoute
+                //if workingRoute dist < tripDist
+                //finArray.clear();
+                //finArray = workingRoute
+                //tripDist = workingDist
+                opt2R(); //go to start
             }
         }
     }
