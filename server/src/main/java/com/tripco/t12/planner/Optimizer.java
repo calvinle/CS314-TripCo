@@ -21,22 +21,17 @@ public class Optimizer {
     private Trip trip;
     private int[][] nnTable;
     private boolean[] visited;
-    //private int workingDest;    //The column of the table we are working on
+    private int tripDist = (int)Double.POSITIVE_INFINITY;
+    public ArrayList<Place> workingArray;
 
-    //Arrays to be tested if they contain shortest distance. Will become finArray/finDist if they do
+    //Test if contain shortest distance. Will become finArray/finDist if they do
     private ArrayList<Place> tempArray;
     private ArrayList<Integer> tempDist;
 
-    //Arrays to be returned
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
-    private int tripDist = (int)Double.POSITIVE_INFINITY;
-
-    public ArrayList<Place> workingArray;
-
 
     public Optimizer(Trip t){
-        //System.out.println("constructor");
         tempArray = new ArrayList<Place>();
         tempDist = new ArrayList<Integer>();
         finArray = new ArrayList<Place>();
@@ -44,19 +39,16 @@ public class Optimizer {
         trip = t;
         workingArray = t.places;
         visited = new boolean[workingArray.size()-1];
-        System.out.println(Arrays.toString(visited));
 
-        nnTable = new int[workingArray.size()-1][workingArray.size()-1];    //original table, untouched
+        nnTable = new int[workingArray.size()-1][workingArray.size()-1];
 
         //Populate Table of distances
         for (int i=0; i < workingArray.size()-1; i++){
             for (int j=0; j < workingArray.size()-1; j++){
                 int dist = NNhelper(workingArray.get(i), workingArray.get(j));
                 nnTable[i][j] = dist;
-                //System.out.println(workingArray.get(i).id + " " + workingArray.get(j).id + " " + dist);
             }
         }
-        System.out.println(Arrays.deepToString(nnTable));
     }
 
     private boolean allTrue(boolean[] array){
@@ -98,12 +90,7 @@ public class Optimizer {
     private void oneTripNN(int i, int counter, boolean[] visCities){
         if(counter == visCities.length-1){
             tempArray.add(tempArray.get(0));
-            /*System.out.println(tempArray.get(0).name);
-            for(Place p: tempArray){
-                System.out.println(p.name);
-            }*/
             tempDist.add(NNhelper(tempArray.get(tempArray.size()-1), tempArray.get(tempArray.size()-2)));
-            //System.out.println("PLACES" +Arrays.toString(tempArray.toArray()));
             System.out.println("DISTS" +Arrays.toString(tempDist.toArray()));
             return;
         }
@@ -126,7 +113,17 @@ public class Optimizer {
         oneTripNN(current, counter, visCities);
     }
 
-
+    public void opt2(){
+        nearNeighbor();
+        for (int i=1; i < finArray.size(); i++){
+            for (int k=i+1; k < finArray.size(); k++){
+                ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);
+                //distance of workingRoute
+                //if workingRoute dist < minDist
+                //finalRoute = workingRoute
+            }
+        }
+    }
 
     private int distSum(ArrayList<Integer> distances){
         int sum = 0;
@@ -145,6 +142,28 @@ public class Optimizer {
         double p1lat = trip.decCoord(place1.latitude);
         double p1long = trip.decCoord(place1.longitude);
         return trip.calcDist(p0lat,p0long,p1lat,p1long);
+    }
+
+    public ArrayList<Place> opt2Swap(ArrayList<Place> existingRoute, int start, int end){
+        ArrayList<Place> testingRoute = new ArrayList<Place>();
+
+        //start=4, end=7
+        //A, B, C, D, E, F, G, H, A
+        //0, 1, 2, 3, 4 ,5 ,6, 7, 8
+        //@TODO: Check inclusive vs exclusive statements
+        for (int i=0; i < start-1; i++){
+            testingRoute.add(existingRoute.get(i));
+        }
+
+        for (int k=end-1; k > start-2; k--){
+            testingRoute.add(existingRoute.get(k));
+        }
+
+        for (int k=end; k < existingRoute.size(); k++){
+            testingRoute.add(existingRoute.get(k));
+        }
+
+        return testingRoute;
     }
 
 }
