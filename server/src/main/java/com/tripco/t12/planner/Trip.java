@@ -280,14 +280,14 @@ public class Trip {
     if(this.options == null || this.options.optimization == null){
       this.distances = legDistances();
     }
-    else if(Integer.parseInt(this.options.optimization) > 0){
+    else if(0.3 < Double.parseDouble(this.options.optimization) && 0.6 >= Double.parseDouble(this.options.optimization)){
       System.out.println("OPTIMIZED:NN");
       Optimizer nn = new Optimizer(testTrip);
       nn.nearNeighbor();
       this.distances = nn.finDist;
       this.places = nn.finArray;
     }
-    else if (Integer.parseInt(this.options.optimization) > 1){
+    else if (0.6 < Double.parseDouble(this.options.optimization) && 1.0>= Double.parseDouble(this.options.optimization)){
       System.out.println("OPTIMIZED:2OPT");
       Optimizer twoOpt = new Optimizer(testTrip);
       twoOpt.opt2Start();

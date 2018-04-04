@@ -33,6 +33,7 @@ public class Optimizer {
 
     public ArrayList<Place> twoOptFinArray;
     public ArrayList<Integer> twoOptfinDist;
+    public int twoOptTripDist = (int)Double.POSITIVE_INFINITY;
     private boolean improve;
 
 
@@ -83,7 +84,7 @@ public class Optimizer {
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
         int temp = distSum(tempDist);
-        System.out.println("trip " + temp + " " + starting);
+        //System.out.println("trip " + temp + " " + starting);
         if (temp < tripDist){
             tripDist = temp;
             finArray = tempArray;
@@ -96,7 +97,7 @@ public class Optimizer {
         if(counter == visCities.length-1){
             tempArray.add(tempArray.get(0));
             tempDist.add(NNhelper(tempArray.get(tempArray.size()-1), tempArray.get(tempArray.size()-2)));
-            System.out.println("DISTS" +Arrays.toString(tempDist.toArray()));
+            //System.out.println("DISTS" +Arrays.toString(tempDist.toArray()));
             return;
         }
         int current = i;
@@ -119,9 +120,11 @@ public class Optimizer {
     }
 
     public void opt2Start(){
-        tripDist = (int)Double.POSITIVE_INFINITY;
+        nearNeighbor();
         improve = true;
+        System.out.println("Starting Distance: " + tripDist);
         opt2R(); //start again
+        return;
     }
 
     private void opt2R(){
@@ -133,8 +136,9 @@ public class Optimizer {
                 ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);   //new placeArray w/ swaps
                 ArrayList<Integer> workingDist = opt2DistSum(workingRoute);//create distArray from placeArray
                 int workingSum = distSum(workingDist);                      //find sum of distArray
-                if (workingSum < tripDist){                                 //compare to total
-                    tripDist = workingSum;
+                if (workingSum < twoOptTripDist){                                 //compare to total
+                    twoOptTripDist = workingSum;
+                    System.out.println("New Trip Distance: " + twoOptTripDist);
                     twoOptFinArray = workingRoute;
                     twoOptfinDist = workingDist;
                     improve = true;
