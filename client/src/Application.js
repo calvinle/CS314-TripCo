@@ -114,7 +114,6 @@ class Application extends Component {
 
     render() {
         return (
-            <div id="application" className="container">
             <Grid>
                 <Row className="show-grid">
                     <Col id="sidenav" sm={3}>
@@ -143,7 +142,6 @@ class Application extends Component {
                     </Col>
                 </Row>
             </Grid>
-            </div>
         )
     }
 }
