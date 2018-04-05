@@ -1,7 +1,21 @@
 #sidenav {
+    height: 100%;
     background-color: #1E4D2B;
 }
 
-.jumbotron {
+#root {
+    background-color: #1E4D2B;
+    color: white;
+}
+
+#header {
+    text-align: center;
     border-radius: 0px;
+    background-color: #1E4D2B;
+    border-color: #1E4D2B;
+    color: white;
+}
+
+#topLogo {
+    text-align: center;
 }
