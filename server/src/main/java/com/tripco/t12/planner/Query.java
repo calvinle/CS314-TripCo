@@ -15,15 +15,13 @@ public class Query
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
+        Filter filter = new Filter();
 
-        //ArrayList<Filter> filter = new ArrayList<Filter>();
-        Filter filters = new Filter();
-        test = SqlConnect.getQ(query, filters);
+        test = SqlConnect.getQ(query, filter);
 
-//        this.places = test;
-//        this.filters = filter;
+        this.places = test;
+        this.filters = filter;
 
-        //System.out.println(test.toString());
     }
 
 
