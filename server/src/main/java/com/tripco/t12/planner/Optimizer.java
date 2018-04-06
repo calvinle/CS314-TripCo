@@ -124,7 +124,7 @@ public class Optimizer {
 
     public void nearNeighbor(){
         if(allTrue(visited)) {
-            //System.out.println("done " + tripDist);
+            System.out.println("done " + tripDist);
             //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
             finDist.add(0,0);
             return;
@@ -136,19 +136,22 @@ public class Optimizer {
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
         //Feed into 2Opt here. Use temp variables first
-        if (Double.parseDouble(trip.options.optimization) > 0){ //@TODO: Change number to whatever
+        if (Double.parseDouble(trip.options.optimization) == 1.0){ //@TODO: Change number to whatever
             System.out.println("TWO OPT");
             twoOptTempArray = new ArrayList<Place>(finArray.size());
             twoOptTempDist =  new ArrayList<Integer>();
             TwoOpt();
         }
 
-        int temp = distSum(tempDist);
-        //System.out.println("trip " + temp + " " + starting);
-        if (temp < tripDist){
-            tripDist = temp;
-            finArray = tempArray;
-            finDist = tempDist;
+        else{
+            int temp = distSum(tempDist);
+            System.out.println("trip " + temp + " " + starting);
+            if (temp < tripDist){
+                tripDist = temp;
+                finArray = tempArray;
+                finDist = tempDist;
+            }
+
         }
         nearNeighbor();
     }
@@ -162,20 +165,21 @@ public class Optimizer {
         int improve = 0;
         System.out.println("Test");
         while (improve < 2){
-            int bestDist = distSum(tempDist);
 
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     TwoOptSwap(i, k);             //modifies twoOptTempArray
                     twoOptTempDist = sumList(twoOptTempArray);    //creates list of distances from twoOptTempArray
                     int newDist = distSum(twoOptTempDist);              //creates total distance from twoOptTempDist
-                    if (newDist < bestDist){
+                    if (newDist < tripDist){
                         improve = 0;
                         for (int j=0; j < size; j++){
                             tempArray.set(j, twoOptTempArray.get(j));
                         }
-                        bestDist = newDist;
-                        System.out.println(bestDist);
+                        tripDist = newDist;
+                        finArray = twoOptTempArray;
+                        finDist = twoOptTempDist;
+                        System.out.println(tripDist);
                     }
                 }
             }
