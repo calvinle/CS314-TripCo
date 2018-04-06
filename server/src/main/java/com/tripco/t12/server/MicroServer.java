@@ -7,6 +7,9 @@ import com.tripco.t12.planner.Search;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
+
+import java.util.Arrays;
+
 import static spark.Spark.*;
 
 
@@ -125,7 +128,26 @@ public class MicroServer {
 
       response.type("application/json");
 
-      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\": 1, \"filters\": [] }";
+      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\": 2, " +
+              "\"distance\": "  + Arrays.toString(units()) +
+              ", \"filters\": \"none\"}";
+  }
+
+  private String[] units(){
+    String[] array = {"\"miles\"","\"kilometers\"","\"nautical miles\"","\"user defined\""};
+    return array;
+  }
+
+  private String[][] filters(){
+    String[] regions = {};
+    String[] continents = {};
+    String[]  countries = {};
+    String[] type = {};
+
+
+    String[][] array = {regions,continents,countries,type};
+
+    return array;
   }
 
     /** A REST API to query the database.

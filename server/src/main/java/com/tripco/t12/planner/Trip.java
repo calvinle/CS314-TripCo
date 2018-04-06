@@ -280,7 +280,7 @@ public class Trip {
     if(this.options == null || this.options.optimization == null){
       this.distances = legDistances();
     }
-    else if(Integer.parseInt(this.options.optimization) > 0){
+    else if(Double.parseDouble(this.options.optimization) > 0){
       System.out.println("OPTIMIZED:NN");
       Optimizer opt = new Optimizer(testTrip);
       opt.nearNeighbor();
