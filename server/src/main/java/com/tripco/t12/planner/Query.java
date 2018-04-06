@@ -10,12 +10,19 @@ public class Query
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
+    public Filter filters;
 
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
-        test = SqlConnect.getQ(query);
-        this.places = test;
+
+        //ArrayList<Filter> filter = new ArrayList<Filter>();
+        Filter filters = new Filter();
+        test = SqlConnect.getQ(query, filters);
+
+//        this.places = test;
+//        this.filters = filter;
+
         //System.out.println(test.toString());
     }
 
@@ -23,12 +30,15 @@ public class Query
     public static void main (String[] args)
     {
         Query query = new Query();
-        query.query = "SELECT * FROM airports WHERE TYPE = \"closed\" ";
+        query.query = "aspen";
 
         ArrayList<Place> test = new ArrayList<Place>();
-        test = SqlConnect.getQ(query.query);
+        Filter filter = new Filter();
 
-        System.out.println(test);
+        filter.attribute = "trip";
+        filter.values.add("heliport");
+
+        test = SqlConnect.getQ(query.query, filter);
 
     }
 
