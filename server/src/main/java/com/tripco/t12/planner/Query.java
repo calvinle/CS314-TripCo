@@ -6,7 +6,7 @@ package com.tripco.t12.planner;
 
 public class Query
 {
-    public int version = 2;
+    public int version = 3;
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
