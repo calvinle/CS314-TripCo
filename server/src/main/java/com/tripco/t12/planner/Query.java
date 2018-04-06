@@ -1,12 +1,12 @@
 package com.tripco.t12.planner;
 
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import com.tripco.t12.planner.SqlConnect;
+import java.util.ArrayList;
+import java.util.Arrays;
+import com.tripco.t12.planner.SqlConnect;
 
 public class Query
 {
-    public int version = 2;
+    public int version = 3;
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
@@ -15,15 +15,13 @@ public class Query
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
+        Filter filter = new Filter();
 
-        //ArrayList<Filter> filter = new ArrayList<Filter>();
-        Filter filters = new Filter();
-        test = SqlConnect.getQ(query, filters);
+        test = SqlConnect.getQ(query, filter);
 
-//        this.places = test;
-//        this.filters = filter;
+        this.places = test;
+        this.filters = filter;
 
-        //System.out.println(test.toString());
     }
 
 

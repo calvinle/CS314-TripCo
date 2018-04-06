@@ -128,7 +128,7 @@ public class MicroServer {
 
       response.type("application/json");
 
-      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\": 2, " +
+      return "{ \"version\" : 3, \"type\" : \"config\", \"optimization\": 2, " +
               "\"distance\": "  + Arrays.toString(units()) +
               ", \"filters\": \"none\"}";
   }

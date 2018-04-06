@@ -6,10 +6,14 @@ class Database extends Component {
         super(props);
         this.state = {
             query: { // query TFFI
-                version: "2",
+                version: 3,
                 type: "query",
                 query: "",
-                places: []
+                places: [],
+                filters:
+                    {   "attribute" : "",
+                        "values" : []
+                    }
             }
         };
 
