@@ -31,9 +31,8 @@ public class Optimizer {
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
 
-    public ArrayList<Place> twoOptFinArray;
-    public ArrayList<Integer> twoOptfinDist;
-    public int twoOptTripDist = (int)Double.POSITIVE_INFINITY;
+    public ArrayList<Place> twoOptTempArray;
+    public ArrayList<Integer> twoOptTempDist;
     private boolean improve;
 
 
@@ -70,27 +69,31 @@ public class Optimizer {
         return -1;
     }
 
-    public void nearNeighbor(){
-        if(allTrue(visited)) {
-            //System.out.println("done " + tripDist);
-            //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
-            finDist.add(0,0);
-            return;
+    private ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
+        ArrayList<Integer> opt2dists = new ArrayList<Integer>();
+        for (int i=0; i < workingRoute.size()-1; i++){
+            opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
         }
-        tempDist.clear();
-        tempArray.clear();
-        int starting = firstFalse(visited);
-        tempArray.add(workingArray.get(starting));
-        boolean[] visCities = new boolean[visited.length];
-        oneTripNN(starting, 0,visCities);
-        int temp = distSum(tempDist);
-        //System.out.println("trip " + temp + " " + starting);
-        if (temp < tripDist){
-            tripDist = temp;
-            finArray = tempArray;
-            finDist = tempDist;
+        return opt2dists;
+    }
+
+    private int distSum(ArrayList<Integer> distances){
+        int sum = 0;
+        for (int i=0; i < distances.size(); i++){
+            sum+=distances.get(i);
         }
-        nearNeighbor();
+        return sum;
+    }
+
+    private int NNhelper(Place place0, Place place1){
+        if(place0.latitude == null || place1.latitude == null){
+            return 0;
+        }
+        double p0lat = trip.decCoord(place0.latitude);
+        double p0long = trip.decCoord(place0.longitude);
+        double p1lat = trip.decCoord(place1.latitude);
+        double p1long = trip.decCoord(place1.longitude);
+        return trip.calcDist(p0lat,p0long,p1lat,p1long);
     }
 
     private void oneTripNN(int i, int counter, boolean[] visCities){
@@ -119,7 +122,68 @@ public class Optimizer {
         oneTripNN(current, counter, visCities);
     }
 
-    public void opt2Start(){
+    public void nearNeighbor(){
+        if(allTrue(visited)) {
+            //System.out.println("done " + tripDist);
+            //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
+            finDist.add(0,0);
+            return;
+        }
+        tempDist.clear();
+        tempArray.clear();
+        int starting = firstFalse(visited);
+        tempArray.add(workingArray.get(starting));
+        boolean[] visCities = new boolean[visited.length];
+        oneTripNN(starting, 0,visCities);
+        //Feed into 2Opt here. Use temp variables first
+        if (Double.parseDouble(trip.options.optimization) > 0){ //@TODO: Change number to whatever
+            System.out.println("TWO OPT");
+            twoOptTempArray = new ArrayList<Place>(finArray.size());
+            twoOptTempDist =  new ArrayList<Integer>();
+            TwoOpt();
+        }
+
+        int temp = distSum(tempDist);
+        //System.out.println("trip " + temp + " " + starting);
+        if (temp < tripDist){
+            tripDist = temp;
+            finArray = tempArray;
+            finDist = tempDist;
+        }
+        nearNeighbor();
+    }
+
+    private void TwoOpt(){
+        //tempArray, temptDist, can get distSum
+        int size = tempArray.size();
+        for (int i=0; i < size; i++){
+            twoOptTempArray.add(i, tempArray.get(i));
+        }
+        int improve = 0;
+        System.out.println("Test");
+        while (improve < 2){
+            int bestDist = distSum(tempDist);
+
+            for ( int i = 1; i < tempArray.size() - 1; i++ ) {
+                for (int k = i + 1; k < tempArray.size(); k++) {
+                    TwoOptSwap(i, k);             //modifies twoOptTempArray
+                    twoOptTempDist = sumList(twoOptTempArray);    //creates list of distances from twoOptTempArray
+                    int newDist = distSum(twoOptTempDist);              //creates total distance from twoOptTempDist
+                    if (newDist < bestDist){
+                        improve = 0;
+                        for (int j=0; j < size; j++){
+                            tempArray.set(j, twoOptTempArray.get(j));
+                        }
+                        bestDist = newDist;
+                        System.out.println(bestDist);
+                    }
+                }
+            }
+            improve++;
+        }
+    }
+
+/*    public void opt2Start(){
         nearNeighbor();
         improve = true;
         System.out.println("Starting Distance: " + tripDist);
@@ -151,55 +215,29 @@ public class Optimizer {
                 opt2R(); //go to start
             }
         }
-    }
+    }*/
 
-    private ArrayList<Integer> opt2DistSum(ArrayList<Place> workingRoute){
-        ArrayList<Integer> opt2dists = new ArrayList<Integer>();
-        for (int i=0; i < workingRoute.size()-1; i++){
-            opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
-        }
-        return opt2dists;
-    }
 
-    private int distSum(ArrayList<Integer> distances){
-        int sum = 0;
-        for (int i=0; i < distances.size(); i++){
-            sum+=distances.get(i);
-        }
-        return sum;
-    }
 
-    private int NNhelper(Place place0, Place place1){
-        if(place0.latitude == null || place1.latitude == null){
-            return 0;
-        }
-        double p0lat = trip.decCoord(place0.latitude);
-        double p0long = trip.decCoord(place0.longitude);
-        double p1lat = trip.decCoord(place1.latitude);
-        double p1long = trip.decCoord(place1.longitude);
-        return trip.calcDist(p0lat,p0long,p1lat,p1long);
-    }
 
-    public ArrayList<Place> opt2Swap(ArrayList<Place> existingRoute, int start, int end){
-        ArrayList<Place> testingRoute = new ArrayList<Place>();
 
-        //start=4, end=7
-        //A, B, C, D, E, F, G, H, A
-        //0, 1, 2, 3, 4 ,5 ,6, 7, 8
-        //@TODO: Check inclusive vs exclusive statements
-        for (int i=0; i < start-1; i++){
-            testingRoute.add(existingRoute.get(i));
+    public void TwoOptSwap(int i, int k){
+        for ( int c = 0; c <= i - 1; ++c ) {
+            twoOptTempArray.set( c, tempArray.get( c ) );
         }
 
-        for (int k=end-1; k > start-2; k--){
-            testingRoute.add(existingRoute.get(k));
+        // 2. take route[i] to route[k] and add them in reverse order to new_route
+        int dec = 0;
+        for ( int c = i; c <= k; ++c ) {
+            twoOptTempArray.set( c, tempArray.get( k - dec ) );
+            dec++;
         }
 
-        for (int k=end; k < existingRoute.size(); k++){
-            testingRoute.add(existingRoute.get(k));
+        // 3. take route[k+1] to end and add them in order to new_route
+        for ( int c = k + 1; c < tempArray.size(); ++c ) {
+            twoOptTempArray.set( c, tempArray.get( c ) );
         }
 
-        return testingRoute;
     }
 
 }
