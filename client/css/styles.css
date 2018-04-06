@@ -19,3 +19,15 @@
 #topLogo {
     text-align: center;
 }
+
+#titleEntry {
+    width: 30%;
+}
+
+#mainContent {
+    padding-top: 100px;
+}
+
+#sidenav {
+    padding-left: 5%;
+}

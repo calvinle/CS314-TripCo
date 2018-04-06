@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Grid, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col } from 'reactstrap';
 import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
@@ -114,10 +114,9 @@ class Application extends Component {
 
     render() {
         return (
-            <Grid>
-                <Row className="show-grid">
+                <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
-                       
+                       Destinations
                     </Col>
                     <Col sm={9}>
                         <Row className="show-grid">
@@ -141,7 +140,6 @@ class Application extends Component {
                         </Row>
                     </Col>
                 </Row>
-            </Grid>
         )
     }
 }
