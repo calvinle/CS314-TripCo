@@ -94,15 +94,16 @@ public class SqlConnect {
         String testStr = stringBuilder.toString();
 
         // Pull the attribute from the filter object
+        String attribute = filters.attribute;
 
-
-
+        System.out.println("Attribute: " + attribute);
         System.out.println("query string: " + query);
         System.out.println("filter list: " + testStr);
 
+
         //Build complete query string
         String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports.type = " + testStr + "";
+                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports." + attribute + " = " + testStr + "";
 
         System.out.println("query string w/ filter: " + modQuery);
 
@@ -162,7 +163,7 @@ public class SqlConnect {
     {
         Filter filters = new Filter();
 
-        filters.attribute = ("trip");
+        filters.attribute = ("type");
 
         System.out.println(filters.values);
 
