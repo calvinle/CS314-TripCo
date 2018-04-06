@@ -68,26 +68,55 @@ public class SqlConnect {
 
 
   // Arguments contain the username and password for the database
-  public static ArrayList <Place> getQ(String q) {
+  public static ArrayList <Place> getQ(String q, Filter filters) {
 
-    //SqlConnect sqlConn = new SqlConnect("select * from airports");
     String query = q;
-    System.out.println("query string: " + query);
+
+    StringBuilder stringBuilder = new StringBuilder();
+
+    // Pull all Values in filter object
+    if(!filters.values.isEmpty()) {
+
+        //find how many filter.values
+        int size = filters.values.size() - 1;
+
+        //Builds the values part of the SQL query string
+        for (String s : filters.values) {
+            stringBuilder.append("\"" + s + "\"");
+
+            //if its not the last filter.value item, add an or
+            if (filters.values.indexOf(s) != size) {
+                stringBuilder.append(" or ");
+            }
+        }
+
+        // Set string builder of complete value query string part to testStr
+        String testStr = stringBuilder.toString();
+
+        // Pull the attribute from the filter object
+        String attribute = filters.attribute;
+
+        System.out.println("Attribute: " + attribute);
+        System.out.println("query string: " + query);
+        System.out.println("filter list: " + testStr);
 
 
-    //String modQuery = "SELECT * FROM airports WHERE (id LIKE \"" + query + "\" or type like \"" + query +
-    //        "\" or name like \"" + query + "\" or municipality like \"" + query + "\")";
+        //Build complete query string
+        String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
+                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports." + attribute + " = " + testStr + "";
 
-    String modQuery = "SELECT * FROM airports WHERE (id LIKE \"" + query + "%\" or type like \"" + query +
-            "%\" or name like \"" + query + "%\" or municipality like \"" + query + "%\")";
-    
-    //String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-    //        "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and iso_region like \"US-CO\"";
-    
-    //String modQuery = "select * from airports where id like \"" + query + "\" or type like \"" + query + "\" or name like \"" + query + "\" or latitude like \"" + query +"\" or longitude like \"" + query + "\" or elevation like \"" + query + "\" or continent like \"" + query + "\" or iso_country like \"" + query + "\" or iso_region like \"" + query + "\" or municipality like \""  + query + "\" or scheduled_service like \""  + query + "\" or gps_code like \""  + query + "\" or iata_code like \""  + query + "\" or local_code like \""  + query + "\" or home_link like \""  + query + "\" or wikipedia_link like \""  + query + "\" or keywords like \""  + query +  "\"";
-    System.out.println("query string: " + modQuery);
+        System.out.println("query string w/ filter: " + modQuery);
 
-    query = modQuery;
+        query = modQuery;
+    }
+    else {
+        String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
+                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\")";
+
+        System.out.println("query string no filter: " + modQuery);
+
+        query = modQuery;
+    }
 
     ArrayList<String> rQ= new ArrayList<String>();
     ArrayList<Place> placeList = new ArrayList<Place>();
@@ -132,7 +161,18 @@ public class SqlConnect {
 
     public static void main(String[] args)
     {
-        getQ("SELECT * FROM airports");
+        Filter filters = new Filter();
+
+        filters.attribute = ("type");
+
+        System.out.println(filters.values);
+
+        filters.values.add("small_airport");
+
+        filters.values.add("balloonport");
+
+        //filters.add("medium_airport");
+        getQ("Aspen", filters);
         //getQ("SELECT * FROM airports where name like 'fly%' or id like 'fly%' or municipality like 'fly%'");
     }
 }

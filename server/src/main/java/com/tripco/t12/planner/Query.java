@@ -6,29 +6,37 @@ package com.tripco.t12.planner;
 
 public class Query
 {
-    public int version = 2;
+    public int version = 3;
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
+    public Filter filters;
 
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
-        test = SqlConnect.getQ(query);
+        Filter filter = new Filter();
+
+        test = SqlConnect.getQ(query, filter);
+
         this.places = test;
-        //System.out.println(test.toString());
+        this.filters = filter;
+
     }
 
 
     public static void main (String[] args)
     {
         Query query = new Query();
-        query.query = "SELECT * FROM airports WHERE TYPE = \"closed\" ";
+        query.query = "aspen";
 
         ArrayList<Place> test = new ArrayList<Place>();
-        test = SqlConnect.getQ(query.query);
+        Filter filter = new Filter();
 
-        System.out.println(test);
+        filter.attribute = "trip";
+        filter.values.add("heliport");
+
+        test = SqlConnect.getQ(query.query, filter);
 
     }
 
