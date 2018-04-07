@@ -33,7 +33,7 @@ public class Optimizer {
 
     public ArrayList<Place> twoOptTempArray;
     public ArrayList<Integer> twoOptTempDist;
-    private boolean improve;
+    private int improve = 0;
 
 
     public Optimizer(Trip t){
@@ -136,7 +136,7 @@ public class Optimizer {
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
         //Feed into 2Opt here. Use temp variables first
-        if (Double.parseDouble(trip.options.optimization) == 1.0){ //@TODO: Change number to whatever
+        if (Double.parseDouble(trip.options.optimization) > 0.5){ //@TODO: Change number to whatever
             System.out.println("TWO OPT");
             twoOptTempArray = new ArrayList<Place>(finArray.size());
             twoOptTempDist =  new ArrayList<Integer>();
@@ -162,10 +162,8 @@ public class Optimizer {
         for (int i=0; i < size; i++){
             twoOptTempArray.add(i, tempArray.get(i));
         }
-        int improve = 0;
         System.out.println("Test");
-        while (improve < 2){
-
+        while (improve < 20){
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     TwoOptSwap(i, k);             //modifies twoOptTempArray
