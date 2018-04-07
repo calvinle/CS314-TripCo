@@ -11,7 +11,9 @@ class SearchTable extends Component {
 
     createTable () {
 
-        let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
+        //clears table before a new one is loaded.
+        let dests = [];
+        dests = this.props.query.places.map((item) => <td>{item.name}</td>);                      
         let buttons = [];
         for(let i = 0; i < dests.length; i++){
             buttons.push(<td><div className="input-group-prepend">
