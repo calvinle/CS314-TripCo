@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Table } from 'reactstrap';
 import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
@@ -112,15 +112,16 @@ class Application extends Component {
         //console.log("testTrip:", testTrip);
     }
 
-
     render() {
         return (
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations
+                        <hr />
                         <SideDestinations />
                     </Col>
                     <Col sm={9}>
+                        <div id="map"></div>
                         <Row className="show-grid">
                             <Col sm={12}>
                                 <Options options={this.state.trip.options} updateOptions={this.updateOptions} updateUserDef={this.updateUserDef} updateOptimization={this.updateOptimization} />
