@@ -15,12 +15,14 @@ public class Query
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
-        Filter filter = new Filter();
+        //Filter filters = new Filter();
 
-        test = SqlConnect.getQ(query, filter);
+        test = SqlConnect.getQ(query, filters);
+
+        System.out.println("in database: Filters: " + filters.values + filters.attribute);
 
         this.places = test;
-        this.filters = filter;
+        //this.filters = filters;
 
     }
 

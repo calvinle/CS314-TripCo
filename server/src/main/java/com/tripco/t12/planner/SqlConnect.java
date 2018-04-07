@@ -80,33 +80,40 @@ public class SqlConnect {
             //find how many filter.values
             int size = filters.values.size() - 1;
 
+            // Pull the attribute from the filter object
+            String attribute = filters.attribute;
+
             //Builds the values part of the SQL query string
             for (String s : filters.values) {
                 stringBuilder.append("\"" + s + "\"");
 
                 //if its not the last filter.value item, add an or
                 if (filters.values.indexOf(s) != size) {
-                    stringBuilder.append(" or ");
+                    stringBuilder.append(" or airports." + attribute + " = ");
                 }
             }
 
             // Set string builder of complete value query string part to testStr
             String testStr = stringBuilder.toString();
 
-            // Pull the attribute from the filter object
-            String attribute = filters.attribute;
-
+            //debug
             System.out.println("Attribute: " + attribute);
             System.out.println("query string: " + query);
             System.out.println("filter list: " + testStr);
 
+            //Select * from airports where name like '%aspen%' and (airports.type = "small_airport" or airports.type = "heliport");
 
             //Build complete query string
             String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports." + attribute + " = " + testStr + "";
+                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and (airports." + attribute + " = " + testStr + ")";
+
+//        //Build complete query string
+//        String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
+//                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports.type = " + testStr + "";
 
             System.out.println("query string w/ filter: " + modQuery);
 
+            //set built SQL string to final query string to be used
             query = modQuery;
         }
         else {
@@ -168,8 +175,8 @@ public class SqlConnect {
         System.out.println(filters.values);
 
         filters.values.add("small_airport");
-
         filters.values.add("balloonport");
+        filters.values.add("heliport");
 
         //filters.add("medium_airport");
         getQ("Aspen", filters);
