@@ -5,6 +5,7 @@ import Destinations from './Destinations';
 import Trip from './Trip';
 import Dropdown from './Dropdown';
 import Database from "./Database";
+import SideDestinations from "./SideDestinations";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -116,7 +117,8 @@ class Application extends Component {
         return (
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
-                       Destinations
+                        Destinations
+                        <SideDestinations />
                     </Col>
                     <Col sm={9}>
                         <Row className="show-grid">

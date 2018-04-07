@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Navbar, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { Navbar, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup, InputGroupAddon, InputGroupText, Input, Button} from 'reactstrap';
 import DistanceOptions from "./DistanceOptions";
 import OptimizationOptions from "./OptimizationOptions";
 
@@ -36,8 +36,8 @@ class Header extends Component{
               Menu
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>TODO Save</DropdownItem>
-              <DropdownItem>TODO Load</DropdownItem>
+              <DropdownItem><Button>Save</Button></DropdownItem>
+              <DropdownItem><Button>Load</Button></DropdownItem>
               <DropdownItem divider />
               <DropdownItem><DistanceOptions /></DropdownItem>
               <DropdownItem><OptimizationOptions /></DropdownItem>

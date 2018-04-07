@@ -12,8 +12,9 @@ public class Filter {
 
   public Filter() {
     ArrayList<String> value = new ArrayList<String>();
+    String attributes = "";
     this.values = value;
+    this.attribute = attributes;
   }
-
 
 }
