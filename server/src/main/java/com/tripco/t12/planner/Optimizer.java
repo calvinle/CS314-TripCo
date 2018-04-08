@@ -126,12 +126,7 @@ public class Optimizer {
         if(allTrue(visited)) {
             System.out.println("done " + tripDist);
             //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
-            if (Double.parseDouble(trip.options.optimization) > 0.5){
-                finArray.remove(0);
-            }
-            else{
-                finDist.add(0,0);
-            }
+            finDist.add(0,0);
             return;
         }
         tempDist.clear();
