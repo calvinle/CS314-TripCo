@@ -166,11 +166,12 @@ public class Optimizer {
 
     private void TwoOpt(){
         //tempArray, temptDist, can get distSum
-        System.out.println("Test");
+        improve = 0;
+        System.out.println(tempArray.get(0));
         int size = tempArray.size();
         twoOptTempArray = tempArray;
 
-        while (improve < 2){
+        while (improve < 1){
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     twoOptTempArray = TwoOptSwap(i, k);             //modifies twoOptTempArray
@@ -183,9 +184,6 @@ public class Optimizer {
                     System.out.println("DISTANCE : " + twoOptTempDist + " , TOTAL: " + newDist);
                     if (newDist < tripDist){
                         improve = 0;
-                        for (int j=0; j < size; j++){
-                            tempArray.set(j, twoOptTempArray.get(j));
-                        }
                         tripDist = newDist;
                         finArray = twoOptTempArray;
                         finDist = twoOptTempDist;
@@ -202,13 +200,13 @@ public class Optimizer {
     public ArrayList<Place> TwoOptSwap(int i, int k){
         ArrayList<Place> swapped = new ArrayList<Place>();
         System.out.println("i: " + i + " k: " + k);
-        for ( int c = 0; c < i; c++ ) {
+        for ( int c = 0; c < i; ++c ) {
             swapped.add( c, tempArray.get( c ) );
         }
 
         // 2. take route[i] to route[k] and add them in reverse order to new_route
         int dec = 0;
-        for ( int c = i; c <= k; c++ ) {
+        for ( int c = i; c <= k; ++c ) {
             swapped.add( c, tempArray.get( k - dec ) );
             dec++;
         }
@@ -218,10 +216,11 @@ public class Optimizer {
             swapped.add( c, tempArray.get( c ) );
         }
 
-        System.out.print("swapped: ");
-        for (int b=0; b < swapped.size(); b++){
-            System.out.print(swapped.get(b).id + ", ");
-        }
+//        System.out.print("swapped: ");
+//        for (int b=0; b < swapped.size(); b++){
+//            System.out.print(swapped.get(b).id + ", ");
+//        }
+//        System.out.println();
         return swapped;
     }
 
