@@ -127,10 +127,13 @@ public class MicroServer {
   private String config(Request request, Response response) {
 
       response.type("application/json");
-
-      return "{ \"version\" : 2, \"type\" : \"config\", \"optimization\": 2, " +
-              "\"distance\": "  + Arrays.toString(units()) +
-              ", \"filters\": \"none\"}";
+      System.out.println("CALLED");
+      return "{\"type\" : \"config\", " +
+              "\"version\" : 3, " +
+              "\"filters\": " + filters() + ", " +
+              "\"maps\": [\"svg\", \"kml\"], " +
+              "\"optimization\": 2," +
+              "\"units\": " + Arrays.toString(units()) + "}";
   }
 
   private String[] units(){
@@ -138,16 +141,9 @@ public class MicroServer {
     return array;
   }
 
-  private String[][] filters(){
-    String[] regions = {};
-    String[] continents = {};
-    String[]  countries = {};
-    String[] type = {};
-
-
-    String[][] array = {regions,continents,countries,type};
-
-    return array;
+  private String filters(){
+    String s = "[{\"attribute\" : \"type\", \"values\": [\"balloonport\", \"closed\", \"heliport\", \"large_airport\", \"medium_airport\", \"seaplane_base\", \"small_airport\"]}]";
+    return s;
   }
 
     /** A REST API to query the database.

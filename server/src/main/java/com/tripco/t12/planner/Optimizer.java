@@ -33,7 +33,7 @@ public class Optimizer {
 
     public ArrayList<Place> twoOptTempArray;
     public ArrayList<Integer> twoOptTempDist;
-    private boolean improve;
+    private int improve = 0;
 
 
     public Optimizer(Trip t){
@@ -77,7 +77,7 @@ public class Optimizer {
         return opt2dists;
     }
 
-    private int distSum(ArrayList<Integer> distances){
+    public int distSum(ArrayList<Integer> distances){
         int sum = 0;
         for (int i=0; i < distances.size(); i++){
             sum+=distances.get(i);
@@ -136,7 +136,7 @@ public class Optimizer {
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
         //Feed into 2Opt here. Use temp variables first
-        if (Double.parseDouble(trip.options.optimization) == 1.0){ //@TODO: Change number to whatever
+        if (Double.parseDouble(trip.options.optimization) > 0.5){ //@TODO: Change number to whatever
             System.out.println("TWO OPT");
             twoOptTempArray = new ArrayList<Place>(finArray.size());
             twoOptTempDist =  new ArrayList<Integer>();
@@ -162,10 +162,8 @@ public class Optimizer {
         for (int i=0; i < size; i++){
             twoOptTempArray.add(i, tempArray.get(i));
         }
-        int improve = 0;
         System.out.println("Test");
         while (improve < 2){
-
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     TwoOptSwap(i, k);             //modifies twoOptTempArray
@@ -186,44 +184,6 @@ public class Optimizer {
             improve++;
         }
     }
-
-/*    public void opt2Start(){
-        nearNeighbor();
-        improve = true;
-        System.out.println("Starting Distance: " + tripDist);
-        opt2R(); //start again
-        return;
-    }
-
-    private void opt2R(){
-        if (improve == false){
-            return;
-        }
-        for (int i=1; i < finArray.size(); i++){
-            for (int k=i+1; k < finArray.size(); k++){
-                ArrayList<Place> workingRoute = opt2Swap(finArray, i, k);   //new placeArray w/ swaps
-                ArrayList<Integer> workingDist = opt2DistSum(workingRoute);//create distArray from placeArray
-                int workingSum = distSum(workingDist);                      //find sum of distArray
-                if (workingSum < twoOptTripDist){                                 //compare to total
-                    twoOptTripDist = workingSum;
-                    System.out.println("New Trip Distance: " + twoOptTripDist);
-                    twoOptFinArray = workingRoute;
-                    twoOptfinDist = workingDist;
-                    improve = true;
-                }
-                else{
-                    improve = false;
-                }
-                workingRoute.clear();
-                workingDist.clear();
-                opt2R(); //go to start
-            }
-        }
-    }*/
-
-
-
-
 
     public void TwoOptSwap(int i, int k){
         for ( int c = 0; c <= i - 1; ++c ) {

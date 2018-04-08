@@ -10,13 +10,25 @@ class OptimizationOptions extends Component {
         this.state = {
             
         };
+        this.changeOptimizationArg = this.changeOptimizationArg.bind(this);
+    }
+
+    changeOptimizationArg(arg){
+        //console.log(arg);
+        this.props.updateOptimization(arg);
+    }
+
+    changeOptimization(event){
+        this.changeOptimizationArg(event.target.value);
     }
 
     render() {
         return (
             <div className="slidecontainer">
                 <p>Choose an Optimization level</p>
-                None &emsp;<input type="range" min="0" max="1" defaultValue={"0"} className="slider" id={"slider"}></input>&emsp; Nearest Neighbor
+                <div onChange={this.changeOptimization.bind(this)}>
+                <input type="range" min="0" max={this.props.config.optimization} defaultValue={this.props.trip.options.optimization} className="slider" id={"slider"}/>
+                </div>
             </div>
         )
     }
