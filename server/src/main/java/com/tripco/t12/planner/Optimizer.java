@@ -77,7 +77,7 @@ public class Optimizer {
         return opt2dists;
     }
 
-    private int distSum(ArrayList<Integer> distances){
+    public int distSum(ArrayList<Integer> distances){
         int sum = 0;
         for (int i=0; i < distances.size(); i++){
             sum+=distances.get(i);
