@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -35,6 +36,14 @@ public class TestOptimizer {
         optimizer.workingArray.add(place);
         optimizer.workingArray.add(place0);
         //optimizer.nearNeighbor();
+    }
+
+    @Test
+    public void testSum(){
+        ArrayList<Integer> n = new ArrayList<Integer>();
+        n.add(2);
+        n.add(5);
+        assertEquals(optimizer.distSum(n), 7, 0);
     }
 
 //    @Test
