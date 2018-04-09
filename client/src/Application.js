@@ -158,7 +158,7 @@ class Application extends Component {
     render() {
         return (
             <div>
-            <Header config = {this.state.config} updateOptimization={this.updateOptimization} updateOptions={this.updateOptions}/>
+            <Header config = {this.state.config} trip = {this.state.trip} updateOptimization={this.updateOptimization} updateOptions={this.updateOptions}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations
@@ -168,11 +168,11 @@ class Application extends Component {
                     <Col sm={9}>
                         <div id="map"></div>
                         <Row className="show-grid">
-                            <Col sm={12}>
+                            {/*<Col sm={12}>
                                 <Options options={this.state.trip.options} config={this.state.config}
                                          updateOptions={this.updateOptions} updateUserDef={this.updateUserDef}
                                          updateOptimization={this.updateOptimization}/>
-                            </Col>
+                            </Col>*/}
 
                             <Col sm={12}>
                                 <Dropdown trip={this.state.trip} config={this.state.config}
