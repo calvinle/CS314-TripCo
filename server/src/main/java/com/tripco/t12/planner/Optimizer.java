@@ -136,13 +136,17 @@ public class Optimizer {
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
         //Feed into 2Opt here. Use temp variables first
-        if (Double.parseDouble(trip.options.optimization) > 0.5){ //@TODO: Change number to whatever
+
+        //Feed NN to 2Opt
+        if (Double.parseDouble(trip.options.optimization) == 2){ //@TODO: Change number to whatever
             System.out.println("TWO OPT");
+            tempArray.remove(tempArray.size()-1);
             twoOptTempArray = new ArrayList<Place>(finArray.size());
             twoOptTempDist =  new ArrayList<Integer>();
             TwoOpt();
-        }
 
+        }
+        //NN only
         else{
             int temp = distSum(tempDist);
             System.out.println("trip " + temp + " " + starting);
@@ -163,14 +167,16 @@ public class Optimizer {
             twoOptTempArray.add(i, tempArray.get(i));
         }
         System.out.println("Test");
-        while (improve < 2){
+        while (improve < 10){
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     TwoOptSwap(i, k);             //modifies twoOptTempArray
+
                     twoOptTempDist = sumList(twoOptTempArray);    //creates list of distances from twoOptTempArray
                     int newDist = distSum(twoOptTempDist);              //creates total distance from twoOptTempDist
                     if (newDist < tripDist){
                         improve = 0;
+
                         for (int j=0; j < size; j++){
                             tempArray.set(j, twoOptTempArray.get(j));
                         }
@@ -183,6 +189,7 @@ public class Optimizer {
             }
             improve++;
         }
+
     }
 
     public void TwoOptSwap(int i, int k){
