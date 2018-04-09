@@ -33,13 +33,13 @@ class Header extends Component{
           <img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%" id="topLogo" />
           <ButtonDropdown direction="left" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
             <DropdownToggle caret>
-              Menu
+                Menu
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem><Button>Save</Button></DropdownItem>
               <DropdownItem><Button>Load</Button></DropdownItem>
               <DropdownItem divider />
-              <DropdownItem><DistanceOptions /></DropdownItem>
+              <DropdownItem><DistanceOptions config = {this.props.config}/></DropdownItem>
               <DropdownItem><OptimizationOptions /></DropdownItem>
             </DropdownMenu>
           </ButtonDropdown>

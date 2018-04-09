@@ -8,20 +8,28 @@ class DistanceOptions extends Component {
             userUnit: "",
             selected: ""
         };
+        this.makeButtons = this.makeButtons.bind(this);
     }
 
-    onRadioBtnClick(selectedButton) {
-        this.setState({ selected: selectedButton });
+    onRadioBtnClick(rSelected) {
+        this.setState({rSelected});
+    }
+
+    makeButtons(){
+        let con = this.props.config;
+        let but = [];
+        for(let i = 0; i < con.units.length; i++){
+            but.push(<Button color = "primary" onClick={()=>this.onRadioBtnClick(con.units[i])} active={this.state.rSelected === con.units[i]}>{con.units[i]}</Button>)
+        }
+        return but;
     }
 
     render() {
         //todo need to update the options when a button is pressed
+        let buttons = this.makeButtons();
         return (
             <ButtonGroup>
-                <Button color="primary" onClick={() => this.onRadioBtnClick(1)} active={this.state.rSelected === 1}>Miles</Button>
-                <Button color="primary" onClick={() => this.onRadioBtnClick(2)} active={this.state.rSelected === 2}>Kilometers</Button>
-                <Button color="primary" onClick={() => this.onRadioBtnClick(3)} active={this.state.rSelected === 3}>Nautical Miles</Button>
-                <Button color="primary" onClick={() => this.onRadioBtnClick(4)} active={this.state.rSelected === 4}>User Units</Button>
+                {buttons}
             </ButtonGroup>
         )
     }
