@@ -9,10 +9,19 @@ class DistanceOptions extends Component {
             selected: ""
         };
         this.makeButtons = this.makeButtons.bind(this);
+        this.changeOption = this.changeOption.bind(this);
+    }
+
+    changeOption(arg) {
+        //console.log(arg);
+        this.props.updateOptions(arg);
+        console.log("this.state.",this.props.options);
     }
 
     onRadioBtnClick(rSelected) {
         this.setState({rSelected});
+        console.log(rSelected);
+        this.changeOption(rSelected);
     }
 
     makeButtons(){
