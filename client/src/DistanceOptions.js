@@ -9,17 +9,26 @@ class DistanceOptions extends Component {
             selected: ""
         };
         this.makeButtons = this.makeButtons.bind(this);
+        this.changeOption = this.changeOption.bind(this);
+    }
+
+    changeOption(arg) {
+        //console.log(arg);
+        this.props.updateOptions(arg);
+        console.log("this.state.",this.props.options);
     }
 
     onRadioBtnClick(rSelected) {
         this.setState({rSelected});
+        console.log(rSelected);
+        this.changeOption(rSelected);
     }
 
     makeButtons(){
         let con = this.props.config;
         let but = [];
         for(let i = 0; i < con.units.length; i++){
-            but.push(<Button color = "primary" onClick={()=>this.onRadioBtnClick(con.units[i])} active={this.state.rSelected === con.units[i]}>{con.units[i]}</Button>)
+            but.push(<Button color = "primary" onClick={()=>this.onRadioBtnClick(con.units[i])} active={this.props.trip.options.distance === con.units[i]}>{con.units[i]}</Button>)
         }
         return but;
     }

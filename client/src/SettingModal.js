@@ -35,8 +35,8 @@ class SearchModal extends Component {
                         <Button>Save</Button>
                         <Button>Load</Button>
                         <hr />
-                        <DistanceOptions />
-                        <OptimizationOptions />
+                        <DistanceOptions config = {this.props.config} trip = {this.props.trip} updateOptions={this.props.updateOptions}/>
+                        <OptimizationOptions config = {this.props.config} trip = {this.props.trip} updateOptimization={this.props.updateOptimization}/>
                     </ModalBody>
                     <ModalFooter>
                     </ModalFooter>
