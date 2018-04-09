@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Container, Row, Col, Table} from 'reactstrap';
 
 /* Destinations reside in the parent object so they may be shared
  * with the Trip object.
@@ -96,7 +97,7 @@ class Destinations extends Component {
   render() {
     // need to clean up the button
     return (
-        <div id="destinations" className="card border-0 border-dark">
+            <div id="destinations" className="card border-0 border-dark">
           <div className="card-header bg-primary text-light">
             Destinations
           </div>
@@ -105,7 +106,6 @@ class Destinations extends Component {
             <div className="form-group" role="group">
                 <input type="file" className="form-control-file" onChange={this.loadTFFI} id="tffifile" />
             </div>
-            <h5>There are {this.state.count} destinations. </h5>
           </div>
         </div>
     )
