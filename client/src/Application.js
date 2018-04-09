@@ -7,6 +7,7 @@ import Destinations from './Destinations';
 import Trip from './Trip';
 import Dropdown from './Dropdown';
 import Database from "./Database";
+import '../css/styles.css';
 import SideDestinations from "./SideDestinations";
 
 /* Renders the application.
