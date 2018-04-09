@@ -158,7 +158,7 @@ class Application extends Component {
     render() {
         return (
             <div>
-            <Header config = {this.state.config} trip = {this.state.trip} updateOptimization={this.updateOptimization} updateOptions={this.updateOptions}/>
+            <Header config = {this.state.config} trip = {this.state.trip} updateOptimization={this.updateOptimization} updateUserDef={this.updateUserDef} updateOptions={this.updateOptions}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations

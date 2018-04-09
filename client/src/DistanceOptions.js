@@ -10,6 +10,9 @@ class DistanceOptions extends Component {
         };
         this.makeButtons = this.makeButtons.bind(this);
         this.changeOption = this.changeOption.bind(this);
+        this.handleRadius = this.handleRadius.bind(this);
+        this.handleUnit = this.handleUnit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     changeOption(arg) {
@@ -33,13 +36,45 @@ class DistanceOptions extends Component {
         return but;
     }
 
+    handleUnit(event){
+        this.setState({userUnit: event.target.value});
+    }
+
+    handleRadius(event){
+        this.setState({userRadius: event.target.value});
+        event.preventDefault();
+    }
+
+    handleSubmit(event){
+        this.props.updateUserDef(this.state.userUnit, this.state.userRadius);
+        alert("Success, radius set to: " + this.state.userRadius);
+        event.preventDefault();
+    }
+
+    usercond(){
+        if(this.props.trip.options.distance === "user defined")
+            return <form onSubmit={this.handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" className="form-control" value={this.state.userUnit} onChange={this.handleUnit} />
+                    Radius:
+                    <input type = "text" className="form-control" value = {this.state.userRadius} onChange={this.handleRadius}/>
+                </label>
+                <input type="submit" value="Submit" />
+            </form>
+                ;
+    }
+
     render() {
         //todo need to update the options when a button is pressed
         let buttons = this.makeButtons();
         return (
-            <ButtonGroup>
+            <div><ButtonGroup>
                 {buttons}
+                {/*<Button color = "primary" onClick={()=>this.onRadioBtnClick("user defined")} active={this.props.trip.options.distance === "user defined"}>user defined</Button>*/}
             </ButtonGroup>
+                {this.usercond()}
+            </div>
         )
     }
 }
