@@ -22,7 +22,7 @@ class Header extends Component{
             <Input placeholder="Enter Title..." />
           </InputGroup>
           <img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%" id="topLogo" />
-          <SettingModal config ={this.props.config} trip = {this.props.trip} updateOptimization={this.props.updateOptimization} updateOptions={this.props.updateOptions}/>
+          <SettingModal config ={this.props.config} trip = {this.props.trip} updateUserDef={this.props.updateUserDef} updateOptimization={this.props.updateOptimization} updateOptions={this.props.updateOptions}/>
         </Navbar>
       </div>
     )
