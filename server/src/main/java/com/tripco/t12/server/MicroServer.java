@@ -127,7 +127,7 @@ public class MicroServer {
   private String config(Request request, Response response) {
 
       response.type("application/json");
-
+      System.out.println("CALLED");
       return "{\"type\" : \"config\", " +
               "\"version\" : 3, " +
               "\"filters\": " + filters() + ", " +
