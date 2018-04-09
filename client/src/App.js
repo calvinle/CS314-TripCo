@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Header from './Header';
+//import Header from './Header';
 import Application from './Application';
-import Footer from './Footer';
+//import Footer from './Footer';
 
 class App extends Component {
   constructor (props){
@@ -15,9 +15,9 @@ class App extends Component {
   render() {
     return(
         <div id="tripco">
-            <Header number={this.state.number} name={this.state.name}/>
-            <Application />
-            <Footer number={this.state.number} name={this.state.name}/>
+            {/*<Header number={this.state.number} name={this.state.name}/>*/}
+            <Application number={this.state.number} name={this.state.name}/>
+            {/*<Footer number={this.state.number} name={this.state.name}/>*/}
         </div>
     );
   }
