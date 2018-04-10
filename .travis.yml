@@ -7,6 +7,11 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   
+  - mysql -v -u root -e 'CREATE DATABASE testingDatabase;'
+  - mysql -v -u root testingDatabase < HeliportTesting.sql
+  - mysql -v -u root -e 'select * from testingDatabase.airports;'
+
+  
 script:
   - mvn prepare-package
 cache:
