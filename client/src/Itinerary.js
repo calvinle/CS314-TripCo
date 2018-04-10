@@ -43,8 +43,7 @@ class Itinerary extends Component {
 
 
     return(
-        <div id="itinerary">
-          <h4>Round trip distance of {table.distance} {table.units}. </h4>
+
           <table className="table table-responsive table-bordered">
             <thead>
             <tr className="table-primary">
@@ -63,7 +62,6 @@ class Itinerary extends Component {
             </tr>
             </tbody>
           </table>
-        </div>
     )
   }
 }

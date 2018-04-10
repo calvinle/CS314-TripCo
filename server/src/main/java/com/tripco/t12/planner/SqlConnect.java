@@ -14,59 +14,6 @@ public class SqlConnect {
     private String username = "";
     private String password = "";
 
-    SqlConnect(String incomingSearch) {
-        if (System.getenv("TRAVIS") != null) {
-            //set db url to travis for testing
-            username = "TRAVIS";
-            myUrl = "localhost";
-        } else {
-            myUrl = "jbdc:mysql://faure.cs.colostate.edu/cs314";
-            username = "cs314-db";
-            password = "eiK5liet1uej";
-        }
-
-        setSearch(incomingSearch);
-
-        try {
-            Class.forName(this.myDriver);
-            // connect to the database and query
-            try (Connection conn = DriverManager.getConnection(this.myUrl, this.username, this.password);
-                 Statement stCount = conn.createStatement();
-                 Statement stQuery = conn.createStatement();
-                 ResultSet rsCount = stCount.executeQuery(this.count);
-                 ResultSet rsQuery = stQuery.executeQuery(this.search)
-            ) {
-                printJSON(rsCount, rsQuery);
-            }
-        } catch (Exception e) {
-            System.err.println("Exception: " + e.getMessage());
-        }
-    }
-
-    public void setSearch(String input) {
-        this.search = input;
-    }
-
-    private void printJSON(ResultSet count, ResultSet query) throws SQLException {
-        System.out.printf("\n{\n");
-        System.out.printf("\"type\": \"find\",\n");
-        System.out.printf("\"title\": \"%s\",\n", this.search);
-        System.out.printf("\"places\": [\n");
-
-        count.next();
-        int results = count.getInt(1);
-
-        while (query.next()) {
-            System.out.printf(" \"%s\"", query.getString("code"));
-            if (--results == 0)
-                System.out.printf("\n");
-            else
-                System.out.printf(",\n");
-        }
-        System.out.printf(" ]\n}\n");
-    }
-
-
     // Arguments contain the username and password for the database
     public static ArrayList <Place> getQ(String q, Filter filters) {
 
@@ -101,15 +48,9 @@ public class SqlConnect {
             System.out.println("query string: " + query);
             System.out.println("filter list: " + testStr);
 
-            //Select * from airports where name like '%aspen%' and (airports.type = "small_airport" or airports.type = "heliport");
-
             //Build complete query string
             String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and (airports." + attribute + " = " + testStr + ")";
-
-//        //Build complete query string
-//        String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-//                "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and airports.type = " + testStr + "";
+                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and (airports." + attribute + " = " + testStr + ");";
 
             System.out.println("query string w/ filter: " + modQuery);
 
@@ -117,8 +58,9 @@ public class SqlConnect {
             query = modQuery;
         }
         else {
+
             String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\")";
+                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\");";
 
             System.out.println("query string no filter: " + modQuery);
 
@@ -127,12 +69,35 @@ public class SqlConnect {
 
         ArrayList<String> rQ= new ArrayList<String>();
         ArrayList<Place> placeList = new ArrayList<Place>();
+        String Regusername;
+        String Regpassword;
         String myDriver = "com.mysql.jdbc.Driver"; // add dependencies in pom.xml
         String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+        //String myUrl1 = "jdbc:mysql://localhost/testingDatabase";
+
+
+        if (System.getenv("TRAVIS") != null)
+        {
+            //set db url to travis for testing
+            Regusername = "travis";
+            Regpassword = null;
+            myUrl = "jdbc:mysql://localhost/testingDatabase";
+            System.out.println("USING TRAVIS!!!!!!!!!!!!!!!!!!!");
+        } else {
+            Regusername = "cs314-db";
+            Regpassword = "eiK5liet1uej";
+            myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+            System.out.println("NOT USING TRAVIS!!!!!!!!!!!!!!!!!!!");
+        }
+
         try { // connect to the database
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "cs314-db", "eiK5liet1uej");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+            Connection conn = DriverManager.getConnection(myUrl, Regusername, Regpassword);
+
+            //Connection conn = DriverManager.getConnection(myUrl1, travisUser, travisPass);
             try { // create a statement
+
                 Statement st = conn.createStatement();
                 try { // submit a query
                     ResultSet rs = st.executeQuery(query);
@@ -141,6 +106,7 @@ public class SqlConnect {
                             String id = rs.getString("id");
                             String name = rs.getString("name");
                             System.out.printf("%s,%s\n", id, name);
+
                             Place place = new Place();
                             place.id = rs.getString("id");;
                             place.name = rs.getString("name");
@@ -172,11 +138,11 @@ public class SqlConnect {
 
         filters.attribute = ("type");
 
-        System.out.println(filters.values);
-
         filters.values.add("small_airport");
         filters.values.add("balloonport");
         filters.values.add("heliport");
+
+        System.out.println("Filters value: " + filters.values);
 
         //filters.add("medium_airport");
         getQ("Aspen", filters);

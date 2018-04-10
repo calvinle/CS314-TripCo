@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import {Container, Row, Col, Table} from 'reactstrap';
+import Map from './Map';
+import Itinerary from './Itinerary';
 import Options from './Options';
 import Destinations from './Destinations';
 import Trip from './Trip';
@@ -35,6 +37,7 @@ class Application extends Component {
             }
         }
         this.updateTrip = this.updateTrip.bind(this);
+        this.updateTitle = this.updateTitle.bind(this);
         this.updateOptions = this.updateOptions.bind(this);
         this.updateStart = this.updateStart.bind(this);
         this.updateOptimization = this.updateOptimization.bind(this);
@@ -123,6 +126,12 @@ class Application extends Component {
         // update the options in the trip.
     }
 
+    updateTitle(title){
+        let testTrip = Object.assign({},this.state.trip);
+        testTrip.title = title;
+        this.setState({trip:testTrip});
+    }
+
     updateOptions(options) {
         console.log("in Application options:", options);
         var testTrip = Object.assign({}, this.state.trip);
@@ -159,7 +168,9 @@ class Application extends Component {
     render() {
         return (
             <div>
-            <Header config = {this.state.config} trip = {this.state.trip} updateOptimization={this.updateOptimization} updateUserDef={this.updateUserDef} updateOptions={this.updateOptions}/>
+                <Header config={this.state.config} trip={this.state.trip} updateOptimization={this.updateOptimization}
+                        updateTrip={this.updateTrip} updateTitle={this.updateTitle} updateUserDef={this.updateUserDef}
+                        updateOptions={this.updateOptions}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations
@@ -175,21 +186,29 @@ class Application extends Component {
                                          updateOptimization={this.updateOptimization}/>
                             </Col>*/}
 
-                            <Col sm={12}>
+                            {/*<Col sm={12}>
                                 <Dropdown trip={this.state.trip} config={this.state.config}
                                           updateStart={this.updateStart}
                                           reduceList={this.reduceList}/>
-                            </Col>
+                            </Col>*/}
 
-                            <Col sm={12}>
+                            {/*<Col sm={12}>
                                 <Destinations trip={this.state.trip} config={this.state.config}
                                               updateTrip={this.updateTrip}/>
-                            </Col>
+                            </Col>*/}
                             <Col sm={12}>
                                 <Database trip={this.state.trip} config={this.state.config} addPlace={this.addPlace}/>
                             </Col>
-                            <Col sm={12}>
+                            {/*<Col sm={12}>
                                 <Trip trip={this.state.trip} config={this.state.config} updateTrip={this.updateTrip}/>
+                            </Col>*/}
+                            <Col sm={12}>
+                                <div id="trip" className="card border-0 border-dark">
+                                    <div className="card-body">
+                                        <Map trip={this.state.trip}/>
+                                        <Itinerary trip={this.state.trip}/>
+                                    </div>
+                                </div>
                             </Col>
                         </Row>
                     </Col>
