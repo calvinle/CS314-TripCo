@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ButtonToolbar, Button } from 'reactstrap';
 import SearchModal from './SearchModal';
+import DestinationContainer from './DestinationContainer';
 
 class SideDestinations extends Component {
     constructor(props) {
@@ -11,11 +12,14 @@ class SideDestinations extends Component {
 
     render() {
         return (
-            <span>
-                <Button>Reverse</Button>
-                <SearchModal />
-                <Button id="planButton" block>Plan</Button>
-            </span>
+            <div>
+                <DestinationContainer />
+                <span>
+                    <Button>Reverse</Button>
+                    <SearchModal />
+                    <Button id="planButton" block>Plan</Button>
+                </span>
+            </div>
         )
     };
 
