@@ -6,8 +6,15 @@ import DestinationList from './DestinationList';
 class SideDestinations extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.reverse = this.reverse.bind(this);
+    }
+
+    reverse(){
+        let temp = this.props.trip.places;
+        temp.reverse();
+        let testTrip = Object.assign({}, this.props.trip);
+        testTrip.places = temp;
+        this.props.updateTrip(testTrip);
     }
 
     render() {
