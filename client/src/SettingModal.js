@@ -5,7 +5,7 @@ import OptimizationOptions from "./OptimizationOptions";
 
 /* Renders a text heading above the application with useful information.
  */
-class SearchModal extends Component {
+class SettingModal extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -154,4 +154,4 @@ class SearchModal extends Component {
 
 }
 
-export default SearchModal;
+export default SettingModal;
