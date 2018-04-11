@@ -69,11 +69,12 @@ public class Optimizer {
         return -1;
     }
 
-    private ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
+    public ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
         ArrayList<Integer> opt2dists = new ArrayList<Integer>();
         for (int i=0; i < workingRoute.size()-1; i++){
             opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
         }
+
         return opt2dists;
     }
 
@@ -127,6 +128,7 @@ public class Optimizer {
             System.out.println("done " + tripDist);
             //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
             finDist.add(0,0);
+            //System.out.println(finDist);
             return;
         }
         tempDist.clear();
@@ -135,14 +137,18 @@ public class Optimizer {
         tempArray.add(workingArray.get(starting));
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
+
         //Feed into 2Opt here. Use temp variables first
-        if (Double.parseDouble(trip.options.optimization) > 0.5){ //@TODO: Change number to whatever
-            System.out.println("TWO OPT");
-            twoOptTempArray = new ArrayList<Place>(finArray.size());
+
+        //Feed NN to 2Opt
+        if (Double.parseDouble(trip.options.optimization) == 2){
+            twoOptTempArray = new ArrayList<Place>();
             twoOptTempDist =  new ArrayList<Integer>();
             TwoOpt();
-        }
+            //add final stuff here?
 
+        }
+        //NN only
         else{
             int temp = distSum(tempDist);
             System.out.println("trip " + temp + " " + starting);
@@ -151,57 +157,63 @@ public class Optimizer {
                 finArray = tempArray;
                 finDist = tempDist;
             }
-
         }
         nearNeighbor();
     }
 
     private void TwoOpt(){
         //tempArray, temptDist, can get distSum
-        int size = tempArray.size();
-        for (int i=0; i < size; i++){
-            twoOptTempArray.add(i, tempArray.get(i));
-        }
-        System.out.println("Test");
-        while (improve < 2){
+        improve = 0;
+        while (improve < 1){
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
-                    TwoOptSwap(i, k);             //modifies twoOptTempArray
+                    twoOptTempArray = TwoOptSwap(i, k);             //modifies twoOptTempArray
+                    if (twoOptTempArray.get(0) != twoOptTempArray.get(twoOptTempArray.size()-1)){
+                        continue;
+                    }
                     twoOptTempDist = sumList(twoOptTempArray);    //creates list of distances from twoOptTempArray
+
                     int newDist = distSum(twoOptTempDist);              //creates total distance from twoOptTempDist
+                    //System.out.println("TOTAL: " + newDist);
                     if (newDist < tripDist){
                         improve = 0;
-                        for (int j=0; j < size; j++){
-                            tempArray.set(j, twoOptTempArray.get(j));
-                        }
                         tripDist = newDist;
                         finArray = twoOptTempArray;
                         finDist = twoOptTempDist;
-                        System.out.println(tripDist);
+                        //System.out.println(tripDist);
                     }
                 }
             }
             improve++;
         }
+        return;
     }
 
-    public void TwoOptSwap(int i, int k){
-        for ( int c = 0; c <= i - 1; ++c ) {
-            twoOptTempArray.set( c, tempArray.get( c ) );
+    public ArrayList<Place> TwoOptSwap(int i, int k){
+        ArrayList<Place> swapped = new ArrayList<Place>(twoOptTempArray.size());
+        //System.out.println("i: " + i + " k: " + k);
+        for ( int c = 0; c < i; ++c ) {
+            swapped.set( c, tempArray.get( c ) );
         }
 
         // 2. take route[i] to route[k] and add them in reverse order to new_route
         int dec = 0;
         for ( int c = i; c <= k; ++c ) {
-            twoOptTempArray.set( c, tempArray.get( k - dec ) );
+            swapped.set( c, tempArray.get( k - dec ) );
             dec++;
         }
 
         // 3. take route[k+1] to end and add them in order to new_route
         for ( int c = k + 1; c < tempArray.size(); ++c ) {
-            twoOptTempArray.set( c, tempArray.get( c ) );
+            swapped.set( c, tempArray.get( c ) );
         }
 
+//        System.out.print("swapped: ");
+//        for (int b=0; b < swapped.size(); b++){
+//            System.out.print(swapped.get(b).id + ", ");
+//        }
+//        System.out.println();
+        return swapped;
     }
 
 }
