@@ -87,6 +87,7 @@ class SearchModal extends Component {
             if(this.validTFFI(fileContents)){
                 this.setState({count: fileContents.places.length - 1});
                 this.props.updateTrip(fileContents);
+                this.props.updateCount(fileContents.places.length - 1);
             }
             else{
                 this.alertMsg();
@@ -139,7 +140,7 @@ class SearchModal extends Component {
                     <ModalBody>
                         <Button onClick={this.saveTFFI} type="button">Save</Button>
                         <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />
-                        <h5>There are {this.state.count} destinations. </h5>
+                        {/*<h5>There are {this.state.count} destinations. </h5>*/}
                         <hr />
                         <DistanceOptions config = {this.props.config} trip = {this.props.trip} updateUserDef={this.props.updateUserDef} updateOptions={this.props.updateOptions}/>
                         <OptimizationOptions config = {this.props.config} trip = {this.props.trip} updateOptimization={this.props.updateOptimization}/>
