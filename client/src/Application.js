@@ -184,7 +184,7 @@ class Application extends Component {
                         Destinations
                         <p>There are {this.state.count} destinations. </p>
                         <hr/>
-                        <SideDestinations/>
+                        <SideDestinations trip={this.state.trip} updateTrip={this.updateTrip}/>
                     </Col>
                     <Col sm={9}>
                         <div id="map"></div>
