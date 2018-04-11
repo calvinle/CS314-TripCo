@@ -122,6 +122,7 @@ class Application extends Component {
 
     updateQuery(tffi) {
         console.log("updateQuery");
+        console.log(tffi);
         this.setState({query: tffi});
     }
 
@@ -219,7 +220,7 @@ class Application extends Component {
                         Destinations
                         <p>There are {this.state.count} destinations. </p>
                         <hr/>
-                        <SideDestinations config ={this.state.config} query={this.state.query}/>
+                        <SideDestinations config ={this.state.config} query={this.state.query} updateQuery = {this.updateQuery}/>
                     </Col>
                     <Col sm={9}>
                         <div id="map"></div>

@@ -4,21 +4,34 @@ class FilterOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cSelected: []
+            cSelected: [],
+
+            query: { // query TFFI
+                version: 3,
+                type: "query",
+                query: "",
+                places: [],
+                filters:
+                    {   "attribute" : "",
+                        "values" : []
+                    }
+            }
+
         };
         this.makeButtons = this.makeButtons.bind(this);
-        this.changeOption = this.changeOption.bind(this);
+        //this.changeOption = this.changeOption.bind(this);
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
+        this.saveFilters = this.saveFilters.bind(this);
         // this.handleRadius = this.handleRadius.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
-    changeOption(arg) {
-        //console.log(arg);
-        this.props.updateOptions(arg);
-        console.log("this.state.",this.props.options);
-    }
+    // changeOption(arg) {
+    //     //console.log(arg);
+    //     this.props.updateOptions(arg);
+    //     console.log("this.state.",this.props.options);
+    // }
 
     onCheckboxBtnClick(selected) {
         const index = this.state.cSelected.indexOf(selected);
@@ -42,10 +55,11 @@ class FilterOptions extends Component {
     }
 
     saveFilters() {
-        let contents = this.props.query;
+        let contents = this.state.query;
         contents.filters.attribute = "trip";
-        contents.filters.values.push(this.state.cSelected);
-        this.props.setState({query: contents});
+        contents.filters.values = (this.state.cSelected);
+
+        this.props.updateQuery(contents);
         console.log("contents: " +contents);
         console.log("query " + this.props.query);
     }

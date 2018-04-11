@@ -14,6 +14,7 @@ class SearchModal extends Component {
             },
             modalOpen: false,
             filterModal: false
+
         }
     }
 
@@ -43,7 +44,7 @@ class SearchModal extends Component {
                                 <Modal isOpen={this.state.filterModal} toggle={this.toggleFilter}>
                                     <ModalHeader size ="sm" toggle={this.toggleFilter}>Pick Filters</ModalHeader>
                                     <ModalBody>
-                                        <FilterOptions config = {this.props.config} query={this.props.query}/>
+                                        <FilterOptions config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
                                         {/*<Button onClick={this.saveFilters} type="button">Save</Button>*/}
 
                                     </ModalBody>

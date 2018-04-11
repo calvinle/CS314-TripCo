@@ -13,7 +13,7 @@ class SideDestinations extends Component {
         return (
             <span>
                 <Button>Reverse</Button>
-                <SearchModal config = {this.props.config} query={this.props.query}/>
+                <SearchModal config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
                 <Button id="planButton" block>Plan</Button>
             </span>
         )
