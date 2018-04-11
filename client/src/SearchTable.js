@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import {Table, Button} from 'reactstrap';
 
 class SearchTable extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class SearchTable extends Component {
         for(let i = 0; i < dests.length; i++){
             buttons.push(<td><div className="input-group-prepend">
                 <div onClick={this.addButton.bind(this)}>
-                    <button className="btn btn-danger " id={i} type="button">Add</button>
+                    <button className="btn btn-secondary" id={i} type="button">Add</button>
                 </div>
             </div></td>)
         }
@@ -46,7 +47,7 @@ class SearchTable extends Component {
     }
 
     addEntry(arg){
-        this.props.addEntryDB(arg);
+        this.props.addPlace(arg);
     }
 
 
@@ -55,26 +56,26 @@ class SearchTable extends Component {
 
         return <div id="SearchTable">
             <h4>Search Results </h4>
-            <table className="table table-responsive table-bordered">
+            <Table striped responsive>
                 <thead>
-                <tr className="table-primary">
-                    <th className="align-middle">Name:</th>
+                <tr>
+                    <th>Name:</th>
                     {table.dests}
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr>
-                    <th className="table-danger align-middle">Click to add</th>
+                    <th>Click to add</th>
                     {table.buttons}
                 </tr>
                 </tbody>
 
-            </table>
+            </Table>
             <div className="card-body">
                 <div className="input-group-prepend">
                     <div onClick={this.addButtonAll.bind(this)}>
-                        <button className="btn btn-success " id="add" type="button">Add All</button>
+                        <Button color="secondary">Add All</Button>
                     </div>
                 </div>
             </div>

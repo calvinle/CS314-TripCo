@@ -17,14 +17,14 @@ class SideDestinations extends Component {
         this.props.updateTrip(testTrip);
     }
 
+
     render() {
         return (
             <span>
-                <SearchModal config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
+                <SearchModal config = {this.props.config} query={this.props.query} addPlace= {this.props.addPlace} updateQuery = {this.props.updateQuery}/>
 
                 <Button onClick={this.reverse} type="button">Reverse</Button>
 
-                <Button id="planButton" block>Plan</Button>
             </span>
         )
     };
