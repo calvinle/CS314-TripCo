@@ -51,10 +51,23 @@ public class TestOptimizer {
 
     @Test
     public void swapTest(){
-        int[] t = [0, 1, 2, 3, 4];
+
+
         int i = 0;
         int k = 3;
-        assertArrayEquals(optimizer.TwoOptSwap());
+        Place[] input = optimizer.TwoOptSwap(i, k);
+        Place place0 = new Place();
+        place0.id = "0";
+        Place place1 = new Place();
+        place0.id = "1";
+        Place place2 = new Place();
+        place0.id = "2";
+        Place place3 = new Place();
+        place0.id = "3";
+        Place place4 = new Place();
+        place0.id = "0";
+        Place[] expected = {place0, place3, place2, place1, place0};
+        assertArrayEquals(optimizer.TwoOptSwap(i, k), expected);
     }
 
 }
