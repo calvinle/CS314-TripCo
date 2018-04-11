@@ -11,6 +11,7 @@ import Dropdown from './Dropdown';
 import Database from "./Database";
 import '../css/styles.css';
 import SideDestinations from "./SideDestinations";
+import FilterOptions from "./FilterOptions";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -35,6 +36,16 @@ class Application extends Component {
                 optimization: "",
                 units: []
             },
+            query: { // query TFFI
+                version: 3,
+                type: "query",
+                query: "",
+                places: [],
+                filters:
+                    {   "attribute" : "",
+                        "values" : []
+                    }
+            },
             count:0
         }
         this.updateTrip = this.updateTrip.bind(this);
@@ -48,6 +59,9 @@ class Application extends Component {
         this.updateConfig = this.updateConfig.bind(this);
         this.config = this.config.bind(this);
         this.fetchResponse = this.fetchResponse.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
+        this.query = this.query.bind(this);
+        this.fetchResponse1 = this.fetchResponse1.bind(this);
         this.updateCount = this.updateCount.bind(this);
     }
 
@@ -79,6 +93,22 @@ class Application extends Component {
         }
     }
 
+    fetchResponse1() {
+        console.log("Fetching");
+        return fetch('http://' + location.host + '/query');
+    }
+
+    async query() {
+        try {
+            let serverResponse = await this.fetchResponse1();
+            let tffi = await serverResponse.json();
+            console.log("RESPONSE", tffi);
+            this.updateQuery(tffi);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     updateTrip(tffi) {
         console.log("updateTrip");
         console.log(tffi);
@@ -88,6 +118,12 @@ class Application extends Component {
     updateConfig(tffi) {
         console.log("updateConfig");
         this.setState({config: tffi});
+    }
+
+    updateQuery(tffi) {
+        console.log("updateQuery");
+        console.log(tffi);
+        this.setState({query: tffi});
     }
 
     reduceList(place) {
@@ -176,7 +212,7 @@ class Application extends Component {
     render() {
         return (
             <div>
-                <Header config={this.state.config} trip={this.state.trip} updateOptimization={this.updateOptimization}
+                <Header config={this.state.config} trip={this.state.trip} query={this.state.query} updateOptimization={this.updateOptimization}
                         updateTrip={this.updateTrip} updateTitle={this.updateTitle} updateUserDef={this.updateUserDef}
                         updateOptions={this.updateOptions} updateCount = {this.updateCount}/>
                 <Row className="show-grid" id="mainContent">
@@ -184,7 +220,9 @@ class Application extends Component {
                         Destinations
                         <p>There are {this.state.count} destinations. </p>
                         <hr/>
-                        <SideDestinations trip={this.state.trip} updateTrip={this.updateTrip}/>
+
+                        <SideDestinations config ={this.state.config} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
+
                     </Col>
                     <Col sm={9}>
                         <div id="map"></div>

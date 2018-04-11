@@ -19,8 +19,12 @@ class SideDestinations extends Component {
     render() {
         return (
             <span>
+
+                <Button>Reverse</Button>
+                <SearchModal config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
+
                 <Button onClick={this.reverse} type="button">Reverse</Button>
-                <SearchModal />
+
                 <Button id="planButton" block>Plan</Button>
             </span>
         )

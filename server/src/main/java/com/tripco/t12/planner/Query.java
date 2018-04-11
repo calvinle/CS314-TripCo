@@ -1,8 +1,8 @@
 package com.tripco.t12.planner;
 
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import com.tripco.t12.planner.SqlConnect;
+import java.util.ArrayList;
+import java.util.Arrays;
+import com.tripco.t12.planner.SqlConnect;
 
 public class Query
 {
@@ -19,13 +19,12 @@ public class Query
 
         test = SqlConnect.getQ(query, filters);
 
+        // '/query/ fix- comment this line out
         System.out.println("in database: Filters: " + filters.values + filters.attribute);
 
         this.places = test;
         //this.filters = filters;
-
     }
-
 
     public static void main (String[] args)
     {
