@@ -11,6 +11,7 @@ import Dropdown from './Dropdown';
 import Database from "./Database";
 import '../css/styles.css';
 import SideDestinations from "./SideDestinations";
+import GoogleMap from './GoogleMap';
 import FilterOptions from "./FilterOptions";
 
 /* Renders the application.
@@ -254,6 +255,7 @@ class Application extends Component {
                                     <div className="card-body">
                                         <Map trip={this.state.trip}/>
                                         <Itinerary trip={this.state.trip}/>
+                                        <GoogleMap />
                                     </div>
                                 </div>
                             </Col>
