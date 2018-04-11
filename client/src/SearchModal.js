@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Modal, Button, ModalHeader, ModalBody, ModalFooter, InputGroup, Input, Row, Col } from 'reactstrap';
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter, InputGroup, InputGroupAddon, Input, Row, Col } from 'reactstrap';
 import FilterOptions from "./FilterOptions";
+import SearchTable from './SearchTable';
 /* Renders a text heading above the application with useful information.
  */
 class SearchModal extends Component {
@@ -8,13 +9,33 @@ class SearchModal extends Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.toggleFilter = this.toggleFilter.bind(this);
+
+        this.updateQ = this.updateQ.bind(this);
+        this.updateQuery = this.updateQuery.bind(this);
+        this.fetchResponse = this.fetchResponse.bind(this);
+        this.plan = this.plan.bind(this);
+        this.conditionalSearch = this.conditionalSearch.bind(this);
+        this.addEntryDB = this.addEntryDB.bind(this);
+        this.fieldChange = this.fieldChange.bind(this);
+
+
         this.state = {
             trip: {
                 title: "",
             },
             modalOpen: false,
-            filterModal: false
+            filterModal: false,
 
+            query: { // query TFFI
+                version: 3,
+                type: "query",
+                query: "",
+                places: [],
+                filters:
+                    {   "attribute" : "",
+                        "values" : []
+                    }
+            }
         }
     }
 
@@ -28,6 +49,72 @@ class SearchModal extends Component {
             filterModal: !this.state.filterModal
         });
     }
+
+
+
+
+    updateQuery(tffi) {
+        console.log("updateQuery");
+        console.log(tffi);
+        this.setState({query: tffi});
+    }
+
+    fetchResponse(tQuery){
+        // need to get the request body from the trip in state object.
+        //let requestBody = this.state.query;
+        let requestBody = tQuery;
+        console.log("request body", requestBody);
+
+        return fetch('http://' + location.host +'/query', {
+            method:"POST",
+            body: JSON.stringify(requestBody)
+        });
+    }
+
+    async plan(tQuery){
+        try {
+            console.log(this.state.query);
+            let serverResponse = await this.fetchResponse(tQuery);
+            let tffi = await serverResponse.json();
+            console.log("in asyncPlan: ", tffi);
+            this.updateQuery(tffi);
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+
+    newQuery(arg) {
+        //this.props.updateOptions(arg);
+        console.log("in Database.js: ", arg);
+        var testQuery = Object.assign({}, this.props.query);
+        testQuery.query = arg;
+        console.log("testQuery: ", testQuery);
+        //this.setState({query: testQuery});
+        this.plan(testQuery);
+    }
+
+    updateQ() {
+        this.newQuery(document.getElementById("search").value);
+    }
+
+    addEntryDB(place){
+        this.props.addPlace(place);
+    }
+
+
+    conditionalSearch(){
+        if(this.props.query.query !== ""){
+            return <SearchTable query={this.props.query} addEntryDB = {this.addEntryDB}/>
+        }
+    }
+
+    fieldChange(event) {
+        this.updateQuery(event.target.value);
+    }
+
+
+
 
     render() {
         return (
@@ -46,18 +133,26 @@ class SearchModal extends Component {
                                     <ModalBody>
                                         <FilterOptions config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
                                         {/*<Button onClick={this.saveFilters} type="button">Save</Button>*/}
-
                                     </ModalBody>
+                                    <ModalFooter>
+                                    </ModalFooter>
                                 </Modal>
 
                             </Col>
                             <Col xs={7}>
+
                                 <InputGroup id="searchEntry">
-                                    <Input placeholder="Enter Search" />
+                                    <InputGroupAddon addonType="prepend"><Button onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
+                                    <Input id="search" placeholder="Enter search" type="text" />
                                 </InputGroup>
+
                             </Col>
                             <Col xs={3}>
-                                <Button block>Search</Button>
+
+                                <div className="card-body">
+                                    {/*{this.conditionalSearch()}*/}
+                                    </div>
+
                             </Col>
                         </Row>
                     </ModalBody>

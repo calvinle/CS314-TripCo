@@ -19,19 +19,10 @@ class FilterOptions extends Component {
 
         };
         this.makeButtons = this.makeButtons.bind(this);
-        //this.changeOption = this.changeOption.bind(this);
         this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
         this.saveFilters = this.saveFilters.bind(this);
-        // this.handleRadius = this.handleRadius.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-
-    // changeOption(arg) {
-    //     //console.log(arg);
-    //     this.props.updateOptions(arg);
-    //     console.log("this.state.",this.props.options);
-    // }
 
     onCheckboxBtnClick(selected) {
         const index = this.state.cSelected.indexOf(selected);
@@ -56,37 +47,13 @@ class FilterOptions extends Component {
 
     saveFilters() {
         let contents = this.state.query;
-        contents.filters.attribute = "trip";
+        contents.filters.attribute = "type";
         contents.filters.values = (this.state.cSelected);
 
         this.props.updateQuery(contents);
         console.log("contents: " +contents);
         console.log("query " + this.props.query);
     }
-    // handleRadius(event){
-    //     this.setState({userRadius: event.target.value});
-    //     event.preventDefault();
-    // }
-
-    // handleSubmit(event){
-    //     this.props.updateUserDef(this.state.userUnit, this.state.userRadius);
-    //     alert("Success, radius set to: " + this.state.userRadius);
-    //     event.preventDefault();
-    // }
-
-    // usercond(){
-    //     if(this.props.trip.options.distance === "user defined")
-    //         return <form onSubmit={this.handleSubmit}>
-    //             <label>
-    //                 Name:
-    //                 <input type="text" className="form-control" value={this.state.userUnit} onChange={this.handleUnit} />
-    //                 Radius:
-    //                 <input type = "text" className="form-control" value = {this.state.userRadius} onChange={this.handleRadius}/>
-    //             </label>
-    //             <input type="submit" value="Submit" />
-    //         </form>
-    //             ;
-    // }
 
     render() {
         //todo need to update the options when a button is pressed
@@ -94,11 +61,9 @@ class FilterOptions extends Component {
         return (
             <div><ButtonGroup size="sm" vertical>
                 {buttons}
-                {/*<Button color = "primary" onClick={()=>this.onRadioBtnClick("user defined")} active={this.props.trip.options.distance === "user defined"}>user defined</Button>*/}
             </ButtonGroup>
-                <Button onClick={this.saveFilters} type="button">Save</Button>
-                {/*<p>Current Filters: {JSON.stringify(this.state.cSelected)}</p>*/}
-                {/*{this.usercond()}*/}
+                <Button className="float-right" onClick={this.saveFilters} type="button">Save</Button>
+                {/*&& this.props.toggle()*/}
             </div>
         )
     }
