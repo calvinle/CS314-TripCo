@@ -207,6 +207,7 @@ class Application extends Component {
                                     <div className="card-body">
                                         <Map trip={this.state.trip}/>
                                         <Itinerary trip={this.state.trip}/>
+                                        <DisplayMap />
                                     </div>
                                 </div>
                             </Col>
