@@ -16,6 +16,7 @@ import spark.Request;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Optimizer {
     private Trip trip;
@@ -31,7 +32,7 @@ public class Optimizer {
     public ArrayList<Place> finArray;
     public ArrayList<Integer> finDist;
 
-    public ArrayList<Place> twoOptTempArray;
+    public Place[] twoOptTempArray;
     public ArrayList<Integer> twoOptTempDist;
     private int improve = 0;
 
@@ -69,10 +70,11 @@ public class Optimizer {
         return -1;
     }
 
-    public ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
+
+    public ArrayList<Integer> sumList(Place[] workingRoute){
         ArrayList<Integer> opt2dists = new ArrayList<Integer>();
-        for (int i=0; i < workingRoute.size()-1; i++){
-            opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
+        for (int i=0; i < workingRoute.length-1; i++){
+            opt2dists.add(NNhelper(workingRoute[i], workingRoute[i+1]));
         }
 
         return opt2dists;
@@ -142,7 +144,8 @@ public class Optimizer {
 
         //Feed NN to 2Opt
         if (Double.parseDouble(trip.options.optimization) == 2){
-            twoOptTempArray = new ArrayList<Place>();
+            //System.out.println("2opt");
+            //twoOptTempArray = new Place[tempArray.size()];
             twoOptTempDist =  new ArrayList<Integer>();
             TwoOpt();
             //add final stuff here?
@@ -168,7 +171,7 @@ public class Optimizer {
             for ( int i = 1; i < tempArray.size() - 1; i++ ) {
                 for (int k = i + 1; k < tempArray.size(); k++) {
                     twoOptTempArray = TwoOptSwap(i, k);             //modifies twoOptTempArray
-                    if (twoOptTempArray.get(0) != twoOptTempArray.get(twoOptTempArray.size()-1)){
+                    if (twoOptTempArray[0] != twoOptTempArray[twoOptTempArray.length-1]){
                         continue;
                     }
                     twoOptTempDist = sumList(twoOptTempArray);    //creates list of distances from twoOptTempArray
@@ -178,7 +181,7 @@ public class Optimizer {
                     if (newDist < tripDist){
                         improve = 0;
                         tripDist = newDist;
-                        finArray = twoOptTempArray;
+                        finArray = new ArrayList<>(Arrays.asList(twoOptTempArray));
                         finDist = twoOptTempDist;
                         //System.out.println(tripDist);
                     }
@@ -189,23 +192,24 @@ public class Optimizer {
         return;
     }
 
-    public ArrayList<Place> TwoOptSwap(int i, int k){
-        ArrayList<Place> swapped = new ArrayList<Place>(twoOptTempArray.size());
+    public Place[] TwoOptSwap(int i, int k){
+        //ArrayList<Place> swapped = new ArrayList<Place>(twoOptTempArray.size());
+        Place[] swapped = new Place[tempArray.size()];
         //System.out.println("i: " + i + " k: " + k);
         for ( int c = 0; c < i; ++c ) {
-            swapped.set( c, tempArray.get( c ) );
+            swapped[c] = tempArray.get( c );
         }
 
         // 2. take route[i] to route[k] and add them in reverse order to new_route
         int dec = 0;
         for ( int c = i; c <= k; ++c ) {
-            swapped.set( c, tempArray.get( k - dec ) );
+            swapped[c] = tempArray.get( k - dec );
             dec++;
         }
 
         // 3. take route[k+1] to end and add them in order to new_route
         for ( int c = k + 1; c < tempArray.size(); ++c ) {
-            swapped.set( c, tempArray.get( c ) );
+            swapped[c] = tempArray.get( c );
         }
 
 //        System.out.print("swapped: ");
