@@ -16,6 +16,7 @@ import spark.Request;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Optimizer {
     private Trip trip;
@@ -68,6 +69,7 @@ public class Optimizer {
         }
         return -1;
     }
+
 
     public ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
         ArrayList<Integer> opt2dists = new ArrayList<Integer>();
@@ -191,6 +193,7 @@ public class Optimizer {
 
     public ArrayList<Place> TwoOptSwap(int i, int k){
         ArrayList<Place> swapped = new ArrayList<Place>(twoOptTempArray.size());
+        Collections.fill(swapped, null);
         //System.out.println("i: " + i + " k: " + k);
         for ( int c = 0; c < i; ++c ) {
             swapped.set( c, tempArray.get( c ) );
