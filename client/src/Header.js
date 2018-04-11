@@ -92,7 +92,7 @@ class Header extends Component {
                                   updateTrip={this.props.updateTrip} trip={this.props.trip}
                                   updateUserDef={this.props.updateUserDef}
                                   updateOptimization={this.props.updateOptimization}
-                                  updateOptions={this.props.updateOptions}/>
+                                  updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
                 </Navbar>
             </div>
         )

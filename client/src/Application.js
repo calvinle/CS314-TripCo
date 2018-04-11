@@ -34,7 +34,8 @@ class Application extends Component {
                 maps: [],
                 optimization: "",
                 units: []
-            }
+            },
+            count:0
         }
         this.updateTrip = this.updateTrip.bind(this);
         this.updateTitle = this.updateTitle.bind(this);
@@ -47,6 +48,7 @@ class Application extends Component {
         this.updateConfig = this.updateConfig.bind(this);
         this.config = this.config.bind(this);
         this.fetchResponse = this.fetchResponse.bind(this);
+        this.updateCount = this.updateCount.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +56,12 @@ class Application extends Component {
         this.config();
         console.log(this.state.config);
     }
+
+    updateCount(arg){
+        console.log("updateCount",arg);
+        this.setState({count: arg});
+    }
+
 
     fetchResponse() {
         console.log("Fetching");
@@ -174,6 +182,7 @@ class Application extends Component {
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations
+                        <p>There are {this.state.count} destinations. </p>
                         <hr/>
                         <SideDestinations/>
                     </Col>
