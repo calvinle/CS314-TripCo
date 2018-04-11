@@ -12,6 +12,7 @@ import {
     Button
 } from 'reactstrap';
 import SettingModal from './SettingModal';
+import SearchModal from './SearchModal';
 
 /* Renders a text heading above the application with useful information.
  */
@@ -88,7 +89,7 @@ class Header extends Component {
                     </InputGroup>
                     <img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%"
                          id="topLogo"/>
-                    <SettingModal config={this.props.config} title={this.props.trip.title}
+                    <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
                                   updateTrip={this.props.updateTrip} trip={this.props.trip}
                                   updateUserDef={this.props.updateUserDef}
                                   updateOptimization={this.props.updateOptimization}

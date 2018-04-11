@@ -24,6 +24,8 @@ public class Search {
         // process the query.
         query.database();
 
+       //SqlConnect.getQ(query.query, query.filters);
+
         // log something.
         System.out.println(query);
     }
