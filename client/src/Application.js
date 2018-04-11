@@ -178,7 +178,7 @@ class Application extends Component {
             <div>
                 <Header config={this.state.config} trip={this.state.trip} updateOptimization={this.updateOptimization}
                         updateTrip={this.updateTrip} updateTitle={this.updateTitle} updateUserDef={this.updateUserDef}
-                        updateOptions={this.updateOptions}/>
+                        updateOptions={this.updateOptions} updateCount = {this.updateCount}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         Destinations
