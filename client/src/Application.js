@@ -244,18 +244,18 @@ class Application extends Component {
                                 <Destinations trip={this.state.trip} config={this.state.config}
                                               updateTrip={this.updateTrip}/>
                             </Col>*/}
-                            <Col sm={12}>
+                            {/*<Col sm={12}>
                                 <Database trip={this.state.trip} config={this.state.config} addPlace={this.addPlace}/>
-                            </Col>
+                            </Col>*/}
                             {/*<Col sm={12}>
                                 <Trip trip={this.state.trip} config={this.state.config} updateTrip={this.updateTrip}/>
                             </Col>*/}
                             <Col sm={12}>
                                 <div id="trip" className="card border-0 border-dark">
                                     <div className="card-body">
-                                        <Map trip={this.state.trip}/>
+                                        {/*<Map trip={this.state.trip}/>*/}
                                         <Itinerary trip={this.state.trip}/>
-                                        <GoogleMap />
+                                        <GoogleMap trip={this.state.trip}/>
                                     </div>
                                 </div>
                             </Col>

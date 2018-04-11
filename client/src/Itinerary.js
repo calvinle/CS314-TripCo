@@ -43,7 +43,10 @@ class Itinerary extends Component {
 
 
     return(
-
+        <div id="database" className="card border-0 border-dark">
+            <div className="card-header bg-primary text-light">
+                Places
+            </div>
           <table className="table table-responsive table-bordered">
             <thead>
             <tr className="table-primary">
@@ -62,6 +65,7 @@ class Itinerary extends Component {
             </tr>
             </tbody>
           </table>
+        </div>
     )
   }
 }
