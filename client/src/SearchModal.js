@@ -101,7 +101,7 @@ class SearchModal extends Component {
 
     conditionalSearch(){
         if(this.state.query.query !== ""){
-            return <SearchTable query={this.state.query} addEntryDB = {this.addEntryDB}/>
+            return <SearchTable query={this.state.query} addPlace = {this.props.addPlace} addEntryDB = {this.addEntryDB}/>
         }
     }
 
@@ -116,7 +116,7 @@ class SearchModal extends Component {
         return (
             <span>
                 <Button className="float-right" onClick={this.toggle}>
-                    +
+                    + Place
                 </Button>
                 <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Add Destination</ModalHeader>

@@ -222,7 +222,7 @@ class Application extends Component {
                         <p>There are {this.state.count} destinations. </p>
                         <hr/>
 
-                        <SideDestinations config ={this.state.config} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
+                        <SideDestinations config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
 
                     </Col>
                     <Col sm={9}>
