@@ -25,7 +25,6 @@ class SearchModal extends Component {
             },
             modalOpen: false,
             filterModal: false,
-
             query: { // query TFFI
                 version: 3,
                 type: "query",
@@ -49,9 +48,6 @@ class SearchModal extends Component {
             filterModal: !this.state.filterModal
         });
     }
-
-
-
 
     updateQuery(tffi) {
         console.log("updateQuery");
@@ -104,8 +100,8 @@ class SearchModal extends Component {
 
 
     conditionalSearch(){
-        if(this.props.query.query !== ""){
-            return <SearchTable query={this.props.query} addEntryDB = {this.addEntryDB}/>
+        if(this.state.query.query !== ""){
+            return <SearchTable query={this.state.query} addEntryDB = {this.addEntryDB}/>
         }
     }
 
@@ -147,11 +143,9 @@ class SearchModal extends Component {
                                 </InputGroup>
 
                             </Col>
-                            <Col xs={3}>
+                            <Col xs={12}>
 
-                                <div className="card-body">
-                                    {/*{this.conditionalSearch()}*/}
-                                    </div>
+                                {this.conditionalSearch()}
 
                             </Col>
                         </Row>
