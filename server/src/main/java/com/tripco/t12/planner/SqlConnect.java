@@ -77,7 +77,7 @@ public class SqlConnect {
 
 
     // Arguments contain the username and password for the database
-    public static ArrayList <Place> getQ(String q, Filter filters) {
+    public static ArrayList <Place> getQ(String q, Filter[] filters) {
 
         String query = q;
 
@@ -85,20 +85,20 @@ public class SqlConnect {
 
         //this is a NULL POINTER EXCEPTION when the /query is done.
 //         Pull all Values in filter object
-        if(!filters.values.isEmpty()) {
+        if(!filters[0].values.isEmpty()) {
 
             //find how many filter.values
-            int size = filters.values.size() - 1;
+            int size = filters[0].values.size() - 1;
 
             // Pull the attribute from the filter object
-            String attribute = filters.attribute;
+            String attribute = filters[0].attribute;
 
             //Builds the values part of the SQL query string
-            for (String s : filters.values) {
+            for (String s : filters[0].values) {
                 stringBuilder.append("\"" + s + "\"");
 
                 //if its not the last filter.value item, add an or
-                if (filters.values.indexOf(s) != size) {
+                if (filters[0].values.indexOf(s) != size) {
                     stringBuilder.append(" or airports." + attribute + " = ");
                 }
             }
@@ -197,15 +197,15 @@ public class SqlConnect {
 
     public static void main(String[] args)
     {
-        Filter filters = new Filter();
+        Filter[] filters = new Filter[1];
 
-        filters.attribute = ("type");
+        filters[0].attribute = ("type");
 
-        filters.values.add("small_airport");
-        filters.values.add("balloonport");
-        filters.values.add("heliport");
+        filters[0].values.add("small_airport");
+        filters[0].values.add("balloonport");
+        filters[0].values.add("heliport");
 
-        System.out.println("Filters value: " + filters.values);
+        System.out.println("Filters value: " + filters[0].values);
 
         //filters.add("medium_airport");
         getQ("Aspen", filters);

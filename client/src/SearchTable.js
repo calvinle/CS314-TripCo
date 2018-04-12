@@ -19,7 +19,7 @@ class SearchTable extends Component {
         for(let i = 0; i < dests.length; i++){
             buttons.push(<td><div className="input-group-prepend">
                 <div onClick={this.addButton.bind(this)}>
-                    <button className="btn btn-secondary" id={i} type="button">Add</button>
+                    <Button size = "sm" outline color="primary" id={i} type="button">Add</Button>
                 </div>
             </div></td>)
         }
@@ -59,14 +59,12 @@ class SearchTable extends Component {
             <Table striped responsive>
                 <thead>
                 <tr>
-                    <th>Name:</th>
                     {table.dests}
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr>
-                    <th>Click to add</th>
                     {table.buttons}
                 </tr>
                 </tbody>
@@ -75,7 +73,7 @@ class SearchTable extends Component {
             <div className="card-body">
                 <div className="input-group-prepend">
                     <div onClick={this.addButtonAll.bind(this)}>
-                        <Button color="secondary">Add All</Button>
+                        <Button color="primary">Add All</Button>
                     </div>
                 </div>
             </div>

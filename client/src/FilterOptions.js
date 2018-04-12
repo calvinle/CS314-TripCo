@@ -11,10 +11,10 @@ class FilterOptions extends Component {
                 type: "query",
                 query: "",
                 places: [],
-                filters:
+                filters:[
                     {   "attribute" : "",
                         "values" : []
-                    }
+                    }]
             }
 
         };
@@ -47,8 +47,8 @@ class FilterOptions extends Component {
 
     saveFilters() {
         let contents = this.state.query;
-        contents.filters.attribute = "type";
-        contents.filters.values = (this.state.cSelected);
+        contents.filters[0].attribute = "type";
+        contents.filters[0].values = (this.state.cSelected);
 
         this.props.updateQuery(contents);
         console.log("contents: " +contents);

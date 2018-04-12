@@ -42,10 +42,10 @@ class Application extends Component {
                 type: "query",
                 query: "",
                 places: [],
-                filters:
+                filters:[
                     {   "attribute" : "",
                         "values" : []
-                    }
+                    }]
             },
             count:0
         }

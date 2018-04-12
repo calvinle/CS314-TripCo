@@ -30,10 +30,10 @@ class SearchModal extends Component {
                 type: "query",
                 query: "",
                 places: [],
-                filters:
+                filters:[
                     {   "attribute" : "",
                         "values" : []
-                    }
+                    }]
             }
         }
     }
@@ -119,14 +119,16 @@ class SearchModal extends Component {
                     + Place
                 </Button>
                 <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Add Destination</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Add a destination</ModalHeader>
                     <ModalBody>
+                         <p> Type a destination in the box, then click search. </p>
                         <Row>
                             <Col xs={2}>
-                                <Button onClick={this.toggleFilter}>Filter</Button>
+                                {/*<Button onClick={this.toggleFilter}>Filter</Button>*/}
                                 <Modal isOpen={this.state.filterModal} toggle={this.toggleFilter}>
                                     <ModalHeader size ="sm" toggle={this.toggleFilter}>Pick Filters</ModalHeader>
                                     <ModalBody>
+                                        <p> Select as many filters as you'd like. When finished, click Save and then exit. </p>
                                         <FilterOptions config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
                                         {/*<Button onClick={this.saveFilters} type="button">Save</Button>*/}
                                     </ModalBody>
@@ -138,8 +140,8 @@ class SearchModal extends Component {
                             <Col xs={7}>
 
                                 <InputGroup id="searchEntry">
-                                    <InputGroupAddon addonType="prepend"><Button onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
-                                    <Input id="search" placeholder="Enter search" type="text" />
+                                    <InputGroupAddon addonType="prepend"><Button color = "primary" onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
+                                    <Input id="search" placeholder="Search for..." type="text" />
                                 </InputGroup>
 
                             </Col>
@@ -151,8 +153,8 @@ class SearchModal extends Component {
                         </Row>
                     </ModalBody>
                     <ModalFooter>
-                        <Button>Cancel</Button>
-                        <Button>Add</Button>
+                        <Button outline color = "secondary" onClick={this.toggleFilter}>Filter</Button>
+                        <p> If you want to add a filter to your destination search, click on the Filter button. </p>
                     </ModalFooter>
                 </Modal>
             </span>
