@@ -20,9 +20,8 @@ public class TestDB {
 
     @Before
     public void initialize() {
-
-        query = new Query();
         filter = new Filter();
+        query = new Query();
     }
 
     @Test
@@ -34,6 +33,12 @@ public class TestDB {
     public void testQuery() {
         if(System.getenv("TRAVIS") != null) {
 
+            Filter[] filters = new Filter[1];
+            for (int i = 0; i < 1; i++)
+            {
+                filters[i] = new Filter();
+                filters[i].attribute = "type";
+            }
             //create test place
             Place p = new Place();
             p.name = "Aspen Test Heliport";
@@ -42,13 +47,13 @@ public class TestDB {
             p.id = "00A";
 
             //add filters for query
-            filter.attribute = ("type");
-            //filter.values.add("heliport");
+            //filters[0].attribute = ("type");
+            //filter[0].values.add("heliport");
 
             Place res = new Place();
             ArrayList<Place> placeList = new ArrayList<Place>();
 
-            placeList = (SqlConnect.getQ("aspen", filter));
+            placeList = (SqlConnect.getQ("aspen", filters));
 
             res = placeList.get(0);
 

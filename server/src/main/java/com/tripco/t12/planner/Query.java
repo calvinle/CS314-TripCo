@@ -10,7 +10,7 @@ public class Query
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
-    public Filter filters;
+    public Filter[] filters;
 
     public void database()
     {
@@ -20,7 +20,7 @@ public class Query
         test = SqlConnect.getQ(query, filters);
 
         // '/query/ fix- comment this line out
-        System.out.println("in database: Filters: " + filters.values + filters.attribute);
+        System.out.println("in database: Filters: " + filters[0].values + filters[0].attribute);
 
         this.places = test;
         //this.filters = filters;
@@ -32,10 +32,10 @@ public class Query
         query.query = "aspen";
 
         ArrayList<Place> test = new ArrayList<Place>();
-        Filter filter = new Filter();
+        Filter[] filter = new Filter[1];
 
-        filter.attribute = "trip";
-        filter.values.add("heliport");
+        filter[0].attribute = "trip";
+        filter[0].values.add("heliport");
 
         test = SqlConnect.getQ(query.query, filter);
 
