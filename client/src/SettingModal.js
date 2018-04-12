@@ -22,7 +22,7 @@ class SettingModal extends Component {
     {
 
         let myArray1 = ["type", "title", "options", "places", "distances", "map"];
-        let myArray2 = ["type", "title", "options", "places", "distances", "map", "version"];
+        let myArray2 = ["version","type", "title", "options", "places", "distances", "map"];
         let key = [];
         let i;
 

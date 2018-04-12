@@ -44,23 +44,23 @@ class Itinerary extends Component {
 
     return(
         <div id="database" className="card border-0 border-dark">
-            <div className="card-header bg-primary text-light">
+            <div className="card-header bg-secondary text-light">
                 Places
             </div>
           <table className="table table-responsive table-bordered">
             <thead>
-            <tr className="table-primary">
+            <tr className="table-secondary">
               <th className="align-middle">Destination</th>
               {table.dests}
             </tr>
             </thead>
             <tbody>
             <tr>
-              <th className="table-danger align-middle">{table.units}</th>
+              <th className="table-secondary align-middle">{table.units}</th>
               {table.dists}
             </tr>
             <tr>
-                <th className="table-success align-middle">cumulative distance</th>
+                <th className="table-secondary align-middle">cumulative distance</th>
                 {table.roundTrip}
             </tr>
             </tbody>
