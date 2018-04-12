@@ -59,14 +59,14 @@ Apr. 10, 2018 | 2Opt Improvements | UI finalization | npm and packages
 ## Review
 
 #### Completed epics in Sprint Backlog
-* *Distance Unit Configuration*:  *comments*
+* *Distance Unit Configuration*:  Let the user put in their own based on radius
 * *Shorter Trips* : On top of Nearest Neighbor
-* *Filtered Searches* :
-* *Zoom and Pan Map* :
+* *Filtered Searches* : Allow the user to pick from certain tables of a database
+* *Zoom and Pan Map* : Google Maps implemented
 
 #### Incomplete epics in Sprint Backlog
-* *Improve User Experience*: *explanation...*
-* *System Testing*:
+* *Improve User Experience*: No start-changer
+* *System Testing*: TFFI checkers were not fully tested
 
 #### What went well
 * Simplifying trip algorithms
@@ -80,13 +80,13 @@ Apr. 10, 2018 | 2Opt Improvements | UI finalization | npm and packages
 * Utilizing ReactStrap to change the majority of the user interface, resolved by studying
 * Debugging individual steps for 2-Opt. Small sized test cases (including round trip) were created and calculated by hand to have a real answer to compare to. In turn, this made implementing the improved-2Opt from the lectures easier than expected.
 * Confusion on decisions and changes made. Part of the reason is most communication coming across Slack. Obviously, explaining in person is more clear.
-* In terms of technicalities,
+* In terms of technical difficulties, there's very little that can be done when they are unforeseen. It is best to often assume the worst when using tools.
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  |
-What we did well |  |  |
-What we need to work on |  |  |
-What we will change next time |  |  |
+What we will change this time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically |Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment |
+What we did well | Spent more time in person and worked around schedules | Pull Requests to Issues and working stuff by hand | Using npm to grab libraries
+What we need to work on | Asking more specific questions, not relying solely talking over Slack or Hangouts  | More detailed changes and issues. Push more frequently | Utilizing Zenhub to assign tasks |
+What we will change next time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way |
