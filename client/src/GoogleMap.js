@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'reactstrap';
 import GoogleMapReact from 'google-map-react';
 
 
@@ -8,12 +9,14 @@ class GoogleMap extends Component {
         this.state = {
             center: { lat: 40.5853, lng: -105.0844 },
             zoom: 13,
-            path: []
+            path: [],
+            toggle:-1
         };
         this.draw = this.draw.bind(this);
         this.assign = this.assign.bind(this);
         this.delimit = this.delimit.bind(this);
         this.conditional = this.conditional.bind(this);
+        this.toggleFunc = this.toggleFunc.bind(this);
     }
 
     //Help on this method received from https://github.com/Dooffy/google-map-react-polyline-example/blob/master/examples/basic/src/components/Map.js
@@ -38,6 +41,7 @@ class GoogleMap extends Component {
 
     draw(){
         let temp = this.props.trip.places;
+        this.setState({path:[]});
         for(let i = 0; i < temp.length; i++){
             this.state.path.push({lat: this.delimit(temp[i].latitude), lng: this.delimit(temp[i].longitude)})
         }
@@ -57,8 +61,12 @@ class GoogleMap extends Component {
             this.fitBounds(map,maps);
     }
 
+    toggleFunc(){
+        this.setState({toggle:this.state.toggle*-1});
+    }
+
     conditional(){
-        if(this.props.trip.places.length > 0){
+        if(this.state.toggle > 0){
             console.log("places!");
             return  <div className='google-map' style={{ height: '100vh', width: '100%' }}>
                         <GoogleMapReact
@@ -75,6 +83,8 @@ class GoogleMap extends Component {
     render() {
         return (
             <div>
+                <p>Render map after you have optimized your trip</p>
+                <Button onClick={this.toggleFunc} color = "secondary" type="button">Render Map</Button>
                 {this.conditional()}
             </div>
         )

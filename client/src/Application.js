@@ -22,6 +22,7 @@ class Application extends Component {
         super(props);
         this.state = {
             trip: { // default TFFI
+                version:0,
                 type: "trip",
                 title: "",
                 options: {distance: "miles", userUnit: "", userRadius: "", optimization: "0"},
