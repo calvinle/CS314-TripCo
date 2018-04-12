@@ -40,22 +40,26 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  22   | *value* 
-Story Points |  34 | *value* 
+Tasks |  47   | 41 
+Story Points |  86 | 76 
 
 ## Daily Scrums
 
 Date | Tasks done  | Tasks in progress | Impediments 
 :--- | :--- | :--- | :--- 
-*date* | *@task only* | *@task only* | none
- | | | 
+Mar. 27, 2018| DB Search | NN Fix | Miscalcuations
+Mar. 29, 2018| Basic Branding| 2Opt | None
+Apr. 3, 2018 | SQL Query | New DB searches | None
+Apr. 10, 2018 | 2Opt Improvements | UI finalization | None
  
 
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *Distance Unit Configuration*:  *comments*
+* *Shorter Trips* :
+* *Filtered Searches* : 
+* *Zoom and Pan Map* : 
 
 #### Incomplete epics in Sprint Backlog 
 * *user story*: *explanation...*
