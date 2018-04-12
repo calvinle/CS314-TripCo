@@ -26,7 +26,7 @@ public class Optimizer {
     public ArrayList<Place> workingArray;
 
     //Test if contain shortest distance. Will become finArray/finDist if they do
-    private ArrayList<Place> tempArray;
+    public ArrayList<Place> tempArray;
     private ArrayList<Integer> tempDist;
 
     public ArrayList<Place> finArray;
@@ -219,5 +219,6 @@ public class Optimizer {
 //        System.out.println();
         return swapped;
     }
+
 
 }

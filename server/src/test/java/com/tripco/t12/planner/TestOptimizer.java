@@ -12,11 +12,12 @@ import java.util.Collections;
 import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class TestOptimizer {
+
     Trip trip;
     Optimizer optimizer;
 
     @Before
-    public void initialize(){
+    public void initialize() {
         trip = new Trip();
         trip.places = new ArrayList<>();
         Place place = new Place();
@@ -25,12 +26,12 @@ public class TestOptimizer {
     }
 
     @Test
-    public void testTrue(){
-        assertTrue(true==true);
+    public void testTrue() {
+        assertTrue(true == true);
     }
 
     @Test
-    public void testN(){
+    public void testN() {
         Place place = new Place();
         Place place0 = new Place();
         optimizer.workingArray.add(place);
@@ -39,33 +40,51 @@ public class TestOptimizer {
     }
 
     @Test
-    public void testSum(){
+    public void testSum() {
         ArrayList<Integer> n = new ArrayList<Integer>();
         n.add(2);
         n.add(5);
         assertEquals(optimizer.distSum(n), 7, 0);
+        n.add(7);
+        assertEquals(optimizer.distSum(n), 14, 0);
     }
 
-//    @Test
-//    public void testo2S(){
-//        Place a = new Place();
-//        Place b = new Place();
-//        Place c = new Place();
-//        Place d = new Place();
-//        Place e = new Place();
-//        Place f = new Place();
-//        Place g = new Place();
-//        Place h = new Place();
-//        ArrayList<Place> w = new ArrayList<Place>();
-//        w.add(a);
-//        w.add(b);
-//        w.add(c);
-//        w.add(d);
-//        w.add(e);
-//        w.add(f);
-//        w.add(g);
-//        w.add(h);
-//        w.add(a);
-//        optimizer.TwoOptSwap(4, 7);
-//    }
+    @Test
+    public void swapTest(){
+        int i = 0;
+        int k = 3;
+        Place place0 = new Place();
+        place0.id = "0";
+        Place place1 = new Place();
+        place0.id = "1";
+        Place place2 = new Place();
+        place0.id = "2";
+        Place place3 = new Place();
+        place0.id = "3";
+        Place place4 = new Place();
+        place0.id = "0";
+        optimizer.tempArray.add(place0);
+        optimizer.tempArray.add(place1);
+        optimizer.tempArray.add(place2);
+        optimizer.tempArray.add(place3);
+        optimizer.tempArray.add(place4);
+        Place[] expected = {place3, place2, place1, place0, place4};
+        assertArrayEquals(optimizer.TwoOptSwap(i, k), expected);
+    }
+
+    @Test
+    public void distCalcTest(){
+        Place p0 =  new Place();
+        p0.latitude = "38.452431";
+        p0.longitude = "-107.006570";
+        Place p1 = new Place();
+        p1.latitude = "38.452431";
+        p1.longitude = "-107.380106";
+
+        Place[] trip = {p0, p1};
+        ArrayList<Integer> expected = new ArrayList<Integer>();
+        expected.add(20);
+        assertEquals(optimizer.sumList(trip), expected);
+    }
+
 }
