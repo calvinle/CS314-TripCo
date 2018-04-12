@@ -23,7 +23,7 @@ class SideDestinations extends Component {
             <span>
                 <SearchModal config = {this.props.config} query={this.props.query} addPlace= {this.props.addPlace} updateQuery = {this.props.updateQuery}/>
 
-                <Button onClick={this.reverse} type="button">Reverse</Button>
+                <Button color="secondary" size="sm" onClick={this.reverse} type="button">Reverse</Button>
 
             </span>
         )

@@ -218,8 +218,14 @@ class Application extends Component {
                         updateOptions={this.updateOptions} updateCount = {this.updateCount}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
-                        Destinations
-                        <p>There are {this.state.count} destinations. </p>
+                        {/*Destinations*/}
+                        {/*<p>There are {this.state.count} destinations. </p>*/}
+                        <p>
+
+                        </p>
+                        <p>
+                            Start your trip below!
+                        </p>
                         <hr/>
 
                         <SideDestinations config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>

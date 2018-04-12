@@ -115,8 +115,8 @@ class SearchModal extends Component {
     render() {
         return (
             <span>
-                <Button className="float-right" onClick={this.toggle}>
-                    + Place
+                <Button color="secondary" size="sm" onClick={this.toggle}>
+                    Add a destination
                 </Button>
                 <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Add a destination</ModalHeader>
