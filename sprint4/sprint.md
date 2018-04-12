@@ -1,6 +1,6 @@
 # Sprint 4 - *12* - *Dave Matthew's Beard @deprecated*
 
-## Goal
+## Goal: Create shorter trips with optimization, and allow adding other destinations
 
 ### Worldwide!
 ### Sprint Leader: *Calvin Le*
@@ -89,4 +89,4 @@ Topic | Teamwork | Process | Tools
 What we will change this time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically |Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment |
 What we did well | Spent more time in person and worked around schedules | Pull Requests to Issues and working stuff by hand | Using npm to grab libraries
 What we need to work on | Asking more specific questions, not relying solely talking over Slack or Hangouts  | More detailed changes and issues. Push more frequently | Utilizing Zenhub to assign tasks |
-What we will change next time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way |
+What we will change next time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way | Sending paper notes for hand-made calculations
