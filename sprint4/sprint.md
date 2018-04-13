@@ -74,7 +74,7 @@ Apr. 10, 2018 | 2Opt Improvements | UI finalization | npm and packages
 * Time Communication
 * Creating a more functional user interface to improve experience
 * Creating test cases that were easy to compute by
-
+* Filters and query fixes
 #### Problems encountered and resolutions
 * Initial understanding of 2-Opt, though quickly resolved by asking Dave Mathews
 * Utilizing ReactStrap to change the majority of the user interface, resolved by studying
