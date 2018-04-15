@@ -3,7 +3,7 @@
 ## Goal
 
 ### Worldwide!
-### Sprint Leader: 
+### Sprint Leader: Calvin Le
 
 ## Definition of Done
 
@@ -31,8 +31,8 @@
 
 Epics planned for this release.
 
-* *## title*
-*
+* Staff Page: Update Resumes and About Me
+* 
 
 *Include a discussion of planning decisions made based on your velocity from previous sprints.*
 
@@ -40,8 +40,8 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  *value*   | *value* 
-Story Points |  *value*  | *value* 
+Tasks |  13   | *value* 
+Story Points |  31  | *value* 
 
 ## Daily Scrums
 
