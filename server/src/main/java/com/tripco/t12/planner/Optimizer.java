@@ -180,7 +180,7 @@ public class Optimizer {
                     int delta = (-1 * NNhelper(tempArray.get(i), tempArray.get(i+1)) )
                             - (NNhelper(tempArray.get(k), tempArray.get(k+1)))
                             + (NNhelper(tempArray.get(i), tempArray.get(k)))
-                            + (NNhelper(tempArray.get(i+1), tempArray.get(k+1))); //finds difference in trip
+                            + (NNhelper(tempArray.get(i+1), tempArray.get(k+1)));
                     if (delta < 0){ //If difference is negative, trip is shortened
                         TwoOptReverse(i+1, k);
                         ArrayList<Integer> newDists = sumList(twoOptTempArray);
