@@ -2,7 +2,7 @@
 
 ## Goal
 
-### Worldwide!
+### Worldwide and Extra User Customization!
 ### Sprint Leader: Calvin Le
 
 ## Definition of Done
