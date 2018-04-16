@@ -68,8 +68,15 @@ public class TestOptimizer {
         optimizer.tempArray.add(place2);
         optimizer.tempArray.add(place3);
         optimizer.tempArray.add(place4);
-        Place[] expected = {place3, place2, place1, place0, place4};
-        assertArrayEquals(optimizer.TwoOptSwap(i, k), expected);
+        optimizer.twoOptTempArray = optimizer.tempArray;
+        ArrayList<Place> expected = new ArrayList<Place> ();
+        expected.add(place3);
+        expected.add(place2);
+        expected.add(place1);
+        expected.add(place0);
+        expected.add(place4);
+        optimizer.TwoOptReverse(i, k);
+        assertEquals(optimizer.tempArray, expected);
     }
 
     @Test
@@ -81,7 +88,9 @@ public class TestOptimizer {
         p1.latitude = "38.452431";
         p1.longitude = "-107.380106";
 
-        Place[] trip = {p0, p1};
+        ArrayList<Place> trip = new ArrayList<Place>();
+        trip.add(p0);
+        trip.add(p1);
         ArrayList<Integer> expected = new ArrayList<Integer>();
         expected.add(20);
         assertEquals(optimizer.sumList(trip), expected);
