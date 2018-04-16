@@ -32,9 +32,14 @@
 Epics planned for this release.
 
 * Staff Page: Update Resumes and About Me
-* 
+* 3Opt : Shorter Trip
+* Improve User Experience
+* Interoperability
+* Save Options for Future Use
+* Staff Page
+* System Testing
 
-*Include a discussion of planning decisions made based on your velocity from previous sprints.*
+There will be an increase of discussions on ideas of executing parts of the sprint. The main benefit is to catch mistakes and hopefully find newer and better ideas. Since there is more of a focus on modifying and improving both the client and server side, members will be involved in more than one Epic.
 
 ## Metrics
 
