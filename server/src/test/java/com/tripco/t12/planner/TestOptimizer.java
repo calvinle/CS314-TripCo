@@ -63,20 +63,20 @@ public class TestOptimizer {
         place0.id = "3";
         Place place4 = new Place();
         place0.id = "0";
-        optimizer.tempArray.add(place0);
-        optimizer.tempArray.add(place1);
-        optimizer.tempArray.add(place2);
-        optimizer.tempArray.add(place3);
-        optimizer.tempArray.add(place4);
-        optimizer.twoOptTempArray = optimizer.tempArray;
-        ArrayList<Place> expected = new ArrayList<Place> ();
+        optimizer.twoOptTempArray = new ArrayList<Place>();
+        optimizer.twoOptTempArray.add(place0);
+        optimizer.twoOptTempArray.add(place1);
+        optimizer.twoOptTempArray.add(place2);
+        optimizer.twoOptTempArray.add(place3);
+        optimizer.twoOptTempArray.add(place4);
+        optimizer.TwoOptReverse(0,3);
+        ArrayList<Place> expected = new ArrayList<Place>();
         expected.add(place3);
         expected.add(place2);
         expected.add(place1);
         expected.add(place0);
         expected.add(place4);
-        optimizer.TwoOptReverse(i, k);
-        assertEquals(optimizer.tempArray, expected);
+        assertEquals(optimizer.twoOptTempArray, expected);
     }
 
     @Test
