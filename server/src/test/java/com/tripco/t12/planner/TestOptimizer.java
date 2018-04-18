@@ -96,4 +96,32 @@ public class TestOptimizer {
         assertEquals(optimizer.sumList(trip), expected);
     }
 
+    @Test
+    public void opt3Swap(){
+        optimizer.threeOptTempArray = new ArrayList<Place>();
+        Place place0 = new Place();
+        place0.id = "0";
+        Place place1 = new Place();
+        place0.id = "1";
+        Place place2 = new Place();
+        place0.id = "2";
+        Place place3 = new Place();
+        place0.id = "3";
+        Place place4 = new Place();
+        place0.id = "4";
+        Place place5 = new Place();
+        place5.id = "5";
+        Place place6 = new Place();
+        place6.id = "6";
+        Place place7 = new Place();
+        place7.id = "7";
+
+
+        optimizer.twoOptTempArray.add(place0);
+        optimizer.twoOptTempArray.add(place1);
+        optimizer.twoOptTempArray.add(place2);
+        optimizer.twoOptTempArray.add(place3);
+        optimizer.twoOptTempArray.add(place4);
+    }
+
 }
