@@ -1,6 +1,6 @@
 # Sprint 4 - *12* - *Dave Matthew's Beard @deprecated*
 
-## Goal
+## Goal: Create shorter trips with optimization, and allow adding other destinations
 
 ### Worldwide!
 ### Sprint Leader: *Calvin Le*
@@ -18,7 +18,7 @@
 ## Policies
 
 * Code adheres to Google style guides for Java and JavaScript.
-* Tests and Javadoc are written before/with code.  
+* Tests and Javadoc are written before/with code.
 * All pull requests include tests for the added or modified code.
 * Master is never broken.  If broken, it is fixed immediately.
 * Always check for new changes in master to resolve merge conflicts locally before committing them.
@@ -31,8 +31,12 @@
 
 Epics planned for this release.
 
-* *## title*
-*
+* Branding
+* Shorter Trips
+* Worldwide Destination
+* Filtered Search
+* New Map Format
+* Custom Distance Units
 
 *Include a discussion of planning decisions made based on your velocity from previous sprints.*
 
@@ -40,40 +44,49 @@ Epics planned for this release.
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  22   | *value* 
-Story Points |  34 | *value* 
+Tasks |  47   | 41
+Story Points |  86 | 76
 
 ## Daily Scrums
 
-Date | Tasks done  | Tasks in progress | Impediments 
-:--- | :--- | :--- | :--- 
-*date* | *@task only* | *@task only* | none
- | | | 
- 
+Date | Tasks done  | Tasks in progress | Impediments
+:--- | :--- | :--- | :---
+Mar. 27, 2018| DB Search | NN Fix | Miscalcuations
+Mar. 29, 2018| Basic Branding| 2Opt | None
+Apr. 3, 2018 | SQL Query | New DB searches, API Testing | None
+Apr. 10, 2018 | 2Opt Improvements | UI finalization | npm and packages
 
 ## Review
 
-#### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+#### Completed epics in Sprint Backlog
+* *Distance Unit Configuration*:  Let the user put in their own based on radius
+* *Shorter Trips* : On top of Nearest Neighbor
+* *Filtered Searches* : Allow the user to pick from certain tables of a database
+* *Zoom and Pan Map* : Google Maps implemented
 
-#### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+#### Incomplete epics in Sprint Backlog
+* *Improve User Experience*: No start-changer
+* *System Testing*: TFFI checkers were not fully tested
 
 #### What went well
-* *something*
-*
-
+* Simplifying trip algorithms
+* System Testing
+* Time Communication
+* Creating a more functional user interface to improve experience
+* Creating test cases that were easy to compute by
+* Filters and query fixes
 #### Problems encountered and resolutions
-* *something*
-*
+* Initial understanding of 2-Opt, though quickly resolved by asking Dave Mathews
+* Utilizing ReactStrap to change the majority of the user interface, resolved by studying
+* Debugging individual steps for 2-Opt. Small sized test cases (including round trip) were created and calculated by hand to have a real answer to compare to. In turn, this made implementing the improved-2Opt from the lectures easier than expected.
+* Confusion on decisions and changes made. Part of the reason is most communication coming across Slack. Obviously, explaining in person is more clear.
+* In terms of technical difficulties, there's very little that can be done when they are unforeseen. It is best to often assume the worst when using tools.
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | communicating more specifically about what is happening | Better at PRs, working incrementally often, rather than large amounts of work sporadically |Make sure all intellij stuff is working, use zenhub more effectively for both planning and assessment |
+What we did well | Spent more time in person and worked around schedules | Pull Requests to Issues and working stuff by hand | Using npm to grab libraries
+What we need to work on | Asking more specific questions, not relying solely talking over Slack or Hangouts  | More detailed changes and issues. Push more frequently | Utilizing Zenhub to assign tasks |
+What we will change next time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way | Sending paper notes for hand-made calculations
