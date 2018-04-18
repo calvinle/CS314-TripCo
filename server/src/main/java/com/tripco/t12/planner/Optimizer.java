@@ -197,6 +197,7 @@ public class Optimizer {
         }
         return;
     }
+  
     public void TwoOptReverse(int i, int k){
         while (i < k){
             Place temp = twoOptTempArray.get(i);
