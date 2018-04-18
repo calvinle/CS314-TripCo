@@ -215,7 +215,22 @@ public class Optimizer {
         }
     }
 
-    private void ThreeOpt(){
+    private void ThreeOpt() {
+        threeOptTempArray = tempArray;
+        improve = true;
+        while (improve) {
+            improve = false;
+            for (int i = 0; i < threeOptTempArray.size() - 2; i++) {
+                for (int j = i + 1; j < threeOptTempArray.size() - 1; j++) {
+                    for (int k = j + 1; k < threeOptTempArray.size(); k++) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    public void ThreeOptReverse(int i, int j, int k){
 
     }
 }
