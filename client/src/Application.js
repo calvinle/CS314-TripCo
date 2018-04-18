@@ -41,6 +41,7 @@ class Application extends Component {
             query: { // query TFFI
                 version: 3,
                 type: "query",
+                //limit: "3" @TODO: decide on the name (in this case, limit). Also, if the number is int or string
                 query: "",
                 places: [],
                 filters:[
@@ -114,7 +115,22 @@ class Application extends Component {
     updateTrip(tffi) {
         console.log("updateTrip");
         console.log(tffi);
-        this.setState({trip: tffi});
+        if (typeof tffi.distances === 'undefined')
+        {
+            this.setState({
+                trip: {
+                        version: 3,
+                        type: "trip",
+                        title: tffi.title,
+                        options: tffi.options,
+                        places: tffi.places,
+                        distances: [],
+                        map: tffi.map }
+            } );
+        }
+        else
+            this.setState({trip: tffi});
+
     }
 
     updateConfig(tffi) {
@@ -229,7 +245,7 @@ class Application extends Component {
                         </p>
                         <hr/>
 
-                        <SideDestinations config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
+                        <SideDestinations updateTitle={this.updateTitle} config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
 
                     </Col>
                     <Col sm={9}>

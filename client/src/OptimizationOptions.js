@@ -25,6 +25,7 @@ class OptimizationOptions extends Component {
     render() {
         return (
             <div className="slidecontainer">
+                <p></p>
                 <p>Choose an Optimization level</p>
                 <div onChange={this.changeOptimization.bind(this)}>
                 <input type="range" min="0" max={this.props.config.optimization} defaultValue={this.props.trip.options.optimization} className="slider" id={"slider"}/>

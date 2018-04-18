@@ -31,13 +31,16 @@
 
 Epics planned for this release.
 
-* Staff Page: Update Resumes and About Me
-* 3Opt : Shorter Trip
-* Improve User Experience
-* Interoperability
-* Save Options for Future Use
-* Staff Page
-* System Testing
+* System Testing: #242
+* TFFI Updates: #344
+* Staff Page: #346, #347, #348, #363
+* Interoperability: #352, 353
+* View Trip in Other Tools: #359
+* Save Options for Future Use: #361
+* 3Opt : #356, #358
+* Improve User Experience:  #249, #277, #280, #334, #343, #364
+
+
 
 There will be an increase of discussions on ideas of executing parts of the sprint. The main benefit is to catch mistakes and hopefully find newer and better ideas. Since there is more of a focus on modifying and improving both the client and server side, members will be involved in more than one Epic.
 
@@ -45,8 +48,8 @@ There will be an increase of discussions on ideas of executing parts of the spri
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  24   | *value* 
-Story Points |  54  | *value* 
+Tasks |  19   | *value* 
+Story Points |  48  | *value* 
 
 ## Daily Scrums
 
