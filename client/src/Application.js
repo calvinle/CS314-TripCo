@@ -41,6 +41,7 @@ class Application extends Component {
             query: { // query TFFI
                 version: 3,
                 type: "query",
+                //limit: "3" @TODO: decide on the name (in this case, limit). Also, if the number is int or string
                 query: "",
                 places: [],
                 filters:[
