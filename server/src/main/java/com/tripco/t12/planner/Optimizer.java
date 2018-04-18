@@ -36,6 +36,7 @@ public class Optimizer {
     public ArrayList<Integer> twoOptTempDist;
 
     public ArrayList<Place> threeOptTempArray;
+    public ArrayList<Place> tempSwap;
     public ArrayList<Integer> threeOptTempDist;
 
     private boolean improve;
@@ -216,6 +217,7 @@ public class Optimizer {
     }
 
     private void ThreeOpt() {
+        tempSwap = new ArrayList<Place>();
         threeOptTempArray = tempArray;
         improve = true;
         while (improve) {
@@ -230,7 +232,10 @@ public class Optimizer {
         }
     }
 
-    public void ThreeOptReverse(int i, int j, int k){
+    public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
+        for (int b=j+1; b <= k; b++){
+            tempSwap.add(threeOptTempArray.get(b));
+        }
 
     }
 }
