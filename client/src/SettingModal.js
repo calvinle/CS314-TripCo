@@ -23,8 +23,10 @@ class SettingModal extends Component {
 
         let myArray1 = ["type", "title", "options", "places", "distances", "map"];
         let myArray2 = ["version","type", "title", "options", "places", "distances", "map"];
+        let myArray3 = ["version", "title", "type", "options", "places"];
         let key = [];
         let i;
+        let distFlag = false;
 
         for(let s in fileContents)
         {
@@ -55,14 +57,29 @@ class SettingModal extends Component {
             }
         }
 
+        else if (key.length === 5)
+        {
+            distFlag = true;
+            for (i = 0; i < 5; i++)
+            {
+                if (!fileContents.hasOwnProperty(myArray3[i]))
+                {
+
+                    return false;
+                }
+            }
+            return true;
+        }
+
         else
             return false;
 
-        if(fileContents.distances[0] !== 0)
-        {
-            fileContents.places.push(fileContents.places[0]);
-            fileContents.distances.unshift(0);
-            return true;
+        if(distFlag === false) {
+            if (fileContents.distances[0] !== 0) {
+                fileContents.places.push(fileContents.places[0]);
+                fileContents.distances.unshift(0);
+                return true;
+            }
         }
 
     }
@@ -79,17 +96,20 @@ class SettingModal extends Component {
         //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
         let file = event.target.files[0];
         if(!file) {
+            console.log("in not file");
             return;
         }
         let reader = new FileReader();
         reader.onload = function(event) {
             let fileContents = JSON.parse(event.target.result);
+            console.log("after fileContents");
             if(this.validTFFI(fileContents)){
-                this.setState({count: fileContents.places.length - 1});
+                console.log("in file validtffi file contents");
+                this.setState({count: fileContents.places.length-1});
                 this.props.updateTrip(fileContents);
-                this.props.updateCount(fileContents.places.length - 1);
             }
             else{
+                console.log("in else this alertmsg");
                 this.alertMsg();
             }
         }.bind(this);

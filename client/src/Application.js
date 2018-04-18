@@ -114,7 +114,22 @@ class Application extends Component {
     updateTrip(tffi) {
         console.log("updateTrip");
         console.log(tffi);
-        this.setState({trip: tffi});
+        if (typeof tffi.distances === 'undefined')
+        {
+            this.setState({
+                trip: {
+                        version: 3,
+                        type: "trip",
+                        title: tffi.title,
+                        options: tffi.options,
+                        places: tffi.places,
+                        distances: [],
+                        map: tffi.map }
+            } );
+        }
+        else
+            this.setState({trip: tffi});
+
     }
 
     updateConfig(tffi) {
