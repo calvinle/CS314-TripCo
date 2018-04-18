@@ -244,7 +244,7 @@ class Application extends Component {
                         </p>
                         <hr/>
 
-                        <SideDestinations config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
+                        <SideDestinations updateTitle={this.updateTitle} config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
 
                     </Col>
                     <Col sm={9}>

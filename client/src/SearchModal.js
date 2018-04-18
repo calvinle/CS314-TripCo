@@ -115,7 +115,7 @@ class SearchModal extends Component {
     render() {
         return (
             <span>
-                <Button color="secondary" size="sm" onClick={this.toggle}>
+                <Button color="secondary" onClick={this.toggle}>
                     Add a destination
                 </Button>
                 <Modal isOpen={this.state.modalOpen} toggle={this.toggle}>
@@ -140,7 +140,7 @@ class SearchModal extends Component {
                             <Col xs={7}>
 
                                 <InputGroup id="searchEntry">
-                                    <InputGroupAddon addonType="prepend"><Button color = "primary" onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
+                                    <InputGroupAddon addonType="append"><Button color = "primary" onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
                                     <Input id="search" placeholder="Search for..." type="text" />
                                 </InputGroup>
 

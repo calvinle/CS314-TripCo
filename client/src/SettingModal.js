@@ -8,14 +8,14 @@ import OptimizationOptions from "./OptimizationOptions";
 class SettingModal extends Component {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
         this.state = {
             settingsModalOpen: false,
             count:0
         };
-        this.loadTFFI = this.loadTFFI.bind(this);
         this.destroyClickedElement = this.destroyClickedElement.bind(this);
         this.saveTFFI = this.saveTFFI.bind(this);
+        this.reverse = this.reverse.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     validTFFI(fileContents)
@@ -64,7 +64,6 @@ class SettingModal extends Component {
             {
                 if (!fileContents.hasOwnProperty(myArray3[i]))
                 {
-
                     return false;
                 }
             }
@@ -96,20 +95,16 @@ class SettingModal extends Component {
         //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
         let file = event.target.files[0];
         if(!file) {
-            console.log("in not file");
             return;
         }
         let reader = new FileReader();
         reader.onload = function(event) {
             let fileContents = JSON.parse(event.target.result);
-            console.log("after fileContents");
             if(this.validTFFI(fileContents)){
-                console.log("in file validtffi file contents");
                 this.setState({count: fileContents.places.length-1});
                 this.props.updateTrip(fileContents);
             }
             else{
-                console.log("in else this alertmsg");
                 this.alertMsg();
             }
         }.bind(this);
@@ -143,6 +138,14 @@ class SettingModal extends Component {
         downloadLink.click();
     }
 
+    reverse(){
+        let temp = this.props.trip.places;
+        temp.reverse();
+        let testTrip = Object.assign({}, this.props.trip);
+        testTrip.places = temp;
+        this.props.updateTrip(testTrip);
+    }
+
     toggle() {
         this.setState({
             settingsModalOpen: !this.state.settingsModalOpen
@@ -152,14 +155,13 @@ class SettingModal extends Component {
     render() {
         return (
             <span>
-                <Button className="float-right" onClick={this.toggle}>
-                    Menu
+                <Button onClick={this.toggle}>
+                    Advanced options
                 </Button>
                 <Modal isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Menu</ModalHeader>
                     <ModalBody>
-                        <Button onClick={this.saveTFFI} type="button">Save</Button>
-                        <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />
+                        <Button color="secondary" onClick={this.reverse} type="button">Reverse trip order</Button>
                         {/*<h5>There are {this.state.count} destinations. </h5>*/}
                         <hr />
                         <DistanceOptions config = {this.props.config} query= {this.props.query} trip = {this.props.trip} updateUserDef={this.props.updateUserDef} updateOptions={this.props.updateOptions}/>
