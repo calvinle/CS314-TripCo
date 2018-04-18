@@ -239,9 +239,32 @@ public class Optimizer {
 
     public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
         //tempArray holds original
-        for (int b=j+1; b <= k; b++){
-            tempSwap.add(threeOptTempArray.get(b));
+
+        if (j-i > k-j){ //if first portion is bigger than latter
+            for (int b=i+1; b <= j; b++){   //copy bigger portion
+                tempSwap.add(threeOptTempArray.get(b));
+            }
+
+            int i2 = i+1;
+            for (int c=j+1; c <= k; c++){   //copy smaller portion into bigger
+                threeOptTempArray.set(i2, tempArray.get(c));
+                i2++;
+            }
+
+            for (int c=0; c < tempSwap.size(); c++){    //continue off
+                threeOptTempArray.set(i2, tempSwap.get(c));
+                i2++;
+            }
         }
+        else{   //if latter portion is bigger than former
+            for (int b=j+1; b <= k; b++){   //copy bigger portion
+                tempSwap.add(threeOptTempArray.get(b));
+            }
+
+            int j2=j+1;
+
+        }
+
 
     }
 }
