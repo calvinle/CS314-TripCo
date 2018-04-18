@@ -222,10 +222,15 @@ public class Optimizer {
         improve = true;
         while (improve) {
             improve = false;
-            for (int i = 0; i < threeOptTempArray.size() - 2; i++) {
-                for (int j = i + 1; j < threeOptTempArray.size() - 1; j++) {
-                    for (int k = j + 1; k < threeOptTempArray.size(); k++) {
-
+            for (int i = 0; i < tempArray.size() - 2; i++) {
+                for (int j = i + 1; j < tempArray.size() - 1; j++) {
+                    for (int k = j + 1; k < tempArray.size(); k++) {
+                        int currentDistance = NNhelper(tempArray.get(i), tempArray.get(j))
+                                + NNhelper(tempArray.get(j), tempArray.get(k)); //j+1 to k??
+                        //if <case1>
+                            //case 1 exchange
+                            //improve = true
+                            //continue;
                     }
                 }
             }
@@ -233,6 +238,7 @@ public class Optimizer {
     }
 
     public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
+        //tempArray holds original
         for (int b=j+1; b <= k; b++){
             tempSwap.add(threeOptTempArray.get(b));
         }
