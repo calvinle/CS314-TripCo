@@ -34,6 +34,10 @@ public class Optimizer {
 
     public ArrayList<Place> twoOptTempArray;
     public ArrayList<Integer> twoOptTempDist;
+
+    public ArrayList<Place> threeOptTempArray;
+    public ArrayList<Integer> threeOptTempDist;
+
     private boolean improve;
 
 
@@ -143,7 +147,7 @@ public class Optimizer {
         //Feed into 2Opt here. Use temp variables first
 
         //Feed NN to 2Opt
-        if (Double.parseDouble(trip.options.optimization) == 2){
+        if (Double.parseDouble(trip.options.optimization) == 2){ //@TODO: Change for 0-1 slider?
             //System.out.println("2opt");
             //twoOptTempArray = new Place[tempArray.size()];
             twoOptTempDist =  new ArrayList<Integer>();
@@ -153,8 +157,12 @@ public class Optimizer {
         }
         
         //Feed NN to 3Opt
-        //if (Double.parseDouble(trip.options.optimization) > 2){
-        //}
+        if (Double.parseDouble(trip.options.optimization) > 2){//@TODO: Change for 0-1 Slider
+            System.out.println("3opt");
+            threeOptTempDist = new ArrayList<Integer>();
+            ThreeOpt();
+
+        }
         
         //NN only
         else{
@@ -170,8 +178,7 @@ public class Optimizer {
     }
 
     private void TwoOpt(){
-        //tempArray, temptDist, can get distSum
-        twoOptTempArray = tempArray;    //copies tempArray
+        twoOptTempArray = tempArray;
         improve = true;
         while (improve){
             improve = false;
@@ -206,5 +213,9 @@ public class Optimizer {
             i++;
             k--;
         }
+    }
+
+    private void ThreeOpt(){
+
     }
 }
