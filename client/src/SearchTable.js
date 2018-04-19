@@ -26,8 +26,9 @@ class SearchTable extends Component {
         console.log("ANYTHING AT ALL");
         //let dests = this.props.query.places.map((item) => <td>{item.name}</td>);
         console.log(this.props.query);
-
-        return {dests,buttons};
+        let count = dests.length;
+        console.log(count);
+        return {dests,buttons, count};
     }
 
 
@@ -67,9 +68,12 @@ class SearchTable extends Component {
                 <tr>
                     {table.buttons}
                 </tr>
+
                 </tbody>
 
             </Table>
+            <br/>
+            <center>{table.count + " Locations Found"}</center>
             <div className="card-body">
                 <div className="input-group-prepend">
                     <div onClick={this.addButtonAll.bind(this)}>
