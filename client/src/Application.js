@@ -36,6 +36,7 @@ class Application extends Component {
                 type: "query",
                 query: "",
                 places: [],
+                limit: 0,
                 filters:[
                     {   "attribute" : "",
                         "values" : []

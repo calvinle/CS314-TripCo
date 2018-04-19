@@ -136,7 +136,6 @@ class SearchModal extends Component {
                                     <ModalFooter>
                                     </ModalFooter>
                                 </Modal>
-
                             </Col>
                             <Col xs={7}>
 
