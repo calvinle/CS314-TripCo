@@ -55,9 +55,18 @@ class Footer extends Component {
                         <Card>
                             <CardImg top width="100%" src="http://www.cs.colostate.edu/~calvinle/calvin.jpg" alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>Calvin Shmalvin</CardTitle>
-                                <CardSubtitle>911</CardSubtitle>
-                                <CardText>Who will go here?</CardText>
+                                <CardTitle>Calvin Michael Le</CardTitle>
+                                <CardSubtitle>calvin.md.le@gmail.com</CardSubtitle><br/>
+                                <CardText size={"small"}>Calvin lived in Los Angeles, California for most of his life before moving to Fort Collins for school, studying Computer Science.
+                                    His main interests in the field include Virtual Reality, machine learning, and big data.
+                                    His other hobbies include competitive weightlifting, dancing, and video games every now and then.
+                                    <br/><br/>
+                                    Calvin started dancing in middle school as a hobby, where he watched frame-by-frame recordings of live performances from Michael Jackson.
+                                    He has performed in many public events in his home county before taking up freestyle popping.
+                                    His early years of dancing built the foundation for his style in dancing today.
+                                    <br/><br/>
+                                    In 2016, Calvin decided to take up weightlifting in pursuit of a healthier lifestyle.
+                                    Since then, he has taken it to higher levels and aspires to reach the 1000 lbs. club, where the Deadlift, Bench Press, and Squat lifts sum to 1000lbs.</CardText>
                                 <CardLink href="#">Resume Link</CardLink>
                             </CardBody>
                         </Card>
