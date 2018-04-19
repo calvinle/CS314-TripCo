@@ -54,7 +54,7 @@ class InnerMap extends Component {
                     <Polyline path={this.makePath(this.props.trip.places)}
                         options={{ strokeColor: 'DeepSkyBlue' }}
                     />
-                    {this.makeMarkers(this.props.trip.places)}
+                    {/*{this.makeMarkers(this.props.trip.places)}*/}
                 </GoogleMap>
             );
         } else {

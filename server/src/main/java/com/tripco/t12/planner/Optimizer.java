@@ -143,7 +143,7 @@ public class Optimizer {
         //Feed into 2Opt here. Use temp variables first
 
         //Feed NN to 2Opt
-        if (Double.parseDouble(trip.options.optimization) == 2){
+        if (((Double.parseDouble(trip.options.optimization) >= .33 && Double.parseDouble(trip.options.optimization) < .66))){
             //System.out.println("2opt");
             //twoOptTempArray = new Place[tempArray.size()];
             twoOptTempDist =  new ArrayList<Integer>();
@@ -153,7 +153,7 @@ public class Optimizer {
         }
         
         //Feed NN to 3Opt
-        //if (Double.parseDouble(trip.options.optimization) > 2){
+        //if (Double.parseDouble(trip.options.optimization) >= .66){
         //}
         
         //NN only
