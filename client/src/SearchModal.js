@@ -120,6 +120,12 @@ class SearchModal extends Component {
                     <ModalHeader toggle={this.toggle}>Add a destination</ModalHeader>
                     <ModalBody>
                          <p> Type a destination in the box, then click search. </p>
+            
+                         <InputGroup size="sm">
+                             <InputGroupAddon addonType="prepend">Limit:</InputGroupAddon>
+                             <Input placeholder="Amount" type="number" step="1" />
+                         </InputGroup>
+            
                         <Row>
                             <Col xs={2}>
                                 {/*<Button onClick={this.toggleFilter}>Filter</Button>*/}
