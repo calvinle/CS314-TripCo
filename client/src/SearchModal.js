@@ -30,6 +30,7 @@ class SearchModal extends Component {
                 type: "query",
                 query: "",
                 places: [],
+                limit : 0,
                 filters:[
                     {   "attribute" : "",
                         "values" : []
@@ -79,7 +80,6 @@ class SearchModal extends Component {
         }
     }
 
-
     newQuery(arg) {
         //this.props.updateOptions(arg);
         console.log("in Database.js: ", arg);
@@ -101,16 +101,14 @@ class SearchModal extends Component {
 
     conditionalSearch(){
         if(this.state.query.query !== ""){
-            return <SearchTable query={this.state.query} addPlace = {this.props.addPlace} addEntryDB = {this.addEntryDB}/>
+            return <SearchTable query={this.state.query}
+                                addPlace={this.props.addPlace} addEntryDB={this.addEntryDB}/>
         }
     }
 
     fieldChange(event) {
         this.updateQuery(event.target.value);
     }
-
-
-
 
     render() {
         return (
@@ -122,25 +120,29 @@ class SearchModal extends Component {
                     <ModalHeader toggle={this.toggle}>Add a destination</ModalHeader>
                     <ModalBody>
                          <p> Type a destination in the box, then click search. </p>
+
                         <Row>
                             <Col xs={2}>
                                 {/*<Button onClick={this.toggleFilter}>Filter</Button>*/}
                                 <Modal isOpen={this.state.filterModal} toggle={this.toggleFilter}>
                                     <ModalHeader size ="sm" toggle={this.toggleFilter}>Pick Filters</ModalHeader>
                                     <ModalBody>
-                                        <p> Select as many filters as you'd like. When finished, click Save and then exit. </p>
-                                        <FilterOptions config = {this.props.config} query={this.props.query} updateQuery = {this.props.updateQuery}/>
+                                        <p> Select as many filters as you'd like.
+                                            When finished, click Save and then exit. </p>
+                                        <FilterOptions config = {this.props.config} query={this.props.query}
+                                                       updateQuery = {this.props.updateQuery}/>
                                         {/*<Button onClick={this.saveFilters} type="button">Save</Button>*/}
                                     </ModalBody>
                                     <ModalFooter>
                                     </ModalFooter>
                                 </Modal>
-
                             </Col>
                             <Col xs={7}>
 
                                 <InputGroup id="searchEntry">
-                                    <InputGroupAddon addonType="append"><Button color = "primary" onClick={this.updateQ} type="button">Search</Button></InputGroupAddon>
+                                    <InputGroupAddon addonType="append"><Button
+                                        addonType="append" color="primary" onClick={this.updateQ} type="button">Search
+                                    </Button></InputGroupAddon>
                                     <Input id="search" placeholder="Search for..." type="text" />
                                 </InputGroup>
 

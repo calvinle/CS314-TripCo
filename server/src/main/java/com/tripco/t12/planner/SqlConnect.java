@@ -5,93 +5,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SqlConnect {
-    // db configuration information
-    private String myDriver = "com.mysql.jdbc.Driver";
-    private String myUrl = "";
-    private String search = "";
-    // SQL queries to count the number of records and to retrieve the data
-    private String count = "";
-    private String username = "";
-    private String password = "";
 
-
-
-
-    SqlConnect(String incomingSearch, Filter s) {
-        if (System.getenv("TRAVIS") != null) {
-            //set db url to travis for testing
-            username = "TRAVIS";
-            myUrl = "localhost/testingDatabase";
-            System.out.println("USING TRAVIS!!!!!!!!!!!!!!!!!!!");
-        } else {
-            myUrl = "jbdc:mysql://faure.cs.colostate.edu/cs314";
-            username = "cs314-db";
-            password = "eiK5liet1uej";
-            System.out.println("NOT USING TRAVIS!!!!!!!!!!!!!!!!!!!");
-        }
-
-        setSearch(incomingSearch);
-
-        try {
-            Class.forName(this.myDriver);
-            // connect to the database and query
-            try (Connection conn = DriverManager.getConnection(this.myUrl, this.username, this.password);
-                 Statement stCount = conn.createStatement();
-                 Statement stQuery = conn.createStatement();
-                 ResultSet rsCount = stCount.executeQuery(this.count);
-                 ResultSet rsQuery = stQuery.executeQuery(this.search)
-            ) {
-                printJSON(rsCount, rsQuery);
-            }
-        } catch (Exception e) {
-            System.err.println("Exception: " + e.getMessage());
-        }
-    }
-
-    public void setSearch(String input) {
-        this.search = input;
-    }
-
-    private void printJSON(ResultSet count, ResultSet query) throws SQLException {
-        System.out.printf("\n{\n");
-        System.out.printf("\"type\": \"find\",\n");
-        System.out.printf("\"title\": \"%s\",\n", this.search);
-        System.out.printf("\"places\": [\n");
-
-        count.next();
-        int results = count.getInt(1);
-
-        while (query.next()) {
-            System.out.printf(" \"%s\"", query.getString("code"));
-            if (--results == 0)
-                System.out.printf("\n");
-            else
-                System.out.printf(",\n");
-        }
-        System.out.printf(" ]\n}\n");
-    }
-
-
-
-
-
-
-    // Arguments contain the username and password for the database
-    public static ArrayList <Place> getQ(String q, Filter[] filters) {
-
-        String query = q;
+    private static String getSqlQuery(String query, int limit, Filter[] filters) {
 
         StringBuilder stringBuilder = new StringBuilder();
+        String attribute = "";
+        String testStr = "";
 
-        //this is a NULL POINTER EXCEPTION when the /query is done.
-//         Pull all Values in filter object
+        if(limit == 0)
+        {
+            limit = 1000000;
+        }
+
         if(!filters[0].values.isEmpty()) {
 
             //find how many filter.values
             int size = filters[0].values.size() - 1;
 
             // Pull the attribute from the filter object
-            String attribute = filters[0].attribute;
+            attribute = filters[0].attribute;
 
             //Builds the values part of the SQL query string
             for (String s : filters[0].values) {
@@ -104,31 +36,30 @@ public class SqlConnect {
             }
 
             // Set string builder of complete value query string part to testStr
-            String testStr = stringBuilder.toString();
+            testStr = stringBuilder.toString();
 
-            //debug
-            System.out.println("Attribute: " + attribute);
-            System.out.println("query string: " + query);
-            System.out.println("filter list: " + testStr);
-
-            //Build complete query string
-            String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\") and (airports." + attribute + " = " + testStr + ");";
-
-            System.out.println("query string w/ filter: " + modQuery);
-
-            //set built SQL string to final query string to be used
-            query = modQuery;
         }
-        else {
 
-            String modQuery = "SELECT * FROM airports WHERE (id LIKE \"%" + query + "%\" or type like \"%" + query +
-                    "%\" or name like \"%" + query + "%\" or municipality like \"%" + query + "%\");";
+        return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
+                 + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')" 
+                 + " and (airports." + attribute + " = " + testStr + ")"
+                 + "LIMIT %2$d;", query, limit);
+    }
 
-            System.out.println("query string no filter: " + modQuery);
+    private static String getSqlQueryNoFilters(String query, int limit) {
 
-            query = modQuery;
+        if(limit == 0)
+        {
+            limit = 1000000;
         }
+
+        return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
+                  + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')"
+                  + "LIMIT %2$d;", query, limit);
+    }
+
+    // Arguments contain the username and password for the database
+    public static ArrayList <Place> getQ(String q, Filter[] filters, int limit) {
 
         ArrayList<String> rQ= new ArrayList<String>();
         ArrayList<Place> placeList = new ArrayList<Place>();
@@ -136,8 +67,17 @@ public class SqlConnect {
         String Regpassword;
         String myDriver = "com.mysql.jdbc.Driver"; // add dependencies in pom.xml
         String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
-        //String myUrl1 = "jdbc:mysql://localhost/testingDatabase";
+        String query = q;
+        StringBuilder stringBuilder = new StringBuilder();
 
+        if(!filters[0].values.isEmpty()) {
+            query = getSqlQuery(query, limit, filters);
+            System.out.println("query string filter: " + query);
+        }
+        else {
+            query = getSqlQueryNoFilters(query, limit);
+            System.out.println("query string no filter: " + query);
+        }
 
         if (System.getenv("TRAVIS") != null)
         {
@@ -208,7 +148,7 @@ public class SqlConnect {
         System.out.println("Filters value: " + filters[0].values);
 
         //filters.add("medium_airport");
-        getQ("Aspen", filters);
+        getQ("Aspen", filters, 3);
         //getQ("SELECT * FROM airports where name like 'fly%' or id like 'fly%' or municipality like 'fly%'");
     }
 }

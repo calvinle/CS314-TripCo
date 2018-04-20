@@ -2,17 +2,10 @@ import React, {Component} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import {Container, Row, Col, Table} from 'reactstrap';
-import Map from './Map';
 import Itinerary from './Itinerary';
-import Options from './Options';
-import Destinations from './Destinations';
-import Trip from './Trip';
-import Dropdown from './Dropdown';
-import Database from "./Database";
 import '../css/styles.css';
 import SideDestinations from "./SideDestinations";
 import GoogleMapDisplay from './GoogleMapDisplay';
-import FilterOptions from "./FilterOptions";
 
 /* Renders the application.
  * Holds the destinations and options state shared with the trip.
@@ -44,6 +37,7 @@ class Application extends Component {
                 //limit: "3" @TODO: decide on the name (in this case, limit). Also, if the number is int or string
                 query: "",
                 places: [],
+                limit: 0,
                 filters:[
                     {   "attribute" : "",
                         "values" : []
@@ -245,7 +239,9 @@ class Application extends Component {
                         </p>
                         <hr/>
 
-                        <SideDestinations updateTitle={this.updateTitle} config ={this.state.config} addPlace={this.addPlace} query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} updateTrip={this.updateTrip}/>
+                        <SideDestinations updateTitle={this.updateTitle} config ={this.state.config} addPlace={this.addPlace}
+                                          query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip}
+                                          updateTrip={this.updateTrip} updateOptimization={this.updateOptimization} updateOptions={this.updateOptions}/>
 
                     </Col>
                     <Col sm={9}>

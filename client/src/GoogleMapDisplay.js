@@ -38,7 +38,7 @@ class InnerMap extends Component {
         this.mapRender();
     }
 
-    componentWillRecieveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (JSON.stringify(this.props.trip.places) !== JSON.stringify(nextProps.trip.places)) {
             this.mapRender();
         }
@@ -54,7 +54,7 @@ class InnerMap extends Component {
                     <Polyline path={this.makePath(this.props.trip.places)}
                         options={{ strokeColor: 'DeepSkyBlue' }}
                     />
-                    {this.makeMarkers(this.props.trip.places)}
+                    {/*{this.makeMarkers(this.props.trip.places)}*/}
                 </GoogleMap>
             );
         } else {

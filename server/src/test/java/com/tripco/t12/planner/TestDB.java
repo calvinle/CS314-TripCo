@@ -53,7 +53,7 @@ public class TestDB {
             Place res = new Place();
             ArrayList<Place> placeList = new ArrayList<Place>();
 
-            placeList = (SqlConnect.getQ("aspen", filters));
+            placeList = (SqlConnect.getQ("aspen", filters, 0));
 
             res = placeList.get(0);
 

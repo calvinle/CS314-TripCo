@@ -12,13 +12,14 @@ public class Query
     public ArrayList<Place> places;
     public int limit = 3; //@TODO: Check compatability in Application.js, under query TFFI. Limits places?
     public Filter[] filters;
+    public int limit;
 
     public void database()
     {
         ArrayList<Place> test = new ArrayList<Place>();
         //Filter filters = new Filter();
 
-        test = SqlConnect.getQ(query, filters);
+        test = SqlConnect.getQ(query, filters, limit);
 
         // '/query/ fix- comment this line out
         System.out.println("in database: Filters: " + filters[0].values + filters[0].attribute);
@@ -38,7 +39,7 @@ public class Query
         filter[0].attribute = "trip";
         filter[0].values.add("heliport");
 
-        test = SqlConnect.getQ(query.query, filter);
+        test = SqlConnect.getQ(query.query, filter, 3);
 
     }
 

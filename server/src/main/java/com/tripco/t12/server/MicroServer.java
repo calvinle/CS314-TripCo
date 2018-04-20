@@ -132,7 +132,7 @@ public class MicroServer {
               "\"version\" : 3, " +
               "\"filters\": " + filters() + ", " +
               "\"maps\": [\"svg\", \"kml\"], " +
-              "\"optimization\": 2," +
+              "\"optimization\": 3," +
               "\"units\": " + Arrays.toString(units()) + "}";
   }
 
