@@ -236,6 +236,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(k))
                             + NNhelper(tempArray.get(j), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 6
@@ -243,6 +246,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
                             + NNhelper(tempArray.get(j), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 5
@@ -250,6 +256,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(k+1))
                             + NNhelper(tempArray.get(j), tempArray.get(k)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 4
@@ -257,6 +266,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(k))
                             + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 3
@@ -264,6 +276,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(j), tempArray.get(j+1))
                             + NNhelper(tempArray.get(i+1), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 2
@@ -271,6 +286,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(j), tempArray.get(k))
                             + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
 
                         //Case 1
@@ -278,6 +296,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
                             + NNhelper(tempArray.get(k+1), tempArray.get(k+1)) < currentDistance){
 
+                            //Exchange
+                            improve=true;
+                            continue;
                         }
                     }
                 }
