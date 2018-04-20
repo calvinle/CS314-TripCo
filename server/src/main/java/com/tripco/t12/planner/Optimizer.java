@@ -225,12 +225,60 @@ public class Optimizer {
             for (int i = 0; i < tempArray.size() - 2; i++) {
                 for (int j = i + 1; j < tempArray.size() - 1; j++) {
                     for (int k = j + 1; k < tempArray.size(); k++) {
-                        int currentDistance = NNhelper(tempArray.get(i), tempArray.get(j))
-                                + NNhelper(tempArray.get(j), tempArray.get(k)); //j+1 to k??
-                        //if <case1>
-                            //case 1 exchange
-                            //improve = true
-                            //continue;
+                        //currentDistance with present i,j,k. Measures distance between all 3 edges
+                        int currentDistance = NNhelper(tempArray.get(i), tempArray.get(i+1))
+                                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
+                                            + NNhelper(tempArray.get(k), tempArray.get(k+1));
+
+                        //Go backwards from slide diagram (most to least complex)
+                        //Case 7
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
+                            + NNhelper(tempArray.get(j), tempArray.get(k+1)) < currentDistance){
+
+                        }
+
+                        //Case 6
+                        if (NNhelper(tempArray.get(i), tempArray.get(k))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(k+1)) < currentDistance){
+
+                        }
+
+                        //Case 5
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(k)) < currentDistance){
+
+                        }
+
+                        //Case 4
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
+                            + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
+
+                        }
+
+                        //Case 3
+                        if (NNhelper(tempArray.get(i), tempArray.get(k))
+                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k+1)) < currentDistance){
+
+                        }
+
+                        //Case 2
+                        if (NNhelper(tempArray.get(i), tempArray.get(i+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(k))
+                            + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
+
+                        }
+
+                        //Case 1
+                        if (NNhelper(tempArray.get(i), tempArray.get(j))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(k+1), tempArray.get(k+1)) < currentDistance){
+
+                        }
                     }
                 }
             }

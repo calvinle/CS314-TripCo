@@ -10,7 +10,6 @@ public class Query
     public String type = "query";
     public String query;
     public ArrayList<Place> places;
-    public int limit = 3; //@TODO: Check compatability in Application.js, under query TFFI. Limits places?
     public Filter[] filters;
 
     public void database()
