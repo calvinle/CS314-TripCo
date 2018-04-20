@@ -23,7 +23,7 @@ class Footer extends Component {
 
   render() {
     return (
-        <div id="footer" className="jumbotron" style={{"background-color": "#1E4D2B", "color":"white"}}>
+        <div id="footer" className="jumbotron" style={{"backgroundColor": "#1E4D2B", "color":"white"}}>
           {<img src={"http://www.cs.colostate.edu/~cs314/images/CSU-Official-wrdmrk-357-617_Rev.png"}/> }
           <h5 align="middle">
 

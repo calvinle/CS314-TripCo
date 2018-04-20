@@ -38,7 +38,7 @@ class InnerMap extends Component {
         this.mapRender();
     }
 
-    componentWillRecieveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (JSON.stringify(this.props.trip.places) !== JSON.stringify(nextProps.trip.places)) {
             this.mapRender();
         }
