@@ -249,6 +249,7 @@ public class Optimizer {
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
                             //Swap above SubArrays
+                          //ThreeOptExchange(i,j,k);
                             improve=true;
                             continue;
                         }
@@ -261,7 +262,9 @@ public class Optimizer {
                             //i+1 to j: Reverse
                             ThreeOptReverse(i+1, j);
                             //j+1 to k: Untouched
+
                             //Swap above SubArrays
+                          //ThreeOptExchange(i,j,k);
                             improve=true;
                             continue;
                         }
@@ -274,7 +277,9 @@ public class Optimizer {
                             //i+1 to j: Untouched
                             //j+1 to k: Reverse
                             ThreeOptReverse(j+1, k);
+
                             //Swap above SubArrays
+                          //ThreeOptExchange(i,j,k);
                             improve=true;
                             continue;
                         }
