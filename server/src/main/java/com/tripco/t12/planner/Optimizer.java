@@ -247,9 +247,8 @@ public class Optimizer {
 
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
-                            //Swap above SubArrays
-                          //ThreeOptExchange(i,j,k);
-                            improve=true;
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -260,10 +259,8 @@ public class Optimizer {
 
                             ThreeOptReverse(i+1, j);//i+1 to j: Reverse
                             //j+1 to k: Untouched
-
-                            //Swap above SubArrays
-                          //ThreeOptExchange(i,j,k); Swap above Arrays
-                            improve=true;
+                            ThreeOptExchange(i,j,k); //Swap above Arrays
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -273,12 +270,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(k+1)) < currentDistance){
 
                             //i+1 to j: Untouched
-                            //j+1 to k: Reverse
-                            ThreeOptReverse(j+1, k);
-
-                            //Swap above SubArrays
-                          //ThreeOptExchange(i,j,k);
-                            improve=true;
+                            ThreeOptReverse(j+1, k); //j+1 to k: Reverse
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -287,11 +281,11 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(k))
                             + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
 
-                            //i+1 to j: Reverse
-                          ThreeOptReverse(i+1, j);
-                            //j+1 to k: Reverse
-                          ThreeOptReverse(j+1, k);
-                            improve=true;
+
+                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            ThreeOptReverse(j+1, k); //j+1 to k: Reverse
+                            //No swap
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -300,9 +294,11 @@ public class Optimizer {
                             + NNhelper(tempArray.get(j), tempArray.get(j+1))
                             + NNhelper(tempArray.get(i+1), tempArray.get(k+1)) < currentDistance){
 
-                            //i+1 to k: Reverse
-                          ThreeOptReverse(i+1, k);
-                            improve=true;
+
+                            ThreeOptReverse(i+1, k); //i+1 to k: Reverse
+                            //j+1 to k: Untouched
+                            //No swap
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -312,8 +308,9 @@ public class Optimizer {
                             + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
 
                             //i+1 to j: Untouched
-                          ThreeOptReverse(j+1, k);//j+1 to k: Reverse
-                            improve=true;
+                            ThreeOptReverse(j+1, k);//j+1 to k: Reverse
+                            //No swap
+                            ThreeOptImprove();
                             continue;
                         }
 
@@ -322,9 +319,10 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
                             + NNhelper(tempArray.get(k+1), tempArray.get(k+1)) < currentDistance){
 
-                          ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
                             // j+1 to k: Untouched
-                            improve=true;
+                            //No swap
+                            ThreeOptImprove();
                             continue;
                         }
                     }
@@ -376,5 +374,16 @@ public class Optimizer {
         }
 
 
+    }
+
+    public void ThreeOptImprove(){
+        improve = true;
+        threeOptTempDist = sumList(threeOptTempArray);
+        int sum = distSum(threeOptTempDist);
+        if (sum < tripDist){
+            tripDist = sum;
+            finDist = threeOptTempDist;
+            finArray = threeOptTempArray;
+        }
     }
 }
