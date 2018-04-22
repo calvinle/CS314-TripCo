@@ -227,7 +227,6 @@ public class Optimizer {
     }
 
     private void ThreeOpt() {
-        tempSwap = new ArrayList<Place>();
         threeOptTempArray = tempArray;
         improve = true;
         while (improve) {
@@ -259,12 +258,11 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
                             + NNhelper(tempArray.get(j), tempArray.get(k+1)) < currentDistance){
 
-                            //i+1 to j: Reverse
-                            ThreeOptReverse(i+1, j);
+                            ThreeOptReverse(i+1, j);//i+1 to j: Reverse
                             //j+1 to k: Untouched
 
                             //Swap above SubArrays
-                          //ThreeOptExchange(i,j,k);
+                          //ThreeOptExchange(i,j,k); Swap above Arrays
                             improve=true;
                             continue;
                         }
@@ -314,8 +312,7 @@ public class Optimizer {
                             + NNhelper(tempArray.get(j+1), tempArray.get(k+1)) < currentDistance){
 
                             //i+1 to j: Untouched
-                            //j+1 to k: Reverse
-                          ThreeOptReverse(j+1, k);
+                          ThreeOptReverse(j+1, k);//j+1 to k: Reverse
                             improve=true;
                             continue;
                         }
@@ -325,9 +322,8 @@ public class Optimizer {
                             + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
                             + NNhelper(tempArray.get(k+1), tempArray.get(k+1)) < currentDistance){
 
-                            //i+1 to j: Reverse
-                          ThreeOptReverse(i+1, j);
-                            //j+1 to k: Untouched
+                          ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            // j+1 to k: Untouched
                             improve=true;
                             continue;
                         }
@@ -338,30 +334,44 @@ public class Optimizer {
     }
 
     public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
-        //tempArray holds original
-
-        if (j-i > k-j){ //if first portion is bigger than latter
-            for (int b=i+1; b <= j; b++){   //copy bigger portion
-                tempSwap.add(threeOptTempArray.get(b));
+        //i already refers to i+1
+        //tempArray holds bigger subArray
+        tempSwap.clear();
+        int i2;
+        if (k-j > j-i+1){   //Latter subArray size> former subArray size
+            tempSwap = new ArrayList<Place>(k-j);   //size of tempSwap
+            for (int b=j+1; b <= k; b++){   //copy bigger subArray to tempSwap
+                tempSwap.add(tempArray.get(b));
             }
 
-            int i2 = i+1;
+            i2=i;
+            for (int c=k-(j+1)+2; c <= k; c++){
+                threeOptTempArray.set(c, tempArray.get(i2));
+                i2++;
+            }
+
+            i2=i;
+            for (int d=0; d < tempSwap.size(); d++){
+                threeOptTempArray.set(i2, tempSwap.get(d));
+            }
+        }
+
+        else if (j-i+1 >= k-j){ //SubArray >= Latter subArray
+            tempSwap = new ArrayList<Place>(j-i+1);
+            for (int b=i; b <= j; b++){
+                tempSwap.add(tempArray.get(b));
+            }
+
+            i2=i;
             for (int c=j+1; c <= k; c++){   //copy smaller portion into bigger
                 threeOptTempArray.set(i2, tempArray.get(c));
                 i2++;
             }
 
-            for (int c=0; c < tempSwap.size(); c++){    //continue off
-                threeOptTempArray.set(i2, tempSwap.get(c));
+            for (int d=0; d < tempSwap.size(); d++){    //continue off
+                threeOptTempArray.set(i2, tempSwap.get(d));
                 i2++;
             }
-        }
-        else{   //if latter portion is bigger than former
-            for (int b=j+1; b <= k; b++){   //copy bigger portion
-                tempSwap.add(threeOptTempArray.get(b));
-            }
-
-            int j2=j+1;
 
         }
 
