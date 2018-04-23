@@ -48,8 +48,8 @@ class Footer extends Component {
                                     Tom is currently working on a personal project with his car- including sequential LEDs for brake lights an an in-car interface for controlling them.<br></br><br></br>
                                     Check it out on GitHub below.
                                 </CardText>
-                                <CardLink href="http://www.cs.colostate.edu/~tomcavey/">Resume Link</CardLink>
-                                <CardLink href="https://github.com/tc30/Volvo-C30-Sequential-LEDs">GitHub Link</CardLink>
+                                <CardLink href="http://www.cs.colostate.edu/~tomcavey/">Resume</CardLink>
+                                <CardLink href="https://github.com/tc30/Volvo-C30-Sequential-LEDs">GitHub</CardLink>
                             </CardBody>
                         </Card>
                         <Card>
@@ -67,16 +67,16 @@ class Footer extends Component {
                                     <br/><br/>
                                     In 2016, Calvin decided to take up weightlifting in pursuit of a healthier lifestyle.
                                     Since then, he has taken it to higher levels and aspires to reach the 1000 lbs. club, where the Deadlift, Bench Press, and Squat lifts sum to 1000lbs.</CardText>
-                                <CardLink href="#">Resume Link</CardLink>
+                                <CardLink href="#">Resume</CardLink>
                             </CardBody>
                         </Card>
                         <Card>
-                            <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+                            <CardImg top width="100%" src="http://www.cs.colostate.edu/~wschoon/me.JPG" alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>Name</CardTitle>
-                                <CardSubtitle>contact info?</CardSubtitle>
-                                <CardText>type something in here</CardText>
-                                <CardLink href="#">Resume Link</CardLink>
+                                <CardTitle>Charlie Schoonover</CardTitle>
+                                <CardSubtitle>wcschoonover@gmail.com</CardSubtitle>
+                                <CardText>Charlie is a software engineer at New Century Software. He enjoys movies, video games, snowboarding, and solving problems with a team.</CardText>
+                                <CardLink href="http://www.cs.colostate.edu/~wschoon/">Resume</CardLink>
                             </CardBody>
                         </Card>
                         <Card>
@@ -85,7 +85,7 @@ class Footer extends Component {
                                 <CardTitle>Name</CardTitle>
                                 <CardSubtitle>contact info?</CardSubtitle>
                                 <CardText>blah blah blah</CardText>
-                                <CardLink href="#">Resume Link</CardLink>
+                                <CardLink href="#">Resume</CardLink>
                             </CardBody>
                         </Card>
                     </CardGroup>
