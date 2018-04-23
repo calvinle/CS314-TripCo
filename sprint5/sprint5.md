@@ -55,8 +55,8 @@ Story Points |  48  | *value*
 
 Date | Tasks done  | Tasks in progress | Impediments 
 :--- | :--- | :--- | :--- 
-*date* | *@task only* | *@task only* | none
- | | | 
+4/19 | Map Markers, Query Count, Slider Step, Repo Clean | 3Opt | none
+4/20 | About Section Section and Query Limit | 3Opt | Swap Algorithm Branching
  
 
 ## Review
