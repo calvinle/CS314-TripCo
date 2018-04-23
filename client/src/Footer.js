@@ -80,12 +80,18 @@ class Footer extends Component {
                             </CardBody>
                         </Card>
                         <Card>
-                            <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+                            <CardImg top width="100%" src="http://www.cs.colostate.edu/~henryjb9/html.jpg" alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>Name</CardTitle>
-                                <CardSubtitle>contact info?</CardSubtitle>
-                                <CardText>blah blah blah</CardText>
-                                <CardLink href="#">Resume</CardLink>
+                                <CardTitle>Josh Henry</CardTitle>
+                                <CardSubtitle>josh.b.henry@gmail.com</CardSubtitle>
+                                <CardText>Josh is a 3rd year Computer Science Student at Colorado
+                                    State. He has been learning code since high school.
+                                    He likes music, movies, and biking. CS314 has created an interest
+                                    for him in both web development and software development
+                                <br/><br/>
+                                Josh has always been fascinated by games and games development. His dream job has always been to work at Valve Software in Seattle, which he toured Winter of 2018.
+                                However, during that time he became interested in both VR development and Architectural Visualization. He is exploring these hobbies all the time.</CardText>
+                                <CardLink href="http://www.cs.colostate.edu/~henryjb9/">Resume</CardLink>
                             </CardBody>
                         </Card>
                     </CardGroup>
