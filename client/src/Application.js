@@ -228,8 +228,6 @@ class Application extends Component {
                         updateOptions={this.updateOptions} updateCount = {this.updateCount}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
-                        {/*Destinations*/}
-                        {/*<p>There are {this.state.count} destinations. </p>*/}
                         <p>
 
                         </p>
@@ -246,28 +244,6 @@ class Application extends Component {
                     <Col sm={9}>
                         <div id="map"></div>
                         <Row className="show-grid">
-                            {/*<Col sm={12}>
-                                <Options options={this.state.trip.options} config={this.state.config}
-                                         updateOptions={this.updateOptions} updateUserDef={this.updateUserDef}
-                                         updateOptimization={this.updateOptimization}/>
-                            </Col>*/}
-
-                            {/*<Col sm={12}>
-                                <Dropdown trip={this.state.trip} config={this.state.config}
-                                          updateStart={this.updateStart}
-                                          reduceList={this.reduceList}/>
-                            </Col>*/}
-
-                            {/*<Col sm={12}>
-                                <Destinations trip={this.state.trip} config={this.state.config}
-                                              updateTrip={this.updateTrip}/>
-                            </Col>*/}
-                            {/*<Col sm={12}>
-                                <Database trip={this.state.trip} config={this.state.config} addPlace={this.addPlace}/>
-                            </Col>*/}
-                            {/*<Col sm={12}>
-                                <Trip trip={this.state.trip} config={this.state.config} updateTrip={this.updateTrip}/>
-                            </Col>*/}
                             <Col sm={12}>
                                 <div id="trip" className="card border-0 border-dark">
                                     <div className="card-body">
