@@ -45,7 +45,7 @@ class Footer extends Component {
                                 <CardSubtitle>tcavey@me.com</CardSubtitle><br></br>
                                 <CardText size="small">Tom strives to foster a team culture focused on development, teamwork, and enthusiasm for learning.<br></br><br></br>
                                     After working at the Genius Bar in numerous Apple Retail locations, he decided to further his education by studying Computer Science at Colorado State University.<br></br><br></br>
-                                    Tom is currently working on a personal project with his car- including sequential LEDs for brake lights an an in-car interface for controlling them.<br></br><br></br>
+                                    Tom is currently working on a personal project with his car- including sequential LEDs for brake lights with an in-car interface for controlling them.<br></br><br></br>
                                     Check it out on GitHub below.
                                 </CardText>
                                 <CardLink href="http://www.cs.colostate.edu/~tomcavey/">Resume</CardLink>
@@ -60,13 +60,7 @@ class Footer extends Component {
                                 <CardText size={"small"}>Calvin lived in Los Angeles, California for most of his life before moving to Fort Collins for school, studying Computer Science.
                                     His main interests in the field include Virtual Reality, machine learning, and big data.
                                     His other hobbies include competitive weightlifting, dancing, and video games every now and then.
-                                    <br/><br/>
-                                    Calvin started dancing in middle school as a hobby, where he watched frame-by-frame recordings of live performances from Michael Jackson.
-                                    He has performed in many public events in his home county before taking up freestyle popping.
-                                    His early years of dancing built the foundation for his style in dancing today.
-                                    <br/><br/>
-                                    In 2016, Calvin decided to take up weightlifting in pursuit of a healthier lifestyle.
-                                    Since then, he has taken it to higher levels and aspires to reach the 1000 lbs. club, where the Deadlift, Bench Press, and Squat lifts sum to 1000lbs.</CardText>
+                                   </CardText>
                                 <CardLink href="#">Resume</CardLink>
                             </CardBody>
                         </Card>
