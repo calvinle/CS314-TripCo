@@ -45,7 +45,7 @@ class Footer extends Component {
                                 <CardSubtitle>tcavey@me.com</CardSubtitle><br></br>
                                 <CardText size="small">Tom strives to foster a team culture focused on development, teamwork, and enthusiasm for learning.<br></br><br></br>
                                     After working at the Genius Bar in numerous Apple Retail locations, he decided to further his education by studying Computer Science at Colorado State University.<br></br><br></br>
-                                    Tom is currently working on a personal project with his car- including sequential LEDs for brake lights an an in-car interface for controlling them.<br></br><br></br>
+                                    Tom is currently working on a personal project with his car- including sequential LEDs for brake lights with an in-car interface for controlling them.<br></br><br></br>
                                     Check it out on GitHub below.
                                 </CardText>
                                 <CardLink href="http://www.cs.colostate.edu/~tomcavey/">Resume</CardLink>
@@ -60,13 +60,7 @@ class Footer extends Component {
                                 <CardText size={"small"}>Calvin lived in Los Angeles, California for most of his life before moving to Fort Collins for school, studying Computer Science.
                                     His main interests in the field include Virtual Reality, machine learning, and big data.
                                     His other hobbies include competitive weightlifting, dancing, and video games every now and then.
-                                    <br/><br/>
-                                    Calvin started dancing in middle school as a hobby, where he watched frame-by-frame recordings of live performances from Michael Jackson.
-                                    He has performed in many public events in his home county before taking up freestyle popping.
-                                    His early years of dancing built the foundation for his style in dancing today.
-                                    <br/><br/>
-                                    In 2016, Calvin decided to take up weightlifting in pursuit of a healthier lifestyle.
-                                    Since then, he has taken it to higher levels and aspires to reach the 1000 lbs. club, where the Deadlift, Bench Press, and Squat lifts sum to 1000lbs.</CardText>
+                                   </CardText>
                                 <CardLink href="#">Resume</CardLink>
                             </CardBody>
                         </Card>
@@ -80,12 +74,18 @@ class Footer extends Component {
                             </CardBody>
                         </Card>
                         <Card>
-                            <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
+                            <CardImg top width="100%" src="http://www.cs.colostate.edu/~henryjb9/html.jpg" alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>Name</CardTitle>
-                                <CardSubtitle>contact info?</CardSubtitle>
-                                <CardText>blah blah blah</CardText>
-                                <CardLink href="#">Resume</CardLink>
+                                <CardTitle>Josh Henry</CardTitle>
+                                <CardSubtitle>josh.b.henry@gmail.com</CardSubtitle>
+                                <CardText>Josh is a 3rd year Computer Science Student at Colorado
+                                    State. He has been learning code since high school.
+                                    He likes music, movies, and biking. CS314 has created an interest
+                                    for him in both web development and software development
+                                <br/><br/>
+                                Josh has always been fascinated by games and games development. His dream job has always been to work at Valve Software in Seattle, which he toured Winter of 2018.
+                                However, during that time he became interested in both VR development and Architectural Visualization. He is exploring these hobbies all the time.</CardText>
+                                <CardLink href="http://www.cs.colostate.edu/~henryjb9/">Resume</CardLink>
                             </CardBody>
                         </Card>
                     </CardGroup>
