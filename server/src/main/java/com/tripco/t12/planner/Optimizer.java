@@ -34,6 +34,11 @@ public class Optimizer {
 
     public ArrayList<Place> twoOptTempArray;
     public ArrayList<Integer> twoOptTempDist;
+
+    public ArrayList<Place> threeOptTempArray;
+    public ArrayList<Place> tempSwap;
+    public ArrayList<Integer> threeOptTempDist;
+
     private boolean improve;
 
 
@@ -153,8 +158,11 @@ public class Optimizer {
         }
         
         //Feed NN to 3Opt
-        //if (Double.parseDouble(trip.options.optimization) >= 1){
-        //}
+        if (Double.parseDouble(trip.options.optimization) >= 1){
+            threeOptTempDist = new ArrayList<Integer>();
+            tempSwap = new ArrayList<Place>();
+            ThreeOpt();
+        }
         
         //NN only
         else{
@@ -207,4 +215,182 @@ public class Optimizer {
             k--;
         }
     }
+
+    public void ThreeOptReverse(int a, int b){
+        while (a < b){
+            Place tempPlace = threeOptTempArray.get(a);
+            threeOptTempArray.set(a, threeOptTempArray.get(b));
+            threeOptTempArray.set(b, tempPlace);
+            a++;
+            b--;
+        }
+    }
+
+    private void ThreeOpt() {
+        threeOptTempArray = tempArray;
+        improve = true;
+        while (improve) {
+            improve = false;
+            for (int i = 0; i < tempArray.size() - 3; i++) {
+                for (int j = i + 1; j < tempArray.size() - 2; j++) {
+                    for (int k = j + 1; k < tempArray.size()-1; k++) {
+                        int newK = k+1;
+                        if (newK == tempArray.size()){
+                            newK = 0;
+                        }
+                        //System.out.println("i: " + i + " j: " + j + " k: " + k);
+                        //currentDistance with present i,j,k. Measures distance between all 3 edges
+                        int currentDistance = NNhelper(tempArray.get(i), tempArray.get(i+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(k), tempArray.get(newK));
+
+                        //Go backwards from slide diagram (most to least complex)
+                        //Case 7
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
+                            + NNhelper(tempArray.get(j), tempArray.get(newK)) < currentDistance){
+
+                            //i+1 to j: Untouched
+                            //j+1 to k: Untouched
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 6
+                        if (NNhelper(tempArray.get(i), tempArray.get(k))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(newK)) < currentDistance){
+
+                            ThreeOptReverse(i+1, j);//i+1 to j: Reverse
+                            //j+1 to k: Untouched
+                            ThreeOptExchange(i,j,k); //Swap above Arrays
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 5
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(k))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(newK)) < currentDistance){
+
+                            //i+1 to j: Untouched
+                            ThreeOptReverse(j+1, k); //j+1 to k: Reverse
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 4
+                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
+                            + NNhelper(tempArray.get(j+1), tempArray.get(newK)) < currentDistance){
+
+
+                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            ThreeOptReverse(j+1, k); //j+1 to k: Reverse
+                            //No swap
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 3
+                        if (NNhelper(tempArray.get(i), tempArray.get(k))
+                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(newK)) < currentDistance){
+
+
+                            ThreeOptReverse(i+1, k); //i+1 to k: Reverse
+                            //j+1 to k: Untouched
+                            //No swap
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 2
+                        if (NNhelper(tempArray.get(i), tempArray.get(i+1))
+                            + NNhelper(tempArray.get(j), tempArray.get(k))
+                            + NNhelper(tempArray.get(j+1), tempArray.get(newK)) < currentDistance){
+
+                            //i+1 to j: Untouched
+                            ThreeOptReverse(j+1, k);//j+1 to k: Reverse
+                            //No swap
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 1
+                        if (NNhelper(tempArray.get(i), tempArray.get(j))
+                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
+                            + NNhelper(tempArray.get(k), tempArray.get(newK)) < currentDistance){
+
+                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            // j+1 to k: Untouched
+                            //No swap
+                            ThreeOptImprove();
+                            continue;
+                        }
+                    }
+                }
+            }
+            return;
+        }
+    }
+
+    public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
+        //i already refers to i+1
+        tempSwap.clear();
+        int i2;
+        if (k-j > j-i+1){   //Latter subArray size> former subArray size
+            tempSwap = new ArrayList<Place>(k-j);   //size of tempSwap
+            for (int b=j+1; b <= k; b++){   //copy bigger subArray to tempSwap
+                tempSwap.add(tempArray.get(b));
+            }
+            i2=i;
+            //36, 37, 48
+            for (int c=k-(j+1)+2; c <= k; c++){
+                //System.out.println(c);
+                threeOptTempArray.set(c, tempArray.get(i2));
+                i2++;
+            }
+
+            i2=i;
+            for (int d=0; d < tempSwap.size(); d++){
+                threeOptTempArray.set(i2, tempSwap.get(d));
+                i2++;
+            }
+        }
+
+        else if (j-i+1 >= k-j){ //SubArray >= Latter subArray
+            tempSwap = new ArrayList<Place>(j-i+1);
+            for (int b=i; b <= j; b++){
+                tempSwap.add(tempArray.get(b));
+            }
+
+            i2=i;
+            for (int c=j+1; c <= k; c++){   //copy smaller portion into bigger
+                threeOptTempArray.set(i2, tempArray.get(c));
+                i2++;
+            }
+
+            for (int d=0; d < tempSwap.size(); d++){    //continue off
+                threeOptTempArray.set(i2, tempSwap.get(d));
+                i2++;
+            }
+        }
+        return;
+    }
+
+    public void ThreeOptImprove(){
+        improve = true;
+        threeOptTempDist = sumList(threeOptTempArray);
+        int sum = distSum(threeOptTempDist);
+        if (sum < tripDist){
+            System.out.println("3Opt Dist: " + sum);
+            tripDist = sum;
+            finDist = threeOptTempDist;
+            finArray = threeOptTempArray;
+        }
+    }
+
 }
