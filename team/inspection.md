@@ -32,4 +32,5 @@ Trip:214-220| methods return the same value. can combine into one method? | m | 
 SQLConnect:64| unused variable |l | Calvin |
 SQLConnect:68| unused variable |l | Calvin |
 SQLConnect:71| unused variable |l | Calvin |
+Trip:212| method is not used anymore, used to bound to CO coords. | h | Tom | 403
  
