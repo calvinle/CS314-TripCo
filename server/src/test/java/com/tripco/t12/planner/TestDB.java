@@ -36,8 +36,11 @@ public class TestDB {
             Filter[] filters = new Filter[1];
             for (int i = 0; i < 1; i++)
             {
+                ArrayList<String> vals = new ArrayList<>();
                 filters[i] = new Filter();
+                vals.add("heliport");
                 filters[i].attribute = "type";
+                filters[i].values.add("heliport");
             }
             //create test place
             Place p = new Place();
@@ -46,9 +49,6 @@ public class TestDB {
             p.longitude = "-74.93360137939453";
             p.id = "00A";
 
-            //add filters for query
-            //filters[0].attribute = ("type");
-            //filter[0].values.add("heliport");
 
             Place res = new Place();
             ArrayList<Place> placeList = new ArrayList<Place>();

@@ -45,7 +45,7 @@ public class SqlConnect {
     }
     
     // Arguments contain the username and password for the database
-    @CallerSensitive
+    // @returns ArrayList<Place>
     public static ArrayList <Place> getQ(String query, Filter[] filters, int limit) {
 
         String myUrl;

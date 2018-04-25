@@ -17,6 +17,7 @@ Josh | Tester | 1:30
 ### Log
 file:line | defect | h/m/l | who found | github# 
 --- | --- |:---:|:---:| ---
- | | | |
- | | | |
+Trip:3-10 | unused imports | | Tom |
+Trip:80-83| unused variables | | Tom |
+Trip:88-91| unused variables| | Tom |
  
