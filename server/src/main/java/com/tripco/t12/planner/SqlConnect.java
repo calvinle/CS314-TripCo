@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SqlConnect {
-
-    private static String getSqlQuery(String query, int limit, Filter[] filters) {
+    /**
+     * getSqlQuery builds the String that gets queried to the DB.
+     * @param query is the destination to search for.
+     * @param limit is the max number of returned query results.
+     * @param filters any filters.
+     * @return the actual query string.
+     */
+    public static String getSqlQuery(String query, int limit, Filter[] filters) {
 
         StringBuilder stringBuilder = new StringBuilder();
         String attribute;
@@ -37,15 +43,26 @@ public class SqlConnect {
                  + "LIMIT %2$d;", query, limit);
     }
 
-    private static String getSqlQueryNoFilters(String query, int limit) {
+    /**
+     * getSqlQueryNoFilters creates the query String with no filters.
+     * @param query the destination to search for.
+     * @param limit is the max num of returned values.
+     * @return the actual query string.
+     */
+    public static String getSqlQueryNoFilters(String query, int limit) {
 
         return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
                   + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')"
                   + "LIMIT %2$d;", query, limit);
     }
-    
-    // Arguments contain the username and password for the database
-    // @returns ArrayList<Place>
+
+    /**
+     * getQ makes the actual database connection and feeds it the query.
+     * @param query the destination being searched for.
+     * @param filters any filters set.
+     * @param limit max number of returned vals.
+     * @return ArrayList of places.
+     */
     public static ArrayList <Place> getQ(String query, Filter[] filters, int limit) {
 
         String myUrl;
