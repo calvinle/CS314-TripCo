@@ -17,12 +17,12 @@ Josh | Tester | 1:30
 ### Log
 file:line | defect | h/m/l | who found | github# 
 --- | --- |:---:|:---:| ---
-Trip:3-10 | unused imports | | Tom |
-Trip:80-83| unused variables | | Tom |
-Trip:88-91| unused variables| | Tom |
-Trip:136| line too long, can shorten | | Tom |
-Trip:206-212| methods return the same value. can combine into one method? | | Tom |
-Trip:214-220| methods return the same value. can combine into one method? | | Tom |
+Trip:3-10 | unused imports | l | Tom | 404
+Trip:80-83| unused variables | l | Tom | 404
+Trip:88-91| unused variables| l | Tom | 404
+Trip:136| line too long, can shorten |l | Tom | 405
+Trip:206-212| methods return the same value. can combine into one method? | m | Tom | 403
+Trip:214-220| methods return the same value. can combine into one method? | m | Tom | 403
 +TwoOpt.java | File not used | l | Charlie | 391
 +Optimizer.java | Delta variable is too complicated. | l | Charlie | 392
 +Optimizer.java | Optimizer.java needs to be broken up and global variables should be relied on less | h | Charlie | 395
