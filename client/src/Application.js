@@ -88,14 +88,16 @@ class Application extends Component {
             this.updateConfig(tffi);
         } catch (err) {
             console.error(err);
-            this.updateConfig({
+            if(this.state.host !== "localhost:8088")
+            alert("Attempted to contact server that did not return config in proper format. Config has been kept the same as on boot.");
+            /*this.updateConfig({
                 type: "",
                     version: "",
                     filters: [],
                     maps: [],
                     optimization: "",
                     units: []
-            });
+            });*/
         }
     }
 
