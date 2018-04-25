@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, ModalHeader, ModalBody, ModalFooter, InputGroup, Input, Row, Col } from 'reactstrap';
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter, InputGroup, Input, Row, Col,Label,FormGroup } from 'reactstrap';
 import DistanceOptions from "./DistanceOptions";
 import OptimizationOptions from "./OptimizationOptions";
 
@@ -10,12 +10,17 @@ class SettingModal extends Component {
         super(props);
         this.state = {
             settingsModalOpen: false,
-            count:0
+            count:0,
+            tHost:"",
+            port:""
         };
         this.destroyClickedElement = this.destroyClickedElement.bind(this);
         this.saveTFFI = this.saveTFFI.bind(this);
         this.reverse = this.reverse.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.host = this.host.bind(this);
+        this.hostChange=this.hostChange.bind(this);
+        this.portChange = this.portChange.bind(this);
     }
 
     validTFFI(fileContents)
@@ -152,6 +157,21 @@ class SettingModal extends Component {
         });
     }
 
+    host(){
+        this.props.updatePort(this.state.tHost,this.state.port);
+    }
+    hostChange(event){
+        this.setState({tHost:event.target.value});
+    }
+    portChange(event){
+        this.setState({port:event.target.value});
+    }
+    componentDidMount(){
+        let variable = this.props.host.split(":");
+        this.setState({tHost:variable[0]});
+        this.setState({port:variable[1]});
+    }
+
     render() {
         return (
             <span>
@@ -166,6 +186,19 @@ class SettingModal extends Component {
                         <hr />
                         <DistanceOptions config = {this.props.config} query= {this.props.query} trip = {this.props.trip} updateUserDef={this.props.updateUserDef} updateOptions={this.props.updateOptions}/>
                         <OptimizationOptions config = {this.props.config} query= {this.props.query} trip = {this.props.trip} updateOptimization={this.props.updateOptimization} />
+                        <FormGroup row>
+                            <Label for="host" sm={2}>Host:</Label>
+                            <Col sm={10}>
+                                <Input type="text" id="host" value={this.state.tHost} onChange={this.hostChange}/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for="port" sm={2}>Port:</Label>
+                            <Col sm={10}>
+                                <Input type="text" id="port" value={this.state.port} onChange={this.portChange}/>
+                            </Col>
+                        </FormGroup>
+                        <Button color="secondary" onClick={this.host} type="button">Change Host</Button>
                     </ModalBody>
                     <ModalFooter>
                     </ModalFooter>
