@@ -1,27 +1,14 @@
 package com.tripco.t12.planner;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.tripco.t12.server.HTTP;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import spark.Request;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- *
- * The Trip class supports TFFI so it can easily be converted to/from Json by Gson.
- *
- */
+// Trip class, supported by the TFFI format. Allows the use of JSON methods for parsing
 public class Trip {
-  // The variables in this class should reflect TFFI.
   public String type;
   public String title;
   public Option options;
@@ -30,17 +17,15 @@ public class Trip {
   public String map;
 
   /** The top level method that does planning.
-   * At this point it just adds the map and distances for the places in order.
-   * It might need to reorder the places in the future.
-   */
+   * At this point it just adds the map and distances for the places in order. **/
   public void plan() {
     checkOpt();
     this.map = svg();
   }
 
-  /**
-   * Plan method for testing without breaking things.
-   */
+    /**
+     * rePlan doesn't break things.
+     */
   public void rePlan(){
     this.map = svg();
     this.distances = legDistances();
@@ -50,7 +35,7 @@ public class Trip {
 
   /**
    * Returns an SVG containing the background and the legs of the trip.
-   * @return
+   * @return string
    */
   private String svg() {
     String map = "";
@@ -76,18 +61,10 @@ public class Trip {
   }
 
   public double longConv(double longitude){
-    //svgWidthPix = 992;                            //Width of SVG in Pixels
-    //maxLong = 7.0;                                //CO is 7 Longitudes wide
-    //longOrigin = -109.293;                        //Origin (Top Left) coordinate.
-    //double netLong = Math.abs(-109.293 - longitude);//Real Life Longitude distance from origin
     return (Math.abs(-109.293 - longitude) * 992) / 7.0;
   }
 
   public double latConv(double latitude) {
-    //svgHeightPix = 707.0;                  //Height of SVG in Pixels
-    //maxLat = 4.0;                            //CO is 4 Latitudes tall
-    //latOrigin = 41.2;                      //Origin (Top Left) coordinate
-    //double netLat = Math.abs(41.2 - latitude);     //Real Life Lat. distance from origin
     return (Math.abs(41.2 - latitude) * 707.0) / 4.0;
   }
 
@@ -115,7 +92,7 @@ public class Trip {
     /**
    * Returns the distances between consecutive places,
    * including the return to the starting point to make a round trip.
-   * @return
+   * @return ArrayList
    */
   private ArrayList<Integer> legDistances() {
 
@@ -133,81 +110,99 @@ public class Trip {
     for(int i = 0; i <= data.size()-2; i++){
       temp0 = data.get(i);
       temp1 = data.get(i+1);
-      dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
+
+      double t0Lat = decCoord(temp0.latitude);
+      double t0Lon = decCoord(temp0.longitude);
+      double t1Lat = decCoord(temp1.latitude);
+      double t1Lon = decCoord(temp1.longitude);
+
+      dist.add(calcDist(t0Lat, t0Lon, t1Lat, t1Lon));
     }
     System.out.println("places is not null");
     return dist;
 
   }
 
-  public double decCoord(String s)
-  {
-    double calculated = 0;
-    ArrayList<String> list = new ArrayList<String>();
-    String in[] = s.split("['\" °″′]+");
-
-    for(String key:in)
+    public double decCoord(String s)
     {
-      if(!(key.matches("[0-9.-]+")))
-      {
-        //Pulled regex from google (find link please)
-        String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
-        list.addAll(Arrays.asList(temp));
-      }
+        double calculated = 0;
+        ArrayList<String> list = new ArrayList<String>();
+        String in[] = s.split("['\" °″′]+");
 
-      else
-        list.add(key);
+        for(String key:in)
+        {
+            if(!(key.matches("[0-9.-]+")))
+            {
+                //Pulled regex from google (find link please)
+                String temp[] = key.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+                list.addAll(Arrays.asList(temp));
+            }
+
+            else
+                list.add(key);
+        }
+
+        String newIn[] = new String[list.size()];
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            newIn[i] = list.get(i);
+        }
+
+        int coordLen = newIn.length;
+        double second = Double.parseDouble(newIn[0]);
+
+        if(coordLen == 4){
+            double hour = (Double.parseDouble(newIn[2])/3600);
+            double minute = (Double.parseDouble(newIn[1])/60);
+
+            calculated = second + minute + hour ;
+        }
+        else if(coordLen == 3){
+            double minute = (Double.parseDouble(newIn[1])/60);
+
+            calculated = second + minute;
+        }
+        else if(coordLen <= 2) {
+            calculated = second;
+        }
+        if(coordLen == 1){
+            return calculated;
+        }
+
+        return validL(newIn,calculated);
     }
 
-    String newIn[] = new String[list.size()];
-
-    for(int i = 0; i < list.size(); i++)
-    {
-      newIn[i] = list.get(i);
-    }
-
-    if(newIn.length == 4){
-      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60+Double.parseDouble(newIn[2])/3600;
-    }
-    else if(newIn.length == 3){
-      calculated = Double.parseDouble(newIn[0])+Double.parseDouble(newIn[1])/60;
-    }
-    else if(newIn.length <= 2) {
-      calculated = Double.parseDouble(newIn[0]);
-    }
-    if(newIn.length == 1){
-      return calculated;
-    }
-
-    return validL(newIn,calculated);
-  }
-  
+    /**
+     * checks if the lat is out of range.
+     * @param dist is coordinate
+     * @return boolean
+     */
   private boolean outofrangelat(double dist)
   {
-      if(dist>=-85 && dist<=85)
-      {
-          return true;
-      }
-      return false;
+      return (dist>=-85 && dist<=85);
   }
-  
+
+  /**
+   * Checks if the long is out of range.
+   * @param dist is coordinate
+   * @return boolean
+   */
   private boolean outofrangelong(double dist)
   {
-      if(dist>=-180 && dist<=180)
-      {
-          return true; 
-      }
-      return false;
+      return (dist>=-180 && dist<=180);
   }
-  
+
+    /**
+     * valid L checks if the lat/long is within the world coords.
+     * @param s is
+     * @param d is
+     * @return double
+     */
   private double validL(String[] s, double d){
     String scheck = s[s.length-1].toLowerCase();
 
-    if (scheck.equals("s")){
-        d *= -1;
-    }
-
-    if (scheck.equals("w")){
+    if (scheck.equals("s") || scheck.equals("w")){
         d *= -1;
     }
 
@@ -224,13 +219,47 @@ public class Trip {
     }
   }
 
+    /**
+     * distance picker, in a switch statement.
+     * @param distUnits string to switch on
+     * @param work number to calc
+     * @return int
+     */
+  public int distSwitcher(String distUnits, double work)
+  {
+      int roundedDist;
+
+      switch (distUnits){
+          case "miles":
+              roundedDist = (int) Math.round(mile(work));
+              break;
+
+          case "kilometers":
+              roundedDist = (int) Math.round(kilo(work));
+              break;
+
+          case "nautical miles":
+              roundedDist = (int) Math.round(mile(work)* 0.868976);
+              break;
+
+          case "user defined":
+              roundedDist = (int) Math.round(user(work));
+              break;
+
+          default: roundedDist = 0;
+      }
+      return roundedDist;
+  }
+
   public int calcDist(double lat1, double long1, double lat2, double long2){
     Option o = this.options;
 
-    double wla1 = lat1*(Math.PI / 180);
-    double wlo1 = long1*(Math.PI / 180);
-    double wla2 = lat2*(Math.PI / 180);
-    double wlo2 = long2*(Math.PI / 180);
+    int roundedDist = 0;
+    double piCalc = (Math.PI / 180);
+    double wla1 = lat1*piCalc;
+    double wlo1 = long1*piCalc;
+    double wla2 = lat2*piCalc;
+    double wlo2 = long2*piCalc;
 
     double difx = Math.cos(wla2)*Math.cos(wlo2) - Math.cos(wla1)*Math.cos(wlo1);
     double dify = Math.cos(wla2)*Math.sin(wlo2) - Math.cos(wla1)*Math.sin(wlo1);
@@ -239,26 +268,18 @@ public class Trip {
     double c = Math.sqrt(Math.pow(difx,2)+ Math.pow(dify,2)+Math.pow(difz,2));
     double work = 2*Math.asin(c/2);
 
-    if(o==null || o.distance.equalsIgnoreCase("miles")){
-      return (int)Math.round(mile(work));
-    }
-    else if(o.distance.equalsIgnoreCase("kilometers")){
-      //System.out.println("kilo");
-      return (int)Math.round(kilo(work));
-    }
 
-    else if (o.distance.equalsIgnoreCase("nautical miles")){
-      //System.out.println("naut");
-      return (int)Math.round(mile(work) * 0.868976);
-    }
 
-    else if(o.distance.equalsIgnoreCase("user defined")){
-      System.out.println("user");
-      return (int)Math.round(user(work));
+    if(o != null) {
+        String distUnits = o.distance.toLowerCase();
+
+        roundedDist = distSwitcher(distUnits, work);
     }
-    else
-      //System.out.println("invalid Unit");
-      return 0;
+    else {
+        roundedDist = (int) Math.round(mile(work));
+
+    }
+    return roundedDist;
   }
 
   public double mile(double d){
@@ -271,8 +292,8 @@ public class Trip {
     return d*6371.0088;
   }
 
-  public double user(double d){
-    return d*Double.parseDouble(this.options.userRadius);
+  public double user(double dist){
+      return dist*Double.parseDouble(this.options.userRadius);
   }
 
   private void checkOpt(){
@@ -287,7 +308,6 @@ public class Trip {
       this.distances = nn.finDist;
       this.places = nn.finArray;
     }
-
     else
       this.distances = legDistances();
   }

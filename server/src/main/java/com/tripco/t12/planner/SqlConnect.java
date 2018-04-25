@@ -59,8 +59,9 @@ public class SqlConnect {
             limit = 1000000;
         }
 
-        if(filters != null) {
+        if(!filters[0].attribute.equals("")) {
             query = getSqlQuery(query, limit, filters);
+            System.out.println("filter length test:" + filters[0].attribute );
             System.out.println("query string filter: " + query);
         }
         else {
