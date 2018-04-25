@@ -11,7 +11,7 @@ public class Query
     public String query;
     public ArrayList<Place> places;
     public Filter[] filters;
-    public int limit;
+    public int limit = 30;
 
     public void database()
     {
@@ -20,8 +20,7 @@ public class Query
 
         test = SqlConnect.getQ(query, filters, limit);
 
-        // '/query/ fix- comment this line out
-        System.out.println("in database: Filters: " + filters[0].values + filters[0].attribute);
+        //System.out.println("in database: Filters: " + filters[0].values + filters[0].attribute);
 
         this.places = test;
         //this.filters = filters;

@@ -9,15 +9,8 @@ public class SqlConnect {
     private static String getSqlQuery(String query, int limit, Filter[] filters) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        String attribute = "";
-        String testStr = "";
-
-        if(limit == 0)
-        {
-            limit = 1000000;
-        }
-
-        if(!filters[0].values.isEmpty()) {
+        String attribute;
+        String testStr;
 
             //find how many filter.values
             int size = filters[0].values.size() - 1;
@@ -38,8 +31,6 @@ public class SqlConnect {
             // Set string builder of complete value query string part to testStr
             testStr = stringBuilder.toString();
 
-        }
-
         return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
                  + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')" 
                  + " and (airports." + attribute + " = " + testStr + ")"
@@ -48,29 +39,27 @@ public class SqlConnect {
 
     private static String getSqlQueryNoFilters(String query, int limit) {
 
+        return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
+                  + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')"
+                  + "LIMIT %2$d;", query, limit);
+    }
+    
+    // Arguments contain the username and password for the database
+    @CallerSensitive
+    public static ArrayList <Place> getQ(String query, Filter[] filters, int limit) {
+
+        String myUrl;
+        String Regusername;
+        String Regpassword;
+        ArrayList<Place> placeList = new ArrayList<Place>();
+
+        //limit set to max if limit is 0.
         if(limit == 0)
         {
             limit = 1000000;
         }
 
-        return String.format("SELECT * FROM airports WHERE (id LIKE '%%%1$s%%' or type like '%%%1$s%%'" 
-                  + " or name like '%%%1$s%%' or municipality like '%%%1$s%%')"
-                  + "LIMIT %2$d;", query, limit);
-    }
-
-    // Arguments contain the username and password for the database
-    public static ArrayList <Place> getQ(String q, Filter[] filters, int limit) {
-
-        ArrayList<String> rQ= new ArrayList<String>();
-        ArrayList<Place> placeList = new ArrayList<Place>();
-        String Regusername;
-        String Regpassword;
-        String myDriver = "com.mysql.jdbc.Driver"; // add dependencies in pom.xml
-        String myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
-        String query = q;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if(!filters[0].values.isEmpty()) {
+        if(filters != null) {
             query = getSqlQuery(query, limit, filters);
             System.out.println("query string filter: " + query);
         }
@@ -81,12 +70,13 @@ public class SqlConnect {
 
         if (System.getenv("TRAVIS") != null)
         {
-            //set db url to travis for testing
+            //set db url, username and password to travis creds for testing
             Regusername = "travis";
             Regpassword = null;
             myUrl = "jdbc:mysql://localhost/testingDatabase";
             System.out.println("USING TRAVIS!!!!!!!!!!!!!!!!!!!");
         } else {
+            //set db url, username and password to CS DB for running
             Regusername = "cs314-db";
             Regpassword = "eiK5liet1uej";
             myUrl = "jdbc:mysql://faure.cs.colostate.edu/cs314";
@@ -98,10 +88,10 @@ public class SqlConnect {
 
             Connection conn = DriverManager.getConnection(myUrl, Regusername, Regpassword);
 
-            //Connection conn = DriverManager.getConnection(myUrl1, travisUser, travisPass);
             try { // create a statement
 
                 Statement st = conn.createStatement();
+
                 try { // submit a query
                     ResultSet rs = st.executeQuery(query);
                     try { // iterate through the query results and print selected columns
@@ -145,7 +135,7 @@ public class SqlConnect {
         filters[0].values.add("balloonport");
         filters[0].values.add("heliport");
 
-        System.out.println("Filters value: " + filters[0].values);
+        //System.out.println("Filters value: " + filters[0].values);
 
         //filters.add("medium_airport");
         getQ("Aspen", filters, 3);
