@@ -42,7 +42,8 @@ class Application extends Component {
                         "values" : []
                     }]
             },
-            count:0
+            count:0,
+            host : location.host
         }
         this.updateTrip = this.updateTrip.bind(this);
         this.updateTitle = this.updateTitle.bind(this);
@@ -59,6 +60,7 @@ class Application extends Component {
         this.query = this.query.bind(this);
         this.fetchResponse1 = this.fetchResponse1.bind(this);
         this.updateCount = this.updateCount.bind(this);
+        this.updatePort = this.updatePort.bind(this);
     }
 
     componentDidMount() {
@@ -74,8 +76,8 @@ class Application extends Component {
 
 
     fetchResponse() {
-        console.log("Fetching");
-        return fetch('http://' + location.host + '/config');
+        console.log("Fetching", this.state.host);
+        return fetch('http://' + this.state.host + '/config');
     }
 
     async config() {
@@ -86,12 +88,22 @@ class Application extends Component {
             this.updateConfig(tffi);
         } catch (err) {
             console.error(err);
+            if(this.state.host !== "localhost:8088")
+            alert("Attempted to contact server that did not return config in proper format. Config has been kept the same as on boot.");
+            /*this.updateConfig({
+                type: "",
+                    version: "",
+                    filters: [],
+                    maps: [],
+                    optimization: "",
+                    units: []
+            });*/
         }
     }
 
     fetchResponse1() {
-        console.log("Fetching");
-        return fetch('http://' + location.host + '/query');
+        console.log("Fetching", this.state.host);
+        return fetch('http://' + this.state.host + '/query');
     }
 
     async query() {
@@ -212,6 +224,12 @@ class Application extends Component {
         this.setState({trip: testTrip});
     }
 
+    updatePort(host,port){
+        let newport = host + ":"+port;
+        this.setState({host:newport},this.config);
+        //console.log("host1", newport);
+    }
+
     updateOptimization(options) {
         console.log("in Application optimization:", options);
         var testTrip = Object.assign({}, this.state.trip);
@@ -236,8 +254,8 @@ class Application extends Component {
                         </p>
                         <hr/>
 
-                        <SideDestinations updateTitle={this.updateTitle} config ={this.state.config} addPlace={this.addPlace}
-                                          query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip}
+                        <SideDestinations updateTitle={this.updateTitle} updatePort = {this.updatePort} config ={this.state.config} addPlace={this.addPlace}
+                                          query={this.state.query} updateQuery = {this.updateQuery} trip={this.state.trip} host={this.state.host}
                                           updateTrip={this.updateTrip} updateOptimization={this.updateOptimization} updateOptions={this.updateOptions}/>
 
                     </Col>
@@ -256,7 +274,7 @@ class Application extends Component {
                         </Row>
                     </Col>
                 </Row>
-                <Footer number = {this.props.number} name = {this.props.name}/>
+                <Footer number = {this.props.number} host ={this.state.host} name = {this.props.name}/>
             </div>
         )
     }

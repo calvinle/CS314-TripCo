@@ -184,7 +184,7 @@ class SideDestinations extends Component {
                 <p></p>
                 <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
                               updateTrip={this.props.updateTrip} trip={this.props.trip}
-                              updateUserDef={this.props.updateUserDef}
+                              updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
                               updateOptimization={this.props.updateOptimization}
                               updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
 
