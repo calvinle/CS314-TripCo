@@ -135,7 +135,6 @@ public class Optimizer {
             System.out.println("done " + tripDist);
             //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
             finDist.add(0,0);
-            //System.out.println(finDist);
             return;
         }
         tempDist.clear();
@@ -226,7 +225,7 @@ public class Optimizer {
         }
     }
 
-    private void ThreeOpt() {
+    public void ThreeOpt() {
         threeOptTempArray = tempArray;
         improve = true;
         while (improve) {
@@ -238,7 +237,7 @@ public class Optimizer {
                         if (newK == tempArray.size()){
                             newK = 0;
                         }
-                        //System.out.println("i: " + i + " j: " + j + " k: " + k);
+
                         //currentDistance with present i,j,k. Measures distance between all 3 edges
                         int currentDistance = NNhelper(tempArray.get(i), tempArray.get(i+1))
                             + NNhelper(tempArray.get(j), tempArray.get(j+1))
@@ -330,10 +329,12 @@ public class Optimizer {
                             ThreeOptImprove();
                             continue;
                         }
+                        else{
+                            improve = false;
+                        }
                     }
                 }
             }
-            return;
         }
     }
 
@@ -359,6 +360,7 @@ public class Optimizer {
                 threeOptTempArray.set(i2, tempSwap.get(d));
                 i2++;
             }
+            //@TODO: Copy rest of stuff after k ffs
         }
 
         else if (j-i+1 >= k-j){ //SubArray >= Latter subArray
