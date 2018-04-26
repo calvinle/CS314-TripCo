@@ -123,6 +123,7 @@ class SettingModal extends Component {
     }
 
     //https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
+
     // saveTFFI(){
     //     let contents = this.props.trip;
     //     contents.title = this.props.title;
