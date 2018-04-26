@@ -27,6 +27,11 @@ class Header extends Component {
                 <Navbar id="header">
                     <img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%"
                          id="topLogo"/>
+                    <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
+                                  updateTrip={this.props.updateTrip} trip={this.props.trip}
+                                  updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
+                                  updateOptimization={this.props.updateOptimization}
+                                  updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
                 </Navbar>
             </div>
         )

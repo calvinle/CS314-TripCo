@@ -241,9 +241,9 @@ class Application extends Component {
     render() {
         return (
             <div>
-                <Header config={this.state.config} trip={this.state.trip} query={this.state.query} updateOptimization={this.updateOptimization}
-                        updateTrip={this.updateTrip} updateTitle={this.updateTitle} updateUserDef={this.updateUserDef}
-                        updateOptions={this.updateOptions} updateCount = {this.updateCount}/>
+                <Header config={this.state.config} trip={this.state.trip} query={this.state.query} host={this.state.host} updateOptimization={this.updateOptimization}
+                        updateTrip={this.updateTrip} updateTitle={this.updateTitle} updateUserDef={this.updateUserDef} updatePort = {this.updatePort}
+                        updateOptions={this.updateOptions} updateCount = {this.updateCount} updateQuery = {this.updateQuery}/>
                 <Row className="show-grid" id="mainContent">
                     <Col id="sidenav" sm={3}>
                         <p>
