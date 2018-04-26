@@ -29,6 +29,7 @@ public class TestTrip {
     assertTrue(true == true);
   }
 
+
   @Test
   public void testDistances() {
     trip.plan();
@@ -111,5 +112,33 @@ public class TestTrip {
   public void testKilo(){
     assertEquals(trip.kilo(0),0,0);
     assertEquals(trip.kilo(1),6371.0088,.001);
+  }
+
+//  @Test
+//  public void testUser(){
+//    trip.options.userRadius =
+//    assertEquals();
+//  }
+
+  @Test
+  public void testOutOfRangeLat(){
+   boolean resultIn =  trip.outofrangelat(84);
+   boolean resultOut0 = trip.outofrangelat(86);
+   boolean resultOut1 = trip.outofrangelat(-86);
+
+   assertTrue(resultIn);
+   assertFalse(resultOut0);
+   assertFalse(resultOut1);
+  }
+
+  @Test
+  public void testOutOfRangeLong(){
+    boolean resultIn =  trip.outofrangelong(80);
+    boolean resultOut0 = trip.outofrangelong(181);
+    boolean resultOut1 = trip.outofrangelong(-181);
+
+    assertTrue(resultIn);
+    assertFalse(resultOut0);
+    assertFalse(resultOut1);
   }
 }
