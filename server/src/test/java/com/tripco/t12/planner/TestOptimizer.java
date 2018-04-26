@@ -126,7 +126,40 @@ public class TestOptimizer {
         optimizer.tempArray.add(place7);
         optimizer.threeOptTempArray = optimizer.tempArray;
 
-        optimizer.ThreeOptExchange(1,4,6);
+        //optimizer.ThreeOptExchange(1,4,6);
+    }
+
+    @Test
+    public void threeOptTest(){
+        Place place0 = new Place();
+        place0.id = "0";
+        Place place1 = new Place();
+        place1.id = "1";
+        Place place2 = new Place();
+        place2.id = "2";
+        Place place3 = new Place();
+        place3.id = "3";
+        Place place4 = new Place();
+        place4.id = "4";
+        Place place5 = new Place();
+        place5.id = "5";
+        Place place6 = new Place();
+        place6.id = "6";
+        Place place7 = new Place();
+        place7.id = "0";
+        optimizer.tempSwap = new ArrayList<Place>();
+        optimizer.tempArray = new ArrayList<Place>();
+        optimizer.tempArray.add(place0);
+        optimizer.tempArray.add(place1);
+        optimizer.tempArray.add(place2);
+        optimizer.tempArray.add(place3);
+        optimizer.tempArray.add(place4);
+        optimizer.tempArray.add(place5);
+        optimizer.tempArray.add(place6);
+        optimizer.tempArray.add(place7);
+        optimizer.threeOptTempArray = optimizer.tempArray;
+
+        optimizer.ThreeOpt();
     }
 
 }
