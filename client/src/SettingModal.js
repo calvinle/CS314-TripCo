@@ -15,7 +15,7 @@ class SettingModal extends Component {
             port:""
         };
         this.destroyClickedElement = this.destroyClickedElement.bind(this);
-        this.saveTFFI = this.saveTFFI.bind(this);
+        //this.saveTFFI = this.saveTFFI.bind(this);
         this.reverse = this.reverse.bind(this);
         this.toggle = this.toggle.bind(this);
         this.host = this.host.bind(this);
