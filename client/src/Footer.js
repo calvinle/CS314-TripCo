@@ -23,15 +23,13 @@ class Footer extends Component {
 
   render() {
     return (
-        <div id="footer" className="jumbotron" style={{"backgroundColor": "#1E4D2B", "color":"white"}}>
+        <div id="footer" style={{"backgroundColor": "#1E4D2B", "color":"white"}}>
           {<img src={"http://www.cs.colostate.edu/~cs314/images/CSU-Official-wrdmrk-357-617_Rev.png"}/> }
-          <h5 align="middle">
-
+            <p />
             <Button align="middle" color="link" onClick={this.toggle}>
                 About the developers
             </Button>
               Welcome to Our Trip Planner  © TripCo t{this.props.number}, {this.props.name}, 2018
-          </h5>
             <Modal id ="myModal" isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>About the developers</ModalHeader>
                 <ModalBody>

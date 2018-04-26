@@ -1,13 +1,12 @@
 #sidenav {
-    height: 100%;
     background-color: #C8C372;
     border-color: #ffffff;
     color: #1E4D2B;
 }
 
 #root {
-    background-color: #ffffff;
-    color: white;
+    background-color: #C8C372;
+    color: #1E4D2B;
 }
 
 #header {
@@ -27,7 +26,6 @@
 }
 
 #mainContent {
-    padding-top: 100px;
 }
 
 #sidenav {

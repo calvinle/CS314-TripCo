@@ -85,7 +85,7 @@ const GoogleMapDisplay = compose(
             '&libraries=geometry,drawing,places',
         loadingElement: <div />,
         containerElement: <div />,
-        mapElement: <div style={{ height: '100%' }} />,
+        mapElement: <div style={{ height: '60%' }} />,
     }),
     withScriptjs,
     withGoogleMap,

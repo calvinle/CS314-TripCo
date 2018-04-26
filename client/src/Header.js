@@ -24,7 +24,7 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <Navbar id="header" fixed="top">
+                <Navbar id="header">
                     <img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%"
                          id="topLogo"/>
                 </Navbar>

@@ -260,18 +260,8 @@ class Application extends Component {
 
                     </Col>
                     <Col sm={9}>
-                        <div id="map"></div>
-                        <Row className="show-grid">
-                            <Col sm={12}>
-                                <div id="trip" className="card border-0 border-dark">
-                                    <div className="card-body">
-                                        {/*<Map trip={this.state.trip}/>*/}
-                                        <Itinerary trip={this.state.trip}/>
-                                        <GoogleMapDisplay trip={this.state.trip}/>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
+                        <Itinerary trip={this.state.trip} />
+                        <GoogleMapDisplay trip={this.state.trip} />
                     </Col>
                 </Row>
                 <Footer number = {this.props.number} host ={this.state.host} name = {this.props.name}/>

@@ -12,7 +12,8 @@ class SideDestinations extends Component {
         this.loadTFFI = this.loadTFFI.bind(this);
         this.saveTFFI = this.saveTFFI.bind(this);
         this.state = {
-            count:0
+            count:0,
+            trip: this.props.trip
         };
     }
 
@@ -166,6 +167,7 @@ class SideDestinations extends Component {
             <span>
                 <Input placeholder="Name My Trip" type="text" value={this.props.trip.title} onChange={this.fieldChange}/>
                 <p></p>
+                <DestinationList trip={this.state.trip}/>
 
                 <p> Load my existing trip:</p>
                 <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />

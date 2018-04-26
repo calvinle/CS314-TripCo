@@ -17,7 +17,7 @@ const reorder = (list, startIndex, endIndex) => {
     return result;
 };
 
-const grid = 8;
+const grid = 2;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -26,23 +26,23 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     margin: `0 0 ${grid}px 0`,
 
     // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'red',
+    background: isDragging ? 'grey' : '#C8C372',
+    border: '#1E4D2B',
 
     // styles we need to apply on draggables
-
+    ...draggableStyle,
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'grey',
+    background: isDraggingOver ? 'lightblue' : '#C8C372',
     padding: grid,
-    width: 250,
 });
 
 class DestinationList extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            items: getItems(10),
+            items: this.props.trip.places,
         };
         this.onDragEnd = this.onDragEnd.bind(this);
     }

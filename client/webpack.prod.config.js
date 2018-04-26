@@ -25,7 +25,7 @@ module.exports = {
     rules: [
       { test: /\.(js|jsx)/, loader: 'babel-loader',
         include: path.join(__dirname, 'src'),
-        query: { presets: ['react'] } // Still unfamiliar with the query instruction
+        query: { presets: ['react', 'stage-2'] } // Still unfamiliar with the query instruction
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.scss&/, loaders: ["style-loader", "css-loader", "sass-loader"] }
