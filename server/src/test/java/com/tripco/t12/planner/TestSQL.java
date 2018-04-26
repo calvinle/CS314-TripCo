@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import spark.Request;
 
 import java.lang.*;
 import java.util.ArrayList;
@@ -58,5 +59,4 @@ public class TestSQL {
         assertEquals(queryString1, noFilterS);
 
     }
-
 }
