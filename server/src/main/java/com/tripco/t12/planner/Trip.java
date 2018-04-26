@@ -178,7 +178,7 @@ public class Trip {
      * @param dist is coordinate
      * @return boolean
      */
-  private boolean outofrangelat(double dist)
+  public boolean outofrangelat(double dist)
   {
       return (dist>=-85 && dist<=85);
   }
@@ -188,7 +188,7 @@ public class Trip {
    * @param dist is coordinate
    * @return boolean
    */
-  private boolean outofrangelong(double dist)
+  public boolean outofrangelong(double dist)
   {
       return (dist>=-180 && dist<=180);
   }
@@ -199,7 +199,7 @@ public class Trip {
      * @param d is
      * @return double
      */
-  private double validL(String[] s, double d){
+  public double validL(String[] s, double d){
     String scheck = s[s.length-1].toLowerCase();
 
     if (scheck.equals("s") || scheck.equals("w")){
