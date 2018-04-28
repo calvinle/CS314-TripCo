@@ -58,6 +58,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 4/19 | Map Markers, Query Count, Slider Step, Repo Clean | 3Opt | none
 4/20 | About Section Section and Query Limit | 3Opt | Swap Algorithm Branching
 4/24 | About Section | Interopt, 3Opt, Query Fix, Set Query Limit, cookies, footer size | Updated client for 3Opt, empty filter in Query TFFI
+4/26 | Interopt, Query, Footer Size | 3Opt, cookies | Types of copies for arraylists and NN wrong output 
  
 
 ## Review
