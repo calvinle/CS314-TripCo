@@ -33,7 +33,6 @@ public class Optimizer {
     public ArrayList<Integer> finDist;
 
     public ArrayList<Place> twoOptTempArray;
-    public ArrayList<Integer> twoOptTempDist;
     private boolean improve;
 
 
@@ -146,7 +145,6 @@ public class Optimizer {
         if (((Double.parseDouble(trip.options.optimization) >= .66 && Double.parseDouble(trip.options.optimization) < 1))){
             //System.out.println("2opt");
             //twoOptTempArray = new Place[tempArray.size()];
-            twoOptTempDist =  new ArrayList<Integer>();
             TwoOpt();
             //add final stuff here?
 
@@ -161,9 +159,15 @@ public class Optimizer {
             int temp = distSum(tempDist);
             System.out.println("trip " + temp + " " + starting);
             if (temp < tripDist){
+                finArray.clear();
+                finDist.clear();
+                for (int i=0; i < tempArray.size(); i++){
+                    finArray.add(tempArray.get(i));
+                }
+                for (int i=0; i < tempDist.size(); i++){
+                    finDist.add(tempDist.get(i));
+                }
                 tripDist = temp;
-                finArray = tempArray;
-                finDist = tempDist;
             }
         }
         nearNeighbor();
@@ -175,8 +179,8 @@ public class Optimizer {
         improve = true;
         while (improve){
             improve = false;
-            for ( int i = 0; i < tempArray.size()-3; i++) {
-                for (int k =i+2; k < tempArray.size()-2; k++) {
+            for ( int i = 0; i < tempArray.size()-2; i++) {
+                for (int k =i+2; k < tempArray.size()-1; k++) {
                     int delta = (-1 * NNhelper(tempArray.get(i), tempArray.get(i+1)) )
                             - (NNhelper(tempArray.get(k), tempArray.get(k+1)))
                             + (NNhelper(tempArray.get(i), tempArray.get(k)))
@@ -187,9 +191,16 @@ public class Optimizer {
                         int sum = distSum(newDists);
                         improve = true;
                         if (sum < tripDist){    //Set final variables
+                            System.out.println("2opt sum: " + sum);
                             tripDist = sum;
-                            finArray = twoOptTempArray;
-                            finDist = newDists;
+                            finArray.clear();
+                            finDist.clear();
+                            for (int b=0; b < twoOptTempArray.size(); b++){
+                                finArray.add(twoOptTempArray.get(b));
+                            }
+                            for (int c=0; c < newDists.size(); c++){
+                                finDist.add(newDists.get(c));
+                            }
                         }
                     }
                 }
