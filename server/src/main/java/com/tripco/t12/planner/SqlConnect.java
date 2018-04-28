@@ -76,10 +76,25 @@ public class SqlConnect {
             limit = 1000000;
         }
 
-        if(!filters[0].attribute.equals("")) {
-            query = getSqlQuery(query, limit, filters);
-            System.out.println("filter length test:" + filters[0].attribute );
-            System.out.println("query string filter: " + query);
+        if(filters != null ) {
+
+            if(!filters[0].attribute.equals("")) {
+
+                if(filters[0].values.isEmpty())
+                {
+                    query = getSqlQueryNoFilters(query, limit);
+                    System.out.println("query string no filter: " + query);
+                }
+                else {
+                    query = getSqlQuery(query, limit, filters);
+                    System.out.println("filter length test:" + filters[0].attribute);
+                    System.out.println("query string filter: " + query);
+                }
+            }
+            else {
+                query = getSqlQueryNoFilters(query, limit);
+                System.out.println("query string no filter: " + query);
+            }
         }
         else {
             query = getSqlQueryNoFilters(query, limit);
