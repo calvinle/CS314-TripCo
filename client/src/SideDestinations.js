@@ -9,8 +9,8 @@ class SideDestinations extends Component {
         super(props);
         this.fieldChange = this.fieldChange.bind(this);
         this.plan = this.plan.bind(this);
-        this.loadTFFI = this.loadTFFI.bind(this);
-        this.saveTFFI = this.saveTFFI.bind(this);
+        /*this.loadTFFI = this.loadTFFI.bind(this);
+        this.saveTFFI = this.saveTFFI.bind(this);*/
         this.state = {
             count:0,
             trip: this.props.trip
@@ -45,7 +45,7 @@ class SideDestinations extends Component {
         this.props.updateTitle(event.target.value);
     }
 
-    validTFFI(fileContents)
+    /*validTFFI(fileContents)
     {
 
         let myArray1 = ["type", "title", "options", "places", "distances", "map"];
@@ -114,9 +114,9 @@ class SideDestinations extends Component {
     {
         alert("File data is corrupt. Please review file format, or create new file below.");
         this.setState({ count: 0 });
-    }
+    }*/
 
-    loadTFFI(event) {
+    /*loadTFFI(event) {
         console.log(event.target.files[0].name);
         //Found via StackOverflow and modified:
         //https://stackoverflow.com/questions/3582671/how-to-open-a-local-disk-file-with-javascript
@@ -138,10 +138,10 @@ class SideDestinations extends Component {
         reader.readAsText(file);
         // then you need to set the trip property
         // this.props.updateTrip(??);
-    }
+    }*/
 
     //https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/
-    saveTFFI(){
+    /*saveTFFI(){
         let contents = this.props.trip;
         contents.title = this.props.title;
 
@@ -159,7 +159,7 @@ class SideDestinations extends Component {
         document.body.appendChild(downloadLink);
 
         downloadLink.click();
-    }
+    }*/
 
 
     render() {
@@ -169,8 +169,8 @@ class SideDestinations extends Component {
                 <p></p>
                 <DestinationList trip={this.state.trip}/>
 
-                <p> Load my existing trip:</p>
-                <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />
+                {/*<p> Load my existing trip:</p>
+                <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />*/}
 
 
                 <p></p>
@@ -181,7 +181,7 @@ class SideDestinations extends Component {
                 <p> When you're ready to see your trip, click plan. </p>
                 <Button color="secondary"  disabled={!this.props.trip.title} onClick={this.plan} type="button">Plan</Button>
                 <p></p>
-                <Button onClick={this.saveTFFI} type="button">Save this trip</Button>
+                {/*<Button onClick={this.saveTFFI} type="button">Save this trip</Button>*/}
 
                 <p></p>
                 {/*<SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
