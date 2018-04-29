@@ -61,6 +61,7 @@ public class MicroServer {
 
     response.type("text/html");
 
+
     return "<html><head></head><body><h1>"+name+" Micro-server on port "+port+"</h1></body></html>";
   }
 
@@ -100,6 +101,7 @@ public class MicroServer {
   private String plan(Request request, Response response) {
 
     response.type("application/json");
+    response.header("Access-Control-Allow-Origin", "*");
 
     return (new Plan(request)).getTrip();
   }
@@ -128,6 +130,7 @@ public class MicroServer {
 
       response.type("application/json");
       System.out.println("CALLED");
+      response.header("Access-Control-Allow-Origin", "*");
       return "{\"type\" : \"config\", " +
               "\"version\" : 3, " +
               "\"filters\": " + filters() + ", " +
@@ -156,6 +159,7 @@ public class MicroServer {
     private String query(Request request, Response response) {
 
         response.type("application/json");
+        response.header("Access-Control-Allow-Origin", "*");
 
         return (new Search(request)).getQuery();
     }
