@@ -34,7 +34,7 @@ class SideDestinations extends Component {
     async plan() {
         try {
             let serverResponse = await this.fetchResponse();
-            response.header("Access-Control-Allow-Origin", "*");
+            //response.header("Access-Control-Allow-Origin", "*");
             let tffi = await serverResponse.json();
             console.log(tffi);
             this.props.updateTrip(tffi);
