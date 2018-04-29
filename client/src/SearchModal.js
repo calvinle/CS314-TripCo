@@ -63,6 +63,7 @@ class SearchModal extends Component {
         console.log("request body", requestBody);
 
         return fetch('http://' + location.host +'/query', {
+            header: {'Access-Control-Allow-Origin':'*'},
             method:"POST",
             body: JSON.stringify(requestBody)
         });

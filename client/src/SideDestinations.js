@@ -25,6 +25,7 @@ class SideDestinations extends Component {
         console.log(requestBody);
 
         return fetch('http://' + location.host + '/plan', {
+            header: {'Access-Control-Allow-Origin':'*'},
             method: "POST",
             body: JSON.stringify(requestBody)
         });
@@ -33,6 +34,7 @@ class SideDestinations extends Component {
     async plan() {
         try {
             let serverResponse = await this.fetchResponse();
+            //response.header("Access-Control-Allow-Origin", "*");
             let tffi = await serverResponse.json();
             console.log(tffi);
             this.props.updateTrip(tffi);

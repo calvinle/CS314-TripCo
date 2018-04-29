@@ -78,8 +78,12 @@ class Application extends Component {
 
     fetchResponse() {
         console.log("Fetching", this.state.host);
-        return fetch('http://' + this.state.host + '/config');
+        return fetch('http://' + this.state.host + '/config',
+            {
+                header: {'Access-Control-Allow-Origin':'*'}
+            });
     }
+
 
     async config() {
         try {
@@ -104,7 +108,10 @@ class Application extends Component {
 
     fetchResponse1() {
         console.log("Fetching", this.state.host);
-        return fetch('http://' + this.state.host + '/query');
+        return fetch('http://' + this.state.host + '/query',
+            {
+                header: {'Access-Control-Allow-Origin':'*'}
+            });
     }
 
     async query() {
