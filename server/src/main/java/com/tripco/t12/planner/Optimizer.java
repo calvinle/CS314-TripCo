@@ -188,12 +188,12 @@ public class Optimizer {
         improve = true;
         while (improve){
             improve = false;
-            for ( int i = 0; i < tempArray.size()-3; i++) {
-                for (int k =i+2; k < tempArray.size()-2; k++) {
-                    int delta = (-1 * NNhelper(tempArray.get(i), tempArray.get(i+1)) )
-                            - (NNhelper(tempArray.get(k), tempArray.get(k+1)))
-                            + (NNhelper(tempArray.get(i), tempArray.get(k)))
-                            + (NNhelper(tempArray.get(i+1), tempArray.get(k+1)));
+            for ( int i = 0; i < twoOptTempArray.size()-3; i++) {
+                for (int k =i+2; k < twoOptTempArray.size()-2; k++) {
+                    int delta = (-1 * NNhelper(twoOptTempArray.get(i), twoOptTempArray.get(i+1)) )
+                            - (NNhelper(twoOptTempArray.get(k), twoOptTempArray.get(k+1)))
+                            + (NNhelper(twoOptTempArray.get(i), twoOptTempArray.get(k)))
+                            + (NNhelper(twoOptTempArray.get(i+1), twoOptTempArray.get(k+1)));
                     if (delta < 0){ //If difference is negative, trip is shortened
                         TwoOptReverse(i+1, k);
                         ArrayList<Integer> newDists = sumList(twoOptTempArray);
