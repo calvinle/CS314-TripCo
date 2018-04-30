@@ -180,6 +180,8 @@ public class Optimizer {
                     finDist.add(tempDist.get(i));
                 }
                 tripDist = temp;
+                finArray = tempArray;
+                finDist = tempDist;
             }
         }
         nearNeighbor();
@@ -262,7 +264,6 @@ public class Optimizer {
                             + NNhelper(threeOptTempArray.get(k), threeOptTempArray.get(newK));
 
                         //Go backwards from slide diagram (most to least complex)
-
                         //Case 7
                         if (NNhelper(threeOptTempArray.get(i), threeOptTempArray.get(j+1))
                             + NNhelper(threeOptTempArray.get(i+1), threeOptTempArray.get(k))
