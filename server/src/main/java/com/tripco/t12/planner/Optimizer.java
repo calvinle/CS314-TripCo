@@ -168,9 +168,15 @@ public class Optimizer {
             int temp = distSum(tempDist);
             System.out.println("trip " + temp + " " + starting);
             if (temp < tripDist){
+                finArray.clear();
+                finDist.clear();
+                for (int i=0; i < tempArray.size(); i++){
+                    finArray.add(tempArray.get(i));
+                }
+                for (int i=0; i < tempDist.size(); i++){
+                    finDist.add(tempDist.get(i));
+                }
                 tripDist = temp;
-                finArray = tempArray;
-                finDist = tempDist;
             }
         }
         nearNeighbor();
@@ -195,8 +201,14 @@ public class Optimizer {
                         improve = true;
                         if (sum < tripDist){    //Set final variables
                             tripDist = sum;
-                            finArray = twoOptTempArray;
-                            finDist = newDists;
+                            finArray.clear();
+                            finDist.clear();
+                            for (int b=0; b < twoOptTempArray.size(); b++){
+                                finArray.add(twoOptTempArray.get(b));
+                            }
+                            for (int b=0; b < twoOptTempDist.size(); b++){
+                                finDist.add(twoOptTempDist.get(b));
+                            }
                         }
                     }
                 }
@@ -390,8 +402,14 @@ public class Optimizer {
         if (sum < tripDist){
             System.out.println("3Opt Dist: " + sum);
             tripDist = sum;
-            finDist = threeOptTempDist;
-            finArray = threeOptTempArray;
+            finArray.clear();
+            finDist.clear();
+            for (int b=0; b < threeOptTempArray.size(); b++){
+                finArray.add(threeOptTempArray.get(b));
+            }
+            for (int b=0; b < threeOptTempDist.size(); b++){
+                finDist.add(threeOptTempDist.get(b));
+            }
         }
     }
 
