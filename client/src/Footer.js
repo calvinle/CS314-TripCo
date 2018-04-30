@@ -59,7 +59,7 @@ class Footer extends Component {
                                     His main interests in the field include Virtual Reality, machine learning, and big data.
                                     His other hobbies include competitive weightlifting, dancing, and video games every now and then.
                                    </CardText>
-                                <CardLink href="#">Resume</CardLink>
+                                <CardLink href="http://www.cs.colostate.edu/~calvinle/index.html">Resume</CardLink>
                             </CardBody>
                         </Card>
                         <Card>
