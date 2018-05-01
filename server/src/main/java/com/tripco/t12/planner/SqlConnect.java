@@ -78,20 +78,23 @@ public class SqlConnect {
 
         if(filters != null ) {
 
-            if(!filters[0].attribute.equals("")) {
+            try{
+                if(filters[0].attribute != null){
 
-                if(filters[0].values.isEmpty())
-                {
-                    query = getSqlQueryNoFilters(query, limit);
-                    System.out.println("query string no filter: " + query);
-                }
-                else {
-                    query = getSqlQuery(query, limit, filters);
-                    System.out.println("filter length test:" + filters[0].attribute);
-                    System.out.println("query string filter: " + query);
+                    if(filters[0].values.isEmpty())
+                    {
+                        query = getSqlQueryNoFilters(query, limit);
+                        System.out.println("query string no filter: " + query);
+                    }
+                    else {
+                        query = getSqlQuery(query, limit, filters);
+                        System.out.println("filter length test:" + filters[0].attribute);
+                        System.out.println("query string filter: " + query);
+                    }
                 }
             }
-            else {
+
+            catch(IndexOutOfBoundsException e) {
                 query = getSqlQueryNoFilters(query, limit);
                 System.out.println("query string no filter: " + query);
             }
