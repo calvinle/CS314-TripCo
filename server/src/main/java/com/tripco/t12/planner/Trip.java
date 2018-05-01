@@ -25,8 +25,8 @@ public class Trip {
   public String type;
   public String title;
   public Option options;
-  public ArrayList<Place> places;
-  public ArrayList<Integer> distances;
+  public Place[] places;
+  public int[] distances;
   public String map;
 
   /** The top level method that does planning.
@@ -45,7 +45,7 @@ public class Trip {
     this.map = svg();
     this.distances = legDistances();
     this.options = new Option();
-    this.places = new ArrayList<Place>();
+    this.places = new Place[this.places.length];
   }
 
   /**
@@ -96,13 +96,13 @@ public class Trip {
     String end = "Z\" stroke=\"blue\" stroke-width=\"2\" fill=\"none\" /> </svg></svg>";
 
     //For loop to go thru each set of long/lat
-    ArrayList<Place> data = this.places;
-    for (int i=0; i < data.size(); i++){
+    Place[] data = this.places;
+    for (int i=0; i < data.length; i++){
       if (i == 0) { path+="M"; } //If first point, then add M
       else { path+="L"; }        //else, add L
 
-      double newLat = decCoord(data.get(i).latitude);  //Convert lat
-      double newLong = decCoord(data.get(i).longitude);//Convert long
+      double newLat = decCoord(data[i].latitude);  //Convert lat
+      double newLong = decCoord(data[i].longitude);//Convert long
 
       path += Double.toString(longConv(newLong)) + " ";//Add long to string with space
       path += Double.toString(latConv(newLat)) + " ";  //Add lat to string with space
@@ -117,23 +117,22 @@ public class Trip {
    * including the return to the starting point to make a round trip.
    * @return
    */
-  private ArrayList<Integer> legDistances() {
+  private int[] legDistances() {
 
-    ArrayList<Integer> dist = new ArrayList<Integer>();
-    ArrayList<Place> data = this.places;
+    Place[] data = this.places;
+    int[] dist = new int[this.places.length-1];
 
     Place temp0;
     Place temp1;
+    dist[0] = 0;
     if(data == null) {
       System.out.println("NULL");
-      dist.add(0);
       return dist;
     }
-    dist.add(0);
-    for(int i = 0; i <= data.size()-2; i++){
-      temp0 = data.get(i);
-      temp1 = data.get(i+1);
-      dist.add(calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude)));
+    for(int i = 1; i <= data.length-2; i++){
+      temp0 = data[i];
+      temp1 = data[i+1];
+      dist[i] = calcDist(decCoord(temp0.latitude),decCoord(temp0.longitude), decCoord(temp1.latitude), decCoord(temp1.longitude));
     }
     System.out.println("places is not null");
     return dist;
