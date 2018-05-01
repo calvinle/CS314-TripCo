@@ -243,20 +243,20 @@ public class Optimizer {
                 for (int j = i + 1; j < tempArray.length - 2; j++) {
                     for (int k = j + 1; k < tempArray.length-1; k++) {
                         int newK = k+1;
-                        if (newK == tempArray.size()){
+                        if (newK == tempArray.length){
                             newK = 0;
                         }
 
                         //currentDistance with present i,j,k. Measures distance between all 3 edges
-                        int currentDistance = NNhelper(tempArray.get(i), tempArray.get(i+1))
-                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(k), tempArray.get(newK));
+                        int currentDistance = NNhelper(threeOptTempArray[i], threeOptTempArray[i+1])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]);
 
                         //Go backwards from slide diagram (most to least complex)
                         //Case 7
-                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
-                            + NNhelper(tempArray.get(j), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[newK]) < currentDistance){
 
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
@@ -266,9 +266,9 @@ public class Optimizer {
                         }
 
                         //Case 6
-                        if (NNhelper(tempArray.get(i), tempArray.get(k))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(j), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[newK]) < currentDistance){
 
                             ThreeOptReverse(i+1, j);//i+1 to j: Reverse
                             //j+1 to k: Untouched
@@ -278,9 +278,9 @@ public class Optimizer {
                         }
 
                         //Case 5
-                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(j), tempArray.get(k))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[newK]) < currentDistance){
 
                             //i+1 to j: Untouched
                             ThreeOptReverse(j+1, k); //j+1 to k: Reverse
@@ -290,9 +290,9 @@ public class Optimizer {
                         }
 
                         //Case 4
-                        if (NNhelper(tempArray.get(i), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(k))
-                            + NNhelper(tempArray.get(j+1), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
 
 
                             ThreeOptReverse(i+1, j); //i+1 to j: Reverse
@@ -303,9 +303,9 @@ public class Optimizer {
                         }
 
                         //Case 3
-                        if (NNhelper(tempArray.get(i), tempArray.get(k))
-                            + NNhelper(tempArray.get(j), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[newK]) < currentDistance){
 
 
                             ThreeOptReverse(i+1, k); //i+1 to k: Reverse
@@ -316,9 +316,9 @@ public class Optimizer {
                         }
 
                         //Case 2
-                        if (NNhelper(tempArray.get(i), tempArray.get(i+1))
-                            + NNhelper(tempArray.get(j), tempArray.get(k))
-                            + NNhelper(tempArray.get(j+1), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[i+1])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
 
                             //i+1 to j: Untouched
                             ThreeOptReverse(j+1, k);//j+1 to k: Reverse
@@ -328,9 +328,9 @@ public class Optimizer {
                         }
 
                         //Case 1
-                        if (NNhelper(tempArray.get(i), tempArray.get(j))
-                            + NNhelper(tempArray.get(i+1), tempArray.get(j+1))
-                            + NNhelper(tempArray.get(k), tempArray.get(newK)) < currentDistance){
+                        if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]) < currentDistance){
 
                             ThreeOptReverse(i+1, j); //i+1 to j: Reverse
                             // j+1 to k: Untouched
