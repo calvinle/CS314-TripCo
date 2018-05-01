@@ -23,40 +23,40 @@ public class Optimizer {
     private int[][] nnTable;
     private boolean[] visited;
     private int tripDist = (int)Double.POSITIVE_INFINITY;
-    public ArrayList<Place> workingArray;
+    public Place[] workingArray;
 
     //Test if contain shortest distance. Will become finArray/finDist if they do
-    public ArrayList<Place> tempArray;
-    private ArrayList<Integer> tempDist;
+    public Place[] tempArray;
+    private int[] tempDist;
 
-    public ArrayList<Place> finArray;
-    public ArrayList<Integer> finDist;
+    public Place[] finArray;
+    public int[] finDist;
 
-    public ArrayList<Place> twoOptTempArray;
-    public ArrayList<Integer> twoOptTempDist;
+    public Place[] twoOptTempArray;
+    public int[] twoOptTempDist;
 
-    public ArrayList<Place> threeOptTempArray;
-    public ArrayList<Place> tempSwap;
-    public ArrayList<Integer> threeOptTempDist;
+    public Place[] threeOptTempArray;
+    public Place[] tempSwap;
+    public int[] threeOptTempDist;
 
     private boolean improve;
 
 
     public Optimizer(Trip t){
-        tempArray = new ArrayList<Place>();
-        tempDist = new ArrayList<Integer>();
-        finArray = new ArrayList<Place>();
-        finDist = new ArrayList<Integer>();
         trip = t;
+        tempArray = new Place[t.places.length];
+        tempDist = new int[t.distances.length];
+        finArray = new Place[t.places.length];
+        finDist = new int[t.distances.length];
         workingArray = t.places;
-        visited = new boolean[workingArray.size()-1];
+        visited = new boolean[workingArray.length-1];
 
-        nnTable = new int[workingArray.size()-1][workingArray.size()-1];
+        nnTable = new int[workingArray.length-1][workingArray.length-1];
 
         //Populate Table of distances
-        for (int i=0; i < workingArray.size()-1; i++){
-            for (int j=0; j < workingArray.size()-1; j++){
-                int dist = NNhelper(workingArray.get(i), workingArray.get(j));
+        for (int i=0; i < workingArray.length-1; i++){
+            for (int j=0; j < workingArray.length-1; j++){
+                int dist = NNhelper(workingArray[i], workingArray[j]);
                 nnTable[i][j] = dist;
             }
         }
@@ -76,10 +76,10 @@ public class Optimizer {
     }
 
 
-    public ArrayList<Integer> sumList(ArrayList<Place> workingRoute){
-        ArrayList<Integer> opt2dists = new ArrayList<Integer>();
+    public int[] sumList(ArrayList<Place> workingRoute){
+        int[] opt2dists = new int[trip.distances.length];
         for (int i=0; i < workingRoute.size()-1; i++){
-            opt2dists.add(NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
+            opt2dists[i] = NNhelper(workingRoute.get(i), workingRoute.get(i+1)));
         }
 
         return opt2dists;
