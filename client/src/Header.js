@@ -27,7 +27,7 @@ class Header extends Component {
         return (
 
 <div>
-    <nav>
+    <Navbar id={"header"}>
     <div className="add-header-height">
                                         <div id="responsiveHeaderContainer">
 
@@ -53,13 +53,12 @@ class Header extends Component {
                                             {/*/!*<img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%" id="topLogo"/>*!/*/}
                                         </div>
     </div>
-    </nav>
-
-                                        <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
-                                                      updateTrip={this.props.updateTrip} trip={this.props.trip}
-                                                      updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
-                                                      updateOptimization={this.props.updateOptimization}
-                                                      updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
+        <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
+                      updateTrip={this.props.updateTrip} trip={this.props.trip}
+                      updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
+                      updateOptimization={this.props.updateOptimization}
+                      updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
+    </Navbar>
 
 </div>
 
