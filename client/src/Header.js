@@ -12,7 +12,6 @@ import {
     Button
 } from 'reactstrap';
 import SettingModal from './SettingModal';
-import '/Users/Boulderc30/IdeaProjects/t12/client/css/styles.css';
 import SearchModal from './SearchModal';
 
 
