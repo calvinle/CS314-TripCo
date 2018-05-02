@@ -244,7 +244,7 @@ public class Optimizer {
         improve = true;
         while (improve) {
             improve = false;
-            for (int i = 0; i < tempArray.size() - 3; i++) {
+            for (int i = 1; i < tempArray.size() - 3; i++) {
                 for (int j = i + 1; j < tempArray.size() - 2; j++) {
                     for (int k = j + 1; k < tempArray.size()-1; k++) {
                         int newK = k+1;
@@ -262,9 +262,9 @@ public class Optimizer {
 
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
-                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 6
@@ -274,9 +274,9 @@ public class Optimizer {
 
                             ThreeOptReverse(i+1, j);//i+1 to j: Reverse
                             //j+1 to k: Untouched
-                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above Arrays
+                            ThreeOptExchange(i,j,k); //Swap above Arrays
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 5
@@ -286,9 +286,9 @@ public class Optimizer {
 
                             //i+1 to j: Untouched
                             ThreeOptReverse(j+1, k); //j+1 to k: Reverse
-                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptExchange(i,j,k); //Swap above SubArrays
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 4
@@ -296,12 +296,11 @@ public class Optimizer {
                             + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
                             + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
 
-
                             ThreeOptReverse(i+1, j); //i+1 to j: Reverse
                             ThreeOptReverse(j+1, k); //j+1 to k: Reverse
                             //No swap
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 3
@@ -314,7 +313,7 @@ public class Optimizer {
                             //j+1 to k: Untouched
                             //No swap
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 2
@@ -326,7 +325,7 @@ public class Optimizer {
                             ThreeOptReverse(j+1, k);//j+1 to k: Reverse
                             //No swap
                             ThreeOptImprove();
-
+                            continue;
                         }
 
                         //Case 1
@@ -338,7 +337,7 @@ public class Optimizer {
                             // j+1 to k: Untouched
                             //No swap
                             ThreeOptImprove();
-
+                            continue;
                         }
                     }
                 }
@@ -347,30 +346,44 @@ public class Optimizer {
         return;
     }
 
-    public Place[] ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
+    public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
         //i already refers to i+1
         //int start1, int end1, int start2, int end2
         int n = threeOptTempArray.length;
-        int n1 = j - i + 1;
-        int n2 = k - (j+1) + 1;
+        int n1 = j - i + 1; //size of subArray1
+        int n2 = k - (j+1) + 1; //size of subArray2
 
-        Place[] swappedPlaces = new Place[n];
-        // Copy up until i
-        System.arraycopy(threeOptTempArray, 0, swappedPlaces, 0, i);
-        // Copy First subarray
-        System.arraycopy(threeOptTempArray, i, swappedPlaces, i + k - j, n1);
-        // Copy Between subarrays
-        System.arraycopy(threeOptTempArray, j + 1, swappedPlaces, i + n2, j+1 - j - 1);
-        // Copy Second subarray
-        System.arraycopy(threeOptTempArray, j+1, swappedPlaces, i, n2);
-        // After second subarray
-        System.arraycopy(threeOptTempArray, k + 1, swappedPlaces, k + 1, n - k - 1);
-
-        for (Place s : swappedPlaces){
-            System.out.print(s.id + " ");
+        if (n1 <= n2){
+            tempSwap = new Place[n1];
+            //copy subArray1 to tempSwap
+            System.arraycopy(threeOptTempArray, i, tempSwap, 0, n1);
+            //Copy subArray2 at i
+            System.arraycopy(threeOptTempArray, (j+1), threeOptTempArray, i, n2);
+            //Copy tempSwap( of subArray1) at k-j+1
+            System.arraycopy(tempSwap, 0, threeOptTempArray, k-j+1, n1);
         }
-        System.out.println();
-        return swappedPlaces;
+        else if (n2 < n1){
+            tempSwap = new Place[n2];
+            //copy subArray2 to tempSwap
+            System.arraycopy(threeOptTempArray, (j+1), tempSwap, 0, n2);
+            //copy subArray1 at k - j + 1
+            System.arraycopy(threeOptTempArray, i, threeOptTempArray, k-j+1, n1);
+            //copy tempSwap (of subArray2) at i
+            System.arraycopy(tempSwap, 0, threeOptTempArray, i, n2);
+        }
+
+
+        // Copy up until i
+
+//        System.arraycopy(threeOptTempArray, 0, swappedPlaces, 0, i);
+//        // Copy First subarray
+//        System.arraycopy(threeOptTempArray, i, swappedPlaces, i + k - j, n1);
+//        // Copy Between subarrays
+//        System.arraycopy(threeOptTempArray, j + 1, swappedPlaces, i + n2, j+1 - j - 1);
+//        // Copy Second subarray
+//        System.arraycopy(threeOptTempArray, j+1, swappedPlaces, i, n2);
+//        // Copy all after second subarray
+//        System.arraycopy(threeOptTempArray, k + 1, swappedPlaces, k + 1, n - k - 1);
 
     }
 
