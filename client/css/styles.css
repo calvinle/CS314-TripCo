@@ -1,7 +1,7 @@
 #sidenav {
     background-color: #C8C372;
     border-color: #ffffff;
-    color: #1E4D2B;
+    color: #1e4d2b;
 }
 #footer {
     background-color: #1E4D2B;
@@ -12,6 +12,17 @@
 #navBarLower{
     background-color: #ffffff;
     color: #1E4D2B;
+    height: 45px;
+}
+
+#goldLine{
+    color: #C8C372;
+    height: 4px;
+}
+
+#whiteLine{
+    color: #ffffff;
+    height: 4px;
 }
 
 #root {

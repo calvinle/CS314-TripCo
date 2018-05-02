@@ -27,9 +27,9 @@ class Header extends Component {
         return (
 
 <div>
-    <div className={"topbar"}>
+    {/*<div className={"topbar"}>*/}
         <div id={"header"}>
-        <div className="add-header-height">
+            <div className="add-header-height">
             <div id="responsiveHeaderContainer">
                 <a href="http://cs.colostate.edu" id="csuHeaderLink">
                     <img id="csuLargeLogo" src="http://cs.colostate.edu/~tomcavey/signature-oneline.svg" width="350" height="45" alt="Colorado State University"/>
@@ -45,11 +45,12 @@ class Header extends Component {
                     </a>
                 </div>
             </div>
+        {/*</div>*/}
         </div>
-        </div>
-
-
 </div>
+
+    <div id={"goldLine"}>
+    </div>
 
     <Navbar id={"navBarLower"}>
     <div className="add-header-height">
@@ -68,6 +69,7 @@ class Header extends Component {
         {/*</NavItem>*/}
 
     </Navbar>
+
 
     {/*<SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}*/}
                   {/*updateTrip={this.props.updateTrip} trip={this.props.trip}*/}
