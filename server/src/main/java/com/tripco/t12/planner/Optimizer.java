@@ -78,7 +78,7 @@ public class Optimizer {
 
 
     public Integer[] sumList(Place[] workingRoute){
-        Integer[] opt2dists = new Integer[tempDist.size()];
+        Integer[] opt2dists = new Integer[workingRoute.length-1];
         for (int i=0; i < workingRoute.length-1; i++){
             opt2dists[i] = NNhelper(workingRoute[i], workingRoute[i+1]);
         }
@@ -116,7 +116,6 @@ public class Optimizer {
         if(counter == visCities.length-1){
             tempArray.add(tempArray.get(0));
             tempDist.add(NNhelper(tempArray.get(tempArray.size()-1), tempArray.get(tempArray.size()-2)));
-            //System.out.println("DISTS" +Arrays.toString(tempDist.toArray()));
             return;
         }
         int current = i;
@@ -161,6 +160,7 @@ public class Optimizer {
 
         //Feed NN to 3Opt
         if (Double.parseDouble(trip.options.optimization) >= 1){
+            tempArray.remove(tempArray.size()-1);
             System.out.println("3opt");
             ThreeOpt();
         }
@@ -244,10 +244,13 @@ public class Optimizer {
         improve = true;
         while (improve) {
             improve = false;
-            for (int i = 0; i < tempArray.size() - 4; i++) {
-                for (int j = i + 1; j < tempArray.size() - 3; j++) {
-                    for (int k = j + 1; k < tempArray.size()-2; k++) {
+            for (int i = 0; i < threeOptTempArray.length - 2; i++) {
+                for (int j = i + 1; j < threeOptTempArray.length - 1; j++) {
+                    for (int k = j + 1; k < threeOptTempArray.length - 0; k++) {
                         int newK = k+1;
+                        if (newK == threeOptTempArray.length){
+                            newK = 0;
+                        }
                         int currentDistance = NNhelper(threeOptTempArray[i], threeOptTempArray[i+1])
                             + NNhelper(threeOptTempArray[j], threeOptTempArray[j+1])
                             + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]);
@@ -333,11 +336,11 @@ public class Optimizer {
         return;
     }
 
-    public Place[] ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
+    public Place[] ThreeOptExchange(int i, int j, int k) { //swaps portions of threeOptTempArray
 
         int n = threeOptTempArray.length;
         int n1 = j - i + 1; //size of subArray1
-        int n2 = k - (j+1) + 1; //size of subArray2
+        int n2 = k - (j + 1) + 1; //size of subArray2
         Place[] swappedPlaces = new Place[n];
         System.arraycopy(threeOptTempArray, 0, swappedPlaces, 0, i);
         // Copy First subarray
@@ -350,30 +353,23 @@ public class Optimizer {
         System.arraycopy(threeOptTempArray, k + 1, swappedPlaces, k + 1, n - k - 1);
         return swappedPlaces;
 //
-//        if (n1 < n2){
+//        if (n1 < n2) {
 //            tempSwap = new Place[n1];
 //            //copy subArray1 to tempSwap
 //            System.arraycopy(threeOptTempArray, i, tempSwap, 0, n1);
 //            //Copy subArray2 at i
-//            System.arraycopy(threeOptTempArray, (j+1), threeOptTempArray, i, n2);
+//            System.arraycopy(threeOptTempArray, (j + 1), threeOptTempArray, i, n2);
 //            //Copy tempSwap( of subArray1) at k-j+1
-//            System.arraycopy(tempSwap, 0, threeOptTempArray, k-j+1, n1);
-//        }
-//        else if (n2 <= n1){
+//            System.arraycopy(tempSwap, 0, threeOptTempArray, k - j + 1, n1);
+//        } else if (n2 <= n1) {
 //            tempSwap = new Place[n2];
 //            //copy subArray2 to tempSwap
-//            System.arraycopy(threeOptTempArray, (j+1), tempSwap, 0, n2);
+//            System.arraycopy(threeOptTempArray, (j + 1), tempSwap, 0, n2);
 //            //copy subArray1 at k - j + 1
-//            System.arraycopy(threeOptTempArray, i, threeOptTempArray, k-j+1, n1);
+//            System.arraycopy(threeOptTempArray, i, threeOptTempArray, k - j + 1, n1);
 //            //copy tempSwap (of subArray2) at i
 //            System.arraycopy(tempSwap, 0, threeOptTempArray, i, n2);
 //        }
-
-
-        // Copy up until i
-
-
-
     }
 
     public void ThreeOptImprove(){
