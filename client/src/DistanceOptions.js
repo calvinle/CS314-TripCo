@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup } from 'reactstrap';
+import { Button, ButtonGroup, Input } from 'reactstrap';
 class DistanceOptions extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class DistanceOptions extends Component {
     changeOption(arg) {
         //console.log(arg);
         this.props.updateOptions(arg);
-        console.log("this.state.",this.props.options);
+        console.log("this.state.",this.props.trip.options);
     }
 
     onRadioBtnClick(rSelected) {
@@ -56,13 +56,12 @@ class DistanceOptions extends Component {
             return <form onSubmit={this.handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" className="form-control" value={this.state.userUnit} onChange={this.handleUnit} />
+                    <Input type="text" placeholder={this.props.trip.options.userUnit} onChange={this.handleUnit} /><p></p>
                     Radius:
-                    <input type = "text" className="form-control" value = {this.state.userRadius} onChange={this.handleRadius}/>
+                    <Input type = "text" placeholder = {this.props.trip.options.userRadius} onChange={this.handleRadius}/>
                 </label>
                 <input type="submit" value="Submit" />
-            </form>
-                ;
+            </form>;
     }
 
     render() {

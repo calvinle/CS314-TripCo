@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import {Container, Row, Col, Table} from 'reactstrap';
+import cookie from 'react-cookie';
 import Itinerary from './Itinerary';
 import '../css/styles.css';
 import SideDestinations from "./SideDestinations";
@@ -18,7 +19,7 @@ class Application extends Component {
                 version:0,
                 type: "trip",
                 title: "",
-                options: {distance: "miles", userUnit: "", userRadius: "", optimization: "0"},
+                options: {distance: "", userUnit: "", userRadius: "", optimization: "0"},
                 places: [],
                 distances: [],
                 map: "<svg width=\"1920\" height=\"20\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\"><g></g></svg>"
@@ -53,7 +54,6 @@ class Application extends Component {
         this.updateOptimization = this.updateOptimization.bind(this);
         this.updateUserDef = this.updateUserDef.bind(this);
         this.addPlace = this.addPlace.bind(this);
-        this.reduceList = this.reduceList.bind(this);
         this.updateConfig = this.updateConfig.bind(this);
         this.config = this.config.bind(this);
         this.fetchResponse = this.fetchResponse.bind(this);
@@ -62,12 +62,28 @@ class Application extends Component {
         this.fetchResponse1 = this.fetchResponse1.bind(this);
         this.updateCount = this.updateCount.bind(this);
         this.updatePort = this.updatePort.bind(this);
+        this.update = this.update.bind(this);
     }
 
     componentDidMount() {
         console.log("DID MOUNT");
         this.config();
-        console.log(this.state.config);
+        //console.log(this.state.config);
+        let testTrip = Object.assign({},this.state.trip);
+        testTrip.options.distance = cookie.load('distance');
+        testTrip.options.optimization = cookie.load('optimization');
+        testTrip.options.userUnit = cookie.load('userUnit');
+        testTrip.options.userRadius = cookie.load('userRadius');
+        this.update(testTrip);
+    }
+
+    update(testTrip){
+        cookie.save('userUnit',testTrip.options.userUnit, { path: '/'});
+        cookie.save('userRadius',testTrip.options.userRadius, { path: '/'});
+        cookie.save('distance',testTrip.options.distance, { path: '/'});
+        cookie.save('optimization',testTrip.options.optimization, { path: '/'});
+        console.log('cookie: ',testTrip);
+        this.setState({trip:testTrip});
     }
 
     updateCount(arg){
@@ -140,9 +156,10 @@ class Application extends Component {
                         distances: [],
                         map: tffi.map }
             } );
+            this.update(this.state.trip);
         }
         else
-            this.setState({trip: tffi});
+            this.update(tffi);
 
     }
 
@@ -155,27 +172,6 @@ class Application extends Component {
         console.log("updateQuery");
         console.log(tffi);
         this.setState({query: tffi});
-    }
-
-    reduceList(place) {
-        var newPlaces = this.state.trip.places;
-        if (place.length <= 7) {
-            var newStart = newPlaces.find(x => x.id === place);
-            var index = newPlaces.indexOf(newStart);
-            if (index === 0) {
-                newPlaces.splice(index, 1);
-                newPlaces.splice(newPlaces.length - 1, 1);
-                newPlaces.push(newPlaces[0]);
-            }
-            else {
-                newPlaces.splice(index, 1);
-            }
-        }
-        else {
-        }
-        var testTrip = Object.assign({}, this.state.trip);
-        testTrip.places = newPlaces;
-        this.setState({trip: testTrip});
     }
 
     updateStart(options) {
@@ -195,7 +191,7 @@ class Application extends Component {
         var testTrip = Object.assign({}, this.state.trip);
         testTrip.places = newPlaces;
         //testTrip.options.start = options;
-        this.setState({trip: testTrip});
+        this.update(testTrip);
         //console.log("new option",testTrip);
         //console.log("testTrip:", testTrip);
         // update the options in the trip.
@@ -204,14 +200,14 @@ class Application extends Component {
     updateTitle(title){
         let testTrip = Object.assign({},this.state.trip);
         testTrip.title = title;
-        this.setState({trip:testTrip});
+        this.update(testTrip);
     }
 
     updateOptions(options) {
         console.log("in Application options:", options);
         var testTrip = Object.assign({}, this.state.trip);
         testTrip.options.distance = options;
-        this.setState({trip: testTrip});
+        this.update(testTrip);
         //console.log("testTrip:", testTrip);
         // update the options in the trip.
     }
@@ -220,7 +216,7 @@ class Application extends Component {
         let testTrip = Object.assign({}, this.state.trip);
         testTrip.options.userRadius = radius;
         testTrip.options.userUnit = unit;
-        this.setState({trip: testTrip});
+        this.update(testTrip);
         console.log("USERDEF", this.state.trip);
     }
 
@@ -229,7 +225,7 @@ class Application extends Component {
         let testTrip = Object.assign({}, this.state.trip);
         testTrip.places.push(place);
         //console.log(testTrip);
-        this.setState({trip: testTrip});
+        this.update(testTrip);
     }
 
     updatePort(host,port){
@@ -242,7 +238,7 @@ class Application extends Component {
         console.log("in Application optimization:", options);
         var testTrip = Object.assign({}, this.state.trip);
         testTrip.options.optimization = options;
-        this.setState({trip: testTrip});
+        this.update(testTrip);
         //console.log("testTrip:", testTrip);
     }
 
