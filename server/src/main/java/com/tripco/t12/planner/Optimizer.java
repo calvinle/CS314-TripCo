@@ -23,40 +23,41 @@ public class Optimizer {
     private int[][] nnTable;
     private boolean[] visited;
     private int tripDist = (int)Double.POSITIVE_INFINITY;
-    public Place[] workingArray;
+    public ArrayList<Place> workingArray;
 
     //Test if contain shortest distance. Will become finArray/finDist if they do
-    public Place[] tempArray;
-    private int[] tempDist;
+    public ArrayList<Place> tempArray;
+    private ArrayList<Integer> tempDist;
 
-    public Place[] finArray;
-    public int[] finDist;
+    public ArrayList<Place> finArray;
+    public ArrayList<Integer> finDist;
 
     public Place[] twoOptTempArray;
-    public int[] twoOptTempDist;
+    public Integer[] twoOptTempDist;
 
     public Place[] threeOptTempArray;
     public Place[] tempSwap;
-    public int[] threeOptTempDist;
+    public Integer[] threeOptTempDist;
 
     private boolean improve;
 
 
     public Optimizer(Trip t){
         trip = t;
-        tempArray = new Place[t.places.length];
-        tempDist = new int[t.distances.length];
-        finArray = new Place[t.places.length];
-        finDist = new int[t.distances.length];
+        tempArray = new ArrayList<Place>();
+        tempDist = new ArrayList<Integer>();
+        finArray = new ArrayList<Place>();
+        finDist = new ArrayList<Integer>();
+        System.out.println(finDist);
         workingArray = t.places;
-        visited = new boolean[workingArray.length-1];
+        visited = new boolean[workingArray.size()-1];
 
-        nnTable = new int[workingArray.length-1][workingArray.length-1];
+        nnTable = new int[workingArray.size()-1][workingArray.size()-1];
 
         //Populate Table of distances
-        for (int i=0; i < workingArray.length-1; i++){
-            for (int j=0; j < workingArray.length-1; j++){
-                int dist = NNhelper(workingArray[i], workingArray[j]);
+        for (int i=0; i < workingArray.size()-1; i++){
+            for (int j=0; j < workingArray.size()-1; j++){
+                int dist = NNhelper(workingArray.get(i), workingArray.get(j));
                 nnTable[i][j] = dist;
             }
         }
@@ -76,19 +77,26 @@ public class Optimizer {
     }
 
 
-    public int[] sumList(Place[] workingRoute){
-        int[] opt2dists = new int[trip.distances.length];
+    public Integer[] sumList(Place[] workingRoute){
+        Integer[] opt2dists = new Integer[tempDist.size()];
         for (int i=0; i < workingRoute.length-1; i++){
             opt2dists[i] = NNhelper(workingRoute[i], workingRoute[i+1]);
         }
-
         return opt2dists;
     }
 
-    public int distSum(int[] distances){
+    public int distSum(ArrayList<Integer> distances, Integer[] dists){
         int sum = 0;
-        for (int i=0; i < distances.length; i++){
-            sum+=distances[i];
+        if (dists == null){
+            for (int i=0; i < distances.size(); i++){
+                sum+=distances.get(i);
+            }
+        }
+
+        else if (distances == null){
+            for (int i=0; i < dists.length; i++){
+                sum+=dists[i];
+            }
         }
         return sum;
     }
@@ -106,8 +114,8 @@ public class Optimizer {
 
     private void oneTripNN(int i, int counter, boolean[] visCities){
         if(counter == visCities.length-1){
-            tempArray.add(tempArray[0]);
-            tempDist.add(NNhelper(tempArray[tempArray.length-1], tempArray[tempArray.length-2]));
+            tempArray.add(tempArray.get(0));
+            tempDist.add(NNhelper(tempArray.get(tempArray.size()-1), tempArray.get(tempArray.size()-2)));
             //System.out.println("DISTS" +Arrays.toString(tempDist.toArray()));
             return;
         }
@@ -123,7 +131,7 @@ public class Optimizer {
                 }
         }
         tempDist.add(minDist);
-        tempArray.add(workingArray[working]);
+        tempArray.add(workingArray.get(working));
         visCities[working] = true;
         current = working;
         counter++;
@@ -134,44 +142,42 @@ public class Optimizer {
         if(allTrue(visited)) {
             System.out.println("done " + tripDist);
             //System.out.println("DISTS" +Arrays.toString(finDist.toArray()));
-            finDist[0] = 0;
+            finDist.add(0,0);
+            //System.out.println(finDist);
             return;
         }
-
+        tempDist.clear();
+        tempArray.clear();
         int starting = firstFalse(visited);
-        tempArray.add(workingArray[starting]));
+        tempArray.add(workingArray.get(starting));
         boolean[] visCities = new boolean[visited.length];
         oneTripNN(starting, 0,visCities);
 
-        //Feed into 2Opt here. Use temp variables first
-
         //Feed NN to 2Opt
         if (((Double.parseDouble(trip.options.optimization) >= .66 && Double.parseDouble(trip.options.optimization) < 1))){
-            //System.out.println("2opt");
-            //twoOptTempArray = new Place[tempArray.size()];
-            twoOptTempDist =  new int[trip.places.length];
+            System.out.println("2opt");
             TwoOpt();
-            //add final stuff here?
-
         }
-        
+
         //Feed NN to 3Opt
         if (Double.parseDouble(trip.options.optimization) >= 1){
-            threeOptTempDist = new int[trip.places.length-1];
-            tempSwap = new Place[trip.places.length];
+            System.out.println("3opt");
             ThreeOpt();
+
         }
-        
+
         //NN only
         else{
-            int temp = distSum(tempDist);
+            int temp = distSum(tempDist, null);
             System.out.println("trip " + temp + " " + starting);
             if (temp < tripDist){
-                for (int i=0; i < tempArray.length; i++){
-                    finArray[i] = tempArray[i];
+                finArray.clear();
+                for (int i=0; i < tempArray.size(); i++){
+                    finArray.add(i, tempArray.get(i));
                 }
-                for (int i=0; i < tempDist.length; i++){
-                    finDist[i] = tempDist[i];
+                finDist.clear();
+                for (int i=0; i < tempDist.size(); i++){
+                    finDist.add(i, tempDist.get(i));
                 }
                 tripDist = temp;
             }
@@ -181,28 +187,30 @@ public class Optimizer {
 
     private void TwoOpt(){
         //tempArray, temptDist, can get distSum
-        twoOptTempArray = tempArray;    //copies tempArray
+        twoOptTempArray = tempArray.toArray(new Place[tempArray.size()]);    //copies tempArray
         improve = true;
         while (improve){
             improve = false;
-            for ( int i = 0; i < twoOptTempArray.length-3; i++) {
-                for (int k =i+2; k < twoOptTempArray.length-2; k++) {
+            for ( int i = 0; i < twoOptTempArray.length-2; i++) {
+                for (int k =i+2; k < twoOptTempArray.length-1; k++) {
                     int delta = (-1 * NNhelper(twoOptTempArray[i], twoOptTempArray[i+1]) )
                             - (NNhelper(twoOptTempArray[k], twoOptTempArray[k+1]))
                             + (NNhelper(twoOptTempArray[i], twoOptTempArray[k]))
                             + (NNhelper(twoOptTempArray[i+1], twoOptTempArray[k+1]));
                     if (delta < 0){ //If difference is negative, trip is shortened
                         TwoOptReverse(i+1, k);
-                        int[] newDists = sumList(twoOptTempArray);
-                        int sum = distSum(newDists);
+                        twoOptTempDist = sumList(twoOptTempArray);
+                        int sum = distSum(null, twoOptTempDist);
                         improve = true;
                         if (sum < tripDist){    //Set final variables
                             tripDist = sum;
+                            finArray.clear();
                             for (int b=0; b < twoOptTempArray.length; b++){
-                                finArray[b] = twoOptTempArray[b];
+                                finArray.add(b, twoOptTempArray[b]);
                             }
+                            finDist.clear();
                             for (int b=0; b < twoOptTempDist.length; b++){
-                                finDist[b] = twoOptTempDist[b];
+                                finDist.add(b, twoOptTempDist[b]);
                             }
                         }
                     }
@@ -233,15 +241,15 @@ public class Optimizer {
     }
 
     public void ThreeOpt() {
-        threeOptTempArray = tempArray;
+        threeOptTempArray = tempArray.toArray(new Place[tempArray.size()]);
         improve = true;
         while (improve) {
             improve = false;
-            for (int i = 0; i < tempArray.length - 3; i++) {
-                for (int j = i + 1; j < tempArray.length - 2; j++) {
-                    for (int k = j + 1; k < tempArray.length-1; k++) {
+            for (int i = 0; i < tempArray.size() - 3; i++) {
+                for (int j = i + 1; j < tempArray.size() - 2; j++) {
+                    for (int k = j + 1; k < tempArray.size()-1; k++) {
                         int newK = k+1;
-                        if (newK == tempArray.length){
+                        if (newK == tempArray.size()){
                             newK = 0;
                         }
 
@@ -258,7 +266,7 @@ public class Optimizer {
 
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
-                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above SubArrays
                             ThreeOptImprove();
                             continue;
                         }
@@ -270,7 +278,7 @@ public class Optimizer {
 
                             ThreeOptReverse(i+1, j);//i+1 to j: Reverse
                             //j+1 to k: Untouched
-                            ThreeOptExchange(i,j,k); //Swap above Arrays
+                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above Arrays
                             ThreeOptImprove();
                             continue;
                         }
@@ -282,7 +290,7 @@ public class Optimizer {
 
                             //i+1 to j: Untouched
                             ThreeOptReverse(j+1, k); //j+1 to k: Reverse
-                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            threeOptTempArray = ThreeOptExchange(i,j,k); //Swap above SubArrays
                             ThreeOptImprove();
                             continue;
                         }
@@ -336,9 +344,6 @@ public class Optimizer {
                             ThreeOptImprove();
                             continue;
                         }
-                        else{
-                            improve = false;
-                        }
                     }
                 }
             }
@@ -371,15 +376,15 @@ public class Optimizer {
     public void ThreeOptImprove(){
         improve = true;
         threeOptTempDist = sumList(threeOptTempArray);
-        int sum = distSum(threeOptTempDist);
+        int sum = distSum(null, threeOptTempDist);
         if (sum < tripDist){
             System.out.println("3Opt Dist: " + sum);
             tripDist = sum;
             for (int b=0; b < threeOptTempArray.length; b++){
-                finArray[b] = threeOptTempArray[b];
+                finArray.set(b, threeOptTempArray[b]);
             }
             for (int b=0; b < threeOptTempDist.length; b++){
-                finDist[b] = threeOptTempDist[b];
+                finDist.set(b, threeOptTempDist[b]);
             }
         }
     }
