@@ -244,7 +244,7 @@ public class Optimizer {
         improve = true;
         while (improve) {
             improve = false;
-            for (int i = 1; i < tempArray.size() - 3; i++) {
+            for (int i = 0; i < tempArray.size() - 3; i++) {
                 for (int j = i + 1; j < tempArray.size() - 2; j++) {
                     for (int k = j + 1; k < tempArray.size()-1; k++) {
                         int newK = k+1;
@@ -255,85 +255,86 @@ public class Optimizer {
                             + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]);
 
                         //Go backwards from slide diagram (most to least complex)
-                        //Case 7
+
+                        //Case 7: 3opt 3X
                         if (NNhelper(threeOptTempArray[i], threeOptTempArray[j+1])
                             + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
                             + NNhelper(threeOptTempArray[j], threeOptTempArray[newK]) < currentDistance){
 
                             //i+1 to j: Untouched
                             //j+1 to k: Untouched
-                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+                            ThreeOptExchange(i+1,j,k); //Swap above SubArrays
                             ThreeOptImprove();
                             continue;
                         }
 
-                        //Case 6
-                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[k])
-                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
-                            + NNhelper(threeOptTempArray[j], threeOptTempArray[newK]) < currentDistance){
+                        //Case 6: 3opt 2X
+                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
 
                             ThreeOptReverse(i+1, j);//i+1 to j: Reverse
-                            //j+1 to k: Untouched
-                            ThreeOptExchange(i,j,k); //Swap above Arrays
+                            ThreeOptReverse(j+1, k);//j+1 to k: Reverse
+
                             ThreeOptImprove();
                             continue;
                         }
 
-                        //Case 5
+                        //Case 5: 3opt 2X
                         else if (NNhelper(threeOptTempArray[i], threeOptTempArray[j+1])
                             + NNhelper(threeOptTempArray[j], threeOptTempArray[k])
                             + NNhelper(threeOptTempArray[i+1], threeOptTempArray[newK]) < currentDistance){
 
                             //i+1 to j: Untouched
+                            ThreeOptExchange(i+1,j,k); //Swap above SubArrays
                             ThreeOptReverse(j+1, k); //j+1 to k: Reverse
-                            ThreeOptExchange(i,j,k); //Swap above SubArrays
+
                             ThreeOptImprove();
                             continue;
                         }
 
-                        //Case 4
-                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
-                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[k])
-                            + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
-
-                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
-                            ThreeOptReverse(j+1, k); //j+1 to k: Reverse
-                            //No swap
-                            ThreeOptImprove();
-                            continue;
-                        }
-
-                        //Case 3
+                        //Case 4: 3opt 2X
                         else if (NNhelper(threeOptTempArray[i], threeOptTempArray[k])
-                            + NNhelper(threeOptTempArray[j], threeOptTempArray[j+1])
-                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[newK]) < currentDistance){
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[newK]) < currentDistance){
 
-
-                            ThreeOptReverse(i+1, k); //i+1 to k: Reverse
-                            //j+1 to k: Untouched
+                            ThreeOptExchange(i+1,j,k);
+                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
                             //No swap
                             ThreeOptImprove();
                             continue;
                         }
 
-                        //Case 2
+                        //Case 3: 2opt 1X
                         else if (NNhelper(threeOptTempArray[i], threeOptTempArray[i+1])
                             + NNhelper(threeOptTempArray[j], threeOptTempArray[k])
                             + NNhelper(threeOptTempArray[j+1], threeOptTempArray[newK]) < currentDistance){
 
-                            //i+1 to j: Untouched
-                            ThreeOptReverse(j+1, k);//j+1 to k: Reverse
+
+                            ThreeOptReverse(j+1, k); //i+1 to k: Reverse
+                            //No swap
+                            ThreeOptImprove();
+                            continue;
+                        }
+
+                        //Case 2: 2opt 1X
+                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]) < currentDistance){
+
+
+                            ThreeOptReverse(i+1, k);//j+1 to k: Reverse
                             //No swap
                             ThreeOptImprove();
                             continue;
                         }
 
                         //Case 1
-                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[j])
-                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[j+1])
-                            + NNhelper(threeOptTempArray[k], threeOptTempArray[newK]) < currentDistance){
+                        else if (NNhelper(threeOptTempArray[i], threeOptTempArray[k])
+                            + NNhelper(threeOptTempArray[j], threeOptTempArray[j+1])
+                            + NNhelper(threeOptTempArray[i+1], threeOptTempArray[newK]) < currentDistance){
 
-                            ThreeOptReverse(i+1, j); //i+1 to j: Reverse
+                            ThreeOptReverse(i+1, k); //i+1 to j: Reverse
                             // j+1 to k: Untouched
                             //No swap
                             ThreeOptImprove();
@@ -347,13 +348,11 @@ public class Optimizer {
     }
 
     public void ThreeOptExchange(int i, int j, int k){ //swaps portions of threeOptTempArray
-        //i already refers to i+1
-        //int start1, int end1, int start2, int end2
         int n = threeOptTempArray.length;
         int n1 = j - i + 1; //size of subArray1
         int n2 = k - (j+1) + 1; //size of subArray2
 
-        if (n1 <= n2){
+        if (n1 < n2){
             tempSwap = new Place[n1];
             //copy subArray1 to tempSwap
             System.arraycopy(threeOptTempArray, i, tempSwap, 0, n1);
@@ -362,7 +361,7 @@ public class Optimizer {
             //Copy tempSwap( of subArray1) at k-j+1
             System.arraycopy(tempSwap, 0, threeOptTempArray, k-j+1, n1);
         }
-        else if (n2 < n1){
+        else if (n2 <= n1){
             tempSwap = new Place[n2];
             //copy subArray2 to tempSwap
             System.arraycopy(threeOptTempArray, (j+1), tempSwap, 0, n2);
