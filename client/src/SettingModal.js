@@ -178,7 +178,7 @@ class SettingModal extends Component {
         return (
             <span>
                 <Button onClick={this.toggle}>
-                    Advanced options
+                    <span className="glyphicon glyphicon-cog"/>
                 </Button>
                 <Modal isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Menu</ModalHeader>

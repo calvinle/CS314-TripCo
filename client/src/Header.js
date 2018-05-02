@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {
     Navbar,
+    NavItem,
     ButtonDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -39,25 +40,28 @@ class Header extends Component {
                     <h1 id={"larger-CSUtext"}>
                         <span id="cnsHeaderText" style={{"display" :"inline-block;"}}> Computer </span>
                         <span id="cnsHeaderText" style={{"display" :"inline-block;"}}> Science </span>
-                        {/*<div>computer </div>*/}
-                        {/*<div> science</div>*/}
                     </h1>
                 </a>
             </div>
         </div>
     </div>
+        {/*<NavItem>*/}
 
-        <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
-                      updateTrip={this.props.updateTrip} trip={this.props.trip}
-                      updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
-                      updateOptimization={this.props.updateOptimization}
-                      updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
+            <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
+                          updateTrip={this.props.updateTrip} trip={this.props.trip}
+                          updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
+                          updateOptimization={this.props.updateOptimization}
+                          updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
+
+        {/*</NavItem>*/}
     </Navbar>
 
-</div>
-
-
-
+    {/*<SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}*/}
+                  {/*updateTrip={this.props.updateTrip} trip={this.props.trip}*/}
+                  {/*updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}*/}
+                  {/*updateOptimization={this.props.updateOptimization}*/}
+                  {/*updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>*/}
+                  </div>
 
         )
     };
