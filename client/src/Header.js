@@ -28,30 +28,25 @@ class Header extends Component {
 <div>
     <Navbar id={"header"}>
     <div className="add-header-height">
-                                        <div id="responsiveHeaderContainer">
-
-                                            <a href="http://cs.colostate.edu" id="csuHeaderLink">
-                                                <img id="csuLargeLogo" src="http://cs.colostate.edu/~tomcavey/signature-oneline.svg" width="350" height="45" alt="Colorado State University"/>
-                                                <img id="csuMedLogo" src="http://cs.colostate.edu/~tomcavey/signature-stacked.svg" width="172" height="45" alt="Colorado State University"/>
-                                                <img id="csuSmallLogo" src="http://cs.colostate.edu/~tomcavey/signature-mobile.svg" width="113" height="45" alt="Colorado State University"/>
-                                            </a>
-
-                                            <div id="responsiveLogoSubsystem">
-                                                <a href="https://www.cs.colostate.edu" id="cnsHeaderLink" title="">
-                                                    <h1 id="cnsHeaderText" className="larger-CSUtext">
-                                                        <div>computer </div>
-                                                        <div> science</div>
-                                                        {/*id={"csText"}*/}
-
-                                                    </h1>
-                                                </a>
-                                            </div>
-
-
-
-                                            {/*/!*<img src="http://www.cs.colostate.edu/~cs314/images/CompSci-NS-CSU-1-Hrev.png" width="30%" id="topLogo"/>*!/*/}
-                                        </div>
+        <div id="responsiveHeaderContainer">
+            <a href="http://cs.colostate.edu" id="csuHeaderLink">
+                <img id="csuLargeLogo" src="http://cs.colostate.edu/~tomcavey/signature-oneline.svg" width="350" height="45" alt="Colorado State University"/>
+                <img id="csuMedLogo" src="http://cs.colostate.edu/~tomcavey/signature-stacked.svg" width="172" height="45" alt="Colorado State University"/>
+                <img id="csuSmallLogo" src="http://cs.colostate.edu/~tomcavey/signature-mobile.svg" width="113" height="45" alt="Colorado State University"/>
+            </a>
+            <div id="responsiveLogoSubsystem">
+                <a href="https://www.cs.colostate.edu" id="cnsHeaderLink" title="">
+                    <h1 id={"larger-CSUtext"}>
+                        <span id="cnsHeaderText" style={{"display" :"inline-block;"}}> Computer </span>
+                        <span id="cnsHeaderText" style={{"display" :"inline-block;"}}> Science </span>
+                        {/*<div>computer </div>*/}
+                        {/*<div> science</div>*/}
+                    </h1>
+                </a>
+            </div>
+        </div>
     </div>
+
         <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
                       updateTrip={this.props.updateTrip} trip={this.props.trip}
                       updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
