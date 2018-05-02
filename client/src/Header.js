@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {
     Navbar,
     NavItem,
+    Nav,
+    NavLink,
     ButtonDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -31,7 +33,7 @@ class Header extends Component {
         <div id={"header"}>
             <div className="add-header-height">
             <div id="responsiveHeaderContainer">
-                <a href="http://cs.colostate.edu" id="csuHeaderLink">
+                <a href="https://cs.colostate.edu" id="csuHeaderLink">
                     <img id="csuLargeLogo" src="http://cs.colostate.edu/~tomcavey/signature-oneline.svg" width="350" height="45" alt="Colorado State University"/>
                     <img id="csuMedLogo" src="http://cs.colostate.edu/~tomcavey/signature-stacked.svg" width="172" height="45" alt="Colorado State University"/>
                     <img id="csuSmallLogo" src="http://cs.colostate.edu/~tomcavey/signature-mobile.svg" width="113" height="45" alt="Colorado State University"/>
@@ -55,18 +57,26 @@ class Header extends Component {
     <Navbar id={"navBarLower"}>
     <div className="add-header-height">
     </div>
+        <Nav>
+            <NavItem>
+                <NavLink>Load trip</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink>Save trip</NavLink>
+            </NavItem>
 
-        <p>Load trip</p>
-        <p>Save Trip</p>
-        {/*<NavItem>*/}
-
+        <NavItem>
+            <NavLink>
             <SettingModal config={this.props.config} query = {this.props.query} title={this.props.trip.title}
                           updateTrip={this.props.updateTrip} trip={this.props.trip}
                           updateUserDef={this.props.updateUserDef} updatePort = {this.props.updatePort} host={this.props.host}
                           updateOptimization={this.props.updateOptimization}
                           updateOptions={this.props.updateOptions}  updateCount = {this.props.updateCount}/>
 
-        {/*</NavItem>*/}
+            </NavLink>
+        </NavItem>
+        </Nav>
+
 
     </Navbar>
 

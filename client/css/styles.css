@@ -15,6 +15,15 @@
     height: 45px;
 }
 
+#searchGreen{
+    background-color: #1e4d2b;
+}
+
+#tableColor{
+    background-color: #ffffff;
+    color: #1e4d2b;
+}
+
 #goldLine{
     color: #C8C372;
     height: 4px;
