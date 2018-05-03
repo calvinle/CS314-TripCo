@@ -48,8 +48,8 @@ There will be an increase of discussions on ideas of executing parts of the spri
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  19   | *value* 
-Story Points |  48  | *value* 
+Tasks |  39   | 31 
+Story Points |  66  | 56 
 
 ## Daily Scrums
 
@@ -66,20 +66,30 @@ Date | Tasks done  | Tasks in progress | Impediments
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *Staff Page*:  *comments*
+* *Improved UI*:
+* *Cookies*:
+* *Inter-operability*:
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* *3Opt*: *explanation...*
+* *API Testing*: 
+* *Drag and Drop*
+* *Itinerary* 
 
 #### What went well
-* *something*
-*
+* Branding and User Interface
+* Query Search
+* Mobile responsiveness
+* Google Maps sizing
+* Inter-operability
+* Fixes to NN and 2Opt Algorithms
+* Multiple Deploys
 
 #### Problems encountered and resolutions
-* *something*
-*
+* *Handling 3Opt Alone*: Something of that magnitude should have multiple people involved, detailing diagrams
+* *Interopt Error Code*: Found solution on piazza
+* *Offline Server*: Website was not aligned with master even on deploy. Minor.
 
 ## Retrospective
 
@@ -87,5 +97,5 @@ Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
 What we will change this time |  |  | 
 What we did well |  |  | 
-What we need to work on |  |  |
+What we need to work on | Biting off more than can be chewed, always have 2+ people working on something. | Breaking down tasks and not undersetimating Product Backlog Items. | Adding more tests to JUnit prior to writing code on the go.
 What we will change next time |  |  | 
