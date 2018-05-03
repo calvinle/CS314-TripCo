@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ButtonToolbar, InputGroup, Input, InputGroupAddon, Button } from 'reactstrap';
 import SearchModal from './SearchModal';
 import SettingModal from './SettingModal';
-import DestinationList from './DestinationList';
 
 class SideDestinations extends Component {
     constructor(props) {

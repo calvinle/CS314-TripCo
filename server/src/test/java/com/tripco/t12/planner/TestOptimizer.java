@@ -97,6 +97,14 @@ public class TestOptimizer {
     }
 
     @Test
+    public void distSumTest(){
+        ArrayList<Integer> testData = new ArrayList<Integer>();
+        testData.add(1);
+        testData.add(2);
+        testData.add(3);
+        assertEquals(optimizer.distSum(testData), 6);
+    }
+
     public void testTrueArray(){
         boolean[] allTrue1 = {true, true, true};
         boolean[] someTrue = {true, true, false};
@@ -114,5 +122,4 @@ public class TestOptimizer {
         assertEquals(optimizer.firstFalse(someTrue), 2);
         assertEquals(optimizer.firstFalse(noFalse), -1);
     }
-
 }

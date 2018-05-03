@@ -141,4 +141,14 @@ public class TestTrip {
     assertFalse(resultOut0);
     assertFalse(resultOut1);
   }
+
+  @Test
+  public void mileTest(){
+    assertEquals(trip.mile(1.0), 3958.7613, 0.0);
+  }
+
+  @Test
+  public void kiloTest(){
+    assertEquals(trip.kilo(1.0), 6371.0088, 0.0);
+  }
 }
