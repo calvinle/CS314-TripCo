@@ -51,7 +51,6 @@ class SideDestinations extends Component {
             <span>
                 <Input placeholder="Name My Trip" type="text" value={this.props.trip.title} onChange={this.fieldChange}/>
                 <p></p>
-                <DestinationList trip={this.state.trip}/>
 
                 {/*<p> Load my existing trip:</p>
                 <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />*/}
