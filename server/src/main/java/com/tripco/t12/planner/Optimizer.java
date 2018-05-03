@@ -56,12 +56,12 @@ public class Optimizer {
         }
     }
 
-    private boolean allTrue(boolean[] array){
+    public boolean allTrue(boolean[] array){
         for(boolean b: array) if(!b) return false;
         return true;
     }
 
-    private int firstFalse(boolean[] array){
+    public int firstFalse(boolean[] array){
         for(int i = 0; i < array.length; i++) if(!array[i]){
             array[i] = true;
             return i;

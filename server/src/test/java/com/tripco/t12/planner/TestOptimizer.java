@@ -96,4 +96,23 @@ public class TestOptimizer {
         assertEquals(optimizer.sumList(trip), expected);
     }
 
+    @Test
+    public void testTrueArray(){
+        boolean[] allTrue1 = {true, true, true};
+        boolean[] someTrue = {true, true, false};
+
+        assertTrue(optimizer.allTrue(allTrue1));
+        assertFalse(optimizer.allTrue(someTrue));
+
+    }
+
+    @Test
+    public void testFirstFalse(){
+        boolean[] someTrue = {true, true, false, true};
+        boolean[] noFalse = {true, true, true, true};
+
+        assertEquals(optimizer.firstFalse(someTrue), 2);
+        assertEquals(optimizer.firstFalse(noFalse), -1);
+    }
+
 }

@@ -19,7 +19,7 @@ class SearchTable extends Component {
         for(let i = 0; i < dests.length; i++){
             buttons.push(<td><div className="input-group-prepend">
                 <div onClick={this.addButton.bind(this)}>
-                    <Button size = "sm" outline color="primary" id={i} type="button">Add</Button>
+                    <Button size = "sm" id={"oOutline"} name={i} type="button">Add</Button>
                 </div>
             </div></td>)
         }
@@ -41,8 +41,8 @@ class SearchTable extends Component {
 
     addButton(event){
         //for(let i =0; i<this.props.query.places.length;){
-            this.addEntry(this.props.query.places[event.target.id]);
-            this.props.query.places.splice(event.target.id, 1);
+            this.addEntry(this.props.query.places[event.target.name]);
+            this.props.query.places.splice(event.target.name, 1);
         //}
         //this.addEntry(event.target.id);
     }
@@ -56,6 +56,7 @@ class SearchTable extends Component {
         let table = this.createTable();
 
         return <div id="SearchTable">
+            <p></p>
             <h4>Search Results </h4>
             <Table striped responsive>
                 <thead>
@@ -77,7 +78,7 @@ class SearchTable extends Component {
             <div className="card-body">
                 <div className="input-group-prepend">
                     <div onClick={this.addButtonAll.bind(this)}>
-                        <Button color="primary">Add All</Button>
+                        <Button id={"searchGreen"}>Add All</Button>
                     </div>
                 </div>
             </div>
