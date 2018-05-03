@@ -177,18 +177,18 @@ class SettingModal extends Component {
     render() {
         return (
             <span>
-                <Button onClick={this.toggle}>
-                    <span className="glyphicon glyphicon-cog"/>
+                <Button id="searchGreen" size="sm" onClick={this.toggle}>
+                    Menu
                 </Button>
                 <Modal isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>Menu</ModalHeader>
+                    <ModalHeader id="searchGreen" toggle={this.toggle}>Menu</ModalHeader>
                     <ModalBody>
                         <p> Load my existing trip:</p>
                         <Input type="file" name="file" onChange={this.loadTFFI} id="tffifile" />
                         <p></p>
-                        <Button color="secondary" onClick={this.reverse} type="button">Reverse trip order</Button>
+                        <Button id="goldButton" color="secondary" onClick={this.reverse} type="button">Reverse trip order</Button>
                         <p></p>
-                        <Button onClick={this.saveTFFI} type="button">Save this trip</Button>
+                        <Button id="goldButton" onClick={this.saveTFFI} type="button">Save this trip</Button>
                         {/*<h5>There are {this.state.count} destinations. </h5>*/}
                         <hr />
                         <DistanceOptions config = {this.props.config} query= {this.props.query} trip = {this.props.trip} updateUserDef={this.props.updateUserDef} updateOptions={this.props.updateOptions}/>
@@ -205,7 +205,7 @@ class SettingModal extends Component {
                                 <Input type="text" id="port" value={this.state.port} onChange={this.portChange}/>
                             </Col>
                         </FormGroup>
-                        <Button color="secondary" onClick={this.host} type="button">Change Host</Button>
+                        <Button id="goldButton" color="secondary" onClick={this.host} type="button">Change Host</Button>
                     </ModalBody>
                     <ModalFooter>
                     </ModalFooter>

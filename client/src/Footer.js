@@ -32,7 +32,7 @@ class Footer extends Component {
                                 <div className="flexbox-footer-left">
                                     <div className="flexbox-footer-left-top">
                                         <BreadcrumbItem id={"bColor"} onClick={this.toggle}>
-                                            About the developers
+                                            About The Developers
                                         </BreadcrumbItem>
                                         <Modal id ="myModal" isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
                                             <ModalHeader toggle={this.toggle}>About the developers</ModalHeader>
@@ -97,7 +97,7 @@ class Footer extends Component {
 
                                     </div>
                                     <div className="flexbox-footer-left-bottom">
-                                        <p>Welcome to Our Trip Planner  © TripCo t{this.props.number}, {this.props.name}, 2018</p>
+                                        <p>Welcome to Our Trip Planner © TripCo T{this.props.number} {this.props.name}, 2018</p>
                                     </div>
                                 </div>
                                 <div className="flexbox-footer-right">
