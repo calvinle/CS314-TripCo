@@ -40,7 +40,7 @@ class FilterOptions extends Component {
         let but = [];
         for(let i = 0; i < con.values.length; i++){
             // console.log("con.values: " + con.values[i]);
-            but.push(<Button color = "success" onClick={()=>this.onCheckboxBtnClick(con.values[i])} active={this.state.cSelected.includes(con.values[i])} >{con.values[i]}</Button>)
+            but.push(<Button color={"secondary"} onClick={()=>this.onCheckboxBtnClick(con.values[i])} active={this.state.cSelected.includes(con.values[i])} >{con.values[i]}</Button>)
         }
         return but;
     }
@@ -62,7 +62,7 @@ class FilterOptions extends Component {
             <div><ButtonGroup size="sm" vertical>
                 {buttons}
             </ButtonGroup>
-                <Button className="float-right" onClick={this.saveFilters} type="button">Save</Button>
+                <Button id={"goldButton"} className="float-right" onClick={this.saveFilters} type="button">Save</Button>
                 {/*&& this.props.toggle()*/}
             </div>
         )

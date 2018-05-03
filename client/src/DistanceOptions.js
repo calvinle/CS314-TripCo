@@ -31,7 +31,7 @@ class DistanceOptions extends Component {
         let con = this.props.config;
         let but = [];
         for(let i = 0; i < con.units.length; i++){
-            but.push(<Button color = "primary" onClick={()=>this.onRadioBtnClick(con.units[i])} active={this.props.trip.options.distance === con.units[i]}>{con.units[i]}</Button>)
+            but.push(<Button id="searchGreen" onClick={()=>this.onRadioBtnClick(con.units[i])} active={this.props.trip.options.distance === con.units[i]}>{con.units[i]}</Button>)
         }
         return but;
     }
@@ -68,7 +68,7 @@ class DistanceOptions extends Component {
         //todo need to update the options when a button is pressed
         let buttons = this.makeButtons();
         return (
-            <div><ButtonGroup>
+            <div id="goldButton"><ButtonGroup>
                 {buttons}
                 {/*<Button color = "primary" onClick={()=>this.onRadioBtnClick("user defined")} active={this.props.trip.options.distance === "user defined"}>user defined</Button>*/}
             </ButtonGroup>
