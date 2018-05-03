@@ -60,7 +60,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 4/24 | About Section | Interopt, 3Opt, Query Fix, Set Query Limit, cookies, footer size | Updated client for 3Opt, empty filter in Query TFFI
 4/26 | Interopt, Query, Footer Size, Interopt | 3Opt, cookies | Types of copies for arraylists and NN wrong output
 4/27 | CSS Clean up, Load/Save Modal, Calvin Resume, 2Opt Fixes | 3Opt, Drag and Drop | Off by 1 errors
-5/1  | Query Fix | Cookies | 
+5/1  | Query Fix, Cookies | 3Opt | Drag/Drop Destinations 
  
 
 ## Review
