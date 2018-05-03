@@ -33,7 +33,6 @@ class Itinerary extends Component {
     let dists = this.props.trip.distances.map((item) => <td>{item}</td>);
     //let tableCells = numbers.map((number, index) => <td key={index}>{number}</td>);
 
-    console.log(this.props.trip);
 
     return {distance, units, dests, dists, roundTrip};
   }

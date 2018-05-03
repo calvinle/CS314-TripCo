@@ -31,9 +31,11 @@ class Footer extends Component {
                             <div className="flexbox-footer">
                                 <div className="flexbox-footer-left">
                                     <div className="flexbox-footer-left-top">
+
                                         <a href={"#"} id={"oColor"} onClick={this.toggle}>
                                             About The Developers
                                         </a>
+
                                         <Modal id ="myModal" isOpen={this.state.settingsModalOpen} toggle={this.toggle}>
                                             <ModalHeader toggle={this.toggle}>About the developers</ModalHeader>
                                             <ModalBody>
