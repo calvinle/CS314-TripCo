@@ -60,7 +60,7 @@ class SearchTable extends Component {
             <h4>Search Results </h4>
             <Table striped responsive>
                 <thead>
-                <tr>
+                <tr id={"tablesCool"}>
                     {table.dests}
                 </tr>
                 </thead>
