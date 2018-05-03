@@ -45,7 +45,7 @@ class Itinerary extends Component {
         <div id="database" className="card border-0 border-dark">
             <div id={"searchGreen"}>
             <div className="card-header text-light">
-                Places - {table.dests.length} Destinations
+                Places: {table.dests.length} Destinations
             </div>
             </div>
           <table className="table table-responsive table-bordered">
