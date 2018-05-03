@@ -135,7 +135,7 @@ public class MicroServer {
               "\"version\" : 3, " +
               "\"filters\": " + filters() + ", " +
               "\"maps\": [\"svg\", \"kml\"], " +
-              "\"optimization\": 3," +
+              "\"optimization\": 2," +
               "\"units\": " + Arrays.toString(units()) + "}";
   }
 
