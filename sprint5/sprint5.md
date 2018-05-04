@@ -95,7 +95,7 @@ Date | Tasks done  | Tasks in progress | Impediments
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
+What we will change this time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way | Sending paper notes for hand-made calculations
+What we did well | Informing of abscenses for planning | Prioritizing time and dedicating time to fix errors from previous sprint | Many, many deploys to avoid last minute panic
 What we need to work on | Biting off more than can be chewed, always have 2+ people working on something. | Breaking down tasks and not undersetimating Product Backlog Items. | Adding more tests to JUnit prior to writing code on the go.
-What we will change next time |  |  | 
+What we will change next time | When getting together, have several people work on something instead of aboslute division of issues | Frequent Scrum Meetings | Discuss with other teams 
