@@ -48,8 +48,8 @@ There will be an increase of discussions on ideas of executing parts of the spri
 
 Statistic | Planned | Completed
 --- | ---: | ---:
-Tasks |  19   | *value* 
-Story Points |  48  | *value* 
+Tasks |  39   | 31 
+Story Points |  66  | 56 
 
 ## Daily Scrums
 
@@ -66,26 +66,35 @@ Date | Tasks done  | Tasks in progress | Impediments
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *user story*:  *comments*
-* 
+* *Staff Page*: Pop Up Module that displays a photo, short bio, and resume link to each person
+* *Improved UI*: Have the map take up the majority of the page, while keeping buttons and options in different modules to minimize clutter
+* *Cookies*: Let the user save their options as default for next visit
+* *Inter-operability*: For developer use, let the client connect to another server to test.
 
 #### Incomplete epics in Sprint Backlog 
-* *user story*: *explanation...*
-*
+* *3Opt*: Inefficient planning and testing
+* *API Testing*: config and query TFFIs tested with interopt and deploys
+* *Drag and Drop*: Too many bugs and not higher on priorty compared to other Epics
 
 #### What went well
-* *something*
-*
+* Branding and User Interface
+* Query Search
+* Mobile responsiveness
+* Google Maps sizing
+* Inter-operability
+* Fixes to NN and 2Opt Algorithms
+* Multiple Deploys
 
 #### Problems encountered and resolutions
-* *something*
-*
+* *Handling 3Opt Alone*: Something of that magnitude should have multiple people involved, detailing diagrams
+* *Interopt Error Code*: Found solution on piazza
+* *Offline Server*: Website was not aligned with master even on deploy. Minor.
 
 ## Retrospective
 
 Topic | Teamwork | Process | Tools
 :--- | :--- | :--- | :---
-What we will change this time |  |  | 
-What we did well |  |  | 
-What we need to work on |  |  |
-What we will change next time |  |  | 
+What we will change this time | Discussing specific changes, elaborate GH/ZH Issues | Test everything along the way | Sending paper notes for hand-made calculations
+What we did well | Informing of abscenses for planning | Prioritizing time and dedicating time to fix errors from previous sprint | Many, many deploys to avoid last minute panic
+What we need to work on | Biting off more than can be chewed, always have 2+ people working on something. | Breaking down tasks and not undersetimating Product Backlog Items. | Adding more tests to JUnit prior to writing code on the go.
+What we will change next time | When getting together, have several people work on something instead of aboslute division of issues | Frequent Scrum Meetings | Discuss with other teams 
