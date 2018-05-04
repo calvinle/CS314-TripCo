@@ -66,16 +66,15 @@ Date | Tasks done  | Tasks in progress | Impediments
 ## Review
 
 #### Completed epics in Sprint Backlog 
-* *Staff Page*:  *comments*
-* *Improved UI*:
-* *Cookies*:
-* *Inter-operability*:
+* *Staff Page*: Pop Up Module that displays a photo, short bio, and resume link to each person
+* *Improved UI*: Have the map take up the majority of the page, while keeping buttons and options in different modules to minimize clutter
+* *Cookies*: Let the user save their options as default for next visit
+* *Inter-operability*: For developer use, let the client connect to another server to test.
 
 #### Incomplete epics in Sprint Backlog 
-* *3Opt*: *explanation...*
-* *API Testing*: 
-* *Drag and Drop*
-* *Itinerary* 
+* *3Opt*: Inefficient planning and testing
+* *API Testing*: config and query TFFIs tested with interopt and deploys
+* *Drag and Drop*: Too many bugs and not higher on priorty compared to other Epics
 
 #### What went well
 * Branding and User Interface
