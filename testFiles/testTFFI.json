@@ -1,0 +1,22 @@
+{
+  "type"      : "trip",
+  "title"     : "My Trip",
+  "options"   : {
+    "distance":"miles",
+    "optimization":"0"
+  },
+  "places"    : [
+    {"id":"dnvr", "name":"Denver",       "latitude":"39.7392° N", "longitude":"104.9903° W"},
+    {"id":"bldr", "name":"Boulder",      "latitude":"40.0149900", "longitude":"-105.2705500"},
+    {"id":"foco", "name":"Fort Collins", "latitude":"40° 35' 6.9288\" N", "longitude":"105° 5' 3.9084\" W"},
+    {"id":"lomo", "name":"Longmont",     "latitude":"40.1672° N", "longitude":"105.1019° W"},
+    {"id":"espa", "name":"Estes Park",   "latitude":"40.3772° N", "longitude":"105.5217° W"},
+    {"id":"keys", "name":"Keystone",     "latitude":"39.5792° N", "longitude":"105.9347° W"},
+    {"id":"brek", "name":"Breckenridge",     "latitude":"39.4817° N", "longitude":"106.0640° W"},
+    {"id":"dill", "name":"Dillon",     "latitude":"39.6303° N", "longitude":"106.0434° W"},
+    {"id":"pago", "name":"Pagosa Springs",     "latitude":"37.2694° N", "longitude":"107.0098° W"}
+    
+  ],
+  "distances":[],
+  "map"      :"<svg> ... </svg>"
+}
