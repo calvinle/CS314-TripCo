@@ -36,9 +36,9 @@ class Header extends Component {
             <div className="add-header-height">
             <div id="responsiveHeaderContainer">
                 <a href="http://www.colostate.edu" id="csuHeaderLink">
-                    <img id="csuLargeLogo" src="http://cs.colostate.edu/~tomcavey/signature-oneline.svg" width="350" height="45" alt="Colorado State University"/>
-                    <img id="csuMedLogo" src="http://cs.colostate.edu/~tomcavey/signature-stacked.svg" width="172" height="45" alt="Colorado State University"/>
-                    <img id="csuSmallLogo" src="http://cs.colostate.edu/~tomcavey/signature-mobile.svg" width="113" height="45" alt="Colorado State University"/>
+                    <img id="csuLargeLogo" src="http://brand.colostate.edu/api/attachment/download/sKowrHnEUG6kVoAaE0PF0gKBxewBvPNL8zyRLFjbLPXHpK0XZs_EkgPB9q4wr7dNamGU6rOEfF6erECqTv0WPQ" alt="Colorado State University"/>
+                    <img id="csuMedLogo" src="http://brand.colostate.edu/api/attachment/download/pDtDKPbgo3wOBVGxe4t7mxA_Z9Y0Nj9714OWFePYORp7injGV9QujInZ6fkBeY-G-JOukx0tGsUsZ3gBeIQ8Hg" alt="Colorado State University"/>
+                    <img id="csuSmallLogo" src="http://brand.colostate.edu/api/attachment/download/SSKS8fWdNC3rlkWsVyBmtuDE1CIo_tJe4xJJR0j2gocG4YtkEy72RIOly2eG9F_WSDb0_WTyq90CXVVhKUdr4w" width="50" height="50" alt="Colorado State University"/>
                 </a>
                 <div id="responsiveLogoSubsystem">
                     <a >
